@@ -1,0 +1,340 @@
+//
+//  Grid Elements
+//
+
+$grid-padded:               ".grid#{$ns-modifier}padded";
+$row-padded:                ".row#{$ns-modifier}padded";
+
+@mixin column--base {
+    float:                  left;
+    min-height:             .1rem;
+    position:               relative;
+}
+
+.row {
+    @include clearfix;
+
+    @include modifier(padded) {
+        @extend                 .row;
+
+        margin: {
+            right:              -($gutter/2);
+            left:               -($gutter/2); }
+    }
+
+
+    @include child-of($grid-padded) {
+        @extend                 #{$row-padded} ;
+    }
+}
+
+
+//  grid element generators
+
+.col {
+    $at:                    $ns-responsive;
+    
+    @mixin column($i) {
+        @include column--base;
+        width:                  (100%/$grid-column-count) * $i;
+
+
+        @include modifier(offset) {
+            margin: {
+                left:               (100%/$grid-column-count) * $i; }
+        }
+
+        @include modifier(padded) {
+            @include column--base;
+            width:                  (100%/$grid-column-count) * $i;
+            padding: {
+                right:              ($gutter/2);
+                left:               ($gutter/2); }
+        }
+
+
+        @include child-of($row-padded) {
+            padding: {
+                right:              ($gutter/2);
+                left:               ($gutter/2); }
+        }
+    }
+
+
+    @for $i from 1 through $grid-column-count {
+        //  base/small grid generator
+        &-#{$i} {
+            &,
+            &#{$at}sm {
+                @include column($i);
+            }
+        }
+    }
+
+    @media screen and (min-width: $grid-break-small) {
+        @for $i from 1 through $grid-column-count {
+            //  medium grid generator
+            &-#{$i} {
+                &#{$at}md {
+                    @include column($i);
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: $grid-break-large) {
+        @for $i from 1 through $grid-column-count {
+            //  large grid generator
+            &-#{$i} {
+                &#{$at}lg {
+                    @include column($i);
+                }
+            }
+        }
+    }
+
+
+    @if $grid-keyword-cols == on {
+
+        @include respond-to(small) {
+            @for $i from 1 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}small {
+                        @include column($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(small/medium) {
+            @for $i from 1 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}small\/medium {
+                        @include column($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(medium) {
+            @for $i from 1 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}medium {
+                        @include column($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(medium/large) {
+            @for $i from 1 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}medium\/large {
+                        @include column($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(large) {
+            @for $i from 1 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}large {
+                        @include column($i);
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.pull {
+    $at:                    $ns-responsive;
+    
+    @mixin pull($i) {
+        right:                  (100%/$grid-column-count) * $i; }
+
+
+    @for $i from 0 through $grid-column-count {
+        &-#{$i} {
+            &,
+            &#{$at}sm {
+                @include pull($i);
+            }
+        }
+    }
+
+    @media screen and (min-width: $grid-break-small) {
+        @for $i from 0 through $grid-column-count {
+            &-#{$i} {
+                &#{$at}md {
+                    @include pull($i);
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: $grid-break-large) {
+        @for $i from 0 through $grid-column-count {
+            &-#{$i} {
+                &#{$at}lg {
+                    @include pull($i);
+                }
+            }
+        }
+    }
+
+
+    @if $grid-keyword-cols == on {
+
+        @include respond-to(small) {
+            @for $i from 0 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}small {
+                        @include pull($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(small/medium) {
+            @for $i from 0 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}small\/medium {
+                        @include pull($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(medium) {
+            @for $i from 0 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}medium {
+                        @include pull($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(medium/large) {
+            @for $i from 0 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}medium\/large {
+                        @include pull($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(large) {
+            @for $i from 0 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}large {
+                        @include pull($i);
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.push {
+    $at:                    $ns-responsive;
+    
+    @mixin push($i) {
+        left:                   (100%/$grid-column-count) * $i; }
+
+
+    @for $i from 0 through $grid-column-count {
+        &-#{$i} {
+            &,
+            &#{$at}sm {
+                @include push($i);
+            }
+        }
+    }
+
+    @media screen and (min-width: $grid-break-small) {
+        @for $i from 0 through $grid-column-count {
+            &-#{$i} {
+                &#{$at}md {
+                    @include push($i);
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: $grid-break-large) {
+        @for $i from 0 through $grid-column-count {
+            &-#{$i} {
+                &#{$at}lg {
+                    @include push($i);
+                }
+            }
+        }
+    }
+
+
+    @if $grid-keyword-cols == on {
+
+        @include respond-to(small) {
+            @for $i from 0 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}small {
+                        @include push($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(small/medium) {
+            @for $i from 0 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}small\/medium {
+                        @include push($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(medium) {
+            @for $i from 0 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}medium {
+                        @include push($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(medium/large) {
+            @for $i from 0 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}medium\/large {
+                        @include push($i);
+                    }
+                }
+            }
+        }
+
+        @include respond-to(large) {
+            @for $i from 0 through $grid-column-count {
+                &-#{$i} {
+                    &#{$at}large {
+                        @include push($i);
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+
+
+
+
+

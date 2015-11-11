@@ -1,0 +1,281 @@
+//
+//  Sass Mixins
+//
+
+//  structuring
+
+//  BEM structuring mixins by Hugo Giraudel
+//  http://www.sitepoint.com/structuring-css-class-selectors-with-sass/
+@mixin element($var) {
+	&#{$ns-element}#{$var} { @content; }
+}
+	@mixin e($var) {
+		@include element($var) { @content; }
+	}
+
+@mixin modifier($var) {
+	&#{$ns-modifier}#{$var} { @content; }
+}
+	@mixin m($var) {
+		@include modifier($var) { @content; }
+	}
+
+
+@mixin qualify($var) {
+    @at-root #{$var + &} {
+        @content;
+    }
+}
+    @mixin when-is($var) {
+        @include qualify($var...) { @content; }
+    }
+
+
+@mixin descendant-of($var) {
+	#{$var} & { @content; }
+}
+	@mixin when-inside($var) {
+		@include descendant-of($var) { @content; }
+	}
+
+@mixin child-of($var) {
+    #{$var} > & { @content; }
+}
+
+@mixin adjacent-sibling-of($var) {
+    #{$var} + & { @content; }
+}
+    @mixin adj-sibling-of($var) {
+        @include adjacent-sibling-of($var) { @content; }
+    }
+
+@mixin following-sibling-of($var) {
+    #{$var} ~ & { @content; }
+}
+    @mixin fol-sibling-of($var) {
+        @include general-sibling-of($var) { @content; }
+    }
+
+
+//  formatting
+
+@mixin clearfix {
+	&::before,
+	&::after {
+		content:				" ";
+		display:				table; }
+
+	&::after {
+		clear:					both; }
+}
+
+
+//  by Chris Coyier
+//  https://css-tricks.com/snippets/sass/centering-mixin/
+@mixin position-center($horizontal: true, $vertical: true) {
+    position:               absolute;
+    
+    
+    @if ($horizontal and $vertical) {
+        top:                    50%;
+        left:                   50%;
+        transform:              translate(-50%, -50%);
+    }
+    
+    @else if ($horizontal) {
+        left:                   50%;
+        transform:              translateX(-50%);
+    }
+    
+    @else if ($vertical) {
+        top:                    50%;
+        transform:              translateY(-50%);
+    }
+}
+
+
+@mixin align($i) {
+	
+	@if $i == left {
+		float:					left !important;
+	}
+	
+	@else if $i == right {
+		float:					right !important;
+	}
+	
+	@else if $i == center {
+		display:				block;
+		float:					none !important;
+		margin: {
+			right:				auto !important;
+			left:				auto !important; } }
+	
+	@else {
+        @include debugger($debug-mixins, $debug-align-syntax);
+    }
+	
+}
+
+
+@mixin null($i: all) {
+
+	@if $i == all {
+		display:				none !important;
+		visibility:				hidden !important; }
+	
+	@else if $i == small {
+		@include respond-to(small) { @include null; } }
+
+	@else if $i == small/medium {
+		@include respond-to(small/medium) { @include null; } }
+
+	@else if $i == medium {
+		@include respond-to(medium) { @include null; } }
+
+	@else if $i == medium/large {
+		@include respond-to(medium/large) { @include null; } }
+
+	@else if $i == large {
+		@include respond-to(large) { @include null; } }
+
+	@else if $i == print {
+		@include respond-to(print) { @include null; } }
+	
+	@else if $i == visual {
+		height:					1px;
+		width:					1px;
+		margin:					-1px;
+		overflow:				hidden;
+		padding:				0;
+		position:				absolute;
+		left:					-200vw;
+
+		clip:					rect(0, 0, 0, 0); }
+
+	@else {
+        @include debugger($debug-mixins, $debug-null-syntax);
+    }
+
+}
+
+
+//  scaling
+
+@mixin size($width, $height: $width) {
+	height:					$height;
+	width:					$width;
+}
+
+@mixin aspect-ratio($width, $height) {
+	//  by Sean Dempsey
+	//  http://codepen.io/seanseansean
+	position:				relative;
+	
+	
+	&::before {
+		display:				block;
+		content:				"";
+		width:					100%;
+		padding-top:			($height / $width) * 100%;
+	}
+	
+	
+	> * {
+		height:					100%;
+		width:					100%;
+		position:				absolute;
+			top:				0;
+			left:				0;
+			right:				0;
+			bottom:				0;
+	}
+}
+
+
+//  styling
+
+@mixin overlay {
+	height:					100%;
+	width:					100%;
+	position:				absolute;
+		top:				0;
+		right:				0;
+		bottom:				0;
+		left:				0;
+}
+
+
+//  by Hugo Giraudel
+//  https://css-tricks.com/snippets/sass/striped-gradient-mixin/
+@mixin stripes($direction, $colors) {
+    $length: length($colors);
+
+    @if $length > 1 {
+        $stripes: ();
+
+        @for $i from 1 through $length {
+            $stripe: (100% / $length) * ($i - 1);
+
+            @if $i > 1 {
+                $stripes: append($stripes, nth($colors, $i - 1) $stripe, comma);
+            }
+
+            $stripes: append($stripes, nth($colors, $i) $stripe, comma);
+        }
+
+        background-image: linear-gradient($direction, $stripes);
+    } @else if $length == 1 {
+        background-color: $colors;
+    }
+}
+
+
+//  by Hugo Giraudel
+//  https://css-tricks.com/snippets/sass/placing-items-circle/
+@mixin place-on-circle($item-count, $circle-size, $item-size) {
+    position: relative;
+    width:  $circle-size;
+    height: $circle-size;
+    padding: 0;
+    border-radius: 50%; 
+    list-style: none;       
+
+    
+    > * {
+        display: block;
+        position: absolute;
+        top:  50%; 
+        left: 50%;
+        width:  $item-size;
+        height: $item-size;
+        margin: -($item-size / 2);
+
+        $angle: (360 / $item-count);
+        $rot: 0;
+
+        @for $i from 1 through $item-count {
+            &:nth-of-type(#{$i}) {
+                transform: 
+                    rotate($rot * 1deg) 
+                    translate($circle-size / 2) 
+                    rotate($rot * -1deg);
+            }
+
+            $rot: $rot + $angle;
+        }
+    }
+}
+
+
+//  transition
+
+@mixin transition($i...) {
+	transition:				$i $util-transit-time $util-transit-ease;
+}
+
+
+
+
+
+

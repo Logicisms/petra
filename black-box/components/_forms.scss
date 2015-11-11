@@ -1,0 +1,122 @@
+//
+//  Input Elements
+//
+
+form {
+    @include clearfix;
+}
+
+legend {
+    display:                block;
+    width:                  100%;
+    padding:                0;
+
+    line-height:            1;
+}
+
+label {
+    display:                inline-block;
+    max-width:              100%;
+
+    line-height:            1;
+}
+
+input {
+    position:               relative;
+
+    color:                  inherit;
+
+
+    &[type="radio"],
+    &[type="checkbox"] {
+        line-height:            normal;
+    }
+
+    &[type="file"] {
+        display:                block;
+    }
+
+    &[type="text"],
+    &[type="search"],
+    &[type="email"],
+    &[type="url"],
+    &[type="tel"],
+    &[type="number"],
+    &[type="range"],
+    &[type="date"],
+    &[type="month"],
+    &[type="week"],
+    &[type="time"],
+    &[type="datetime"],
+    &[type="datetime-local"],
+    &.full {
+        display:                block;
+        width:                  100%;
+        position:               relative;
+    }
+}
+
+select {
+    width:                  100%;
+
+    color:                  inherit;
+    text-transform:         none;
+
+
+    &[multiple],
+    &[size] {
+        height:                 auto;
+    }
+}
+
+output {
+    display:                block;
+
+    line-height:            1.5;
+}
+
+textarea {
+    display:                block;
+    width:                  100%;
+
+    color:                  inherit;
+}
+
+button {
+    overflow:               visible;
+
+    background:             transparent;
+
+    color:                  inherit;
+    cursor:                 pointer;
+    line-height:            1;
+    text-transform:         none;
+
+
+    &.full {
+        display:                block;
+        min-height:             2.6em;
+        width:                  100%;
+        padding:                0 1.5ex;
+    }
+}
+
+input,
+button {
+    &[type="button"],
+    &[type="reset"],
+    &[type="submit"] {
+        -webkit-appearance:     button;
+        cursor:                 pointer;
+    }
+
+    &[disabled] {
+        cursor:                 default;
+    }
+}
+
+
+
+
+
+

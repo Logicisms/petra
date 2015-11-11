@@ -1,0 +1,49 @@
+//
+//  Device Breakpoints
+//
+
+@mixin respond-to($i) {
+
+    @if $i == small {
+        @media screen and (max-width: $grid-break-small) { @content; }
+    }
+
+    @else if $i == small/medium {
+        @media screen and (max-width: $grid-break-large) { @content; }
+    }
+
+    @else if $i == medium {
+        @media screen and (min-width: $grid-break-small) and (max-width: $grid-break-large) { @content; }
+    }
+
+    @else if $i == medium/large {
+        @media screen and (min-width: $grid-break-small) { @content; }
+    }
+
+    @else if $i == large {
+        @media screen and (min-width: $grid-break-large) { @content; }
+    }
+
+    @else if $i == print {
+        @media print { @content; }
+    }
+
+    @else if $i == screenreader {
+        @media speech { @content; }
+    }
+
+    @else {
+        @include debugger($debug-breakpoints, $debug-breakpoints-syntax);
+    }
+
+}
+
+@function respond-to($var) {
+    @return '@media screen and (max-width: $grid-break-small)';
+}
+
+
+
+
+
+

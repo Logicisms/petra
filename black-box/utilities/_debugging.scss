@@ -1,0 +1,44 @@
+//
+//  Debugging
+//
+
+//  @debug statement variables
+
+$debug-syntax:              "Invalid value(s) given for";
+
+$debug-breakpoints-syntax:  "‘@include respond-to( )’";
+$debug-align-syntax:        "‘@include align( )’";
+$debug-null-syntax:         "‘@include null( )’";
+
+$debug-check:               "Review styles.";
+$debug-check-visible:       "Review styles or rendered markup.";
+
+
+//  debugging mixins
+
+@mixin debugger($variable: $debug-fallback, $syntax: "element (no syntax defined)") {
+    @if $variable == visible {
+        outline: {
+            color:              material-color(red) !important;
+            style:              solid !important;
+            width:              0.5ex !important; }
+        
+        @warn "#{$debug-syntax} #{$syntax}. #{$debug-check-visible}";
+    }
+
+    @else if $variable == on {
+        @error "#{$debug-syntax} #{$syntax}. #{$debug-check}";
+    }
+
+    @else if $variable == off { }
+
+    @else {
+        @error "#{$debug-syntax} #{$syntax}. #{$debug-check}";
+    }
+}
+
+
+
+
+
+

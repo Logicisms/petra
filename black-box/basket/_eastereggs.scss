@@ -1,0 +1,247 @@
+//
+//  Easter Eggs
+//
+
+
+//  ascii emoticons
+
+%emoticon {
+    display:                inline-block;
+
+    font: {
+        family:             $sans-serif;
+        size:               inherit;
+        style:              normal;
+        variant:            normal; }
+    line-height:            1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:         auto;
+
+    cursor:                 default;
+}
+
+#{$util-emote-pref} {
+    &-theface::before {
+        //  ಠ_ಠ
+        @extend                 %emoticon;
+
+        content:                "\0ca0\005f\0ca0";
+    }
+
+    &-glare::before {
+        //  ¬_¬
+        @extend                 %emoticon;
+
+        content:                "\00ac\005f\00ac";
+    }
+
+    &-iono::before {
+        //  ¯\_(ツ)_/¯
+        @extend                 %emoticon;
+
+        content:                "\00af\005c\005f\0028\30c4\0029\005f\002f\00af";
+    }
+
+    &-idfk::before {
+        //  ¯\_(ಠ_ಠ)_/¯
+        @extend                 %emoticon;
+
+        content:                "\00af\005c\005f\0028\0ca0\005f\0ca0\0029\005f\002f\00af";
+    }
+
+    &-lenny::before {
+        //  (͡° ͜ʖ͡°)
+        @extend                 %emoticon;
+
+        content:                "\0028\0020\0361\00b0\0020\035c\0296\0020\0361\00b0\0029";
+
+        font-family:            Helvetica, Arial, sans-serif;
+    }
+
+    &-bauble::before {
+        //  (っ˘ω˘ς)
+        @extend                 %emoticon;
+
+        content:                "\0028\3063\02d8\03c9\02d8\03c2\0029";
+
+        font-family:            Helvetica, Arial, sans-serif;
+    }
+
+    &-cutie::before {
+        //  (⌒-⌒;)
+        @extend                 %emoticon;
+
+        content:                "\0028\2312\002d\2312\003b\0029";
+    }
+
+    &-monstercry::before {
+        //  ༼ ༎ຶ ෴ ༎ຶ ༽
+        @extend                 %emoticon;
+
+        content:                "\0f3c\0020\0f0e\0020\0df4\0020\0f0e\0020\0f3d";
+
+        font-family:            Helvetica, Arial, sans-serif;
+    }
+}
+
+
+//  css3 backgrounds
+
+@import                     "eggs/css3backgrounds";
+
+
+//  css glitch
+//  by Chris Coiler
+//  http://css-tricks.com/glitch-effect-text-images-svg/
+
+@mixin glitch (
+    $color,
+    $intensity,
+    $height,
+    $width,
+    $attribute-1,
+    $attribute-2,
+    $offset,
+    $shadow-1,
+    $shadow-2,
+    $background
+) {
+    position:               relative;
+    margin:                 0 auto;
+
+    color:                  $color;
+    white-space:            normal;
+
+
+    @at-root {
+        @keyframes noise-anim-1{
+            $steps:$intensity;
+            @for $i from 0 through $steps{
+                #{percentage($i*(1/$steps))}{
+                    clip:rect(random($height)+rem,$width,random($height)+rem,0);
+                }
+            }
+        }
+
+        @keyframes noise-anim-2{
+            $steps:$intensity;
+            @for $i from 0 through $steps{
+                #{percentage($i*(1/$steps))}{
+                    clip:rect(random($height)+rem,$width,random($height)+rem,0);
+                }
+            }
+        }
+    }
+
+
+    &::after {
+        clip:                   rect(0,90rem,0,0);
+        overflow:               hidden;
+        position:               absolute;
+        top:                    0;
+        left:                   $offset;
+
+        background: {
+            color:              $background; }
+
+        color:                  $color;
+        text-shadow:            $shadow-1;
+
+        content:                $attribute-1;
+
+        animation:              noise-anim-1 2s infinite linear alternate-reverse; }
+
+    &::before {
+        clip:                   rect(0,90rem,0,0);
+        overflow:               hidden;
+        position:               absolute;
+        top:                    0;
+        left:                   -$offset;
+
+        background: {
+            color:              $background; }
+
+        color:                  $color;
+        text-shadow:            $shadow-2; 
+
+        content:                $attribute-2;
+
+        animation:              noise-anim-2 3s infinite linear alternate-reverse;
+    }
+}
+
+
+
+
+
+
+
+//  animated starfield
+//  by Sean Dempsey
+//  http://codepen.io/seanseansean/pen/JdMMdG
+
+@mixin starfield($star-count: 260,
+                 $star-color: lighten(material-color(light-blue), 24%),
+                 $background-color: darken(material-color(indigo), 36%)) {
+    .the-sky,
+    .the-cosmos {
+        position:               absolute;
+            top:                0;
+            right:              0;
+            bottom:             0;
+            left:               0;
+        
+        perspective:            120rem;
+        
+        background: {
+            color:              black;
+            image:              linear-gradient(top, black 0%, $background-color 100%); }
+        
+        transform-style:        preserve-3d;
+    }
+    
+    .star {
+        animation: {
+            name:               flicker;
+            timing-function:    ease-in-out;
+            direction:          alternate;
+            iteration-count:    infinite; }
+        
+        position:               absolute;
+        
+        background:             white;
+        border: {
+            radius:             50%; }
+        box-shadow:             0 0 0.14rem $star-color inset;
+        opacity:                1;
+        
+        
+        @for $i from 1 through $star-count {
+            $size: random(5) * 0.05rem;
+            
+            &:nth-child(#{$i}) {
+                animation: {
+                    delay:              random(10) / random(9) + 0s;
+                    duration:           random(4) / random(3) + 0s; }
+                
+                height:                 $size;
+                width:                  $size;
+                top:                    random(100) + 0%;
+                left:                   random(100) + 0%;
+            }
+        }
+    }
+    
+    @keyframes flicker {
+        to {
+            opacity:                0.25;
+        }
+    }
+}
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+//
+//  Media Elements
+//
+
+%media {
+    display:                block;
+    float:                  left;
+    height:                 auto;
+    max-width:              100%;
+
+    vertical-align:         middle;
+}
+
+img {
+    @extend                 %media;
+}
+
+svg {
+    &:not(:root) {
+        overflow:               hidden;
+    }
+}
+
+audio {
+    display:                inline-block;
+    vertical-align:         baseline;
+
+
+    &:not([controls]) {
+        display:                none;
+        height:                 0;
+    }
+}
+
+video {
+    @extend                 %media;
+}
+
+iframe {
+    @extend                 %media;
+}
+
+
+
+
+
+

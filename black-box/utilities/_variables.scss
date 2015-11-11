@@ -1,0 +1,269 @@
+//
+//  Variables
+//
+
+//  debugging configuration
+
+$debug-config: (
+    
+    switches: (
+        breakpoints:        visible,
+        mixins:             visible,
+    ),
+    
+) !default;
+
+$debug-config-hidden: (
+
+    fallback-state:         visible,
+
+) !default;
+
+$debug-breakpoints:         map-deep-get($debug-config, switches, breakpoints);
+$debug-mixins:              map-deep-get($debug-config, switches, mixins);
+$debug-fallback:            map-get($debug-config-hidden, fallback-state);
+
+
+//  structuring configuration
+
+$structure-config: (
+
+    z-index: (
+        default:            1,
+        below:              -1,
+        beneath:            -1,
+        under:              -1,
+        
+        header:             4,
+        modal:              2048,
+    ),
+    
+    namespace-delimiters: (
+        element:            "__",
+        modifier:           "--",
+        responsive:         \@,
+    ),
+
+) !default;
+
+$ns-element: map-deep-get($structure-config, namespace-delimiters, element);
+$ns-modifier: map-deep-get($structure-config, namespace-delimiters, modifier);
+$ns-responsive: map-deep-get($structure-config, namespace-delimiters, responsive);
+    
+    $ns-e: $ns-element;
+    $ns-m: $ns-modifier;
+    $ns-r: $ns-responsive;
+
+@function z($key) {
+    @return map-deep-get($structure-config, z-index, $key);
+}
+
+
+//  color configuration
+
+$colors-config: (
+    black:                      hsl(0, 0%, 3%),
+    white:                      hsl(0, 0%, 97%),
+    
+    material-colors: (
+        //  material color variables (500s from Google's Material Design palettes)
+        //  https://www.google.com/design/spec/style/color.html#color-color-palette
+        red:                    hsl(4, 90%, 58%),
+        pink:                   hsl(340, 82%, 52%),
+        purple:                 hsl(291, 64%, 42%),
+        deep-purple:            hsl(262, 52%, 47%),
+        indigo:                 hsl(231, 48%, 48%),
+        blue:                   hsl(207, 90%, 54%),
+        light-blue:             hsl(199, 98%, 48%),
+        cyan:                   hsl(187, 100%, 42%),
+        teal:                   hsl(174, 100%, 29%),
+        green:                  hsl(122, 39%, 49%),
+        light-green:            hsl(88, 50%, 53%),
+        lime:                   hsl(66, 70%, 54%),
+        yellow:                 hsl(54, 100%, 62%),
+        amber:                  hsl(45, 100%, 51%),
+        orange:                 hsl(36, 100%, 50%),
+        deep-orange:            hsl(14, 100%, 57%),
+        brown:                  hsl(16, 25%, 38%),
+        blue-grey:              hsl(200, 18%, 46%),
+        blue-gray:              hsl(200, 18%, 46%),
+    ),
+) !default;
+
+$black:                     map-get($colors-config, black) !default;
+$white:                     map-get($colors-config, white) !default;
+
+@function material-color($key) {
+    @return map-deep-get($colors-config, material-colors, $key);
+}
+
+
+
+//  base typographic variables
+
+$type-config: (
+
+    path:                   "../petra/fonts",
+
+    relative-line-height:   on,
+    
+    sans-serif: (
+        stack:              "'Open Sans', 'Helvetica Neue', Helvetica, sans-serif",
+        
+        base: (
+            font-size:      16,
+            font-weight:    400,
+            line-height:    1.75,
+        ),
+    ),
+    
+    serif: (
+        stack:              "'Times New Roman', Times, Georgia, serif",
+        
+        base: (
+            font-size:      16,
+            font-weight:    normal,
+            line-height:    1.75,
+        ),
+    ),
+    
+    monospace-1: (
+        stack:              "Monaco, Consolas, 'Andale Mono', monospace",
+        
+        base: (
+            font-size:      16,
+            font-weight:    normal,
+            line-height:    inherit,
+        ),
+    ),
+    
+    monospace-2: (
+        stack:              "'Courier New', Courier, monospace",
+
+        base: (
+            font-size:      16,
+            font-weight:    normal,
+            line-height:    inherit,
+        ),
+    ),
+
+) !default;
+
+@function _font-set-family($family) {
+    @return unquote(map-deep-get($type-config, $family, stack)); }
+
+@function _font-set-size($family, $preset: base) {
+    @return map-deep-get($type-config, $family, $preset, font-size); }
+
+@function _font-set-weight($family, $preset: base) {
+    @return map-deep-get($type-config, $family, $preset, font-weight); }
+
+@function _font-set-line($family, $preset: base) {
+    @return map-deep-get($type-config, $family, $preset, line-height); }
+
+@mixin font-set($family, $preset: base) {
+    font: {
+        family:             _font-set-family($family);
+        @if type-of(map-deep-get($type-config, $family, $preset, font-size)) == number {
+            size:           rem(_font-set-size($family, $preset)); }
+        @else {
+            size:           _font-set-size($family, $preset); }
+        weight:             _font-set-weight($family, $preset: base); }
+    
+    @if type-of(map-deep-get($type-config, $family, $preset, line-height)) == number {
+        @if map-get($type-config, relative-line-height) == on {
+            line-height:            _font-set-line($family, $preset: base); }
+        @else if map-get($type-config, relative-line-height) == off {
+            line-height:            rem(_font-set-line($family, $preset: base)); }
+        @else {
+            line-height:            _font-set-line($family, $preset: base);
+            @warn "Invalid value given for ‘relative-line-height’ in $type-config. Value must == ‘on’ or ‘off’. Defaulting to ‘on’." } }
+    @else {
+        line-height:            _font-set-line($family, $preset: base); }
+}
+
+$font-path:                 map-get($type-config, path) !default;
+
+$sans-serif:                _font-set-family(sans-serif) !default;
+$serif:                     _font-set-family(serif) !default;
+$monospace-1:               _font-set-family(monospace-1) !default;
+$monospace-2:               _font-set-family(monospace-2) !default;
+
+
+//  grid configuration
+
+$grid-config: (
+
+    columns:                12,
+    keyword-columns:        off,
+
+    gutter:                 2.4rem,
+
+    breakpoints: (
+        small:              640px,
+        large:              1024px,
+    ),
+
+    master-width: (
+        on-small:           85%,
+        on-medium:          80%,
+        on-large:           80%,
+
+        fixed:              102.4rem,
+    ),
+
+) !default;
+
+$grid-column-count: map-get($grid-config, columns);
+$grid-keyword-cols: map-get($grid-config, keyword-columns);
+
+$grid-gutter: map-get($grid-config, gutter);
+$gutter: map-get($grid-config, gutter);
+
+$grid-break-small: map-deep-get($grid-config, breakpoints, small);
+$grid-break-large: map-deep-get($grid-config, breakpoints, large);
+
+$grid-master-small: map-deep-get($grid-config, master-width, on-small);
+$grid-master-medium: map-deep-get($grid-config, master-width, on-medium);
+$grid-master-large: map-deep-get($grid-config, master-width, on-large);
+$grid-master-fixed: map-deep-get($grid-config, master-width, fixed);
+
+
+//  utility configuration
+
+$utilities-config: (
+    
+    //  mixins
+    transitions: (
+        default-time:       0.24s,
+        default-ease:       ease-in-out,
+    ),
+    
+    //  recurring classes
+    rotation-grades: (
+        1:                  45,
+        2:                  90,
+        3:                  180,
+        4:                  270,
+        5:                  360,
+    ),
+    type-scales-to:         12,
+    
+    //  easter eggs
+    emoticon-prefixes:      ".e, .ascii",
+    
+) !default;
+
+$util-transit-time:         map-deep-get($utilities-config, transitions, default-time);
+$util-transit-ease:         map-deep-get($utilities-config, transitions, default-ease);
+
+$util-rot-grades:           map-values(map-deep-get($utilities-config, rotation-grades));
+$util-type-scale:           map-get($utilities-config, type-scales-to);
+
+$util-emote-pref:           map-get($utilities-config, emoticon-prefixes);
+
+
+
+
+
+

@@ -1,0 +1,65 @@
+//
+//  Sass Functions
+//
+
+//  tool functions
+
+@function map-deep-get($map, $keys...) {
+    //  by Hugo Giraudel
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    
+    @return $map;
+}
+
+
+//  number functions
+
+@function rem($pixels) {
+    @return ($pixels / 10) * 1rem;
+}
+
+@function strip-unit($number) {
+    //  by Hugo Giraudel
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+@function str-replace($string, $search, $replace: '') {
+    //  replace `$search` with `$replace` in `$string`
+    //  by Hugo Giraudel
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}
+
+
+//  color functions
+
+@function blacken($color, $var) {
+    @return mix(black, $color, $var);
+}
+    @function shade($color, $var) {
+        @return blacken($color, $var);
+    }
+
+@function whiten($color, $var) {
+    @return mix(white, $color, $var);
+}
+    @function tint($color, $var) {
+        @return whiten($color, $var);
+    }
+
+
+
+
+
+

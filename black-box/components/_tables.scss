@@ -1,0 +1,51 @@
+//
+//  Table Styles
+//
+
+.tablecloth {
+    //  a container for tables that ensures basic responsiveness on mobile-layouts
+    display:                block;
+    width:                  100%;
+    overflow:               hidden;
+
+    @include clearfix;
+
+
+    th,
+    td {
+        white-space:            nowrap; }
+
+
+    @include respond-to(small/medium) {
+        overflow: {
+            x:                  auto;
+            y:                  hidden; }
+        -ms-overflow-style:     -ms-autohiding-scrollbar;
+        -webkit-overflow-scrolling:touch;
+
+        th,
+        td {
+            padding-right:          4.2rem !important; } }
+}
+
+table {
+    width:                  100%;
+    max-width:              100%;
+
+    background:             transparent;
+    border-collapse:        collapse;
+
+    text-align:             left;
+
+
+    th {
+        vertical-align:         bottom; }
+    td {
+        vertical-align:         top; }
+}
+
+
+
+
+
+
