@@ -48,8 +48,7 @@ input {
     &[type="week"],
     &[type="time"],
     &[type="datetime"],
-    &[type="datetime-local"],
-    &.full {
+    &[type="datetime-local"] {
         display:                block;
         width:                  100%;
         position:               relative;
@@ -83,7 +82,10 @@ textarea {
 }
 
 button {
+    display:                block;
+    width:                  100%;
     overflow:               visible;
+    position:               relative;
 
     background:             transparent;
 
@@ -91,13 +93,12 @@ button {
     cursor:                 pointer;
     line-height:            1;
     text-transform:         none;
+}
 
-
-    &.full {
-        display:                block;
-        min-height:             2.6em;
-        width:                  100%;
-        padding:                0 1.5ex;
+.button {
+    @include modifier('inline') {
+        display:                inline-block;
+        width:                  auto;
     }
 }
 

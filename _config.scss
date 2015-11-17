@@ -128,6 +128,9 @@ $grid-config: (
     ),
 
     master-width: (
+        //  @TODO:
+        //  if on-small is set to 100%, row--padded elements will cause
+        //  horizontal scrolling. fix it.
         on-small:           85%,
         on-medium:          80%,
         on-large:           80%,

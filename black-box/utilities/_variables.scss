@@ -106,6 +106,8 @@ $type-config: (
     path:                   "../petra/fonts",
 
     relative-line-height:   on,
+    // @TODO: do some testing to see if numbers with units are interpreted as strings or numbers
+    // if so, there's no need for this variable
     
     sans-serif: (
         stack:              "'Open Sans', 'Helvetica Neue', Helvetica, sans-serif",
