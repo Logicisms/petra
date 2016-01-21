@@ -45,14 +45,14 @@
 @mixin adjacent-sibling-of($var) {
     #{$var} + & { @content; }
 }
-    @mixin adj-sibling-of($var) {
+    @mixin when-adjacent-to($var) {
         @include adjacent-sibling-of($var) { @content; }
     }
 
 @mixin following-sibling-of($var) {
     #{$var} ~ & { @content; }
 }
-    @mixin fol-sibling-of($var) {
+    @mixin when-following($var) {
         @include general-sibling-of($var) { @content; }
     }
 
@@ -91,6 +91,10 @@
         top:                    50%;
         transform:              translateY(-50%);
     }
+    
+    @else {
+        @include debugger($debug-mixins, $debug-center-syntax);
+    }
 }
 
 
@@ -122,36 +126,44 @@
 
 	@if $i == all {
 		display:				none !important;
-		visibility:				hidden !important; }
+		visibility:				hidden !important;
+    }
 	
 	@else if $i == small {
-		@include respond-to(small) { @include null; } }
+		@include respond-to(small) { @include null; }
+    }
 
 	@else if $i == small/medium {
-		@include respond-to(small/medium) { @include null; } }
+		@include respond-to(small/medium) { @include null; }
+    }
 
 	@else if $i == medium {
-		@include respond-to(medium) { @include null; } }
+		@include respond-to(medium) { @include null; }
+    }
 
 	@else if $i == medium/large {
-		@include respond-to(medium/large) { @include null; } }
+		@include respond-to(medium/large) { @include null; }
+    }
 
 	@else if $i == large {
-		@include respond-to(large) { @include null; } }
+		@include respond-to(large) { @include null; }
+    }
 
 	@else if $i == print {
-		@include respond-to(print) { @include null; } }
+		@include respond-to(print) { @include null; }
+    }
 	
 	@else if $i == visual {
-		height:					1px;
-		width:					1px;
-		margin:					-1px;
-		overflow:				hidden;
-		padding:				0;
-		position:				absolute;
-		left:					-200vw;
+		height:					1px      !important;
+		width:					1px      !important;
+		margin:					-1px     !important;
+		overflow:				hidden   !important;
+		padding:				0        !important;
+		position:				absolute !important;
+		left:					-200vw   !important;
 
-		clip:					rect(0, 0, 0, 0); }
+		clip:					rect(0, 0, 0, 0);
+    }
 
 	@else {
         @include debugger($debug-mixins, $debug-null-syntax);
@@ -165,6 +177,12 @@
 @mixin size($width, $height: $width) {
 	height:					$height;
 	width:					$width;
+}
+
+@mixin min-size($width, $height: $width) {
+    min: {
+        height:				$height;
+        width:				$width; }
 }
 
 @mixin aspect-ratio($width, $height) {
@@ -224,35 +242,38 @@
             $stripes: append($stripes, nth($colors, $i) $stripe, comma);
         }
 
-        background-image: linear-gradient($direction, $stripes);
-    } @else if $length == 1 {
-        background-color: $colors;
+        background: {
+            image:              linear-gradient($direction, $stripes); }
+    }
+    
+    @else if $length == 1 {
+        background: {
+            color:              $colors; }
     }
 }
-
 
 //  by Hugo Giraudel
 //  https://css-tricks.com/snippets/sass/placing-items-circle/
 @mixin place-on-circle($item-count, $circle-size, $item-size) {
-    position: relative;
-    width:  $circle-size;
-    height: $circle-size;
-    padding: 0;
-    border-radius: 50%; 
-    list-style: none;       
+    position:               relative;
+    width:                  $circle-size;
+    height:                 $circle-size;
+    padding:                0;
+    border-radius:          50%; 
+    list-style:             none;       
 
     
     > * {
-        display: block;
-        position: absolute;
-        top:  50%; 
-        left: 50%;
-        width:  $item-size;
-        height: $item-size;
-        margin: -($item-size / 2);
+        display:                block;
+        position:               absolute;
+        top:                    50%; 
+        left:                   50%;
+        width:                  $item-size;
+        height:                 $item-size;
+        margin:                 -($item-size / 2);
 
-        $angle: (360 / $item-count);
-        $rot: 0;
+        $angle:                 (360 / $item-count);
+        $rot:                   0;
 
         @for $i from 1 through $item-count {
             &:nth-of-type(#{$i}) {

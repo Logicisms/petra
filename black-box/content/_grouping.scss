@@ -21,24 +21,24 @@ ul {
     }
     
     
-    @include modifier(circle) {
+    @include modifier('circle') {
         @extend                 .list;
 
         list-style-type:        circle;
     }
 
-    @include modifier(cjk-ideographic) {
+    @include modifier('cjk-ideographic') {
         margin: {
             left:               $petra-ul-margin-left * 1.6; }
 
         list-style-type:        cjk-ideographic;
     }
 
-    @include modifier(cjk) {
+    @include modifier('cjk') {
         @extend                 .list#{$ns-modifier}cjk-ideographic;
 }
 
-    @include modifier(decimal) {
+    @include modifier('decimal') {
         @extend                 .list;
 
         list-style-type:        decimal;
@@ -49,32 +49,32 @@ ul {
         }
     }
 
-    @include modifier(decimal-leading-zero) {
+    @include modifier('decimal-leading-zero') {
         margin: {
             left:               $petra-ul-margin-left * 1.5; }
 
         list-style-type:        decimal-leading-zero;
     }
 
-    @include modifier(disc) {
+    @include modifier('disc') {
         @extend                 .list;
 
         list-style-type:        disc;
     }
 
-    @include modifier(georgian) {
+    @include modifier('georgian') {
         @extend                 .list;
 
         list-style-type:        georgian;
     }
 
-    @include modifier(hebrew) {
+    @include modifier('hebrew') {
         @extend                 .list;
 
         list-style-type:        hebrew;
     }
 
-    @include modifier(hiragana) {
+    @include modifier('hiragana') {
         margin: {
             left:               $petra-ul-margin-left * 1.6; }
 
@@ -89,7 +89,7 @@ ul {
         }
     }
 
-    @include modifier(icon) {
+    @include modifier('icon') {
         @extend                 .list;
 
         > li {
@@ -107,31 +107,31 @@ ul {
         }
     }
 
-    @include modifier(lower-alpha) {
+    @include modifier('lower-alpha') {
         @extend                 .list;
 
         list-style-type:        lower-alpha;
     }
 
-    @include modifier(lower-greek) {
+    @include modifier('lower-greek') {
         @extend                 .list;
 
         list-style-type:        lower-greek;
     }
 
-    @include modifier(lower-latin) {
+    @include modifier('lower-latin') {
         @extend                 .list;
 
         list-style-type:        lower-latin;
     }
 
-    @include modifier(lower-roman) {
+    @include modifier('lower-roman') {
         @extend                 .list;
 
         list-style-type:        lower-roman;
     }
 
-    @include modifier(none) {
+    @include modifier('none') {
         //  if the styles are written well, this class will never be used
         margin: {
             left:               0; }
@@ -139,25 +139,25 @@ ul {
         list-style-type:        none;
     }
 
-    @include modifier(square) {
+    @include modifier('square') {
         @extend                 .list;
 
         list-style-type:        square;
     }
 
-    @include modifier(upper-alpha) {
+    @include modifier('upper-alpha') {
         @extend                 .list;
 
         list-style-type:        upper-alpha;
     }
 
-    @include modifier(upper-latin) {
+    @include modifier('upper-latin') {
         @extend                 .list;
 
         list-style-type:        upper-latin;
     }
 
-    @include modifier(upper-roman) {
+    @include modifier('upper-roman') {
         @extend                 .list;
 
         list-style-type:        upper-roman;
@@ -189,7 +189,7 @@ dl {
     }
 
 
-    @include element(entry-header) {
+    @include element('entry-header') {
         display:                inline-block;
 
         font: {
@@ -197,7 +197,7 @@ dl {
             weight:             600; }
     }
 
-    @include element(pron) {
+    @include element('pronunciation') {
         display:                inline-block;
 
         font-weight:            200;
@@ -213,8 +213,11 @@ dl {
             content:                " |";
         }
     }
+    @include element('pron') {
+        @extend                 .lexicon#{$ns-e}pronunciation;
+    }
 
-    @include element(noun) { }
+    @include element('noun') { }
 }
 
 

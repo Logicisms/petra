@@ -25,12 +25,7 @@
     vertical-align:         baseline;
 
     
-    &::before {
-        -webkit-box-sizing:     border-box !important;
-        -moz-box-sizing:        border-box !important;
-        box-sizing:             border-box !important;
-    }
-
+    &::before,
     &::after {
         -webkit-box-sizing:     border-box !important;
         -moz-box-sizing:        border-box !important;

@@ -50,6 +50,8 @@ $structure-config: (
 
 $type-config: (
 
+    browser-context:        16px,
+
     path:                   "../petra/fonts",
     
     //  valid values are: on, off
@@ -68,6 +70,18 @@ $type-config: (
             font-size:      16,
             font-weight:    400,
             line-height:    1.75, // equivalent to 2.8rem
+        ),
+
+        larger: (
+            font-size:      18,
+            font-weight:    400,
+            line-height:    1.611,
+        ),
+
+        smaller: (
+            font-size:      12,
+            font-weight:    400,
+            line-height:    1.583,
         ),
     ),
 
@@ -101,6 +115,28 @@ $type-config: (
             font-size:      16,
             font-weight:    normal,
             line-height:    inherit,
+        ),
+    ),
+
+    inherit: (
+        stack:              inherit,
+
+        base: (
+            font-size:      inherit,
+            font-weight:    inherit,
+            line-height:    inherit,
+        ),
+
+        larger: (
+            font-size:      18,
+            font-weight:    inherit,
+            line-height:    1.611,
+        ),
+
+        smaller: (
+            font-size:      12,
+            font-weight:    inherit,
+            line-height:    1.583,
         ),
     ),
 
@@ -183,33 +219,39 @@ $utilities-config: (
     "black-box/utilities/debugging",
     "black-box/utilities/breakpoints",
     "black-box/utilities/mixins",
-    "black-box/utilities/animation";
+    "black-box/utilities/animation"
+;
 
 @import
     "black-box/base/reset",
     "black-box/base/root",
     "black-box/base/accessibility",
-    "black-box/base/typography";
+    "black-box/base/typography"
+;
 
 @import
     "black-box/content/icons",
     "black-box/content/grouping",
     "black-box/content/recurring",
-    "black-box/content/media";
+    "black-box/content/media"
+;
 
 @import
-    "black-box/basket/eastereggs";
+    "black-box/basket/eastereggs"
+;
 
 @import
     "black-box/structure/sections",
     "black-box/structure/containers",
-    "black-box/structure/grid";
+    "black-box/structure/grid"
+;
 
 @import
     "black-box/components/navigation",
     "black-box/components/forms",
     "black-box/components/modals",
-    "black-box/components/tables";
+    "black-box/components/tables"
+;
 
 
 

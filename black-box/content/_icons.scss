@@ -19,23 +19,43 @@
                             url(#{$font-path}/MaterialIcons-Regular.ttf) format("truetype");
 }
 
-@mixin material-icon {
+@mixin material-icon($size: 1em) {
+    //  @TODO:  make this more useful and accessible.
+    //  move the font icon itself into a ::before pseudo-element.
+    //  configure the embedded text to be used as an accessibility feature.
+    
+    //  a mixin here makes it easier to apply these icon-specific styles
+    //  to other elements without abusing the @extend directive.
     display:                inline-block;
-    height:                 1em;
-    width:                  1em;
+    height:                 $size;
+    width:                  $size;
+    
+    
+    &::before {
+        font: {
+            family:             "Material Icons";
+            size:               inherit;
+            style:              normal;
+            weight:             normal; }
+        line-height:            1;
+        text: {
+            transform:          none; }
 
-    font: {
-        family:             "Material Icons";
-        size:               inherit;
-        style:              normal;
-        weight:             normal; }
-    line-height:            1;
-    text-transform:         none;
-
-    -webkit-font-smoothing: antialiased;
-    text-rendering:         optimizeLegibility;
-    -moz-osx-font-smoothing:grayscale;
-    font-feature-settings:  "liga";
+        -webkit-font-smoothing: antialiased;
+        text-rendering:         optimizeLegibility;
+        -moz-osx-font-smoothing:grayscale;
+        font-feature-settings:  "liga";
+        
+        content:                " "attr(data-icon)" ";
+        
+        
+        @content;
+    }
+    
+    
+    > * {
+        @include            null(visual);
+    }
 }
 
 .material-icon,
@@ -57,6 +77,8 @@
 //  font awesome compatibility
 
 @mixin fontawesome {
+    //  a mixin here makes it easier to apply these fontawesome-specific styles
+    //  to other elements without abusing the @extend directive.
     display:                inline-block;
 
     font: {
@@ -72,8 +94,9 @@
 
 i[class*=fa-] {
     @include                    fontawesome;
-    //    allows user to use font awesome icons without precursory "fa" class hook
-    //    e.g. instead of <i class="fa fa-eye"></i> user would use <i class="fa-eye"></i>
+    //  allows user to use font awesome icons without precursory "fa" class hook.
+    //  e.g. instead of <i class="fa fa-eye"></i>,
+    //  user would use <i class="fa-eye"></i>
     
     
     &.fw {

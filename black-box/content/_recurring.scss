@@ -7,6 +7,39 @@
 .clear,
 .clearfix {
     @include clearfix;
+    
+    
+    $at:                    $ns-responsive;
+    
+    @media screen and (max-width: $grid-break-small) {
+        &#{$at}small {
+            @include clearfix;
+        }
+    }
+
+    @media screen and (max-width: $grid-break-large) {
+        &#{$at}small\/medium {
+            @include clearfix;
+        }
+    }
+
+    @media screen and (min-width: $grid-break-small) and (max-width: $grid-break-large) {
+        &#{$at}medium {
+            @include clearfix;
+        }
+    }
+
+    @media screen and (min-width: $grid-break-small) {
+        &#{$at}medium\/large {
+            @include clearfix;
+        }
+    }
+
+    @media screen and (min-width: $grid-break-large) {
+        &#{$at}large {
+            @include clearfix;
+        }
+    }
 }
 
 
@@ -36,11 +69,45 @@
 .text {
     $at:                    $ns-responsive;
     
-    &-lg {
+    @mixin text-lg {
         //  makes txt 33% larger relative to its container
         font-size:              1.5em !important;
 //      line-height:            0.75 !important;
-        vertical-align:         middle !important;
+    }
+    
+    &-lg {
+        @include text-lg;
+        
+        
+        @media screen and (max-width: $grid-break-small) {
+            &#{$at}small {
+                @include text-lg;
+            }
+        }
+
+        @media screen and (max-width: $grid-break-large) {
+            &#{$at}small\/medium {
+                @include text-lg;
+            }
+        }
+
+        @media screen and (min-width: $grid-break-small) and (max-width: $grid-break-large) {
+            &#{$at}medium {
+                @include text-lg;
+            }
+        }
+
+        @media screen and (min-width: $grid-break-small) {
+            &#{$at}medium\/large {
+                @include text-lg;
+            }
+        }
+
+        @media screen and (min-width: $grid-break-large) {
+            &#{$at}large {
+                @include text-lg;
+            }
+        }
     }
 
 
@@ -48,32 +115,62 @@
 
     @for $i from 1 through $scale-values {
         &-x#{$i} {
-            font-size:              1em * $i;
+            font-size:              1em * $i !important;
         }
 
         &-scale-#{$i} {
-            font-size:              1em * $i;
+            font-size:              1em * $i !important;
         }
     }
 
 
     $justification-values:      left, center, right, justify;
-
+    
     @each $i in $justification-values {
         &-#{$i},
         &-align-#{$i} {
-            &,
-            &#{$at}sm {
-                text-align:             $i !important;
+            text-align:             $i !important;
+        }
+    }
+
+    @media screen and (max-width: $grid-break-small) {
+        @each $i in $justification-values {
+            &-#{$i},
+            &-align-#{$i} {
+                &#{$at}small {
+                    text-align:             $i !important;
+                }
+            }
+        }
+    }
+    
+    @media screen and (max-width: $grid-break-large) {
+        @each $i in $justification-values {
+            &-#{$i},
+            &-align-#{$i} {
+                &#{$at}small\/medium {
+                    text-align:             $i !important;
+                }
             }
         }
     }
 
+    @media screen and (min-width: $grid-break-small) and (max-width: $grid-break-large) {
+        @each $i in $justification-values {
+            &-#{$i},
+            &-align-#{$i} {
+                &#{$at}medium {
+                    text-align:             $i !important;
+                }
+            }
+        }
+    }
+    
     @media screen and (min-width: $grid-break-small) {
         @each $i in $justification-values {
             &-#{$i},
             &-align-#{$i} {
-                &#{$at}md {
+                &#{$at}medium\/large {
                     text-align:             $i !important;
                 }
             }
@@ -84,9 +181,27 @@
         @each $i in $justification-values {
             &-#{$i},
             &-align-#{$i} {
-                &#{$at}lg {
+                &#{$at}large {
                     text-align:             $i !important;
                 }
+            }
+        }
+    }
+}
+
+.font {
+    &-weight {
+        $values:                normal,
+                                bold,
+                                bolder,
+                                lighter,
+                                initial,
+                                inherit;
+        
+        @each $i in $values {
+            @include modifier('#{$i}') {
+                font: {
+                    weight:             $i; }
             }
         }
     }
@@ -117,6 +232,19 @@
     @each $i in $values {
         @include modifier($i) {
             position:               $i !important;
+        }
+    }
+    
+    &-center {
+        @include                position-center;
+        
+        
+        @include modifier('horizontal') {
+            @include                position-center($vertical: false);
+        }
+        
+        @include modifier('vertical') {
+            @include                position-center($horizontal: false);
         }
     }
 }
@@ -240,6 +368,26 @@
 }
 
 
+.vertical-align {
+    $values:                baseline,
+                            bottom,
+                            initial,
+                            inherit,
+                            middle,
+                            sub,
+                            super,
+                            text-top,
+                            text-bottom,
+                            top;
+    
+    @each $var in $values {
+        @include modifier($var) {
+            vertical-align:         $var;
+        }
+    }
+}
+
+
 .br {
     margin: {
         bottom:             $gutter; }
@@ -261,7 +409,7 @@
 
 //  display modifiers
 
-.disp {
+.display {
     $values:                block,
                             inherit,
                             initial,
@@ -312,6 +460,14 @@
 
         &large {
             @include null(large);
+        }
+        
+        &print {
+            @include null(print);
+        }
+        
+        &visual {
+            @include null(visual);
         }
     }
 }

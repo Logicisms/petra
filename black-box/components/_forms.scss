@@ -15,7 +15,7 @@ legend {
 }
 
 label {
-    display:                inline-block;
+    display:                block;
     max-width:              100%;
 
     line-height:            1;
@@ -39,6 +39,7 @@ input {
     &[type="text"],
     &[type="search"],
     &[type="email"],
+    &[type="password"],
     &[type="url"],
     &[type="tel"],
     &[type="number"],
@@ -83,7 +84,6 @@ textarea {
 
 button {
     display:                block;
-    width:                  100%;
     overflow:               visible;
     position:               relative;
 

@@ -47,7 +47,7 @@
         background-clip:        padding-box;
 
 
-        :last-child {
+        > *:last-child {
             margin: {
                 bottom:             0; }
         }
