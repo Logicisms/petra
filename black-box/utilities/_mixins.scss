@@ -70,9 +70,9 @@
 }
 
 
-//  by Chris Coyier
-//  https://css-tricks.com/snippets/sass/centering-mixin/
 @mixin position-center($horizontal: true, $vertical: true) {
+    //  by Chris Coyier
+    //  https://css-tricks.com/snippets/sass/centering-mixin/
     position:               absolute;
     
     
@@ -224,9 +224,9 @@
 }
 
 
-//  by Hugo Giraudel
-//  https://css-tricks.com/snippets/sass/striped-gradient-mixin/
 @mixin stripes($direction, $colors) {
+    //  by Hugo Giraudel
+    //  https://css-tricks.com/snippets/sass/striped-gradient-mixin/
     $length: length($colors);
 
     @if $length > 1 {
@@ -252,9 +252,9 @@
     }
 }
 
-//  by Hugo Giraudel
-//  https://css-tricks.com/snippets/sass/placing-items-circle/
 @mixin place-on-circle($item-count, $circle-size, $item-size) {
+    //  by Hugo Giraudel
+    //  https://css-tricks.com/snippets/sass/placing-items-circle/
     position:               relative;
     width:                  $circle-size;
     height:                 $circle-size;

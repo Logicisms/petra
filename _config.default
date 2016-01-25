@@ -238,7 +238,7 @@ $utilities-config: (
 
 @import
     "black-box/basket/eastereggs"
-;
+    ;
 
 @import
     "black-box/structure/sections",
