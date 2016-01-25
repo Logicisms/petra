@@ -6,38 +6,38 @@
 
 .clear,
 .clearfix {
-    @include clearfix;
+    @include                clearfix;
     
     
     $at:                    $ns-responsive;
     
     @media screen and (max-width: $grid-break-small) {
         &#{$at}small {
-            @include clearfix;
+            @include                clearfix;
         }
     }
 
     @media screen and (max-width: $grid-break-large) {
         &#{$at}small\/medium {
-            @include clearfix;
+            @include                clearfix;
         }
     }
 
     @media screen and (min-width: $grid-break-small) and (max-width: $grid-break-large) {
         &#{$at}medium {
-            @include clearfix;
+            @include                clearfix;
         }
     }
 
     @media screen and (min-width: $grid-break-small) {
         &#{$at}medium\/large {
-            @include clearfix;
+            @include                clearfix;
         }
     }
 
     @media screen and (min-width: $grid-break-large) {
         &#{$at}large {
-            @include clearfix;
+            @include                clearfix;
         }
     }
 }
@@ -76,36 +76,36 @@
     }
     
     &-lg {
-        @include text-lg;
+        @include                text-lg;
         
         
         @media screen and (max-width: $grid-break-small) {
             &#{$at}small {
-                @include text-lg;
+                @include                text-lg;
             }
         }
 
         @media screen and (max-width: $grid-break-large) {
             &#{$at}small\/medium {
-                @include text-lg;
+                @include                text-lg;
             }
         }
 
         @media screen and (min-width: $grid-break-small) and (max-width: $grid-break-large) {
             &#{$at}medium {
-                @include text-lg;
+                @include                text-lg;
             }
         }
 
         @media screen and (min-width: $grid-break-small) {
             &#{$at}medium\/large {
-                @include text-lg;
+                @include                text-lg;
             }
         }
 
         @media screen and (min-width: $grid-break-large) {
             &#{$at}large {
-                @include text-lg;
+                @include                text-lg;
             }
         }
     }
@@ -317,36 +317,36 @@
 
 
     &-center {
-        @include align(center);
+        @include                align(center);
 
 
         @media screen and (max-width: $grid-break-small) {
             &#{$at}small {
-                @include align(center);
+                @include                align(center);
             }
         }
 
         @media screen and (max-width: $grid-break-large) {
             &#{$at}small\/medium {
-                @include align(center);
+                @include                align(center);
             }
         }
 
         @media screen and (min-width: $grid-break-small) and (max-width: $grid-break-large) {
             &#{$at}medium {
-                @include align(center);
+                @include                align(center);
             }
         }
 
         @media screen and (min-width: $grid-break-small) {
             &#{$at}medium\/large {
-                @include align(center);
+                @include                align(center);
             }
         }
 
         @media screen and (min-width: $grid-break-large) {
             &#{$at}large {
-                @include align(center);
+                @include                align(center);
             }
         }
     }
@@ -438,36 +438,36 @@
 .null {
     $at:                    $ns-responsive;
     
-    @include null;
+    @include                null;
 
 
     &#{$at} {
         &small {
-            @include null(small);
+            @include                null(small);
         }
 
         &small\/medium {
-            @include null(small/medium);
+            @include                null(small/medium);
         }
 
         &medium {
-            @include null(medium);
+            @include                null(medium);
         }
 
         &medium\/large {
-            @include null(medium/large);
+            @include                null(medium/large);
         }
 
         &large {
-            @include null(large);
+            @include                null(large);
         }
         
         &print {
-            @include null(print);
+            @include                null(print);
         }
         
         &visual {
-            @include null(visual);
+            @include                null(visual);
         }
     }
 }
