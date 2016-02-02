@@ -18,7 +18,7 @@ $browser-context:           16px !default;
 }
 
 @function strip-unit($number) {
-    @if type-of($number) == 'number' and not unitless($number) {
+    @if type-of($number) == "number" and not unitless($number) {
         @return $number / ($number * 0 + 1);
     }
 
@@ -40,15 +40,15 @@ $browser-context:           16px !default;
 //  number functions
 
 @function rem($pixels) {
-    @return ($pixels / 10) + 0rem;
+    @return (strip-unit($pixels) / 10) + 0rem;
 }
 
 @function em($pixels, $context: $browser-context) {
-    @if (unitless($pixels)) {
+    @if unitless($pixels) {
         $pixels: $pixels + 0px;
     }
 
-    @if (unitless($context)) {
+    @if unitless($context) {
         $context: $context + 0px;
     }
 
@@ -56,7 +56,7 @@ $browser-context:           16px !default;
 }
 
 @function replace-unit($number, $unit) {
-    @if type-of($number) == 'number' and not unitless($number) {
+    @if type-of($number) == "number" and not unitless($number) {
         @return strip-unit($number) + 0#{$unit};
     }
     

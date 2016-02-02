@@ -67,10 +67,6 @@ $type-config: (
 
     path:                   "../petra/fonts",
 
-    relative-line-height:   on,
-    // @TODO: do some testing to see if numbers with units are interpreted as strings or numbers
-    // if so, there's no need for this variable
-
     sans-serif: (
         stack:              "'Open Sans', 'Helvetica Neue', Helvetica, sans-serif",
 
@@ -111,18 +107,13 @@ $type-config: (
         ),
     ),
 
-    inherit: (
-        stack:              inherit,
-
+    scale: (
         base: (
-            font-size:      inherit,
-            font-weight:    inherit,
-            line-height:    inherit,
+            font-size:      initial,
         ),
 
         larger: (
             font-size:      18,
-            font-weight:    inherit,
             line-height:    1.611,
         ),
 
@@ -136,38 +127,49 @@ $type-config: (
 ) !default;
 
 $type-context: map-get($type-config, browser-context);
+$relative-line-height: map-get($type-config, relative-line-height);
 
 @function _font-set-family($family) {
-    @return unquote(map-deep-get($type-config, $family, stack)); }
+    @return map-deep-get($type-config, $family, stack); }
 
-@function _font-set-size($family, $preset: base) {
+@function _font-set-size($family, $preset) {
     @return map-deep-get($type-config, $family, $preset, font-size); }
 
-@function _font-set-weight($family, $preset: base) {
+@function _font-set-weight($family, $preset) {
     @return map-deep-get($type-config, $family, $preset, font-weight); }
 
-@function _font-set-line($family, $preset: base) {
+@function _font-set-line($family, $preset) {
     @return map-deep-get($type-config, $family, $preset, line-height); }
 
 @mixin font-set($family, $preset: base) {
     font: {
-        family:             _font-set-family($family);
-        @if type-of(map-deep-get($type-config, $family, $preset, font-size)) == number {
-            size:           rem(_font-set-size($family, $preset)); }
+        @if _font-set-family($family) {
+            family:             unquote(_font-set-family($family));
+        } @else { }
+        
+        @if _font-set-size($family, $preset) {
+            @if type-of(_font-set-size($family, $preset)) == "number" {
+                size:           rem(_font-set-size($family, $preset));
+            }
+            @else {
+                size:           _font-set-size($family, $preset);
+            }
+        } @else { }
+        
+        @if _font-set-weight($family, $preset) {
+            weight:             _font-set-weight($family, $preset);
+        } @else { }
+    }
+    
+    @if _font-set-line($family, $preset) {
+        @if type-of(_font-set-line($family, $preset)) == "number"
+            and unit(_font-set-line($family, $preset)) == px {
+            line-height:            rem(_font-set-line($family, $preset));
+        }
         @else {
-            size:           _font-set-size($family, $preset); }
-        weight:             _font-set-weight($family, $preset: base); }
-
-    @if type-of(map-deep-get($type-config, $family, $preset, line-height)) == number {
-        @if map-get($type-config, relative-line-height) == on {
-            line-height:            _font-set-line($family, $preset: base); }
-        @else if map-get($type-config, relative-line-height) == off {
-            line-height:            rem(_font-set-line($family, $preset: base)); }
-        @else {
-            line-height:            _font-set-line($family, $preset: base);
-            @warn "Invalid value given for ‘relative-line-height’ in $type-config. Value must == ‘on’ or ‘off’. Defaulting to ‘on’." } }
-    @else {
-        line-height:            _font-set-line($family, $preset: base); }
+            line-height:            _font-set-line($family, $preset);
+        }
+    } @else { }
 }
 
 $font-path:                 map-get($type-config, path) !default;
