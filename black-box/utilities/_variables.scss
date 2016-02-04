@@ -119,7 +119,6 @@ $type-config: (
 
         smaller: (
             font-size:      12,
-            font-weight:    inherit,
             line-height:    1.583,
         ),
     ),
@@ -132,44 +131,26 @@ $relative-line-height: map-get($type-config, relative-line-height);
 @function _font-set-family($family) {
     @return map-deep-get($type-config, $family, stack); }
 
-@function _font-set-size($family, $preset) {
-    @return map-deep-get($type-config, $family, $preset, font-size); }
-
-@function _font-set-weight($family, $preset) {
-    @return map-deep-get($type-config, $family, $preset, font-weight); }
-
-@function _font-set-line($family, $preset) {
-    @return map-deep-get($type-config, $family, $preset, line-height); }
+@function _font-set-property($family, $preset, $property) {
+    @return map-deep-get($type-config, $family, $preset, $property); }
 
 @mixin font-set($family, $preset: base) {
-    font: {
-        @if _font-set-family($family) {
-            family:             unquote(_font-set-family($family));
-        } @else { }
-        
-        @if _font-set-size($family, $preset) {
-            @if type-of(_font-set-size($family, $preset)) == "number" {
-                size:           rem(_font-set-size($family, $preset));
+    @each $property, $value in (map-deep-get($type-config, $family, $preset)) {
+        @if $property == "font-size" and type-of($value) == "number" {
+            @if unitless($value) or unit($value) == "px" {
+                #{$property}:           rem($value);
             }
             @else {
-                size:           _font-set-size($family, $preset);
+                #{$property}:           $value;
             }
-        } @else { }
-        
-        @if _font-set-weight($family, $preset) {
-            weight:             _font-set-weight($family, $preset);
-        } @else { }
-    }
-    
-    @if _font-set-line($family, $preset) {
-        @if type-of(_font-set-line($family, $preset)) == "number"
-            and unit(_font-set-line($family, $preset)) == px {
-            line-height:            rem(_font-set-line($family, $preset));
+        }
+        @else if $property == "line-height" and type-of($value) == "number" and unit($value) == "px" {
+            #{$property}:           rem($value);
         }
         @else {
-            line-height:            _font-set-line($family, $preset);
+            #{$property}:           $value;
         }
-    } @else { }
+    }
 }
 
 $font-path:                 map-get($type-config, path) !default;
