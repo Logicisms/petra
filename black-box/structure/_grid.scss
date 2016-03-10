@@ -94,7 +94,7 @@ $row-padded:                ".row#{$ns-modifier}padded";
     }
 
 
-    @if $grid-keyword-cols == on {
+    @if $grid-keyword-columns {
 
         @include respond-to(small) {
             @for $i from 1 through $grid-column-count {
@@ -186,7 +186,7 @@ $row-padded:                ".row#{$ns-modifier}padded";
     }
 
 
-    @if $grid-keyword-cols == on {
+    @if $grid-keyword-columns {
 
         @include respond-to(small) {
             @for $i from 0 through $grid-column-count {
@@ -278,7 +278,7 @@ $row-padded:                ".row#{$ns-modifier}padded";
     }
 
 
-    @if $grid-keyword-cols == on {
+    @if $grid-keyword-columns {
 
         @include respond-to(small) {
             @for $i from 0 through $grid-column-count {

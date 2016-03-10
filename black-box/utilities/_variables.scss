@@ -126,7 +126,6 @@ $type-config: (
 ) !default;
 
 $type-context: map-get($type-config, browser-context);
-$relative-line-height: map-get($type-config, relative-line-height);
 
 @function _font-set-family($family) {
     @return map-deep-get($type-config, $family, stack); }
@@ -135,6 +134,10 @@ $relative-line-height: map-get($type-config, relative-line-height);
     @return map-deep-get($type-config, $family, $preset, $property); }
 
 @mixin font-set($family, $preset: base) {
+    @if _font-set-family($family) {
+        font-family:            unquote(_font-set-family($family));
+    } @else { }
+    
     @each $property, $value in (map-deep-get($type-config, $family, $preset)) {
         @if $property == "font-size" and type-of($value) == "number" {
             @if unitless($value) or unit($value) == "px" {
@@ -166,7 +169,7 @@ $monospace-2:               _font-set-family(monospace-2) !default;
 $grid-config: (
 
     columns:                12,
-    keyword-columns:        off,
+    keyword-columns:        false,
 
     gutter:                 2.4rem,
 
@@ -176,6 +179,9 @@ $grid-config: (
     ),
 
     master-width: (
+        //  @TODO:
+        //  if on-small is set to 100%, row--padded elements will cause
+        //  horizontal scrolling. fix it.
         on-small:           85%,
         on-medium:          80%,
         on-large:           80%,
@@ -186,7 +192,7 @@ $grid-config: (
 ) !default;
 
 $grid-column-count: map-get($grid-config, columns);
-$grid-keyword-cols: map-get($grid-config, keyword-columns);
+$grid-keyword-columns: map-get($grid-config, keyword-columns);
 
 $grid-gutter: map-get($grid-config, gutter);
 $gutter: map-get($grid-config, gutter);
