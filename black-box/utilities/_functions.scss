@@ -57,9 +57,9 @@ $browser-context:           16px !default;
 
 @function replace-unit($number, $unit) {
     @if type-of($number) == "number" and not unitless($number) {
-        @return strip-unit($number) + 0#{$unit};
+        @return strip-unit($number) + 0 + $unit;
     }
-    
+
     @return $number;
 }
 
