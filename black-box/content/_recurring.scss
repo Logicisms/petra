@@ -46,7 +46,7 @@
 //  transformative classes
 
 .rotate {
-    @each $var in $util-rot-grades {
+    @each $var in $util-rotation-grades {
         &-#{$var} {
             transform:              rotate(#{$var}deg);
         }
