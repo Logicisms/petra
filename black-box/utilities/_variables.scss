@@ -125,7 +125,7 @@ $type-config: (
 
 ) !default;
 
-$type-context: map-get($type-config, browser-context);
+$browser-context: map-get($type-config, browser-context);
 
 @function _font-set-family($family) {
     @return map-deep-get($type-config, $family, stack); }
