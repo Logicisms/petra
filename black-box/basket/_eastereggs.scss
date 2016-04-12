@@ -135,17 +135,22 @@
     }
 
 
-    &::after {
+    &::after,
+    &::before {
         clip:                   rect(0,90rem,0,0);
         overflow:               hidden;
         position:               absolute;
         top:                    0;
-        left:                   $offset;
 
         background: {
             color:              $background; }
-
+        
         color:                  $color;
+    }
+    
+    &::after {
+        left:                   $offset;
+
         text-shadow:            $shadow-1;
 
         content:                $attribute-1;
@@ -153,16 +158,8 @@
         animation:              noise-anim-1 2s infinite linear alternate-reverse; }
 
     &::before {
-        clip:                   rect(0,90rem,0,0);
-        overflow:               hidden;
-        position:               absolute;
-        top:                    0;
         left:                   -$offset;
 
-        background: {
-            color:              $background; }
-
-        color:                  $color;
         text-shadow:            $shadow-2; 
 
         content:                $attribute-2;

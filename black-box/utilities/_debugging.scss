@@ -17,9 +17,9 @@ $debug-check-visible:       "Review styles or rendered markup.";
 
 //  debugging mixins
 
-@mixin debugger($variable: $debug-fallback, $syntax: "element (no syntax defined)") {
-    @if $variable {
-        @if $variable == visible {
+@mixin debugger($condition: visual, $syntax: "element (no syntax defined)") {
+    @if $condition {
+        @if $condition == visual {
             outline: {
                 color:              material-color(red) !important;
                 style:              solid !important;
@@ -34,7 +34,7 @@ $debug-check-visible:       "Review styles or rendered markup.";
     }
 
     @else {
-        @error "#{$debug-syntax} #{$syntax}. #{$debug-check}";
+        
     }
 }
 
