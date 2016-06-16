@@ -249,7 +249,7 @@ $utilities-config: (
 @import
     "black-box/components/navigation",
     "black-box/components/forms",
-    "black-box/components/modals",
+    
     "black-box/components/tables"
 ;
 
