@@ -53,7 +53,7 @@
     #{$var} ~ & { @content; }
 }
     @mixin when-following($var) {
-        @include general-sibling-of($var) { @content; }
+        @include following-sibling-of($var) { @content; }
     }
 
 
