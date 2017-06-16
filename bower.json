@@ -1,4 +1,13 @@
 {
     "name": "petra-scss",
-    "description": "A slightly experimental Sass framework designed with configurability in mind. An ongoing work in progress."
+    "description": "Petra Sass Framework",
+    "keywords": [],
+    "authors": [
+        { "name": "Jean-Luc Harbin" }
+    ],
+    "ignore" : [
+        "*.json",
+        "_config-default",
+        "fonts/codepoints"
+    ]
 }
