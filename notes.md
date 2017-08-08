@@ -68,7 +68,8 @@ div.c-example {
     &.js-active {
         opacity:                0.75;
     }
-}```
+}
+```
 
 
 ## light reading
