@@ -1,0 +1,62 @@
+//
+//  Reset
+//
+
+:root {
+    box-sizing:             border-box;
+    margin:                 0;
+    padding:                0;
+    
+    font: {
+        family:             inherit;
+        size:               (10 / strip-unit($browser-context) * 100) + 0%;
+        // 'size' sets the document's root font-size to 10px,
+        // relative to set browser context
+        style:              inherit;
+        weight:             inherit; }
+    text: {
+        decoration:         none;
+        size-adjust:        100%; }
+    vertical-align:         baseline;
+    
+    
+    &:before,
+    &:after,
+    * {
+        box-sizing:             inherit;
+    }
+}
+
+article,
+aside,
+details,
+div,
+footer,
+header,
+main,
+menu,
+nav,
+ol,
+section,
+summary,
+ul {
+    display:                block;
+}
+
+audio,
+canvas,
+progress,
+video {
+    display:                inline-block;
+    
+    vertical-align:         baseline;
+}
+    audio:not([controls]) {
+        display:                none;
+        height:                 0;
+    }
+
+[hidden] {
+    display:                none;
+}
+
