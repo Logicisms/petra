@@ -43,7 +43,7 @@
     @return (strip-unit($pixels) / 10) + 0rem;
 }
 
-@function em($pixels, $context) {
+@function em($pixels, $context: 16px) {
     @if unitless($pixels) {
         $pixels: $pixels + 0px;
     }

@@ -2,5 +2,36 @@
 //  Variables
 //
 
-$browser-context:       16px !default;
+$petra: (
+    global: (
+        //  browser context for font-size setting in the reset
+        context:                16px,
+    ),
+    
+    grid: (
+        breakpoints: (
+            small: (
+                name:           "small",
+                shorthand:      "sm",
+                query:          max-width,
+                width:          640px,
+            ),
+            medium: (
+                name:           "medium",
+                shorthand:      "md",
+                query:          min-width,
+                width:          641px,
+            ),
+            large: (
+                name:           "large",
+                shorthand:      "lg",
+                query:          min-width,
+                width:          1024px,
+            ),
+        ),
+        //  toggle responsive shorthand for grid and utility classes
+        breakpoint-shorthand:   0,
+    )
+);
 
+$browser-context: map-deep-get($petra, global, context) !default;

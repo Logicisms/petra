@@ -16,7 +16,7 @@ Relational groups are [`display level` | `box style` | `type` | `content/interac
 Namespaced properties may be [nested](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#Nested_Properties "Sass documentation for nested properties") to keep rules explicit. The closing bracket of a nested property group trails the last property to keep relational groups compact.
 
 ```scss
-div.c-example {
+.c-example {
     // display level
     box-sizing:             border-box;
     display:                block;
@@ -56,7 +56,7 @@ Nested selectors are sorted by type and relationship to the parent class, and in
 State-modifying classes follow. These may be integrated into pseudo-class selectors, as they often perform the same functions; the class selectors typically being applied dynamically via a frontend framework.
 
 ```scss
-div.c-example {
+.c-example {
     pointer-events:         none;
     
     

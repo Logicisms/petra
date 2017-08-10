@@ -1,0 +1,26 @@
+//
+//  Breakpoints
+//
+
+//$_breakpoint-get-path:  map-deep-get($settings, grid, breakpoints);
+$_breakpoint-get-path:  map-deep-get($petra, grid, breakpoints) !default;
+
+@function _breakpoint-get-key($key) {
+    @return map-deep-get($_breakpoint-get-path, $key);
+}
+@debug _breakpoint-get-key(small);
+@function _breakpoint-get-query-property($key) {
+    @return deep-inspect($_breakpoint-get-path, breaks, $key, query-property);
+}
+@function _breakpoint-get-query-value($key) {
+    @return deep-inspect($_breakpoint-get-path, breaks, $key, query-value);
+}
+@function _breakpoint-get-shorthand($key) {
+    $i: map-deep-get($_breakpoint-get-path, breaks, $key, shorthand);
+    @return unquote($i);
+}
+@function _breakpoint-get-keyword($key) {
+    $i: map-deep-get($_breakpoint-get-path, breaks, $key, keyword);
+    @return unquote($i);
+}
+
