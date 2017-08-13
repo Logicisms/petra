@@ -2,3 +2,34 @@
 //  Debugging  
 //
 
+$_debug-get-path:       map-deep-get($petra, debug) !default;
+
+@function _debug-get-message($key) {
+    @return map-deep-get($_debug-get-path, message, $key);
+}
+    @function debug-message($key) {
+        @return _debug-get-message($key); }
+
+@function _debug-get-outline($key) {
+    @return map-deep-get($_debug-get-path, outline, $key);
+}
+@function _debug-get-flag($key) {
+    @return map-deep-get($_debug-get-path, flags, $key);
+}
+    @function debug-flag($key) {
+        @return _debug-get-flag($key); }
+
+
+@mixin debug($message: _debug-get-message('default'), $error: false) {
+    @if $error {
+        @warn "#{_debug-get-message(lede)} #{$message}. #{_debug-get-message(on-error)}";
+        @error _debug-get-message(on-error);
+    } @else {
+        outline: {
+            color:                  _debug-get-outline('color') !important;
+            style:                  _debug-get-outline('style') !important;
+            width:                  _debug-get-outline('width') !important; }
+        
+        @warn "#{_debug-get-message(lede)} #{$message}. #{_debug-get-message(on-warn)}";
+    }
+}

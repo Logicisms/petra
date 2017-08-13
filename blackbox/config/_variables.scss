@@ -8,29 +8,54 @@ $petra: (
         context:                16px,
     ),
     
+    debug: (
+        message: (
+            lede:                   "Invalid value(s) at",
+            default:                "mixin (no message defined)",
+            on-warn:                "Follow backtrace or review rendered markup.",
+            on-error:               "Follow backtrace and correct invalid syntax to unblock compiler.",
+            
+            respond-to:             "'@include respond-to()'",
+        ),
+        outline: (
+            color:                  red,
+            style:                  solid,
+            width:                  0.5rem,
+        ),
+        flags: (
+            //  warn/error flags for petra mixins using the debug utility
+            //  set to 'true' to error out of a compile with incorrect syntax
+            respond-to:             false,
+        ),
+    ),
+    
     grid: (
         breakpoints: (
             small: (
-                name:           "small",
-                shorthand:      "sm",
-                query:          max-width,
-                width:          640px,
+                name:                   "small",
+                shorthand:              "sm",
+                query: (
+                    max-width:          640px,
+                ),
             ),
             medium: (
-                name:           "medium",
-                shorthand:      "md",
-                query:          min-width,
-                width:          641px,
+                name:                   "medium",
+                shorthand:              "md",
+                query: (
+                    min-width:          641px,
+                    max-width:          1023px,
+                ),
             ),
             large: (
-                name:           "large",
-                shorthand:      "lg",
-                query:          min-width,
-                width:          1024px,
+                name:                   "large",
+                shorthand:              "lg",
+                query: (
+                    min-width:          1024px,
+                ),
             ),
         ),
         //  toggle responsive shorthand for grid and utility classes
-        breakpoint-shorthand:   0,
+        breakpoint-shorthand:   false,
     )
 );
 
