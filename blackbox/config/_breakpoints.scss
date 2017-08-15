@@ -2,27 +2,28 @@
 //  Breakpoints
 //
 
-//$_breakpoint-get-path:  map-deep-get($settings, grid, breakpoints);
-$_breakpoint-get-path:  map-deep-get($petra, grid, breakpoints) !default;
-$_breakpoint-get-keys:  map-deep-keys($_breakpoint-get-path);
+//$_breakpoint-get-path:      map-deep-get($settings, grid, breakpoints);
+$_breakpoint-get-path:      map-deep-get($_petra, grid, breakpoints) !default;
+$_breakpoint-get-keys:      map-deep-keys($_breakpoint-get-path);
+    $breakpoints:           $_breakpoint-get-keys;
 
 @function _breakpoint-get-name($key) {
-    $i: map-deep-get($_breakpoint-get-path, $key, name);
-    @return unquote($i);
+    $name: map-deep-get($_breakpoint-get-path, $key, name);
+    @return $name;
 }
 @function _breakpoint-get-shorthand($key) {
-    $i: map-deep-get($_breakpoint-get-path, $key, shorthand);
-    @return unquote($i);
+    $shorthand: map-deep-get($_breakpoint-get-path, $key, shorthand);
+    @return $shorthand;
 }
 @function _breakpoint-get-query($key) {
     @return map-deep-get($_breakpoint-get-path, $key, query);
 }
 @function _breakpoint-build-query($arg) {
-    $base: ();
+    $query: ();
     @each $property, $value in ($arg) {
-        $base: append($base, unquote("and (#{$property}: #{$value})"), space);
+        $query: append($query, unquote("and (#{$property}: #{$value})"), space);
     }
-    @return $base;
+    @return $query;
 }
 
 @mixin respond-to($breakpoint...) {
@@ -30,7 +31,7 @@ $_breakpoint-get-keys:  map-deep-keys($_breakpoint-get-path);
         $i: nth($breakpoint, $index);
         
         @if map-has-key($_breakpoint-get-path, $i) {
-            $query:     _breakpoint-get-query($i);
+            $query: _breakpoint-get-query($i);
 
             @media screen #{_breakpoint-build-query($query)} {
                 @content;

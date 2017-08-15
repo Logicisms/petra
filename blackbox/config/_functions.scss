@@ -63,18 +63,18 @@
 
 //  Color functions
 
-@function blacken($color, $var) {
-    @return mix(black, $color, $var);
+@function blacken($color, $amount) {
+    @return mix(black, $color, $amount);
 }
-    @function shade($color, $var) {
-        @return blacken($color, $var);
+    @function shade($color, $amount) {
+        @return blacken($color, $amount);
     }
 
-@function whiten($color, $var) {
-    @return mix(white, $color, $var);
+@function whiten($color, $amount) {
+    @return mix(white, $color, $amount);
 }
-    @function tint($color, $var) {
-        @return whiten($color, $var);
+    @function tint($color, $amount) {
+        @return whiten($color, $amount);
     }
 
 
