@@ -2,7 +2,7 @@
 //  Debugging  
 //
 
-$_debug-get-path:       map-deep-get($_petra, debug) !default;
+$_debug-get-path:       _pathfinder(debug);
 
 @function _debug-get-message($key) {
     @return map-deep-get($_debug-get-path, message, $key);
@@ -34,3 +34,4 @@ $_debug-get-path:       map-deep-get($_petra, debug) !default;
         @warn "#{nth(_debug-get-message(lede), 1)} '#{$value}' #{nth(_debug-get-message(lede), 2)} '#{$mixin}'. #{_debug-get-message(on-warn)}";
     }
 }
+

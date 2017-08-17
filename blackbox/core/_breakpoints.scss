@@ -2,8 +2,7 @@
 //  Breakpoints
 //
 
-//$_breakpoint-get-path:      map-deep-get($settings, grid, breakpoints);
-$_breakpoint-get-path:      map-deep-get($_petra, grid, breakpoints) !default;
+$_breakpoint-get-path:      _pathfinder(grid, breakpoints);
 $_breakpoint-get-keys:      map-deep-keys($_breakpoint-get-path);
     $breakpoints:           $_breakpoint-get-keys;
 

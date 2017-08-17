@@ -4,8 +4,26 @@
 
 $_petra: (
     global: (
-        //  browser context for font-size setting in the reset
-        context:                16px,
+        namespacing: (
+            element:                "__",
+            modifier:               "--",
+            responsive:             \@,
+        ),
+        z-index: (
+            default:                1,
+        ),
+        typography: (
+            //  browser context for font-size setting in the reset
+            browser-context:        16px,
+            
+            local-path:             "../fonts",
+            
+            font-family: (
+                sans-serif: (),
+                serif: (),
+                monospace: (),
+            ),
+        ),
     ),
     
     debug: (
@@ -48,8 +66,6 @@ $_petra: (
                 query: (
                     min-width:          641px,
                     max-width:          1023px,
-                    min-height:         480px,
-                    max-height:         960px,
                 ),
             ),
             large: (
@@ -69,10 +85,11 @@ $_petra: (
     $list: ();
     $list: remove($path, nth($path, -1));
     
-    $fallback: map-deep-get($_petra, $list...);
+    $map: map-deep-get($_petra, $list...) !default;
     $key: nth($path, -1);
     
-    @if variable-exists(settings) {
+    @if variable-exists(settings) and type-of($settings) == map {
+        $fallback: $map;
         $map: map-deep-get($settings, $list...);
         
         @if if(map-has-key($map, key), true, false) {
@@ -81,10 +98,20 @@ $_petra: (
             @return map-deep-get($fallback, $key);
         }
     } @else {
-        @warn map-deep-get($_petra, debug, message, project-settings);
-        @return map-deep-get($fallback, $key);
+        @if not variable-exists(settings) {
+            @warn map-deep-get($_petra, debug, message, project-settings);
+        }
+        @return map-deep-get($map, $key);
     }
 }
+    //  high-specificity _pathfinder aliases
+    @function z($key) {
+        @return _pathfinder(global, z-index, $key); }
 
-$browser-context: map-deep-get($_petra, global, context) !default;
+
+$_element:                  _pathfinder(global, namespacing, element);
+$_modifier:                 _pathfinder(global, namespacing, modifier);
+$_responsive:               _pathfinder(global, namespacing, responsive);
+
+$browser-context:           _pathfinder(global, typography, browser-context);
 
