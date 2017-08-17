@@ -37,7 +37,7 @@ $_breakpoint-get-keys:      map-deep-keys($_breakpoint-get-path);
                 @content;
             }
         } @else {
-            @include debug(debug-message('respond-to'), debug-flag('respond-to'));
+            @include debug(debug-message('respond-to'), debug-flag('respond-to'), $i);
         }
     }
 }

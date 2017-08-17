@@ -21,9 +21,9 @@ $_debug-get-path:       map-deep-get($_petra, debug) !default;
         @return _debug-get-flag($key); }
 
 
-@mixin debug($message: _debug-get-message('default'), $error: false) {
+@mixin debug($mixin: _debug-get-message('default'), $error: false, $value: "<undefined>") {
     @if $error {
-        @warn "#{_debug-get-message(lede)} #{$message}. #{_debug-get-message(on-error)}";
+        @warn "#{nth(_debug-get-message(lede), 1)} '#{$value}' #{nth(_debug-get-message(lede), 2)} '#{$mixin}'. #{_debug-get-message(on-error)}";
         @error _debug-get-message(on-error);
     } @else {
         outline: {
@@ -31,6 +31,6 @@ $_debug-get-path:       map-deep-get($_petra, debug) !default;
             style: _debug-get-outline('style') !important;
             width: _debug-get-outline('width') !important; }
         
-        @warn "#{_debug-get-message(lede)} #{$message}. #{_debug-get-message(on-warn)}";
+        @warn "#{nth(_debug-get-message(lede), 1)} '#{$value}' #{nth(_debug-get-message(lede), 2)} '#{$mixin}'. #{_debug-get-message(on-warn)}";
     }
 }

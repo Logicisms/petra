@@ -3,10 +3,10 @@
 //
 
 @import
-    "blackbox/config/functions",
-    "blackbox/config/variables",
-    "blackbox/config/debugging",
-    "blackbox/config/breakpoints";
+    "blackbox/core/functions",
+    "blackbox/core/variables",
+    "blackbox/core/debugging",
+    "blackbox/core/breakpoints";
 
 @import
     "blackbox/base/reset";

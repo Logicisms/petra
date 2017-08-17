@@ -10,12 +10,14 @@ $_petra: (
     
     debug: (
         message: (
-            lede:                   "Invalid value(s) at",
-            default:                "mixin (no message defined)",
+            lede:                   ("Invalid value(s):", "at mixin:"),
             on-warn:                "Follow backtrace or review rendered markup.",
             on-error:               "Follow backtrace and correct invalid syntax to unblock compiler.",
             
-            respond-to:             "'@include respond-to()'",
+            project-settings:       "No '$settings' map found for this project.",
+            
+            default:                "mixin (no message defined)",
+            respond-to:             "@include respond-to()",
         ),
         outline: (
             color:                  red,
@@ -25,6 +27,8 @@ $_petra: (
         flags: (
             //  warn/error flags for petra mixins using the debug utility
             //  set to 'true' to error out of a compile with incorrect syntax
+            project-settings:       true,
+            
             respond-to:             false,
         ),
     ),
@@ -44,6 +48,8 @@ $_petra: (
                 query: (
                     min-width:          641px,
                     max-width:          1023px,
+                    min-height:         480px,
+                    max-height:         960px,
                 ),
             ),
             large: (
@@ -58,6 +64,27 @@ $_petra: (
         breakpoint-shorthand:   false,
     )
 );
+
+@function _pathfinder($path...) {
+    $list: ();
+    $list: remove($path, nth($path, -1));
+    
+    $fallback: map-deep-get($_petra, $list...);
+    $key: nth($path, -1);
+    
+    @if variable-exists(settings) {
+        $map: map-deep-get($settings, $list...);
+        
+        @if if(map-has-key($map, key), true, false) {
+            @return map-deep-get($map, $key);
+        } @else {
+            @return map-deep-get($fallback, $key);
+        }
+    } @else {
+        @warn map-deep-get($_petra, debug, message, project-settings);
+        @return map-deep-get($fallback, $key);
+    }
+}
 
 $browser-context: map-deep-get($_petra, global, context) !default;
 
