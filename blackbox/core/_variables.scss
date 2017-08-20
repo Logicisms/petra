@@ -4,10 +4,21 @@
 
 $_petra: (
     global: (
-        namespacing: (
-            element:                "__",
-            modifier:               "--",
-            responsive:             \@,
+        namespace: (
+            prefix: (
+                object:                 "o-",
+                component:              "c-",
+                utility:                "u-",
+                scope:                  "s-",
+                is:                     "is-",
+                has:                    "has-",
+                javascript:             "js-",
+            ),
+            delimiter: (
+                element:                "__",
+                modifier:               "--",
+                responsive:             \@,
+            ),
         ),
         z-index: (
             default:                1,
@@ -19,9 +30,9 @@ $_petra: (
             local-path:             "../fonts",
             
             font-family: (
-                sans-serif: (),
-                serif: (),
-                monospace: (),
+                sans-serif:             ("Helvetica", Helvetica, sans-serif),
+                serif:                  ("Times New Roman", Times, serif),
+                monospace:              (Monaco, Consolas, "Andale Mono", monospace),
             ),
         ),
     ),
@@ -104,14 +115,17 @@ $_petra: (
         @return map-deep-get($map, $key);
     }
 }
-    //  high-specificity _pathfinder aliases
+    //  increased-specificity _pathfinder aliases
     @function z($key) {
         @return _pathfinder(global, z-index, $key); }
 
+    @function prefix($key) {
+        @return _pathfinder(global, namespace, prefix, $key); }
 
-$_element:                  _pathfinder(global, namespacing, element);
-$_modifier:                 _pathfinder(global, namespacing, modifier);
-$_responsive:               _pathfinder(global, namespacing, responsive);
+
+$element:                   _pathfinder(global, namespace, delimiter, element);
+$modifier:                  _pathfinder(global, namespace, delimiter, modifier);
+$responsive:                _pathfinder(global, namespace, delimiter, responsive);
 
 $browser-context:           _pathfinder(global, typography, browser-context);
 

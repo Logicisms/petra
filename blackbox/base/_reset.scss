@@ -15,8 +15,6 @@
     font: {
         family:             inherit;
         size:               100%;
-        // 'size' sets the document's root font-size to 10px,
-        // relative to set browser context
         style:              inherit;
         weight:             inherit; }
     // line-height: / set a configurable option for this value, after building out the source getting function
@@ -36,6 +34,8 @@
 body {
     font: {
         size:               (10 / strip-unit($browser-context) * 100) + 0%; }
+        // 'size' sets the document's root font-size to 10px,
+        // relative to set browser context
 }
 
 article,
