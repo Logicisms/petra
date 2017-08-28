@@ -1,44 +1,10 @@
 //
 //  Variables
 //
-
+//  Fallback configuration map
 $_petra: (
-    global: (
-        namespace: (
-            prefix: (
-                object:                 "o-",
-                component:              "c-",
-                utility:                "u-",
-                scope:                  "s-",
-                is:                     "is-",
-                has:                    "has-",
-                javascript:             "js-",
-            ),
-            delimiter: (
-                element:                "__",
-                modifier:               "--",
-                responsive:             \@,
-            ),
-        ),
-        z-index: (
-            default:                1,
-        ),
-        typography: (
-            //  browser context for font-size setting in the reset
-            browser-context:        16px,
-            
-            local-path:             "../fonts",
-            
-            font-family: (
-                sans-serif:             ("Helvetica", Helvetica, sans-serif),
-                serif:                  ("Times New Roman", Times, serif),
-                monospace:              (Monaco, Consolas, "Andale Mono", monospace),
-            ),
-        ),
-    ),
-    
-    debug: (
-        message: (
+    debugging: (
+        messages: (
             lede:                   ("Invalid value(s):", "at mixin:"),
             on-warn:                "Follow backtrace or review rendered markup.",
             on-error:               "Follow backtrace and correct invalid syntax to unblock compiler.",
@@ -54,78 +20,164 @@ $_petra: (
             width:                  0.5rem,
         ),
         flags: (
-            //  warn/error flags for petra mixins using the debug utility
-            //  set to 'true' to error out of a compile with incorrect syntax
+            //  warn/error flags for petra mixins using the debug utility.
+            //  set to 'true' to warn if no $settings map is declared.
             project-settings:       true,
             
+            //  set to 'true' to error out of a compile with incorrect syntax.
             respond-to:             false,
         ),
+    ),
+    
+    global: (
+        reset: (
+            browser-context:        16px,
+        ),
+        custom-properties: (
+            //  css variables to be injected at the top of the document :root
+            //  experimental, may be removed
+            //  good test case for the feature flags
+            foo:                    "bar",
+        ),
+        namespacing: (
+            prefix: (
+                object:                 "o-",
+                component:              "c-",
+                utility:                "u-",
+                scope:                  "s-",
+                is:                     "is-",
+                has:                    "has-",
+                hack:                   "\*\*",
+                javascript:             "js-",
+            ),
+            delimiter: (
+                element:                "__",
+                modifier:               "--",
+                responsive:             \@,
+            ),
+        ),
+        z-index: (
+            default:                1,
+        ),
+    ),
+    
+    typography: (
+        font-families: (
+            sans-serif:         ("Helvetica", Helvetica, sans-serif),
+            serif:              ("Times New Roman", Times, serif),
+            monospace:          (Monaco, Consolas, "Andale Mono", monospace),
+        ),
+        line-height:            1.75,
     ),
     
     grid: (
         breakpoints: (
             small: (
-                name:                   "small",
-                shorthand:              "sm",
-                query: (
-                    max-width:          640px,
-                ),
+                max-width:          640px,
             ),
             medium: (
-                name:                   "medium",
-                shorthand:              "md",
-                query: (
-                    min-width:          641px,
-                    max-width:          1023px,
-                ),
+                min-width:          641px,
             ),
             large: (
-                name:                   "large",
-                shorthand:              "lg",
-                query: (
-                    min-width:          1024px,
-                ),
+                min-width:          1024px,
             ),
         ),
-        //  toggle responsive shorthand for grid and utility classes
-        breakpoint-shorthand:   false,
-    )
+    ),
+    
+    features: (
+        //  experimental feature flags
+        //  toggle whether or not Petra outputs a CSS reset.
+        reset-css:              true,
+        
+        //  toggle custom properties (CSS variables) inserted at document root.
+        custom-properties:      true,
+        
+        //  toggle nested BEM namespacing; applies to element and modifier mixins.
+        nested-bem:             true,
+        
+        //  toggle the output of responsive modifying classes for grids and utilities.
+        responsive-modifiers:   true,
+    ),
 );
 
+
+//
+//  Config introspection functions
 @function _pathfinder($path...) {
-    $list: ();
-    $list: remove($path, nth($path, -1));
-    
-    $map: map-deep-get($_petra, $list...) !default;
-    $key: nth($path, -1);
+    $fallback: map-deep-get($_petra, $path...);
     
     @if variable-exists(settings) and type-of($settings) == map {
-        $fallback: $map;
-        $map: map-deep-get($settings, $list...);
+        $map: ();
+        $keys: ();
         
-        @if if(map-has-key($map, key), true, false) {
-            @return map-deep-get($map, $key);
-        } @else {
-            @return map-deep-get($fallback, $key);
+        @for $i from 1 through length($path) {
+            $key: nth($path, $i);
+            
+            @if $i > 1 {
+                $map: if(
+                    length($path) > 2,
+                    $path,
+                    append($map, nth($path, ($i - 1)), comma)
+                );
+                $map-get: map-deep-get($settings, $map...);
+                
+                @if map-has-key($map-get, $key) {
+                    $keys: append($keys, $key, comma);
+                } @else {
+                    @return map-deep-get($fallback);
+                }
+            } @else {
+                @if map-has-key($settings, $key) {
+                    $keys: append($keys, $key, comma);
+                } @else {
+                    @return map-deep-get($fallback);
+                } 
+            }
         }
+        @return map-deep-get($settings, $keys...);
     } @else {
         @if not variable-exists(settings) {
-            @warn map-deep-get($_petra, debug, message, project-settings);
+            @warn map-deep-get($_petra, debugging, messages, project-settings);
         }
-        @return map-deep-get($map, $key);
+        @return map-deep-get($fallback);
     }
 }
-    //  increased-specificity _pathfinder aliases
-    @function z($key) {
-        @return _pathfinder(global, z-index, $key); }
 
-    @function prefix($key) {
-        @return _pathfinder(global, namespace, prefix, $key); }
+@function _feature($flag) {
+    @return _pathfinder(features, $flag);
+}
 
+//
+//  $settings parsing functions
+@function z($key) {
+    @return _pathfinder(global, z-index, $key);
+}
 
-$element:                   _pathfinder(global, namespace, delimiter, element);
-$modifier:                  _pathfinder(global, namespace, delimiter, modifier);
-$responsive:                _pathfinder(global, namespace, delimiter, responsive);
+@function prefix($key) {
+    @return _pathfinder(global, namespacing, prefix, $key);
+}
 
-$browser-context:           _pathfinder(global, typography, browser-context);
+@function font-family($stack) {
+    @return _pathfinder(typography, font-families, $stack);
+}
+
+//
+//  Parsed and aliased $settings variables
+//  global
+//  global, reset
+$_browser-context:          _pathfinder(global, reset, browser-context);
+ $browser-context:          $_browser-context !default;
+//
+//  global, namespacing
+$_element:                  _pathfinder(global, namespacing, delimiter, element);
+ $element:                  $_element !default;
+$_modifier:                 _pathfinder(global, namespacing, delimiter, modifier);
+ $modifier:                 $_modifier !default;
+$_responsive:               _pathfinder(global, namespacing, delimiter, responsive);
+ $responsive:               $_responsive !default;
+
+//  grid
+//  grid, breakpoints
+$_breakpoints:              map-keys(_pathfinder(grid, breakpoints));
+ $breakpoints:              $_breakpoints !default;
 

@@ -28,6 +28,39 @@
 }
 
 
+//  List functions
+
+@function remove($list, $value, $separator: auto, $recursive: false) {
+    //  remove an entry from a list, by Hugo Giraudel, modified
+    //  https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#removing-values-from-list
+    $result: ();
+
+    @for $i from 1 through length($list) {
+        @if type-of(nth($list, $i)) == list and $recursive {
+            $result: append($result, remove(nth($list, $i), $value, $recursive), $separator);
+        }
+        @else if nth($list, $i) != $value {
+            $result: append($result, nth($list, $i), $separator);
+        }
+    }
+    @return $result;
+}
+
+
+//  String functions
+
+@function str-replace($string, $search, $replace: '') {
+    //  replace `$search` with `$replace` in `$string`, by Hugo Giraudel
+    //  https://css-tricks.com/snippets/sass/str-replace-function/
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+    @return $string;
+}
+
+
 //  Number functions
 
 @function strip-unit($number) {
@@ -35,6 +68,13 @@
     //  https://css-tricks.com/snippets/sass/strip-unit-function/
     @if type-of($number) == "number" and not unitless($number) {
         @return $number / ($number * 0 + 1);
+    }
+    @return $number;
+}
+
+@function replace-unit($number, $unit) {
+    @if type-of($number) == "number" and not unitless($number) {
+        @return strip-unit($number) + 0 + $unit;
     }
     @return $number;
 }
@@ -53,13 +93,6 @@
     @return ($pixels / $context) + 0em;
 }
 
-@function replace-unit($number, $unit) {
-    @if type-of($number) == "number" and not unitless($number) {
-        @return strip-unit($number) + 0 + $unit;
-    }
-    @return $number;
-}
-
 
 //  Color functions
 
@@ -76,37 +109,4 @@
     @function tint($color, $amount) {
         @return whiten($color, $amount);
     }
-
-
-//  String functions
-
-@function str-replace($string, $search, $replace: '') {
-    //  replace `$search` with `$replace` in `$string`, by Hugo Giraudel
-    //  https://css-tricks.com/snippets/sass/str-replace-function/
-    $index: str-index($string, $search);
-
-    @if $index {
-        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
-    }
-    @return $string;
-}
-
-
-//  List functions
-
-@function remove($list, $value, $separator: auto, $recursive: false) {
-    //  remove an entry from a list, by Hugo Giraudel, modified
-    //  https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#removing-values-from-list
-    $result: ();
-
-    @for $i from 1 through length($list) {
-        @if type-of(nth($list, $i)) == list and $recursive {
-            $result: append($result, remove(nth($list, $i), $value, $recursive), $separator);
-        }
-        @else if nth($list, $i) != $value {
-            $result: append($result, nth($list, $i), $separator);
-        }
-    }
-    @return $result;
-}
 

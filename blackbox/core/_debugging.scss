@@ -2,10 +2,10 @@
 //  Debugging  
 //
 
-$_debug-get-path:       _pathfinder(debug);
+$_debug-get-path:       _pathfinder(debugging);
 
 @function _debug-get-message($key) {
-    @return map-deep-get($_debug-get-path, message, $key);
+    @return map-deep-get($_debug-get-path, messages, $key);
 }
     @function debug-message($key) {
         @return _debug-get-message($key); }

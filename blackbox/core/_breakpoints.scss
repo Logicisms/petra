@@ -3,19 +3,9 @@
 //
 
 $_breakpoint-get-path:      _pathfinder(grid, breakpoints);
-$_breakpoint-get-keys:      map-deep-keys($_breakpoint-get-path);
-    $breakpoints:           $_breakpoint-get-keys;
 
-@function _breakpoint-get-name($key) {
-    $name: map-deep-get($_breakpoint-get-path, $key, name);
-    @return $name;
-}
-@function _breakpoint-get-shorthand($key) {
-    $shorthand: map-deep-get($_breakpoint-get-path, $key, shorthand);
-    @return $shorthand;
-}
 @function _breakpoint-get-query($key) {
-    @return map-deep-get($_breakpoint-get-path, $key, query);
+    @return map-deep-get($_breakpoint-get-path, $key);
 }
 @function _breakpoint-build-query($arg) {
     $query: ();
