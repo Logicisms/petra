@@ -17,7 +17,7 @@
         family:             inherit;
         size:               (10 / strip-unit($_browser-context) * 100) + 0%;
         // 'size' sets the document's root font-size to 10px,
-        // relative to a browser context of 16px
+        // relative to the given browser context
         style:              inherit;
         weight:             inherit; }
     line-height:            _pathfinder(typography, line-height);
@@ -45,14 +45,13 @@ body {
 //  CSS reset
 @if _feature(reset-css) {
     p, blockquote, pre,
-    abbr, acronym, address,
-    big, cite, code,
-    del, dfn, em,
-    img, ins, kbd,
-    q, s, samp,
-    small, strike, strong,
-    sub, sup, tt,
-    var, b, u, i,
+    abbr, address, cite,
+    code, del, dfn,
+    em, img, ins,
+    kbd, q, s,
+    samp, small, strike,
+    strong, sub, sup,
+    tt, var, b, u, i,
     dl, dt, dd,
     ol, ul, li,
     fieldset, form, label,
@@ -120,7 +119,7 @@ body {
         }
     }
     
-    strong {
+    b, strong {
         font-weight:            bolder;
     }
     

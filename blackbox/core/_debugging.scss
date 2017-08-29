@@ -2,23 +2,25 @@
 //  Debugging  
 //
 
-$_debug-get-path:       _pathfinder(debugging);
+//$_debug-get-path:       _pathfinder(debugging); @debug type-of($_debug-get-path);
 
 @function _debug-get-message($key) {
-    @return map-deep-get($_debug-get-path, messages, $key);
+    @return _pathfinder(debugging, messages, $key);
 }
     @function debug-message($key) {
-        @return _debug-get-message($key); }
+        @return _debug-get-message($key);
+    }
 
 @function _debug-get-outline($key) {
-    @return map-deep-get($_debug-get-path, outline, $key);
+    @return _pathfinder(debugging, outline, $key);
 }
 
 @function _debug-get-flag($key) {
-    @return map-deep-get($_debug-get-path, flags, $key);
+    @return _pathfinder(debugging, flags, $key);
 }
     @function debug-flag($key) {
-        @return _debug-get-flag($key); }
+        @return _debug-get-flag($key);
+    }
 
 
 @mixin debug($mixin: _debug-get-message('default'), $error: false, $value: "<undefined>") {
