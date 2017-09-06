@@ -89,6 +89,9 @@ $_petra: (
         
         //  toggle the output of responsive modifying classes for grids and utilities.
         responsive-modifiers:   true,
+        
+        //  determine whether or not to output Petra's animation mixins and @keyframe blocks.
+        animation-mixins:       true,
     ),
     
     colors: (

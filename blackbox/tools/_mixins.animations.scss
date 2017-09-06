@@ -2,25 +2,31 @@
 //  Mixins, animations
 //
 
-@mixin animate-spin($keys: false) {
-    animation:              spin $duration infinite linear;
-    
-    @if $keys {
-        @at-root @keyframes spin {
-            0% {
-                transform:              rotate(0deg);
-            }
+//  Animations
+@if _feature(animation-mixins) {
+    @mixin animate-spin($duration: 1s) {
+        animation:              _spin $duration infinite linear;
+    }
 
-            100% {
-                transform:              rotate(359deg);
-            }
+    @keyframes _spin {
+        0% {
+            transform:              rotate(0deg);
+        }
+
+        100% {
+            transform:              rotate(359deg);
         }
     }
 }
+@debug mixin-exists(animate-spin);
 
 
 //  Transitions
-@mixin transition($i...) {
-	transition:				$i $util-transit-time $util-transit-ease;
+@mixin transition($properties, $duration: 0.25s, $timing-function: ease-in-out, $delay: 0) {
+	transition: {
+        delay:              $delay;
+        duration:           $duration;
+        property:           $properties;
+        timing-function:    $timing-function; }
 }
 
