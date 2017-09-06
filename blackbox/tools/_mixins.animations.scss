@@ -1,0 +1,26 @@
+//
+//  Mixins, animations
+//
+
+@mixin animate-spin($keys: false) {
+    animation:              spin $duration infinite linear;
+    
+    @if $keys {
+        @at-root @keyframes spin {
+            0% {
+                transform:              rotate(0deg);
+            }
+
+            100% {
+                transform:              rotate(359deg);
+            }
+        }
+    }
+}
+
+
+//  Transitions
+@mixin transition($i...) {
+	transition:				$i $util-transit-time $util-transit-ease;
+}
+

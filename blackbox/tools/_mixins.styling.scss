@@ -1,0 +1,85 @@
+//
+//  Mixins, styling
+//
+
+//  General
+@mixin overlay($background: false) {
+	height:					100%;
+	width:					100%;
+	position:				absolute;
+		top:				0;
+		right:				0;
+		bottom:				0;
+		left:				0;
+    
+    @if $background {
+        background-color:       $background;
+    }
+}
+
+
+//  Patterns
+@mixin stripes($direction, $colors) {
+    //  by Hugo Giraudel
+    //  https://css-tricks.com/snippets/sass/striped-gradient-mixin/
+    $length: length($colors);
+
+    @if $length > 1 {
+        $stripes: ();
+
+        @for $i from 1 through $length {
+            $stripe: (100% / $length) * ($i - 1);
+            @if $i > 1 {
+                $stripes: append($stripes, nth($colors, $i - 1) $stripe, comma);
+            }
+            $stripes: append($stripes, nth($colors, $i) $stripe, comma);
+        }
+
+        background: {
+            image:              linear-gradient($direction, $stripes); }
+    } @else if $length == 1 {
+        background: {
+            color:              $colors; }
+    }
+}
+
+@import "mixins.css3patterns";
+
+
+//  Placement
+@mixin place-on-circle($item-count, $circle-size, $item-size) {
+    //  by Hugo Giraudel
+    //  https://css-tricks.com/snippets/sass/placing-items-circle/
+    position:               relative;
+    width:                  $circle-size;
+    height:                 $circle-size;
+    padding:                0;
+    border-radius:          50%; 
+    list-style:             none;       
+
+    
+    > * {
+        display:                block;
+        position:               absolute;
+        top:                    50%; 
+        left:                   50%;
+        width:                  $item-size;
+        height:                 $item-size;
+        margin:                 -($item-size / 2);
+
+        $angle:                 (360 / $item-count);
+        $rot:                   0;
+
+        @for $i from 1 through $item-count {
+            &:nth-of-type(#{$i}) {
+                transform: 
+                    rotate($rot * 1deg) 
+                    translate($circle-size / 2) 
+                    rotate($rot * -1deg);
+            }
+
+            $rot: $rot + $angle;
+        }
+    }
+}
+

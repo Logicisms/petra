@@ -2,13 +2,12 @@
 //  Breakpoints
 //
 
-$_breakpoint-get-path:      _pathfinder(grid, breakpoints);
-
 @function _breakpoint-get-query($key) {
-    @return map-deep-get($_breakpoint-get-path, $key);
+    @return _pathfinder(grid, breakpoints, $key);
 }
 @function _breakpoint-build-query($arg) {
     $query: ();
+    
     @each $property, $value in ($arg) {
         $query: append($query, unquote("and (#{$property}: #{$value})"), space);
     }
@@ -16,10 +15,12 @@ $_breakpoint-get-path:      _pathfinder(grid, breakpoints);
 }
 
 @mixin respond-to($breakpoint...) {
-    @for $index from 1 through length($breakpoint) {
+    $length: length($breakpoint);
+    
+    @for $index from 1 through $length {
         $i: nth($breakpoint, $index);
         
-        @if map-has-key($_breakpoint-get-path, $i) {
+        @if _pathfinder(grid, breakpoints, $i) {
             $query: _breakpoint-get-query($i);
 
             @media screen #{_breakpoint-build-query($query)} {

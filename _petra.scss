@@ -3,13 +3,11 @@
 //
 
 @import
-    "blackbox/core/functions",
-    "blackbox/core/variables",
-    "blackbox/core/debugging",
-    "blackbox/core/breakpoints",
-    "blackbox/core/mixins";
+    "petra.core";
 
 @import
-    "blackbox/base/root",
-    "blackbox/base/font-face";
+    "petra.tools";
+
+@import
+    "petra.generic";
 

@@ -3,14 +3,6 @@
 //
 
 :root {
-    @if _feature(custom-properties) {
-        $_custom-properties: _pathfinder(global, custom-properties);
-        
-        @each $variable, $value in $_custom-properties {
-            #{"--" + $variable}: $value;
-        }
-    }
-    
     box-sizing:             border-box;
     
     font: {

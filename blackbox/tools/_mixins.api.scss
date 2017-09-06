@@ -1,0 +1,114 @@
+//
+//  Mixins, writing API
+//
+
+//  Prefixing
+@mixin _prefix($prefix, $name) {
+    .#{_pathfinder(global, namespacing, prefixes, $prefix) + $name} {
+        @content;
+    }
+}
+    @mixin class($prefix, $name) {
+        @include _prefix($var, $i) { @content; }
+    }
+
+
+//  BEM
+@mixin _block {
+    @if _feature(nested-bem) {
+        &#{&} { @content; }
+    } @else {
+        & { @content; }
+    }
+}
+    @mixin block {
+        @include _block { @content; }
+    }
+
+@mixin _element($elements...) {
+    $length: length($elements);
+    $selectors: ();
+    $parent: if(_feature(nested-bem), "& &", "&");
+    
+    @for $index from 1 through $length {
+        $i: nth($elements, $index);
+        
+        $selectors: append($selectors, #{$parent + $_element + $i}, comma);
+    }
+    
+    #{$selectors} {
+        @content;
+    }
+}
+    @mixin element($elements...) {
+        @include _element($elements...) { @content; }
+    }
+
+@mixin _modifier($modifiers...) {
+    $length: length($modifiers);
+    $selectors: ();
+    
+    @for $index from 1 through $length {
+        $i: nth($modifiers, $index);
+        
+        $selectors: append($selectors, "&#{$_modifier + $i}", comma);
+    }
+    
+    #{$selectors} {
+        @content;
+    }
+}
+    @mixin modifier($modifiers) {
+        @include _modifier($modifiers) { @content; }
+    }
+
+
+//  Breakpoints
+@mixin _responsive-modifier($breakpoint...) {
+    $length: length($breakpoint);
+    
+    @for $index from 1 through $length {
+        $i: nth($breakpoint, $index);
+        
+        @include respond-to($i) {
+            &#{$_responsive + $i} { @content; }
+        }
+    }
+}
+    @mixin responsive-modifier($breakpoint...) {
+        @include _responsive-modifier($breakpoint...) { @content }
+    }
+
+@mixin _responsive-modifier-array($output: _feature(responsive-modifiers)) {
+    @if $output {
+        @include responsive-modifier($_breakpoints...) {
+            @content;
+        }
+    }
+}
+    @mixin responsive-modifier-array($output: _feature(responsive-modifiers)) {
+        @include _responsive-modifier-array($output) { @content; }
+    }
+
+
+//  Context simplification
+@mixin qualify($selector) {
+    @at-root #{$selector + &} { @content; }
+}
+
+@mixin descendant-of($selector) {
+    #{$selector} & { @content; }
+}
+
+@mixin child-of($selector) {
+    #{$selector} > & { @content; }
+}
+
+@mixin adjacent-sibling-of($selector) {
+    #{$selector} + & { @content; }
+}
+
+@mixin general-sibling-of($selector) {
+    #{$selector} ~ & { @content; }
+}
+
