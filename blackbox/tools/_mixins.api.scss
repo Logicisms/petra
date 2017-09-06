@@ -58,8 +58,8 @@
         @content;
     }
 }
-    @mixin modifier($modifiers) {
-        @include _modifier($modifiers) { @content; }
+    @mixin modifier($modifiers...) {
+        @include _modifier($modifiers...) { @content; }
     }
 
 
