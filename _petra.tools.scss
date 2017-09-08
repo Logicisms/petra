@@ -2,11 +2,20 @@
 //  Petra, tools
 //
 
-@import // tools
-    "blackbox/tools/breakpoints",
+@import
+    //  core
+    "blackbox/tools/core.functions",
+    "blackbox/tools/core.pathfinder",
+    "blackbox/tools/core.debugging",
+    "blackbox/tools/core.breakpoints",
+    
+    //  maps
+    "blackbox/tools/maps.material-colors",
+    
+    //  mixins
     "blackbox/tools/mixins.api",
     "blackbox/tools/mixins.animations",
-    "blackbox/tools/mixins.formatting",
-    "blackbox/tools/mixins.scaling",
-    "blackbox/tools/mixins.styling";
+    "blackbox/tools/mixins.design",
+    "blackbox/tools/mixins.layout",
+    "blackbox/tools/mixins.scaling";
 

@@ -29,13 +29,14 @@
 }
 
 
-body {
-    margin:                 0;
-}
-
 //
 //  CSS reset
 @if _feature(reset-css) {
+    html, body {
+        height:                 100%;
+    }
+    
+    html, body, div, span,
     p, blockquote, pre,
     abbr, address, cite,
     code, del, dfn,

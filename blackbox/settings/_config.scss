@@ -1,0 +1,97 @@
+//
+//  Petra config
+//
+//  Fallback configuration map
+$_petra: (
+    debugging: (
+        messages: (
+            lede:                   ("Invalid value(s):", "at mixin:"),
+            on-warn:                "Follow backtrace or review rendered markup.",
+            on-error:               "Follow backtrace and correct invalid syntax to unblock compiler.",
+            
+            project-settings:       "No '$settings' map found for this project.",
+            
+            default:                "mixin (no message defined)",
+            respond-to:             "@include respond-to()",
+            align:                  "@include align()",
+        ),
+        outline: (
+            color:                  red,
+            style:                  solid,
+            width:                  0.5rem,
+        ),
+        flags: (
+            //  set to 'true' to warn if no $settings map is declared.
+            project-settings:       true,
+            
+            //  warn/error flags for petra mixins using the debug utility.
+            //  set to 'true' to error out of a compile with incorrect syntax.
+            respond-to:             false,
+            align:                  false,
+        ),
+    ),
+    
+    global: (
+        reset: (
+            browser-context:        16px,
+        ),
+        namespacing: (
+            prefixes: (
+                object:                 "o-",
+                component:              "c-",
+                utility:                "u-",
+                scope:                  "s-",
+                state:                  "is-",
+                hack:                   "\*\*",
+                javascript:             "js-",
+            ),
+            delimiter: (
+                element:                "__",
+                modifier:               "--",
+                responsive:             \@,
+            ),
+        ),
+        z-index: (
+            default:                1,
+        ),
+    ),
+    
+    typography: (
+        font-stacks: (
+            sans-serif:         ("Helvetica", Helvetica, sans-serif),
+            serif:              ("Times New Roman", Times, serif),
+            monospace:          (Monaco, Consolas, "Andale Mono", monospace),
+        ),
+        line-height:            1.75,
+    ),
+    
+    grid: (
+        breakpoints: (
+            small: (
+                max-width:          640px,
+            ),
+            medium: (
+                min-width:          641px,
+            ),
+            large: (
+                min-width:          1024px,
+            ),
+        ),
+    ),
+    
+    features: (
+        //  experimental feature flags
+        //  toggle whether or not Petra outputs a CSS reset.
+        reset-css:              true,
+        
+        //  toggle nested BEM namespacing; applies to block and element mixins.
+        nested-bem:             true,
+        
+        //  toggle the output of responsive modifying classes for grids and utilities.
+        responsive-modifiers:   true,
+        
+        //  determine whether or not to output Petra's animation mixins and @keyframe blocks.
+        animation-mixins:       true,
+    ),
+);
+

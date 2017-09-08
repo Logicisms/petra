@@ -40,7 +40,20 @@
     }
 }
 
-@mixin null {
-    display:                none;
+@mixin null($visual: false) {
+    @if $visual {
+        height:					1px;
+		width:					1px;
+		margin:					-1px;
+		overflow:				hidden;
+		padding:				0;
+		position:				absolute;
+		left:					-200vw;
+
+		clip:					rect(0, 0, 0, 0);
+    } @else {
+        display:                none;
+    }
+        
 }
 
