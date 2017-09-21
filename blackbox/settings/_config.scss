@@ -32,9 +32,6 @@ $_petra: (
     ),
     
     global: (
-        reset: (
-            browser-context:        16px,
-        ),
         namespacing: (
             prefixes: (
                 object:                 "o-",
@@ -57,15 +54,20 @@ $_petra: (
     ),
     
     typography: (
+        browser-context:        16px,
+        
         font-stacks: (
-            sans-serif:         ("Helvetica", Helvetica, sans-serif),
+            sans-serif:         ("Helvetica Neue", Helvetica, sans-serif),
             serif:              ("Times New Roman", Times, serif),
-            monospace:          (Monaco, Consolas, "Andale Mono", monospace),
+            monospace:          ("Lucida Console", Monaco, monospace),
         ),
         line-height:            1.75,
     ),
     
     grid: (
+        //  if 'type-based-grid' is true, this gutter will be ignored.
+        gutter:                 2.4rem,
+        
         breakpoints: (
             small: (
                 max-width:          640px,
@@ -80,9 +82,15 @@ $_petra: (
     ),
     
     features: (
-        //  experimental feature flags
+        //  feature flags
+        //  toggle whether the project gutter and vertical spacing are based on line-height.
+        type-based-grid:        true,
+        
         //  toggle whether or not Petra outputs a CSS reset.
         reset-css:              true,
+        
+        //  toggle whether to reset the styles for the :focus pseudo-selector.
+        reset-focus:            false,
         
         //  toggle nested BEM namespacing; applies to block and element mixins.
         nested-bem:             true,
@@ -92,6 +100,9 @@ $_petra: (
         
         //  determine whether or not to output Petra's animation mixins and @keyframe blocks.
         animation-mixins:       true,
+        
+        //  toggle whether or not to output a styles for printed media. uses the HTML5 Boilerplate rules.
+        print-media:           true,
     ),
 );
 

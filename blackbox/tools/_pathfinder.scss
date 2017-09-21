@@ -68,11 +68,6 @@
 
 
 //  Parsed and aliased $settings variables
-//  global
-//  global, reset
-$_browser-context:          _pathfinder(global, reset, browser-context);
- $browser-context:          $_browser-context !default;
-
 //  global, namespacing
 $_element:                  _pathfinder(global, namespacing, delimiter, element);
  $element:                  $_element !default;
@@ -81,7 +76,18 @@ $_modifier:                 _pathfinder(global, namespacing, delimiter, modifier
 $_responsive:               _pathfinder(global, namespacing, delimiter, responsive);
  $responsive:               $_responsive !default;
 
-//  grid
+//  typography
+$_browser-context:          _pathfinder(typography, browser-context);
+ $browser-context:          $_browser-context !default;
+$_line-height:              _pathfinder(typography, line-height);
+ $line-height:              $_line-height !default;
+
+//  gri
+$_gutter: if(               _feature(type-based-grid),
+                            ($_line-height + 0em),
+                            _pathfinder(grid, gutter)
+);
+ $gutter:                   $_gutter;
 //  grid, breakpoints
 $_breakpoints:              map-keys(_pathfinder(grid, breakpoints));
  $breakpoints:              $_breakpoints !default;

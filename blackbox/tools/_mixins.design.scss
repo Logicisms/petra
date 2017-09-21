@@ -37,7 +37,7 @@
 
         background: {
             image:              linear-gradient($direction, $stripes); }
-    } @else if $length == 1 {
+    } @else {
         background: {
             color:              $colors; }
     }

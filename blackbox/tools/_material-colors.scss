@@ -1,4 +1,4 @@
-$material-design-palette: (
+$google-material-colors: (
     //  material color variables from Google's Material Design library
     //  https://material.io/guidelines/style/color.html#color-color-palette
     red: (
@@ -312,6 +312,6 @@ $material-design-palette: (
 );
 
 @function material-color($key, $tone: 500) {
-    @return map-deep-get($material-design-palette, $key, $tone);
+    @return map-deep-get($google-material-colors, $key, $tone);
 }
 

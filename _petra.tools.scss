@@ -1,16 +1,12 @@
-//
-//  Petra, tools
-//
-
 @import
-    //  core
-    "blackbox/tools/core.functions",
-    "blackbox/tools/core.pathfinder",
-    "blackbox/tools/core.debugging",
-    "blackbox/tools/core.breakpoints",
+    //  core functionality
+    "blackbox/tools/functions",
+    "blackbox/tools/pathfinder",
+    "blackbox/tools/debugging",
+    "blackbox/tools/breakpoints",
     
-    //  maps
-    "blackbox/tools/maps.material-colors",
+    //  map assets
+    "blackbox/tools/material-colors",
     
     //  mixins
     "blackbox/tools/mixins.api",

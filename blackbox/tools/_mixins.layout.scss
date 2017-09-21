@@ -40,7 +40,12 @@
     }
 }
 
-@mixin null($visual: false) {
+@mixin null($print: false, $visual: false) {
+    @if $print {
+        @media print {
+            display:                none !important;
+        }
+    }
     @if $visual {
         height:					1px;
 		width:					1px;
@@ -51,9 +56,18 @@
 		left:					-200vw;
 
 		clip:					rect(0, 0, 0, 0);
-    } @else {
+    }
+    @if not $print and not $visual {
         display:                none;
+        visibility:             hidden;
     }
         
+}
+
+@mixin pseudo($display: block, $position: absolute, $content: "") {
+    display:                $display;
+    position:               $position;
+    
+    content:                $content;
 }
 

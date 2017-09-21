@@ -1,0 +1,37 @@
+//
+//  Typography
+//
+
+h1, h2, h3, h4, h5, h6 {
+    clear:                  both;
+}
+
+p {
+    //  @TODO: test and weight whether to use a gutter or an em here.
+    //  perhaps using the line-height with an em?
+    margin-bottom:          $_gutter;
+}
+
+blockquote {
+    // @TODO:  likewise here.
+    margin-bottom:          $_gutter;
+    position:               relative;
+}
+
+code, kbd, pre, tt, var {
+    font-family:            font-stack(monospace);
+}
+
+abbr[title] {
+    cursor:                 help;
+}
+
+mark, ins {
+    margin: {
+        right:              -0.2ex;
+        left:               -0.2ex; }
+    padding: {
+        right:              0.2ex;
+        left:               0.2ex; }
+}
+
