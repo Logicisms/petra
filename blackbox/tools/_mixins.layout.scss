@@ -1,0 +1,73 @@
+//
+//  Mixins, formatting
+//
+
+@mixin absolute-center($x: true, $y: true) {
+    position:               absolute;
+    @if ($x and $y) {
+        top:                    50%;
+        left:                   50%;
+        transform:              translate(-50%, -50%);
+    } @else if $x {
+        left:                   50%;
+        transform:              translateX(-50%);
+    } @else if $y {
+        top:                    50%;
+        transform:              translateY(-50%);
+    }
+}
+
+@mixin align($position) {
+    @if ($position == "left") or ($position == "right") {
+        float:                  $position;
+    } @else if $position == "center" {
+        display:                block;
+        float:                  none;
+        margin: {
+            right:              auto;
+            left:               auto; }
+    } @else {
+        @include debug(_debug-get-message('align'), _debug-get-flag('align'), $position);
+    }
+}
+
+@mixin clearfix {
+    &::after {
+        clear:                  both;
+        display:                block;
+        
+        content:                " ";
+    }
+}
+
+@mixin null($print: false, $visual: false) {
+    @if $print {
+        @media print {
+            display:                none !important;
+        }
+    }
+    @if $visual {
+        height:					1px;
+		width:					1px;
+		margin:					-1px;
+		overflow:				hidden;
+		padding:				0;
+		position:				absolute;
+		left:					-200vw;
+
+		clip:					rect(0, 0, 0, 0);
+    }
+    @if not $print and not $visual {
+        display:                none;
+        visibility:             hidden;
+    }
+        
+}
+
+@mixin pseudo($display: block, $position: absolute, $content: "") {
+    display:                $display;
+    position:               $position;
+    
+    content:                $content;
+}
+

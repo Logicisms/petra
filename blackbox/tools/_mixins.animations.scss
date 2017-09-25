@@ -1,0 +1,70 @@
+//
+//  Mixins, animations
+//
+
+//  Animations
+@mixin spin($duration: 1s) {
+    animation:              spin $duration infinite linear;
+    
+    @if not global-variable-exists(_keyframes-set-spin) {
+        $_keyframes-set-spin: true !global;
+        
+        @at-root {
+            @keyframes spin {
+                from {
+                    transform:              rotate(0deg);
+                }
+
+                to {
+                    transform:              rotate(359deg);
+                }
+            }
+        }
+    }
+}
+
+@mixin filmreel($frames, $duration, $name: reelId-#{random(100000)}) {
+    background: {
+        position-x:         center;
+        repeat:             no-repeat;
+        size:               100% auto; }
+    
+    animation: {
+        name:               $name;
+        duration:           $duration;
+        iteration-count:    infinite;
+        timing-function:    step-end; }
+    
+    @at-root {
+        @keyframes #{$name} {
+            $var: ($frames - 1);
+            
+            @for $index from 0 through $var {
+                #{100% / $var * $index} {
+                    background-position-y: (100% / $var) * $index;
+                }
+            }
+        }
+    }
+    
+//    .example {
+//        display: block;
+//        height: 200px;
+//        width: 540px;
+//
+//        background-image: url('../tmp/issadargon.jpg');
+//
+//        @include filmreel(31, 2.5s);
+//    }
+}
+
+
+//  Transitions
+@mixin transition($properties, $duration: 0.25s, $timing-function: ease-in-out, $delay: 0) {
+	transition: {
+        delay:              $delay;
+        duration:           $duration;
+        property:           $properties;
+        timing-function:    $timing-function; }
+}
+
