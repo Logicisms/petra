@@ -2,49 +2,31 @@
 //  Mixins, styling
 //
 
-//  General
-@mixin overlay($background: false) {
-	height:					100%;
-	width:					100%;
-	position:				absolute;
-		top:				0;
-		right:				0;
-		bottom:				0;
-		left:				0;
-    
-    @if $background {
-        background-color:       $background;
-    }
+//  Borders
+@mixin border-radius($value) {
+    background-clip:        padding-box;
+    border-radius:          $value;
 }
-
-
-//  Patterns
-@mixin stripes($direction, $colors) {
-    //  by Hugo Giraudel
-    //  https://css-tricks.com/snippets/sass/striped-gradient-mixin/
-    $length: length($colors);
-
-    @if $length > 1 {
-        $stripes: ();
-
-        @for $i from 1 through $length {
-            $stripe: (100% / $length) * ($i - 1);
-            @if $i > 1 {
-                $stripes: append($stripes, nth($colors, $i - 1) $stripe, comma);
-            }
-            $stripes: append($stripes, nth($colors, $i) $stripe, comma);
-        }
-
-        background: {
-            image:              linear-gradient($direction, $stripes); }
-    } @else {
-        background: {
-            color:              $colors; }
-    }
+@mixin border-top-radius($value) {
+    background-clip:        padding-box;
+    border-top-right-radius:$value;
+    border-top-left-radius: $value;
 }
-
-@import "mixins.css3patterns";
-
+@mixin border-right-radius($value) {
+    background-clip:        padding-box;
+    border-top-right-radius:$value;
+    border-bottom-right-radius:$value;
+}
+@mixin border-bottom-radius($value) {
+    background-clip:        padding-box;
+    border-bottom-right-radius:$value;
+    border-bottom-left-radius:$value;
+}
+@mixin border-left-radius($value) {
+    background-clip:        padding-box;
+    border-top-left-radius: $value;
+    border-bottom-left-radius:$value;
+}
 
 //  Placement
 @mixin place-on-circle($item-count, $circle-size, $item-size) {
@@ -80,6 +62,48 @@
 
             $rot: $rot + $angle;
         }
+    }
+}
+
+//  Patterns
+@mixin stripes($direction, $colors) {
+    //  by Hugo Giraudel
+    //  https://css-tricks.com/snippets/sass/striped-gradient-mixin/
+    $length: length($colors);
+
+    @if $length > 1 {
+        $stripes: ();
+
+        @for $i from 1 through $length {
+            $stripe: (100% / $length) * ($i - 1);
+            @if $i > 1 {
+                $stripes: append($stripes, nth($colors, $i - 1) $stripe, comma);
+            }
+            $stripes: append($stripes, nth($colors, $i) $stripe, comma);
+        }
+
+        background: {
+            image:              linear-gradient($direction, $stripes); }
+    } @else {
+        background: {
+            color:              $colors; }
+    }
+}
+
+@import "mixins.css3patterns";
+
+//  Misc
+@mixin overlay($background: false) {
+	height:					100%;
+	width:					100%;
+	position:				absolute;
+		top:				0;
+		right:				0;
+		bottom:				0;
+		left:				0;
+    
+    @if $background {
+        background-color:       $background;
     }
 }
 

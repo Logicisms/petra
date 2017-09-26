@@ -62,6 +62,10 @@ $_petra: (
             monospace:          ("Lucida Console", Monaco, monospace),
         ),
         line-height:            1.75,
+        
+        //  determines the value (in ems) by which headings h1-h6 are scaled
+        //  relative to font-size.
+        hx-scale-increment:     0.25em,
     ),
     
     grid: (
@@ -77,6 +81,10 @@ $_petra: (
             ),
             large: (
                 min-width:          1024px,
+            ),
+            retina: (
+                min-device-pixel-ratio: 2,
+                min-resolution:     192dpi,
             ),
         ),
     ),

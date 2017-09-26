@@ -81,8 +81,18 @@ $_browser-context:          _pathfinder(typography, browser-context);
  $browser-context:          $_browser-context !default;
 $_line-height:              _pathfinder(typography, line-height);
  $line-height:              $_line-height !default;
+//  @TODO: this could be more elegant, i think. revisit it later.
+$_hx-i:                     _pathfinder(typography, hx-scale-increment);
+$_heading-scales: (
+    h1:                     1em + ($_hx-i * 5),
+    h2:                     1em + ($_hx-i * 4),
+    h3:                     1em + ($_hx-i * 3),
+    h4:                     1em + ($_hx-i * 2),
+    h5:                     1em + ($_hx-i * 1),
+    h6:                     1em + ($_hx-i * 0),
+);
 
-//  gri
+//  grid
 $_gutter: if(               _feature(type-based-grid),
                             ($_line-height + 0em),
                             _pathfinder(grid, gutter)
