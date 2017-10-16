@@ -65,6 +65,9 @@
 @function font-stack($stack) {
     @return _pathfinder(typography, font-stacks, $stack);
 }
+@function font-size($size) {
+    @return _pathfinder(typography, font-sizes, $size);
+}
 
 
 //  Parsed and aliased $settings variables
@@ -79,6 +82,8 @@ $_responsive:               _pathfinder(global, namespacing, delimiter, responsi
 //  typography
 $_browser-context:          _pathfinder(typography, browser-context);
  $browser-context:          $_browser-context !default;
+$_font-family:              _pathfinder(typography, font-family);
+ $font-family:              $_font-family !default;
 $_line-height:              _pathfinder(typography, line-height);
  $line-height:              $_line-height !default;
 //  @TODO: this could be more elegant, i think. revisit it later.

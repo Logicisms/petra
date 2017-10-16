@@ -1,0 +1,27 @@
+//
+//  Grid
+//
+
+@include _prefix(object, 'flex') {
+    @include _block {
+        display:                flex;
+        flex-wrap:              nowrap;
+        width:                  100%;
+    
+//        blocks of in-object utilities?
+//        @include _modifier('column') {
+//            flex-direction:         column;
+//        }
+    }
+    
+    @include _element('object') {
+        margin: {
+            top:                auto;
+            bottom:             auto; }
+        
+        @include _modifier('grow') {
+            flex:                   auto;
+        }
+    }
+}
+

@@ -15,7 +15,7 @@
 
 //  BEM
 @mixin _block {
-    @if _feature(nested-bem) {
+    @if _feature(nested-bem) and _feature(strict-nesting) {
         &#{&} { @content; }
     } @else {
         & { @content; }

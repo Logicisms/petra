@@ -2,7 +2,16 @@
 //  Mixins, formatting
 //
 
-@mixin absolute-center($x: true, $y: true) {
+//  Positioning
+@mixin position-absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
+    position:               absolute;
+        top:                $top;
+        right:              $right;
+        bottom:             $bottom;
+        left:               $left;
+}
+
+@mixin position-center($x: true, $y: true) {
     position:               absolute;
     @if ($x and $y) {
         top:                    50%;
@@ -17,7 +26,7 @@
     }
 }
 
-@mixin align($position) {
+@mixin float($position) {
     @if ($position == "left") or ($position == "right") {
         float:                  $position;
     } @else if $position == "center" {
@@ -27,10 +36,12 @@
             right:              auto;
             left:               auto; }
     } @else {
-        @include debug(_debug-get-message('align'), _debug-get-flag('align'), $position);
+        @include debug(_debug-get-message('float'), _debug-get-flag('float'), $position);
     }
 }
 
+
+//  Vertical flow
 @mixin clearfix {
     &::after {
         clear:                  both;
@@ -40,34 +51,68 @@
     }
 }
 
-@mixin null($print: false, $visual: false) {
-    @if $print {
-        @media print {
-            display:                none !important;
-        }
-    }
-    @if $visual {
-        height:					1px;
-		width:					1px;
-		margin:					-1px;
-		overflow:				hidden;
-		padding:				0;
-		position:				absolute;
-		left:					-200vw;
 
-		clip:					rect(0, 0, 0, 0);
-    }
-    @if not $print and not $visual {
+//  Visibility
+@mixin null($var: false) {
+    @if $var {
+        @if $var == "print" {
+            @media print {
+                display:                none !important;
+            }
+        } @else if $var == "visual" {
+            height:					1px;
+            width:					1px;
+            margin:					-1px;
+            overflow:				hidden;
+            padding:				0;
+            position:				absolute;
+            left:					-200vw;
+
+            clip:					rect(0, 0, 0, 0);
+        } @else {
+            @include debug(_debug-get-message('null'), _debug-get-flag('null'), $var);
+        }
+    } @else {
         display:                none;
         visibility:             hidden;
     }
-        
 }
 
-@mixin pseudo($display: block, $position: absolute, $content: "") {
-    display:                $display;
-    position:               $position;
+
+//  Misc
+@mixin place-on-circle($item-count, $circle-size, $item-size) {
+    //  by Hugo Giraudel
+    //  https://css-tricks.com/snippets/sass/placing-items-circle/
+    position:               relative;
+    width:                  $circle-size;
+    height:                 $circle-size;
+    padding:                0;
+    border-radius:          50%; 
+    list-style:             none;       
+
     
-    content:                $content;
+    > * {
+        display:                block;
+        position:               absolute;
+        top:                    50%; 
+        left:                   50%;
+        width:                  $item-size;
+        height:                 $item-size;
+        margin:                 -($item-size / 2);
+
+        $angle:                 (360 / $item-count);
+        $rot:                   0;
+
+        @for $i from 1 through $item-count {
+            &:nth-of-type(#{$i}) {
+                transform: 
+                    rotate($rot * 1deg) 
+                    translate($circle-size / 2) 
+                    rotate($rot * -1deg);
+            }
+
+            $rot: $rot + $angle;
+        }
+    }
 }
 

@@ -2,8 +2,14 @@
 //  Grouping
 //
 
-ol,
-ul {
+hr {
+    margin: {
+        top:                ($_gutter / 2);
+        bottom:             ($_gutter / 2); }
     
+    border: {
+        top-style:          none;
+        right-style:        none;
+        left-style:         none; }
 }
 

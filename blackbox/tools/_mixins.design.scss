@@ -3,9 +3,16 @@
 //
 
 //  Borders
-@mixin border-radius($value) {
+@mixin border-radius($value, $positions...) {
     background-clip:        padding-box;
-    border-radius:          $value;
+    
+    @if length($positions) > 0 {
+        @each $position in $positions {
+            border-#{$position}-radius: $value;
+        }
+    } @else {
+        border-radius:      $value;
+    }
 }
 @mixin border-top-radius($value) {
     background-clip:        padding-box;
@@ -28,42 +35,6 @@
     border-bottom-left-radius:$value;
 }
 
-//  Placement
-@mixin place-on-circle($item-count, $circle-size, $item-size) {
-    //  by Hugo Giraudel
-    //  https://css-tricks.com/snippets/sass/placing-items-circle/
-    position:               relative;
-    width:                  $circle-size;
-    height:                 $circle-size;
-    padding:                0;
-    border-radius:          50%; 
-    list-style:             none;       
-
-    
-    > * {
-        display:                block;
-        position:               absolute;
-        top:                    50%; 
-        left:                   50%;
-        width:                  $item-size;
-        height:                 $item-size;
-        margin:                 -($item-size / 2);
-
-        $angle:                 (360 / $item-count);
-        $rot:                   0;
-
-        @for $i from 1 through $item-count {
-            &:nth-of-type(#{$i}) {
-                transform: 
-                    rotate($rot * 1deg) 
-                    translate($circle-size / 2) 
-                    rotate($rot * -1deg);
-            }
-
-            $rot: $rot + $angle;
-        }
-    }
-}
 
 //  Patterns
 @mixin stripes($direction, $colors) {
@@ -92,6 +63,7 @@
 
 @import "mixins.css3patterns";
 
+
 //  Misc
 @mixin overlay($background: false) {
 	height:					100%;
@@ -105,5 +77,12 @@
     @if $background {
         background-color:       $background;
     }
+}
+
+@mixin pseudo-element($display: block, $position: absolute, $content: "") {
+    display:                $display;
+    position:               $position;
+    
+    content:                $content;
 }
 

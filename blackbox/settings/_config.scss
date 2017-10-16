@@ -13,7 +13,8 @@ $_petra: (
             
             default:                "mixin (no message defined)",
             respond-to:             "@include respond-to()",
-            align:                  "@include align()",
+            float:                  "@include align()",
+            null:                   "@include null()",
         ),
         outline: (
             color:                  red,
@@ -27,7 +28,8 @@ $_petra: (
             //  warn/error flags for petra mixins using the debug utility.
             //  set to 'true' to error out of a compile with incorrect syntax.
             respond-to:             false,
-            align:                  false,
+            float:                  false,
+            null:                   false,
         ),
     ),
     
@@ -61,6 +63,16 @@ $_petra: (
             serif:              ("Times New Roman", Times, serif),
             monospace:          ("Lucida Console", Monaco, monospace),
         ),
+        font-sizes: (
+            //  "static" sizes, should be in 'rem'.
+            normal:             1.6rem,
+            
+            //  "responsive" sizes, should be in '%' or 'em'.
+            smaller:            85%,
+            larger:             115%,
+        ),
+        
+        font-family:            sans-serif,
         line-height:            1.75,
         
         //  determines the value (in ems) by which headings h1-h6 are scaled
@@ -100,8 +112,14 @@ $_petra: (
         //  toggle whether to reset the styles for the :focus pseudo-selector.
         reset-focus:            false,
         
+        //  removes all user agent button styles, rendering them as plain text.
+        hard-reset-buttons:     true,
+        
         //  toggle nested BEM namespacing; applies to block and element mixins.
         nested-bem:             true,
+        
+        //  if true, will nest block rules to themselves to ensure consistent specificity.
+        strict-nesting:         false,
         
         //  toggle the output of responsive modifying classes for grids and utilities.
         responsive-modifiers:   true,
@@ -110,7 +128,7 @@ $_petra: (
         animation-mixins:       true,
         
         //  toggle whether or not to output a styles for printed media. uses the HTML5 Boilerplate rules.
-        print-media:           true,
+        print-media:            true,
     ),
 );
 
