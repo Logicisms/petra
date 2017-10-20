@@ -8,9 +8,6 @@
         @content;
     }
 }
-    @mixin class($prefix, $name) {
-        @include _prefix($var, $i) { @content; }
-    }
 
 
 //  BEM

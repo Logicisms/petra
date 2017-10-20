@@ -97,13 +97,16 @@ $_heading-scales: (
     h6:                     1em + ($_hx-i * 0),
 );
 
-//  grid
+//  layout
 $_gutter: if(               _feature(type-based-grid),
                             ($_line-height + 0em),
-                            _pathfinder(grid, gutter)
+                            _pathfinder(layout, gutter)
 );
  $gutter:                   $_gutter;
-//  grid, breakpoints
-$_breakpoints:              map-keys(_pathfinder(grid, breakpoints));
+//  layout, grid
+$_grid-columns:             _pathfinder(layout, grid-columns);
+ $grid-columns:             $_grid-columns;
+//  layout, breakpoints
+$_breakpoints:              map-keys(_pathfinder(layout, breakpoints));
  $breakpoints:              $_breakpoints !default;
 

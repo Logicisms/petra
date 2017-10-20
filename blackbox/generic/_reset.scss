@@ -3,6 +3,10 @@
 //
 
 @if _feature(reset-css) {
+    body {
+        height:                 100vh;
+    }
+    
     html, body, div, span,
     p, blockquote, pre,
     abbr, address, cite,

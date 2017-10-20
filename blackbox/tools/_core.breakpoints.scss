@@ -3,7 +3,7 @@
 //
 
 @function _breakpoint-get-query($key) {
-    @return _pathfinder(grid, breakpoints, $key);
+    @return _pathfinder(layout, breakpoints, $key);
 }
 @function _breakpoint-build-query($arg) {
     $query: ();
@@ -20,7 +20,7 @@
     @for $index from 1 through $length {
         $i: nth($breakpoint, $index);
         
-        @if _pathfinder(grid, breakpoints, $i) {
+        @if _pathfinder(layout, breakpoints, $i) {
             $query: _breakpoint-get-query($i);
 
             @media only screen #{_breakpoint-build-query($query)} {

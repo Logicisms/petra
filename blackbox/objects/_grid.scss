@@ -2,25 +2,25 @@
 //  Grid
 //
 
-@include _prefix(object, 'flex') {
-    @include _block {
+@include _prefix(object, 'row') {
+    margin: {
+        right:              ($gutter / -2);
+        left:               ($gutter / -2); }
+    
+    @if _feature(flexbox-grid) {
         display:                flex;
-        flex-wrap:              nowrap;
-        width:                  100%;
-    
-//        blocks of in-object utilities?
-//        @include _modifier('column') {
-//            flex-direction:         column;
-//        }
+        flex-wrap:              wrap;
+    } @else {
+        @include clearfix;
     }
+}
+
+@include _prefix(object, 'col') {
+    @include _column-base;
     
-    @include _element('object') {
-        margin: {
-            top:                auto;
-            bottom:             auto; }
-        
-        @include _modifier('grow') {
-            flex:                   auto;
+    @each $breakpoint in $_breakpoints {
+        @include respond-to($breakpoint) {
+            @include _column-base($breakpoint);
         }
     }
 }

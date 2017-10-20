@@ -1,0 +1,65 @@
+//
+//  Flexbox
+//
+
+@include _prefix(object, 'flex') {
+    @include _block {
+        display:                flex;
+        flex-wrap:              nowrap;
+        
+        
+        @include _modifier('column') {
+            flex-direction:         column;
+        }
+    
+        @include _modifier('row') {
+            flex-direction:         row;
+        }
+        
+        @include _modifier('v-center') {
+            align-content:          center;
+        }
+        
+        @include _modifier('h-center') {
+            justify-content:        center;
+        }
+    }
+    
+    @include _element('item') {
+        flex: {
+            grow:               0;
+            shrink:             1;
+            basis:              auto; }
+        //  min-width set to prevent css-truncated text from breaking the flex.
+        min-width:              0;
+        margin: {
+            top:                auto;
+            bottom:             auto; }
+        
+        
+        @include _modifier('grow') {
+            flex-grow:              1;
+        }
+        
+        @include _modifier('v-center') {
+            align-self:             center;
+        }
+        @include _modifier('v-start') {
+            align-self:             flex-start;
+        }
+        @include _modifier('v-end') {
+            align-self:             flex-end;
+        }
+        
+        @include _modifier('h-center') {
+            justify-self:           center;
+        }
+        @include _modifier('h-start') {
+            justify-self:           flex-start;
+        }
+        @include _modifier('h-end') {
+            justify-self:           flex-end;
+        }
+    }
+}
+

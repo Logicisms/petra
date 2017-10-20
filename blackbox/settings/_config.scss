@@ -80,9 +80,11 @@ $_petra: (
         hx-scale-increment:     0.25em,
     ),
     
-    grid: (
+    layout: (
         //  if 'type-based-grid' is true, this gutter will be ignored.
         gutter:                 2.4rem,
+        
+        grid-columns:           12,
         
         breakpoints: (
             small: (
@@ -126,6 +128,9 @@ $_petra: (
         
         //  determine whether or not to output Petra's animation mixins and @keyframe blocks.
         animation-mixins:       true,
+        
+        //  toggle whether grid is configured to work with Petra's flexbox rules.
+        flexbox-grid:           true,
         
         //  toggle whether or not to output a styles for printed media. uses the HTML5 Boilerplate rules.
         print-media:            true,
