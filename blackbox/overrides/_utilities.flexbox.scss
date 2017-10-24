@@ -1,0 +1,49 @@
+//
+//  Utilities, flexbox
+//
+
+@if _feature(flex-utilities) {
+    @include _prefix(utility, 'flex') {
+        //  flex container-level modifiers.
+        &-direction {
+            &-column { flex-direction: column; }
+            &-row { flex-direction: row; }
+        }
+
+        &-align {
+            &-center { align-content: center; }
+            &-start { align-content: flex-start; }
+            &-end { align-content: flex-end; }
+            &-space-around { align-content: space-around; }
+            &-space-between { align-content: space-between; }
+            &-stretch { align-content: stretch; }
+        }
+
+        &-justify {
+            &-center { justify-content: center; }
+            &-start { justify-content: flex-start; }
+            &-end { justify-content: flex-end; }
+            &-space-around { justify-content: space-around; }
+            &-space-between { justify-content: space-between; }
+        }
+        
+        //  flex item-level modifiers.
+        &-grow {
+            flex-grow:              1;
+            //  'flex-basis' here is to resolve issues with older browsers.
+            //  this is in spite of my deliberate disregard for all of IE. ¬_¬
+            flex-basis:             0%;
+        }
+
+        &-align-self {
+            &-center { align-self: center; }
+            &-safe-center { align-self: safe center; }
+            &-start { align-self: flex-start; }
+            &-end { align-self: flex-end; }
+            &-space-around { align-self: space-around; }
+            &-space-between { align-self: space-between; }
+            &-stretch { align-self: stretch; }
+        }
+    }
+}
+

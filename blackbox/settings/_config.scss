@@ -132,6 +132,9 @@ $_petra: (
         //  toggle whether grid is configured to work with Petra's flexbox rules.
         flexbox-grid:           true,
         
+        //  if set to false, some lite flex utilities will be built as flex object modifiers.
+        flex-utilities:         true,
+        
         //  toggle whether or not to output a styles for printed media. uses the HTML5 Boilerplate rules.
         print-media:            true,
     ),

@@ -8,20 +8,22 @@
         flex-wrap:              nowrap;
         
         
-        @include _modifier('column') {
-            flex-direction:         column;
-        }
-    
-        @include _modifier('row') {
-            flex-direction:         row;
-        }
-        
-        @include _modifier('v-center') {
-            align-content:          center;
-        }
-        
-        @include _modifier('h-center') {
-            justify-content:        center;
+        @if not _feature(flex-utilities) {
+            @include _modifier('column') {
+                flex-direction:         column;
+            }
+
+            @include _modifier('row') {
+                flex-direction:         row;
+            }
+
+            @include _modifier('align-center') {
+                align-content:          center;
+            }
+
+            @include _modifier('justify-center') {
+                justify-content:        center;
+            }
         }
     }
     
@@ -37,28 +39,23 @@
             bottom:             auto; }
         
         
-        @include _modifier('grow') {
-            flex-grow:              1;
-        }
+        @if not _feature(flex-utilities) {
+            @include _modifier('grow') {
+                flex-grow:              1;
+                //  'flex-basis' here is to resolve issues with older browsers.
+                //  this is in spite of my deliberate disregard for all of IE. ¬_¬
+                flex-basis:             0%;
+            }
         
-        @include _modifier('v-center') {
-            align-self:             center;
-        }
-        @include _modifier('v-start') {
-            align-self:             flex-start;
-        }
-        @include _modifier('v-end') {
-            align-self:             flex-end;
-        }
-        
-        @include _modifier('h-center') {
-            justify-self:           center;
-        }
-        @include _modifier('h-start') {
-            justify-self:           flex-start;
-        }
-        @include _modifier('h-end') {
-            justify-self:           flex-end;
+            @include _modifier('align-center') {
+                align-self:             center;
+            }
+            @include _modifier('align-start') {
+                align-self:             flex-start;
+            }
+            @include _modifier('align-end') {
+                align-self:             flex-end;
+            }
         }
     }
 }
