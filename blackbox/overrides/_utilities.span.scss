@@ -1,0 +1,8 @@
+//
+//  Utilities, spans
+//
+
+@include _prefix(utility, 'span') {
+    @include _column-constructor($grid: false);
+}
+

@@ -16,12 +16,6 @@
 }
 
 @include _prefix(object, 'col') {
-    @include _column-base;
-    
-    @each $breakpoint in $_breakpoints {
-        @include respond-to($breakpoint) {
-            @include _column-base($breakpoint);
-        }
-    }
+    @include _column-constructor;
 }
 

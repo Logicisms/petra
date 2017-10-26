@@ -55,11 +55,11 @@
 
 //  Config parsing functions
 @function z($key) {
-    @return _pathfinder(global, z-index, $key);
+    @return _pathfinder(layout, z-indices, $key);
 }
 
 @function prefix($key) {
-    @return _pathfinder(global, namespacing, prefixes, $key);
+    @return _pathfinder(namespacing, prefixes, $key);
 }
 
 @function font-stack($stack) {
@@ -69,14 +69,18 @@
     @return _pathfinder(typography, font-sizes, $size);
 }
 
+@function column-width($index) {
+    @return (100% / _pathfinder(layout, grid-columns) * $index);
+}
+
 
 //  Parsed and aliased $settings variables
-//  global, namespacing
-$_element:                  _pathfinder(global, namespacing, delimiter, element);
+//  namespacing
+$_element:                  _pathfinder(namespacing, delimiters, element);
  $element:                  $_element !default;
-$_modifier:                 _pathfinder(global, namespacing, delimiter, modifier);
+$_modifier:                 _pathfinder(namespacing, delimiters, modifier);
  $modifier:                 $_modifier !default;
-$_responsive:               _pathfinder(global, namespacing, delimiter, responsive);
+$_responsive:               _pathfinder(namespacing, delimiters, responsive);
  $responsive:               $_responsive !default;
 
 //  typography

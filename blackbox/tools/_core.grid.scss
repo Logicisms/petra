@@ -2,26 +2,42 @@
 //  Mixins, grid
 //
 
-@mixin _column-base($breakpoint: false) {
+@mixin _column-base($grid: true, $breakpoint: false) {
     @for $index from 1 through $_grid-columns {
         &-#{ if($breakpoint, ($index + $_responsive + $breakpoint), $index) } {
-            position:               relative;
-            padding: {
-                right:              ($gutter / 2);
-                left:               ($gutter / 2); }
+            @if $grid {
+                position:               relative;
+                padding: {
+                    right:              ($gutter / 2);
+                    left:               ($gutter / 2); }
 
-            @if _feature(flexbox-grid) {
-                flex: {
-                    grow:               0;
-                    shrink:             0;
-                    basis:              (100% / $_grid-columns * $index); }
-                //  'width' here is a trick learned from Bootstrap, explained there:
-                //  https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss#L35
-                width:                  100%;
-                max-width:              (100% / $_grid-columns * $index);
+                @if _feature(flexbox-grid) {
+                    flex: {
+                        grow:               0;
+                        shrink:             0;
+                        basis:              column-width($index); }
+                    //  'width' here is a trick learned from Bootstrap, explained there:
+                    //  https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss#L35
+                    width:                  100%;
+                    max-width:              column-width($index);
+                } @else {
+                    float:                  left;
+                    width:                  column-width($index);
+                }
             } @else {
-                float:                  left;
-                width:                  (100% / $_grid-columns * $index);
+                width:                  column-width($index);
+            }
+        }
+    }
+}
+
+@mixin _column-constructor($grid: true, $responsive: _feature(responsive-grid)) {
+    @include _column-base($grid);
+    
+    @if $responsive {
+        @each $breakpoint in $_breakpoints {
+            @include respond-to($breakpoint) {
+                @include _column-base($grid, $breakpoint: $breakpoint);
             }
         }
     }

@@ -33,25 +33,20 @@ $_petra: (
         ),
     ),
     
-    global: (
-        namespacing: (
-            prefixes: (
-                object:                 "o-",
-                component:              "c-",
-                utility:                "u-",
-                scope:                  "s-",
-                state:                  "is-",
-                hack:                   "\*\*",
-                javascript:             "js-",
-            ),
-            delimiter: (
-                element:                "__",
-                modifier:               "--",
-                responsive:             \@,
-            ),
+    namespacing: (
+        prefixes: (
+            object:                 "o-",
+            component:              "c-",
+            utility:                "u-",
+            scope:                  "s-",
+            state:                  "is-",
+            hack:                   "\*\*",
+            javascript:             "js-",
         ),
-        z-index: (
-            default:                1,
+        delimiters: (
+            element:                "__",
+            modifier:               "--",
+            responsive:             \@,
         ),
     ),
     
@@ -101,6 +96,10 @@ $_petra: (
                 min-resolution:     192dpi,
             ),
         ),
+        
+        z-indices: (
+            default:                1,
+        ),
     ),
     
     features: (
@@ -131,6 +130,9 @@ $_petra: (
         
         //  toggle whether grid is configured to work with Petra's flexbox rules.
         flexbox-grid:           true,
+        
+        //  when true, Petra will build the grid with media queries defined in config.
+        responsive-grid:        true,
         
         //  if set to false, some lite flex utilities will be built as flex object modifiers.
         flex-utilities:         true,

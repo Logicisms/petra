@@ -4,7 +4,7 @@
 
 //  Prefixing
 @mixin _prefix($prefix, $name) {
-    .#{_pathfinder(global, namespacing, prefixes, $prefix) + $name} {
+    .#{_pathfinder(namespacing, prefixes, $prefix) + $name} {
         @content;
     }
 }
