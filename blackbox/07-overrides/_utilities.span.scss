@@ -2,7 +2,9 @@
 //  Utilities, spans
 //
 
-@include _prefix(utility, 'span') {
-    @include _column-constructor($grid: false);
+@if _feature(grid-span-utilities) {
+    @include _prefix(utility, 'span') {
+        @include _column-constructor($grid: false);
+    }
 }
 

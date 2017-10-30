@@ -6,43 +6,43 @@
     @include _prefix(utility, 'flex') {
         //  flex container-level modifiers.
         &-direction {
-            &-column { flex-direction: column; }
-            &-row { flex-direction: row; }
+            &-column { flex-direction: column !important; }
+            &-row { flex-direction: row !important; }
         }
 
         &-align {
-            &-center { align-content: center; }
-            &-start { align-content: flex-start; }
-            &-end { align-content: flex-end; }
-            &-space-around { align-content: space-around; }
-            &-space-between { align-content: space-between; }
-            &-stretch { align-content: stretch; }
+            &-center { align-content: center !important; }
+            &-start { align-content: flex-start !important; }
+            &-end { align-content: flex-end !important; }
+            &-space-around { align-content: space-around !important; }
+            &-space-between { align-content: space-between !important; }
+            &-stretch { align-content: stretch !important; }
         }
 
         &-justify {
-            &-center { justify-content: center; }
-            &-start { justify-content: flex-start; }
-            &-end { justify-content: flex-end; }
-            &-space-around { justify-content: space-around; }
-            &-space-between { justify-content: space-between; }
+            &-center { justify-content: center !important; }
+            &-start { justify-content: flex-start !important; }
+            &-end { justify-content: flex-end !important; }
+            &-space-around { justify-content: space-around !important; }
+            &-space-between { justify-content: space-between !important; }
         }
         
         //  flex item-level modifiers.
         &-grow {
-            flex-grow:              1;
+            flex-grow:              1 !important;
             //  'flex-basis' here is to resolve issues with older browsers.
             //  this is in spite of my deliberate disregard for all of IE. ¬_¬
-            flex-basis:             0%;
+            flex-basis:             0% !important;
         }
 
         &-align-self {
-            &-center { align-self: center; }
-            &-safe-center { align-self: safe center; }
-            &-start { align-self: flex-start; }
-            &-end { align-self: flex-end; }
-            &-space-around { align-self: space-around; }
-            &-space-between { align-self: space-between; }
-            &-stretch { align-self: stretch; }
+            &-center { align-self: center !important; }
+            &-safe-center { align-self: safe center !important; }
+            &-start { align-self: flex-start !important; }
+            &-end { align-self: flex-end !important; }
+            &-space-around { align-self: space-around !important; }
+            &-space-between { align-self: space-between !important; }
+            &-stretch { align-self: stretch !important; }
         }
     }
 }

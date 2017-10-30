@@ -39,14 +39,14 @@
             bottom:             auto; }
         
         
-        @if not _feature(flex-utilities) {
-            @include _modifier('grow') {
-                flex-grow:              1;
-                //  'flex-basis' here is to resolve issues with older browsers.
-                //  this is in spite of my deliberate disregard for all of IE. ¬_¬
-                flex-basis:             0%;
-            }
+        @include _modifier('grow') {
+            flex-grow:              1;
+            //  'flex-basis' here is to resolve issues with older browsers.
+            //  this is in spite of my deliberate disregard for all of IE. ¬_¬
+            flex-basis:             0%;
+        }
         
+        @if not _feature(flex-utilities) {
             @include _modifier('align-center') {
                 align-self:             center;
             }

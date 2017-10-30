@@ -102,6 +102,26 @@ $_petra: (
         ),
     ),
     
+    utilities: (
+        displays: (
+            'block',
+            'flex',
+            'flow',
+            'flow-root',
+            'grid',
+            'inline',
+            'inline-block',
+            'inline-flex',
+            'inline-grid',
+            'inline-table',
+            'list-item',
+            'none',
+            'run-in',
+            'subgrid',
+            'table',
+        ),
+    ),
+    
     features: (
         //  feature flags
         //  toggle whether the project gutter and vertical spacing are based on line-height.
@@ -136,6 +156,9 @@ $_petra: (
         
         //  if set to false, some lite flex utilities will be built as flex object modifiers.
         flex-utilities:         true,
+        
+        //  toggle whether or not to output width-affecting utility classes corresponding with the grid.
+        grid-span-utilities:    true,
         
         //  toggle whether or not to output a styles for printed media. uses the HTML5 Boilerplate rules.
         print-media:            true,
