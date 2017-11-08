@@ -1,0 +1,20 @@
+//
+//  Tools, List Functions
+//
+
+@function remove($list, $value, $separator: auto, $recursive: false) {
+    //  remove an entry from a list, by Hugo Giraudel, modified
+    //  https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#removing-values-from-list
+    $result: ();
+
+    @for $i from 1 through length($list) {
+        @if type-of(nth($list, $i)) == list and $recursive {
+            $result: append($result, remove(nth($list, $i), $value, $recursive), $separator);
+        }
+        @else if nth($list, $i) != $value {
+            $result: append($result, nth($list, $i), $separator);
+        }
+    }
+    @return $result;
+}
+

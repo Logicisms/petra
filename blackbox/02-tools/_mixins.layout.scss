@@ -26,15 +26,15 @@
     }
 }
 
-@mixin float($position) {
+@mixin float($position, $important: false) {
     @if ($position == "left") or ($position == "right") {
-        float:                  $position;
+        float:                  $position#{if($important, ' !important', '')};
     } @else if $position == "center" {
-        display:                block;
-        float:                  none;
+        display:                block#{if($important, ' !important', '')};
+        float:                  none#{if($important, ' !important', '')};
         margin: {
-            right:              auto;
-            left:               auto; }
+            right:              auto#{if($important, ' !important', '')};
+            left:               auto#{if($important, ' !important', '')}; }
     } @else {
         @include debug(_debug-get-message('float'), _debug-get-flag('float'), $position);
     }

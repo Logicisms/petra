@@ -1,0 +1,18 @@
+//
+//  Tools, Color Functions
+//
+
+@function blacken($color, $amount) {
+    @return mix(black, $color, $amount);
+}
+    @function shade($color, $amount) {
+        @return blacken($color, $amount);
+    }
+
+@function whiten($color, $amount) {
+    @return mix(white, $color, $amount);
+}
+    @function tint($color, $amount) {
+        @return whiten($color, $amount);
+    }
+

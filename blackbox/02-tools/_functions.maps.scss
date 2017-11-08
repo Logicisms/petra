@@ -1,0 +1,27 @@
+//
+//  Tools, Mapping Functions
+//
+
+@function map-deep-get($map, $keys...) {
+    //  an extension of the built in 'map-get()' by Hugo Giraudel
+    //  https://css-tricks.com/snippets/sass/deep-getset-maps/
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
+}
+
+@function map-deep-keys($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return map-keys($map);
+}
+
+@function deep-inspect($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return inspect($map);
+}
+

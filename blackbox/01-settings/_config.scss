@@ -53,22 +53,25 @@ $_petra: (
     typography: (
         browser-context:        16px,
         
-        font-stacks: (
-            sans-serif:         ("Helvetica Neue", Helvetica, sans-serif),
-            serif:              ("Times New Roman", Times, serif),
-            monospace:          ("Lucida Console", Monaco, monospace),
-        ),
+        line-height:            1.75,
         font-sizes: (
             //  "static" sizes, should be in 'rem'.
-            normal:             1.6rem,
+            normal:                 1.6rem,
             
             //  "responsive" sizes, should be in '%' or 'em'.
-            smaller:            85%,
-            larger:             115%,
+            smaller:                85%,
+            larger:                 115%,
+        ),
+        font-faces: (
+            
+        ),
+        font-stacks: (
+            sans-serif:             ("Helvetica Neue", Helvetica, sans-serif),
+            serif:                  ("Times New Roman", Times, serif),
+            monospace:              ("Lucida Console", Monaco, monospace),
         ),
         
-        font-family:            sans-serif,
-        line-height:            1.75,
+//        font-family:            sans-serif,
         
         //  determines the value (in ems) by which headings h1-h6 are scaled
         //  relative to font-size.
@@ -103,22 +106,44 @@ $_petra: (
     ),
     
     utilities: (
+        //  display utilities.
         displays: (
-            'block',
-            'flex',
-            'flow',
-            'flow-root',
-            'grid',
-            'inline',
-            'inline-block',
-            'inline-flex',
-            'inline-grid',
-            'inline-table',
-            'list-item',
-            'none',
-            'run-in',
-            'subgrid',
-            'table',
+            'block', 'flex', 'flow', 'flow-root', 'grid',
+            'inline', 'inline-block', 'inline-flex', 'inline-grid', 'inline-table',
+            'list-item', 'none', 'run-in', 'subgrid', 'table',
+        ),
+        
+        //  layout utilities
+        positions: (
+            'absolute', 'fixed', 'inherit', 'relative', 'static',
+        ),
+        floats: (
+            'left', 'right', 'none',
+        ),
+        
+        //  transform utilities
+        rotation-grades: (
+            45, 90, 180, 270, 360,
+        ),
+        
+        //  typography utilities
+        font-size-multiplier:   10,
+        
+        font-weights: (
+            'normal', 'bold', 'bolder', 'lighter', 'inherit',
+        ),
+        text-alignments: (
+            'left', 'right', 'center', 'justify', 'inherit',
+        ),
+        text-transforms: (
+            'capitalize', 'full-width', 'lowercase', 'uppercase', 'inherit',
+        ),
+        white-spaces: (
+            'normal', 'pre', 'pre-line', 'pre-wrap', 'inherit',
+        ),
+        vertical-alignments: (
+            'baseline', 'bottom', 'middle', 'sub', 'super',
+            'test-top', 'test-bottom', 'top',
         ),
     ),
     
@@ -142,9 +167,6 @@ $_petra: (
         //  if true, will nest block rules to themselves to ensure consistent specificity.
         strict-nesting:         false,
         
-        //  toggle the output of responsive modifying classes for grids and utilities.
-        responsive-modifiers:   true,
-        
         //  determine whether or not to output Petra's animation mixins and @keyframe blocks.
         animation-mixins:       true,
         
@@ -159,6 +181,9 @@ $_petra: (
         
         //  toggle whether or not to output width-affecting utility classes corresponding with the grid.
         grid-span-utilities:    true,
+        
+        //  toggle the output of responsive modifying classes for grids and utilities.
+        responsive-utilities:   true,
         
         //  toggle whether or not to output a styles for printed media. uses the HTML5 Boilerplate rules.
         print-media:            true,

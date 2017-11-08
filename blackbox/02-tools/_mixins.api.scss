@@ -76,14 +76,12 @@
         @include _responsive-modifier($breakpoint...) { @content }
     }
 
-@mixin _responsive-modifier-array($output: _feature(responsive-modifiers)) {
-    @if $output {
-        @include responsive-modifier($_breakpoints...) {
-            @content;
-        }
+@mixin _responsive-modifier-array {
+    @include responsive-modifier($_breakpoints...) {
+        @content;
     }
 }
-    @mixin responsive-modifier-array($output: _feature(responsive-modifiers)) {
+    @mixin responsive-modifier-array {
         @include _responsive-modifier-array($output) { @content; }
     }
 

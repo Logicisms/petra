@@ -1,10 +1,10 @@
 //
-//  Utilities, display
+//  Utilities, Display
 //
 
 @include _prefix(utility, 'display') {
     @each $display in _pathfinder(utilities, displays) {
-        &-#{$display} { display: $display !important; }
+        &-#{$display} { display: #{$display} !important; }
     }
 }
 

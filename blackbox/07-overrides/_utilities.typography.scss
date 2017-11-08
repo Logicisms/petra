@@ -1,0 +1,43 @@
+//
+//  Utilities, Typography
+//
+
+@include _prefix(utility, 'font') {
+    @for $i from 1 through _pathfinder(utilities, font-size-multiplier) {
+        &-size-x#{$i} { font-size: 1em * $i !important; }
+    }
+    
+    @each $val in _pathfinder(utilities, font-weights) {
+        &-weight-#{$val} { font-weight: #{$val} !important; }
+    }
+}
+
+@include _prefix(utility, 'text') {
+    &-smaller { font-size: _pathfinder(typography, font-sizes, smaller) !important; }
+    &-larger { font-size: _pathfinder(typography, font-sizes, larger) !important; }
+    
+    @each $val in _pathfinder(utilities, text-alignments) {
+        &-#{$val} { text-align: #{$val} !important; }
+    }
+    
+    @each $val in _pathfinder(utilities, text-transforms) {
+        &-#{$val} { text-transform: #{$val} !important; }
+    }
+}
+
+@include _prefix(utility, 'white-space') {
+    @each $val in _pathfinder(utilities, white-spaces) {
+        &-#{$val} { white-space: #{$val} !important; }
+    }
+}
+
+@include _prefix(utility, 'nowrap') {
+    white-space: nowrap !important;
+}
+
+@include _prefix(utility, 'vertical-align') {
+    @each $val in _pathfinder(utilities, vertical-alignments) {
+        &-#{$val} { vertical-align: #{$val} !important; }
+    }
+}
+

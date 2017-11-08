@@ -1,0 +1,14 @@
+//
+//  Utilities, Clearfix
+//
+
+@include _prefix(utility, 'clearfix') {
+    @include clearfix;
+    
+    @if _feature(responsive-utilities) {
+        @include _responsive-modifier-array {
+            @include clearfix;
+        }
+    }
+}
+

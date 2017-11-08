@@ -1,0 +1,34 @@
+//
+//  Tools, Number Functions
+//
+
+@function strip-unit($number) {
+    //  strips css unit from any number value, by Hugo Giraudel
+    //  https://css-tricks.com/snippets/sass/strip-unit-function/
+    @if type-of($number) == "number" and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+    @return $number;
+}
+
+@function replace-unit($number, $unit) {
+    @if type-of($number) == "number" and not unitless($number) {
+        @return strip-unit($number) + 0 + $unit;
+    }
+    @return $number;
+}
+
+@function rem($pixels) {
+    @return (strip-unit($pixels) / 10) + 0rem;
+}
+
+@function em($pixels, $context: 16px) {
+    @if unitless($pixels) {
+        $pixels: $pixels + 0px;
+    }
+    @if unitless($context) {
+        $context: $context + 0px;
+    }
+    @return ($pixels / $context) + 0em;
+}
+

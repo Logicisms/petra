@@ -1,5 +1,5 @@
 //
-//  Utilities, flexbox
+//  Utilities, Flexbox
 //
 
 @if _feature(flex-utilities) {
@@ -33,6 +33,7 @@
             //  'flex-basis' here is to resolve issues with older browsers.
             //  this is in spite of my deliberate disregard for all of IE. ¬_¬
             flex-basis:             0% !important;
+            max-width:              100% !important;
         }
 
         &-align-self {

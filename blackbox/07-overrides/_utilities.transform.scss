@@ -1,0 +1,19 @@
+//
+//  Utilities, Transformations
+//
+
+//  rotation class builder
+@include _prefix(utility, 'rotate') {
+    @each $grade in _pathfinder(utilities, rotation-grades) {
+        &-#{$grade} {
+            transform:              rotate(#{$grade + 'deg'}) !important;
+        }
+    }
+}
+
+//  1.1 scaling classes
+@include _prefix(utility, 'flip') {
+    &-x { transform: scaleX(-1) !important; }
+    &-y { transform: scaleY(-1) !important; }
+}
+
