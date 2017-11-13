@@ -2,9 +2,23 @@
 //  Utilities, Display
 //
 
+//  'display'
 @include _prefix(utility, 'display') {
     @each $display in _pathfinder(utilities, displays) {
         &-#{$display} { display: #{$display} !important; }
     }
+}
+
+@include _prefix(utility, 'null') {
+    display:                none !important;
+}
+
+//  'visibility'
+@include _prefix(utility, 'hidden') {
+    visibility:             hidden !important;
+}
+
+@include _prefix(utility, 'visible') {
+    visibility:             visible !important;
 }
 

@@ -110,40 +110,52 @@ $_petra: (
         displays: (
             'block', 'flex', 'flow', 'flow-root', 'grid',
             'inline', 'inline-block', 'inline-flex', 'inline-grid', 'inline-table',
-            'list-item', 'none', 'run-in', 'subgrid', 'table',
+            'list-item', 'run-in', 'subgrid', 'table',
         ),
         
-        //  layout utilities
+        //  interaction utilities.
+        cursors: (
+            'alias', 'all-scroll', 'copy', 'crosshair', 'default',
+            'grab', 'grabbing', 'help', 'move', 'not-allowed',
+            'none', 'pointer', 'progress', 'text', 'wait',
+            'zoom-in', 'zoom-out',
+        ),
+        
+        pointer-events: (
+            'auto', 'initial', 'none',
+        ),
+        
+        //  layout utilities.
         positions: (
-            'absolute', 'fixed', 'inherit', 'relative', 'static',
+            'absolute', 'fixed', 'relative', 'static',
         ),
         floats: (
             'left', 'right', 'none',
         ),
         
-        //  transform utilities
+        //  transform utilities.
         rotation-grades: (
             45, 90, 180, 270, 360,
         ),
         
-        //  typography utilities
+        //  typography utilities.
         font-size-multiplier:   10,
         
         font-weights: (
-            'normal', 'bold', 'bolder', 'lighter', 'inherit',
+            'normal', 'bold', 'bolder', 'lighter',
         ),
         text-alignments: (
-            'left', 'right', 'center', 'justify', 'inherit',
+            'left', 'right', 'center', 'justify',
         ),
         text-transforms: (
-            'capitalize', 'full-width', 'lowercase', 'uppercase', 'inherit',
+            'capitalize', 'full-width', 'lowercase', 'uppercase',
         ),
         white-spaces: (
-            'normal', 'pre', 'pre-line', 'pre-wrap', 'inherit',
+            'normal', 'pre', 'pre-line', 'pre-wrap',
         ),
         vertical-alignments: (
             'baseline', 'bottom', 'middle', 'sub', 'super',
-            'test-top', 'test-bottom', 'top',
+            'text-top', 'text-bottom', 'top',
         ),
     ),
     

@@ -1,0 +1,16 @@
+//
+//  Utilities, Interaction
+//
+
+@include _prefix(utility, 'cursor') {
+    @each $val in _pathfinder(utilities, cursors) {
+        &-#{$val} { cursor: #{$val} !important; }
+    }
+}
+
+@include _prefix(utility, 'pointer-events') {
+    @each $val in _pathfinder(utilities, pointer-events) {
+        &-#{$val} { pointer-events: #{$val} !important; }
+    }
+}
+
