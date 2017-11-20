@@ -23,9 +23,9 @@
     }
 }
 
-@mixin filmreel($frames, $duration, $name: reelId-#{random(100000)}) {
+@mixin filmreel($frames, $duration, $name: reelId-#{random(1000)}) {
     background: {
-        position-x:         center;
+        position:           center;
         repeat:             no-repeat;
         size:               100% auto; }
     

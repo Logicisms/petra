@@ -31,17 +31,31 @@ $_petra: (
             float:                  false,
             null:                   false,
         ),
+        
+        health-check: (
+            run:                    false,
+            
+            colors: (
+                object:             #2196f3,
+                component:          #00c853,
+                utility:            #aa00ff,
+                scope:              #ff3d00,
+                hack:               #f44336,
+                javascript:         #ffeb3b,
+            ),
+        ),
     ),
     
     namespacing: (
         prefixes: (
-            object:                 "o-",
-            component:              "c-",
-            utility:                "u-",
-            scope:                  "s-",
-            state:                  "is-",
+            object:                 "o",
+            component:              "c",
+            utility:                "u",
+            scope:                  "s",
             hack:                   "\*\*",
-            javascript:             "js-",
+            javascript:             "js",
+            
+            delimiter:              "-",
         ),
         delimiters: (
             element:                "__",
@@ -63,7 +77,13 @@ $_petra: (
             larger:                 115%,
         ),
         font-faces: (
-            
+            open-sans: (
+                font-family:            "Open Sans",
+                src: (
+                    url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2"),
+                    url("/fonts/OpenSans-Regular-webfont.woff") format("woff")
+                ),
+            ),
         ),
         font-stacks: (
             sans-serif:             ("Helvetica Neue", Helvetica, sans-serif),

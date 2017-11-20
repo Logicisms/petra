@@ -2,14 +2,10 @@
 //  Typography
 //
 
-h1, h2, h3, h4, h5, h6 {
-    clear:                  both;
-    
-    font-weight:            normal;
-}
-
 @each $heading, $font-size in $_heading-scales {
     #{$heading} {
+        clear:              both;
+        
         font-size:          $font-size;
     }
 }

@@ -1,0 +1,12 @@
+//
+//  @font-face Declarations
+//
+
+@each $font-face in $_font-faces {
+    @font-face {
+        @each $property, $value in font-face($font-face) {
+            #{$property}:       $value;
+        }
+    }
+}
+
