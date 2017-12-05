@@ -1,5 +1,5 @@
 //
-//  Mixins, writing API
+//  Core, writing API
 //
 
 //  Prefixing
@@ -7,6 +7,8 @@
     .#{prefix($prefix) + prefix(delimiter) + $name} {
         @content;
     }
+    
+    @include _scope-index-counter($prefix, $name);
 }
 
 
@@ -61,14 +63,10 @@
 
 
 //  Breakpoints
-@mixin _responsive-modifier($breakpoint...) {
-    $length: length($breakpoint);
-    
-    @for $index from 1 through $length {
-        $i: nth($breakpoint, $index);
-        
-        @include respond-to($i) {
-            &#{$_responsive + $i} { @content; }
+@mixin _responsive-modifier($breakpoints...) {
+    @each $breakpoint in $breakpoints {
+        @include respond-to($breakpoint) {
+            &#{$_responsive + $breakpoint} { @content; }
         }
     }
 }

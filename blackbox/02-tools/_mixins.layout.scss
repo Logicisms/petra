@@ -36,7 +36,11 @@
             right:              auto#{if($important, ' !important', '')};
             left:               auto#{if($important, ' !important', '')}; }
     } @else {
-        @include debug(_debug-get-message('float'), _debug-get-flag('float'), $position);
+        @include debug(
+            "@include float()",
+            $value: $position,
+            $valid-arguments: "'left', 'right', 'center'"
+        );
     }
 }
 
@@ -70,7 +74,11 @@
 
             clip:					rect(0, 0, 0, 0);
         } @else {
-            @include debug(_debug-get-message('null'), _debug-get-flag('null'), $var);
+            @include debug(
+                "@include null()",
+                $value: $var,
+                $valid-arguments: "'print', 'visual'"
+            );
         }
     } @else {
         display:                none;

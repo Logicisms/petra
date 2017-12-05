@@ -1,0 +1,51 @@
+//
+//  Core, Scope Indexer
+//
+
+$_scope-index:              ();
+$_scope-index-classes:      ();
+
+@mixin _scope-index-counter($type, $class) {
+    $_scope-index: append($_scope-index, $type, comma) !global;
+    $_scope-index-classes: append($_scope-index-classes, $class, comma) !global;
+}
+
+@function _scope-index-parser($index, $classes) {
+    $prefixes: remove(map-keys( _pathfinder(namespacing, prefixes) ), delimiter, comma);
+    $map: ();
+    
+    @each $prefix in $prefixes {
+        $list: ();
+        
+        @for $i from 1 through length($index) {
+            @if nth($index, $i) == $prefix {
+                $list: append($list, nth($classes, $i), comma);
+            }
+        }
+        
+        $map: map-merge($map, ($prefix: $list) );
+    }
+    
+    @return $map;
+}
+
+@mixin scope-index($run: _feature(scope-index) ) {
+    @if $run {
+        $prefixes: remove(map-keys( _pathfinder(namespacing, prefixes) ), delimiter, comma);
+        $count: 0;
+        $scopes: _scope-index-parser($_scope-index, $_scope-index-classes);
+
+        @debug "START scope indexer.";
+
+        @each $prefix in $prefixes {
+            $_count: length( map-get($scopes, $prefix) );
+            $count: $count + $_count;
+
+            @debug "- #{$_count} '#{$prefix}' scopes:  (#{map-get($scopes, $prefix)}).";
+        }
+
+        @debug "- #{$count} unique scopes in total.";
+        @debug "END scope indexer."
+    }
+}
+

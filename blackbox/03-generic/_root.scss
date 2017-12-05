@@ -7,7 +7,7 @@
     
     font: {
         family:             inherit;
-        size:               (10 / strip-unit($_browser-context) * 100) + 0%;
+        size:               percentage( 10 / strip-unit($_browser-context) );
         // 'size' sets the document's root font-size to 10px,
         // relative to the given browser context
         style:              inherit;

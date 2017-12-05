@@ -2,8 +2,8 @@
 //  Health check
 //
 
-@if _pathfinder(debugging, health-check, run) {
-    @each $type in map-keys(_pathfinder(debugging, health-check, colors)) {
+@if _feature(health-check) {
+    @each $type in map-keys( _pathfinder(debugging, health-check, colors) ) {
         [class*="#{prefix($type) + prefix(delimiter)}"] {
             outline: 6px solid _pathfinder(debugging, health-check, colors, $type) !important;
         }

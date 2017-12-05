@@ -2,6 +2,13 @@
 //  Tools, Number Functions
 //
 
+@function random-range($min, $max) {
+    $random: random();
+    $number: $min + floor($random * (($max - $min) + 1));
+
+    @return $number;
+}
+
 @function strip-unit($number) {
     //  strips css unit from any number value, by Hugo Giraudel
     //  https://css-tricks.com/snippets/sass/strip-unit-function/

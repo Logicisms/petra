@@ -4,8 +4,8 @@
 
 //  'display'
 @include _prefix(utility, 'display') {
-    @each $display in _pathfinder(utilities, displays) {
-        &-#{$display} { display: #{$display} !important; }
+    @each $val in _pathfinder(utilities, displays) {
+        &-#{$val} { display: #{$val} !important; }
     }
 }
 

@@ -1,19 +1,19 @@
 //
-//  Petra config
+//  Petra Configuration
 //
 //  Fallback configuration map
 $_petra: (
     debugging: (
         messages: (
-            lede:                   ("Invalid value(s):", "at mixin:"),
+            lede:                   ("Invalid argument:", "passed to mixin:"),
             on-warn:                "Follow backtrace or review rendered markup.",
-            on-error:               "Follow backtrace and correct invalid syntax to unblock compiler.",
+            on-error:               "Correct invalid argument to unblock compiler.",
+            valid-arg:              "Valid arguments:",
             
             project-settings:       "No '$settings' map found for this project.",
             
             default:                "mixin (no message defined)",
             respond-to:             "@include respond-to()",
-            float:                  "@include align()",
             null:                   "@include null()",
         ),
         outline: (
@@ -33,8 +33,6 @@ $_petra: (
         ),
         
         health-check: (
-            run:                    false,
-            
             colors: (
                 object:             #2196f3,
                 component:          #00c853,
@@ -44,22 +42,27 @@ $_petra: (
                 javascript:         #ffeb3b,
             ),
         ),
+        
+        scope-index: (
+            //  outputs a count of unique scopes declared with prefixing mixins.
+            run:                    false,
+        ),
     ),
     
     namespacing: (
         prefixes: (
-            object:                 "o",
-            component:              "c",
-            utility:                "u",
-            scope:                  "s",
-            hack:                   "\*\*",
-            javascript:             "js",
+            object:                 'o',
+            component:              'c',
+            utility:                'u',
+            scope:                  's',
+            hack:                   '\*\*',
+            javascript:             'js',
             
-            delimiter:              "-",
+            delimiter:              '-',
         ),
         delimiters: (
-            element:                "__",
-            modifier:               "--",
+            element:                '__',
+            modifier:               '--',
             responsive:             \@,
         ),
     ),
@@ -125,32 +128,40 @@ $_petra: (
         ),
     ),
     
+    grouping: (
+        list-style-types: (
+            circle, disclosure-closed, disclosure-open, decimal, decimal-leading-zero,
+            disc, lower-alpha, lower-roman, square, upper-alpha,
+            upper-roman,
+        ),
+    ),
+    
     utilities: (
         //  display utilities.
         displays: (
-            'block', 'flex', 'flow', 'flow-root', 'grid',
-            'inline', 'inline-block', 'inline-flex', 'inline-grid', 'inline-table',
-            'list-item', 'run-in', 'subgrid', 'table',
+            block, flex, flow, flow-root, grid,
+            inline, inline-block, inline-flex, inline-grid, inline-table,
+            list-item, run-in, subgrid, table,
         ),
         
         //  interaction utilities.
         cursors: (
-            'alias', 'all-scroll', 'copy', 'crosshair', 'default',
-            'grab', 'grabbing', 'help', 'move', 'not-allowed',
-            'none', 'pointer', 'progress', 'text', 'wait',
-            'zoom-in', 'zoom-out',
+            alias, all-scroll, copy, crosshair, default,
+            grab, grabbing, help, move, not-allowed,
+            none, pointer, progress, text, wait,
+            zoom-in, zoom-out,
         ),
         
         pointer-events: (
-            'auto', 'initial', 'none',
+            auto, initial, none,
         ),
         
         //  layout utilities.
         positions: (
-            'absolute', 'fixed', 'relative', 'static',
+            absolute, fixed, relative, static,
         ),
         floats: (
-            'left', 'right', 'none',
+            left, right, none,
         ),
         
         //  transform utilities.
@@ -162,25 +173,34 @@ $_petra: (
         font-size-multiplier:   10,
         
         font-weights: (
-            'normal', 'bold', 'bolder', 'lighter',
+            normal, bold, bolder, lighter,
         ),
         text-alignments: (
-            'left', 'right', 'center', 'justify',
+            left, right, center, justify,
         ),
         text-transforms: (
-            'capitalize', 'full-width', 'lowercase', 'uppercase',
+            capitalize, full-width, lowercase, uppercase,
         ),
         white-spaces: (
-            'normal', 'pre', 'pre-line', 'pre-wrap',
+            normal, pre, pre-line, pre-wrap,
         ),
         vertical-alignments: (
-            'baseline', 'bottom', 'middle', 'sub', 'super',
-            'text-top', 'text-bottom', 'top',
+            baseline, bottom, middle, sub, super,
+            text-top, text-bottom, top,
         ),
     ),
     
     features: (
         //  feature flags
+        //  visual debugging.
+        visual-debugging:       true,
+        
+        //  health check.
+        health-check:           false,
+        
+        //  scope indexer.
+        scope-index:            false,
+        
         //  toggle whether the project gutter and vertical spacing are based on line-height.
         type-based-grid:        true,
         

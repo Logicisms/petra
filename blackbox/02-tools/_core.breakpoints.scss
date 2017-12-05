@@ -1,5 +1,5 @@
 //
-//  Breakpoints
+//  Core, Breakpoints
 //
 
 @function _breakpoint-get-query($key) {
@@ -27,7 +27,11 @@
                 @content;
             }
         } @else {
-            @include debug(debug-message('respond-to'), debug-flag('respond-to'), $i);
+            @include debug(
+                "@include respond-to()",
+                $value: $i,
+                $valid-arguments: map-keys( _pathfinder(layout, breakpoints) )
+            );
         }
     }
 }
