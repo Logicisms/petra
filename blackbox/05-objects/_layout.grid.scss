@@ -1,0 +1,61 @@
+//
+//  Layout, Grid
+//
+
+@include _prefix(object, 'row') {
+    @include block {
+        margin: {
+            right:              ($gutter / -2);
+            left:               ($gutter / -2); }
+    
+        @if _feature(flexbox-grid) {
+            display:                flex;
+            flex-wrap:              wrap;
+        } @else {
+            @include clearfix;
+        }
+    }
+}
+
+
+@mixin _column($index) {
+    @include block {
+        position:               relative;
+        padding: {
+            right:              ($gutter / 2);
+            left:               ($gutter / 2); }
+        
+        @if _feature(flexbox-grid) {
+            flex: {
+                grow:               0;
+                shrink:             0;
+                basis:              column($index); }
+            //  'width' here is a trick learned from Bootstrap, explained there:
+            //  https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss#L35
+            width:                  100%;
+            max-width:              column($index);
+        } @else {
+            float:                  left;
+            width:                  column($index);
+        }
+    }
+}
+
+@include _prefix(object, 'col') {
+    @for $i from 1 through $_grid-columns {
+        &-#{$i} {
+            @include _column($i);
+        }
+    }
+    
+    @each $var in $_class-breakpoints {
+        @include respond-to($var) {
+            @for $i from 1 through $_grid-columns {
+                &-#{$i + $_responsive + $var} {
+                    @include _column($i);
+                }
+            }
+        }
+    }
+}
+
