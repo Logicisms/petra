@@ -3,7 +3,9 @@
 //
 
 @include _prefix(utility, 'font') {
-    @for $i from 1 through _pathfinder(utilities, font-size-multiplier) {
+    $_scale-start: if(_feature(fonts-scale-from-1), 1, 2);
+    
+    @for $i from $_scale-start through _pathfinder(utilities, font-scale-threshold) {
         &-size-x#{$i} { font-size: 1em * $i !important; }
     }
     

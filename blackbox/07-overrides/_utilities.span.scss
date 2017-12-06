@@ -4,7 +4,11 @@
 
 @if _feature(grid-span-utilities) {
     @include _prefix(utility, 'span') {
-        @include _column-constructor($grid: false);
+        @for $i from 1 through $_grid-columns {
+            &-#{$i} {
+                width:                  column($i);
+            }
+        }
     }
 }
 

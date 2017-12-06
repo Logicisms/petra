@@ -13,8 +13,6 @@ $_petra: (
             project-settings:       "No '$settings' map found for this project.",
             
             default:                "mixin (no message defined)",
-            respond-to:             "@include respond-to()",
-            null:                   "@include null()",
         ),
         outline: (
             color:                  red,
@@ -42,11 +40,6 @@ $_petra: (
                 javascript:         #ffeb3b,
             ),
         ),
-        
-        scope-index: (
-            //  outputs a count of unique scopes declared with prefixing mixins.
-            run:                    false,
-        ),
     ),
     
     namespacing: (
@@ -70,7 +63,6 @@ $_petra: (
     typography: (
         browser-context:        16px,
         
-        line-height:            1.75,
         font-sizes: (
             //  "static" sizes, should be in 'rem'.
             normal:                 1.6rem,
@@ -94,11 +86,12 @@ $_petra: (
             monospace:              ("Lucida Console", Monaco, monospace),
         ),
         
-//        font-family:            sans-serif,
+        font-family:            sans-serif,
+        line-height:            1.75,
         
         //  determines the value (in ems) by which headings h1-h6 are scaled
         //  relative to font-size.
-        hx-scale-increment:     0.25em,
+        heading-scale-ratio:    0.25em,
     ),
     
     layout: (
@@ -109,19 +102,20 @@ $_petra: (
         
         breakpoints: (
             small: (
-                max-width:          640px,
+                max-width:          64rem,
             ),
             medium: (
-                min-width:          641px,
+                min-width:          64.1rem,
             ),
             large: (
-                min-width:          1024px,
+                min-width:          102.4rem,
             ),
             retina: (
                 min-device-pixel-ratio: 2,
                 min-resolution:     192dpi,
             ),
         ),
+        class-breakpoints:      3,
         
         z-indices: (
             default:                1,
@@ -169,7 +163,7 @@ $_petra: (
         ),
         
         //  typography utilities.
-        font-size-multiplier:   10,
+        font-scale-threshold:   10,
         
         font-weights: (
             normal, bold, bolder, lighter,
@@ -190,53 +184,63 @@ $_petra: (
     ),
     
     features: (
-        //  feature flags
-        //  visual debugging.
+        //  Debugging
+        //  'true' to outline affected elements when a mixin is passed invalid arguments.
         visual-debugging:       true,
-        
-        //  health check.
+
+        //  'true' to apply color-coded outlines to namespaced entities.
         health-check:           false,
-        
-        //  scope indexer.
+
+        //  'true' to @debug print a count of namespaced scopes on compile.
         scope-index:            false,
         
-        //  toggle whether the project gutter and vertical spacing are based on line-height.
-        type-based-grid:        true,
-        
-        //  toggle whether or not Petra outputs a CSS reset.
-        reset-css:              true,
-        
-        //  toggle whether to reset the styles for the :focus pseudo-selector.
-        reset-focus:            false,
-        
-        //  removes all user agent button styles, rendering them as plain text.
-        hard-reset-buttons:     true,
-        
-        //  toggle nested BEM namespacing; applies to block and element mixins.
+        //  Namespacing
+        //  'true' to nest BEM elements to their parent blocks.
         nested-bem:             true,
         
-        //  if true, will nest block rules to themselves to ensure consistent specificity.
+        //  'true' to nest BEM blocks with themselves to ensure consistent specificity.
         strict-nesting:         false,
         
-        //  determine whether or not to output Petra's animation mixins and @keyframe blocks.
+        //  Layout
+        //  'true' to base project gutter and vertical spacing on line-height.
+        type-based-grid:        true,
+        
+        //  Tools
+        //  'true' to output Petra's animation mixins and @Keyframe blocks.
         animation-mixins:       true,
         
-        //  toggle whether grid is configured to work with Petra's flexbox rules.
+        //  Generic
+        //  'true' to output CSS reset.
+        reset-css:              true,
+        
+        //  'true' to reset :focus styles. WARNING: if 'true', implement custom styles to ensure accessibility.
+        reset-focus:            false,
+        
+        //   'true' to remove all user agent button styles, rendering them as plain text.
+        hard-reset-buttons:     true,
+        
+        //  Objects
+        //  'true' to use flexbox rules instead of floats in grid system.
         flexbox-grid:           true,
         
-        //  when true, Petra will build the grid with media queries defined in config.
+        //  'true' to build grid system with media queries as defined in config.
         responsive-grid:        true,
         
-        //  if set to false, some lite flex utilities will be built as flex object modifiers.
+        //  Overrides
+        //  'true' to output flexbox utilities to compelement the flex object.
+        //  'false' will output lite flex object modifiers instead.
         flex-utilities:         true,
         
-        //  toggle whether or not to output width-affecting utility classes corresponding with the grid.
+        //  'true' to output width-affecting 'span' utilities that correspond with the grid.
         grid-span-utilities:    true,
         
-        //  toggle the output of responsive modifying classes for grids and utilities.
+        //  'true' to output responsive modifying classes for utilities.
         responsive-utilities:   true,
         
-        //  toggle whether or not to output a styles for printed media. uses the HTML5 Boilerplate rules.
+        //  'true' to output a 'font-size-x1' utility, 'false' will start at 'font-size-x2'.
+        fonts-scale-from-1:     false,
+        
+        //  'true' to output a stylesheet for printed media, based on the HTML5 boilerplate.
         print-media:            true,
     ),
 );

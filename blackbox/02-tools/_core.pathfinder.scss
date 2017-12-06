@@ -100,7 +100,7 @@ $_debug-pathfinder: false;
     @return _pathfinder(typography, font-sizes, $size);
 }
 
-@function column-width($index) {
+@function column($index) {
     @return percentage($index / _pathfinder(layout, grid-columns));
 }
 
@@ -124,7 +124,7 @@ $_font-family:              _pathfinder(typography, font-family);
 $_line-height:              _pathfinder(typography, line-height);
  $line-height:              $_line-height !default;
 //  @TODO: this could be more elegant, i think. revisit it later.
-$_hx-i:                     _pathfinder(typography, hx-scale-increment);
+$_hx-i:                     _pathfinder(typography, heading-scale-ratio);
 $_heading-scales: (
     h1:                     1em + ($_hx-i * 5),
     h2:                     1em + ($_hx-i * 4),
@@ -146,4 +146,6 @@ $_grid-columns:             _pathfinder(layout, grid-columns);
 //  layout, breakpoints
 $_breakpoints:              map-keys(_pathfinder(layout, breakpoints));
  $breakpoints:              $_breakpoints !default;
+$_class-breakpoints:        remove($_breakpoints, nth($_breakpoints, _pathfinder(layout, class-breakpoints) + 1), comma);
+ $class-breakpoints:        $_class-breakpoints !default;
 
