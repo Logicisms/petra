@@ -23,7 +23,7 @@
     }
 }
 
-@mixin filmreel($frames, $duration, $name: reel-#{unique-id()}) {
+@mixin filmreel($frames, $duration, $name: 'reel-' + unique-id()) {
     background: {
         position:           center;
         repeat:             no-repeat;
@@ -41,7 +41,7 @@
             
             @for $index from 0 through $var {
                 #{100% / $var * $index} {
-                    background-position-y: (100% / $var) * $index;
+                    background-position: 0% ( (100% / $var) * $index );
                 }
             }
         }

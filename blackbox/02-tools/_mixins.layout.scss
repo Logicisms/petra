@@ -28,13 +28,13 @@
 
 @mixin float($position, $important: false) {
     @if ($position == "left") or ($position == "right") {
-        float:                  $position#{if($important, ' !important', '')};
+        float:                  $position if($important, !important, null);
     } @else if $position == "center" {
-        display:                block#{if($important, ' !important', '')};
-        float:                  none#{if($important, ' !important', '')};
+        display:                block if($important, !important, null);
+        float:                  none if($important, !important, null);
         margin: {
-            right:              auto#{if($important, ' !important', '')};
-            left:               auto#{if($important, ' !important', '')}; }
+            right:              auto if($important, !important, null);
+            left:               auto if($important, !important, null); }
     } @else {
         @include debug(
             "@include float()",

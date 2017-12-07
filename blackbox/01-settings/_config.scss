@@ -220,6 +220,9 @@ $_petra: (
         hard-reset-buttons:     true,
         
         //  Objects
+        //  'true' to output a configurable grid system.
+        grid-system:            true,
+        
         //  'true' to use flexbox rules instead of floats in grid system.
         flexbox-grid:           true,
         

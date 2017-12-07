@@ -2,29 +2,13 @@
 //  Layout, Grid
 //
 
-@include _prefix(object, 'row') {
-    @include block {
-        margin: {
-            right:              ($gutter / -2);
-            left:               ($gutter / -2); }
-    
-        @if _feature(flexbox-grid) {
-            display:                flex;
-            flex-wrap:              wrap;
-        } @else {
-            @include clearfix;
-        }
-    }
-}
-
-
 @mixin _column($index) {
     @include block {
         position:               relative;
         padding: {
             right:              ($gutter / 2);
             left:               ($gutter / 2); }
-        
+
         @if _feature(flexbox-grid) {
             flex: {
                 grow:               0;
@@ -41,18 +25,35 @@
     }
 }
 
-@include _prefix(object, 'col') {
-    @for $i from 1 through $_grid-columns {
-        &-#{$i} {
-            @include _column($i);
+@if _feature(grid-system) {
+    @include _prefix(object, 'row') {
+        @include block {
+            margin: {
+                right:              ($gutter / -2);
+                left:               ($gutter / -2); }
+
+            @if _feature(flexbox-grid) {
+                display:                flex;
+                flex-wrap:              wrap;
+            } @else {
+                @include clearfix;
+            }
         }
     }
-    
-    @each $var in $_class-breakpoints {
-        @include respond-to($var) {
-            @for $i from 1 through $_grid-columns {
-                &-#{$i + $_responsive + $var} {
-                    @include _column($i);
+
+    @include _prefix(object, 'col') {
+        @for $i from 1 through $_grid-columns {
+            &-#{$i} {
+                @include _column($i);
+            }
+        }
+
+        @each $var in $_class-breakpoints {
+            @include respond-to($var) {
+                @for $i from 1 through $_grid-columns {
+                    &-#{$i + $_responsive + $var} {
+                        @include _column($i);
+                    }
                 }
             }
         }
