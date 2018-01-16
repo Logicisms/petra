@@ -6,56 +6,28 @@
     @include _block {
         display:                flex;
         flex-wrap:              nowrap;
-        
-        
-        @if not _feature(flex-utilities) {
-            @include _modifier('column') {
-                flex-direction:         column;
-            }
-
-            @include _modifier('row') {
-                flex-direction:         row;
-            }
-
-            @include _modifier('align-center') {
-                align-content:          center;
-            }
-
-            @include _modifier('justify-center') {
-                justify-content:        center;
-            }
-        }
     }
     
     @include _element('item') {
         flex: {
+            basis:              auto;
             grow:               0;
-            shrink:             1;
-            basis:              auto; }
-        //  min-width set to prevent css-truncated text from breaking the flex.
-        min-width:              0;
+            shrink:             1; }
         margin: {
             top:                auto;
             bottom:             auto; }
+        min: {
+        //  min sizes set to prevent css-truncated text from breaking the flex.
+            width:              0;
+            height:             0; }
         
         
         @include _modifier('grow') {
-            flex-grow:              1;
+            flex: {
             //  'flex-basis' here is to resolve issues with older browsers.
             //  this is in spite of my deliberate disregard for all of IE. ¬_¬
-            flex-basis:             0%;
-        }
-        
-        @if not _feature(flex-utilities) {
-            @include _modifier('align-center') {
-                align-self:             center;
-            }
-            @include _modifier('align-start') {
-                align-self:             flex-start;
-            }
-            @include _modifier('align-end') {
-                align-self:             flex-end;
-            }
+                basis:              0%;
+                grow:               1; }
         }
     }
 }

@@ -40,8 +40,9 @@ $_scope-index-classes:      ();
         @each $prefix in $prefixes {
             $_count: length( map-get($scopes, $prefix) );
             $count: $count + $_count;
-
-            @debug "- #{$_count} '#{$prefix}' scopes:  (#{map-get($scopes, $prefix)}).";
+            $print: if( $_count > 0, map-get($scopes, $prefix), 'null' );
+            
+            @debug "- #{$_count} '#{$prefix}' scopes:  (#{$print}).";
         }
 
         @debug "- #{$count} unique scopes in total.";

@@ -64,13 +64,14 @@
                 display:                none !important;
             }
         } @else if $var == "visual" {
-            height:					1px;
-            width:					1px;
+            position:				absolute;
+                left:       		-200vw;
+            
             margin:					-1px;
             overflow:				hidden;
             padding:				0;
-            position:				absolute;
-            left:					-200vw;
+            width:					1px;
+            height:					1px;
 
             clip:					rect(0, 0, 0, 0);
         } @else {
@@ -92,21 +93,25 @@
     //  by Hugo Giraudel
     //  https://css-tricks.com/snippets/sass/placing-items-circle/
     position:               relative;
+    
+    padding:                0;
     width:                  $circle-size;
     height:                 $circle-size;
-    padding:                0;
-    border-radius:          50%; 
+    
+    border-radius:          50%;
+    
     list-style:             none;       
 
     
     > * {
-        display:                block;
         position:               absolute;
-        top:                    50%; 
-        left:                   50%;
+            top:                50%; 
+            left:               50%;
+        
+        display:                block;
+        margin:                 -($item-size / 2);
         width:                  $item-size;
         height:                 $item-size;
-        margin:                 -($item-size / 2);
 
         $angle:                 (360 / $item-count);
         $rot:                   0;

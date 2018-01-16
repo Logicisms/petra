@@ -96,7 +96,7 @@ $_petra: (
     
     layout: (
         //  if 'type-based-grid' is true, this gutter will be ignored.
-        gutter:                 2.4rem,
+        gutter:                 1.75em,
         
         grid-columns:           12,
         
@@ -130,56 +130,117 @@ $_petra: (
     ),
     
     utilities: (
-        //  display utilities.
-        displays: (
-            block, flex, flow, flow-root, grid,
-            inline, inline-block, inline-flex, inline-grid, inline-table,
-            list-item, run-in, subgrid, table,
-        ),
-        
-        //  interaction utilities.
-        cursors: (
-            alias, all-scroll, copy, crosshair, default,
-            grab, grabbing, help, move, not-allowed,
-            none, pointer, progress, text, wait,
-            zoom-in, zoom-out,
-        ),
-        
-        pointer-events: (
-            auto, initial, none,
-        ),
-        
-        //  layout utilities.
-        positions: (
-            absolute, fixed, relative, static,
-        ),
-        floats: (
-            left, right, none,
-        ),
-        
-        //  transform utilities.
+        //  Transform
         rotation-grades: (
             45, 90, 180, 270, 360,
         ),
         
-        //  typography utilities.
-        font-scale-threshold:   10,
+        //  Typography
+        font-scale-start:       1,
+        font-scale-end:         10,
+    ),
+    
+    single-property-utilities: (
+        //  @TODO: debug how the constructor for this builds out the utilities
+        //  when differences exist between this config and the user-facing one.
         
-        font-weights: (
-            normal, bold, bolder, lighter,
+        //  Display
+        display: (
+            namespace:              'display',
+            values: (
+                block, flex, flow, flow-root, grid,
+                inline, inline-block, inline-flex, inline-grid, inline-table,
+                list-item, run-in, subgrid, table,
+            ),
         ),
-        text-alignments: (
-            left, right, center, justify,
+        
+        //  Interaction
+        cursor: (
+            namespace:              'cursor',
+            values: (
+                alias, all-scroll, copy, crosshair, default,
+                grab, grabbing, help, move, not-allowed,
+                none, pointer, progress, text, wait,
+                zoom-in, zoom-out,
+            ),
         ),
-        text-transforms: (
-            capitalize, full-width, lowercase, uppercase,
+        pointer-events: (
+            namespace:              'pointer-events',
+            values: (
+                auto, initial, none,
+            ),
         ),
-        white-spaces: (
-            normal, pre, pre-line, pre-wrap,
+        
+        //  Layout
+        position: (
+            namespace:              'position',
+            values: (
+                absolute, fixed, relative, static,
+            ),
         ),
-        vertical-alignments: (
-            baseline, bottom, middle, sub, super,
-            text-top, text-bottom, top,
+        float: (
+            namespace:              'float',
+            values: (
+                left, right, none,
+            ),
+        ),
+        
+        flex-direction: (
+            namespace:              'flex-direction',
+            values: (
+                column, row,
+            ),
+        ),
+        align-content: (
+            namespace:              'flex-align',
+            values: (
+                center, flex-start, flex-end, space-around, space-between, stretch,
+            ),
+        ),
+        justify-content: (
+            namespace:              'flex-justify',
+            values: (
+                center, flex-start, flex-end, space-around, space-between,
+            ),
+        ),
+        align-self: (
+            namespace:              'flex-align-self',
+            values: (
+                center, flex-start, flex-end, space-around, space-between, stretch,
+            ),
+        ),
+        
+        //  Typography
+        font-weight: (
+            namespace:              'font-weight',
+            values: (
+                normal, bold, bolder, lighter,
+            ),
+        ),
+        text-align: (
+            namespace:             'text-align',
+            values: (
+                left, right, center, justify,
+            ),
+        ),
+        text-transform: (
+            namespace:              'text-transform',
+            values: (
+                capitalize, lowercase, uppercase,
+            ),
+        ),
+        white-space: (
+            namespace:              'white-space',
+            values: (
+                normal, pre, pre-line, pre-wrap,
+            ),
+        ),
+        vertical-align: (
+            namespace:              'vertical-align',
+            values: (
+                baseline, bottom, middle, sub, super,
+                text-top, text-bottom, top,
+            ),
         ),
     ),
     
@@ -201,13 +262,12 @@ $_petra: (
         //  'true' to nest BEM blocks with themselves to ensure consistent specificity.
         strict-nesting:         false,
         
+        //  'true' to output BEM modifiers as delimiter-prefixed short classes.
+        detached-bem-syntax:    false,
+        
         //  Layout
         //  'true' to base project gutter and vertical spacing on line-height.
         type-based-grid:        true,
-        
-        //  Tools
-        //  'true' to output Petra's animation mixins and @Keyframe blocks.
-        animation-mixins:       true,
         
         //  Generic
         //  'true' to output CSS reset.
@@ -230,18 +290,11 @@ $_petra: (
         responsive-grid:        true,
         
         //  Overrides
-        //  'true' to output flexbox utilities to compelement the flex object.
-        //  'false' will output lite flex object modifiers instead.
-        flex-utilities:         true,
+        //  'true' will output utility class values as '!important'.
+        important-utilities:    true,
         
         //  'true' to output width-affecting 'span' utilities that correspond with the grid.
         grid-span-utilities:    true,
-        
-        //  'true' to output responsive modifying classes for utilities.
-        responsive-utilities:   true,
-        
-        //  'true' to output a 'font-size-x1' utility, 'false' will start at 'font-size-x2'.
-        fonts-scale-from-1:     false,
         
         //  'true' to output a stylesheet for printed media, based on the HTML5 boilerplate.
         print-media:            true,

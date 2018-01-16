@@ -103,6 +103,14 @@ $_debug-pathfinder: false;
     @return percentage($index / _pathfinder(layout, grid-columns));
 }
 
+@function utility-value($value) {
+    @if _feature(important-utilities) {
+        @return $value !important;
+    }
+    
+    @return $value;
+}
+
 
 //  Parsed and aliased $settings variables
 //  namespacing

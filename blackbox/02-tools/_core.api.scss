@@ -49,8 +49,9 @@
     
     @for $index from 1 through $length {
         $i: nth($modifiers, $index);
+        $modifier: if(_feature(detached-bem-syntax), "&.#{$_modifier + $i}", "&#{$_modifier + $i}");
         
-        $selectors: append($selectors, "&#{$_modifier + $i}", comma);
+        $selectors: append($selectors, $modifier, comma);
     }
     
     #{$selectors} {

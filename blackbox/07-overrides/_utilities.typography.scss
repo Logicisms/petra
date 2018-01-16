@@ -3,43 +3,20 @@
 //
 
 @include _prefix(utility, 'font') {
-    $_scale-start: if(_feature(fonts-scale-from-1), 1, 2);
+    $start: _pathfinder(utilities, font-scale-start);
+    $end: _pathfinder(utilities, font-scale-end);
     
-    @for $i from $_scale-start through _pathfinder(utilities, font-scale-threshold) {
-        &-size-x#{$i} { font-size: 1em * $i !important; }
-    }
-    
-    @each $val in _pathfinder(utilities, font-weights) {
-        &-weight-#{$val} { font-weight: #{$val} !important; }
+    @for $i from $start through $end {
+        &-size-x#{$i} { font-size: utility-value(1em * $i); }
     }
 }
 
 @include _prefix(utility, 'text') {
-    &-smaller { font-size: _pathfinder(typography, font-sizes, smaller) !important; }
-    &-larger { font-size: _pathfinder(typography, font-sizes, larger) !important; }
-    
-    @each $val in _pathfinder(utilities, text-alignments) {
-        &-#{$val} { text-align: #{$val} !important; }
-    }
-    
-    @each $val in _pathfinder(utilities, text-transforms) {
-        &-#{$val} { text-transform: #{$val} !important; }
-    }
-}
-
-@include _prefix(utility, 'white-space') {
-    @each $val in _pathfinder(utilities, white-spaces) {
-        &-#{$val} { white-space: #{$val} !important; }
-    }
+    &-smaller { font-size: utility-value( _pathfinder(typography, font-sizes, smaller) ); }
+    &-larger { font-size: utility-value( _pathfinder(typography, font-sizes, larger) ); }
 }
 
 @include _prefix(utility, 'nowrap') {
-    white-space: nowrap !important;
-}
-
-@include _prefix(utility, 'vertical-align') {
-    @each $val in _pathfinder(utilities, vertical-alignments) {
-        &-#{$val} { vertical-align: #{$val} !important; }
-    }
+    white-space: utility-value(nowrap);
 }
 

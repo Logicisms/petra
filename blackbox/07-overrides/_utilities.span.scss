@@ -6,7 +6,7 @@
     @include _prefix(utility, 'span') {
         @for $i from 1 through $_grid-columns {
             &-#{$i} {
-                width:                  column($i);
+                width:                  utility-value( column($i) );
             }
         }
     }

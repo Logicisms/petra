@@ -2,23 +2,16 @@
 //  Utilities, Display
 //
 
-//  'display'
-@include _prefix(utility, 'display') {
-    @each $val in _pathfinder(utilities, displays) {
-        &-#{$val} { display: #{$val} !important; }
-    }
-}
-
 @include _prefix(utility, 'null') {
-    display:                none !important;
+    display:                utility-value(none);
 }
 
 //  'visibility'
 @include _prefix(utility, 'hidden') {
-    visibility:             hidden !important;
+    visibility:             utility-value(hidden);
 }
 
 @include _prefix(utility, 'visible') {
-    visibility:             visible !important;
+    visibility:             utility-value(visible);
 }
 

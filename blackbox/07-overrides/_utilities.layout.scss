@@ -2,23 +2,11 @@
 //  Utilities, Layout
 //
 
-@include _prefix(utility, 'position') {
-    @each $val in _pathfinder(utilities, positions) {
-        &-#{$val} { position: #{$val} !important; }
-    }
-}
-
-@include _prefix(utility, 'pull') {
-    @each $val in _pathfinder(utilities, floats) {
-        &-#{$val} { float: #{$val} !important; }
-    }
-    
-    &-center {
-        @include float(center, $important: true);
-    }
-}
-
 @include _prefix(utility, 'br') {
-    margin-bottom:          $_gutter !important;
+    margin-bottom:          utility-value($_gutter);
+}
+
+@include _prefix(utility, 'clearfix') {
+    @include clearfix;
 }
 

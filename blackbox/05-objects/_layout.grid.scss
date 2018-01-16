@@ -5,6 +5,7 @@
 @mixin _column($index) {
     @include block {
         position:               relative;
+        
         padding: {
             right:              ($gutter / 2);
             left:               ($gutter / 2); }
@@ -48,11 +49,13 @@
             }
         }
 
-        @each $var in $_class-breakpoints {
-            @include respond-to($var) {
-                @for $i from 1 through $_grid-columns {
-                    &-#{$i + $_responsive + $var} {
-                        @include _column($i);
+        @if _feature(responsive-grid) {
+            @each $var in $_class-breakpoints {
+                @include respond-to($var) {
+                    @for $i from 1 through $_grid-columns {
+                        &-#{$i + $_responsive + $var} {
+                            @include _column($i);
+                        }
                     }
                 }
             }
