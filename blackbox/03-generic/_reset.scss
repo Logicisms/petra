@@ -4,7 +4,7 @@
 
 @if _feature(reset-css) {
     body {
-        height:                 100vh;
+        min-height:             100vh;
     }
     
     html, body, div, span,
@@ -195,8 +195,7 @@
             font-weight:            normal;
             text: {
                 align:              inherit;
-                shadow:             none;
-                transform:          none; }
+                shadow:             none; }
         }
     }
     

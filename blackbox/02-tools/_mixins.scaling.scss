@@ -2,7 +2,7 @@
 //  Mixins, scaling
 //
 
-@mixin size($width, $height: $width, $min: false, $max: false) {
+@mixin size($width, $height: $width) {
     height:					$height;
     width:					$width;
 }
@@ -17,10 +17,12 @@
         height:             $height; }
 }
 
-@mixin aspect-ratio($width: 16, $height: 9) {
+@mixin aspect-ratio($width: 16, $height: 9, $position: relative) {
 	//  by Sean Dempsey
 	//  http://codepen.io/seanseansean
-    position:               relative;
+    @if $position {
+        position:               $position;
+    }
 	
 	
 	&::before {

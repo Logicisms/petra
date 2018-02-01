@@ -2,8 +2,6 @@
 //  Core, Debugging  
 //
 
-//$_debug-get-path:       _pathfinder(debugging); @debug type-of($_debug-get-path);
-
 @function _debug-get-message($key) {
     @return _pathfinder(debugging, messages, $key);
 }

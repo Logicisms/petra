@@ -50,10 +50,10 @@
         }
 
         @if _feature(responsive-grid) {
-            @each $var in $_class-breakpoints {
-                @include respond-to($var) {
+            @each $breakpoint in $_class-breakpoints {
+                @include respond-to($breakpoint) {
                     @for $i from 1 through $_grid-columns {
-                        &-#{$i + $_responsive + $var} {
+                        &-#{$i + $_responsive + $breakpoint} {
                             @include _column($i);
                         }
                     }

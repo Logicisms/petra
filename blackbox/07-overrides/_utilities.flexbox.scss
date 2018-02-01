@@ -5,10 +5,15 @@
 @include _prefix(utility, 'flex') {
     &-grow {
         flex-grow:              utility-value(1);
-        //  'flex-basis' here is to resolve issues with older browsers.
-        //  this is in spite of my deliberate disregard for all of IE. ¬_¬
         flex-basis:             utility-value(0%);
         max-width:              utility-value(100%);
+    }
+    
+    &-push {
+        &-top { margin-top: utility-value(auto); }
+        &-right { margin-right: utility-value(auto); }
+        &-bottom { margin-bottom: utility-value(auto); }
+        &-left { margin-left: utility-value(auto); }
     }
 }
 

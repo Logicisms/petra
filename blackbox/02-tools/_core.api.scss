@@ -4,9 +4,7 @@
 
 //  Prefixing
 @mixin _prefix($prefix, $name) {
-    .#{prefix($prefix) + prefix(delimiter) + $name} {
-        @content;
-    }
+    .#{prefix($prefix) + $name} { @content; }
     
     @include _scope-index-counter($prefix, $name);
 }

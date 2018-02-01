@@ -2,12 +2,14 @@
 //  Utilities, Typography
 //
 
-@include _prefix(utility, 'font') {
-    $start: _pathfinder(utilities, font-scale-start);
-    $end: _pathfinder(utilities, font-scale-end);
-    
-    @for $i from $start through $end {
-        &-size-x#{$i} { font-size: utility-value(1em * $i); }
+@if feature(font-scale-utilities) {
+    @include _prefix( utility, _pathfinder(utilities, font-scale, namespace) ) {
+        $start: _pathfinder(utilities, font-scale-start);
+        $end: _pathfinder(utilities, font-scale-end);
+
+        @for $i from $start through $end {
+            &-x#{$i} { font-size: utility-value(1em * $i); }
+        }
     }
 }
 

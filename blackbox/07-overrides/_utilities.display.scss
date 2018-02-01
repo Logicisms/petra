@@ -4,14 +4,21 @@
 
 @include _prefix(utility, 'null') {
     display:                utility-value(none);
+    
+    
+    @include _responsive-modifier-array {
+        display:                utility-value(none);
+    }
 }
 
 //  'visibility'
-@include _prefix(utility, 'hidden') {
-    visibility:             utility-value(hidden);
-}
+@if feature(visibility-utilities) {
+    @include _prefix(utility, 'hidden') {
+        visibility:             utility-value(hidden);
+    }
 
-@include _prefix(utility, 'visible') {
-    visibility:             utility-value(visible);
+    @include _prefix(utility, 'visible') {
+        visibility:             utility-value(visible);
+    }
 }
 

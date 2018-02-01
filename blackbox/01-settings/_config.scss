@@ -3,6 +3,26 @@
 //
 //  Fallback configuration map
 $_petra: (
+    namespacing: (
+        prefixes: (
+            object:                 'o-',
+            component:              'c-',
+            utility:                'u-',
+            scope:                  's-',
+            
+            state:                  'is-',
+            state-within:           'has-',
+            
+            hack:                   '\*\*',
+            javascript:             'js-',
+        ),
+        delimiters: (
+            element:                '__',
+            modifier:               '--',
+            responsive:             \@,
+        ),
+    ),
+    
     debugging: (
         messages: (
             lede:                   ("Invalid argument:", "passed to mixin:"),
@@ -32,31 +52,18 @@ $_petra: (
         
         health-check: (
             colors: (
-                object:             #2196f3,
-                component:          #00c853,
-                utility:            #aa00ff,
-                scope:              #ff3d00,
-                hack:               #f44336,
-                javascript:         #ffeb3b,
+                object:             material-color(blue, a400),
+                component:          material-color(purple, a400),
+                scope:              material-color(green, a400),
+                utility:            material-color(yellow, a400),
+                
+                state:              material-color(orange, a400),
+                state-within:       material-color(deep-orange, a400),
+                
+                hack:               material-color(red, a700),
+                javascript:         material-color(blue-grey, 500),
             ),
-        ),
-    ),
-    
-    namespacing: (
-        prefixes: (
-            object:                 'o',
-            component:              'c',
-            utility:                'u',
-            scope:                  's',
-            hack:                   '\*\*',
-            javascript:             'js',
-            
-            delimiter:              '-',
-        ),
-        delimiters: (
-            element:                '__',
-            modifier:               '--',
-            responsive:             \@,
+            warning:                "Health-check is active, DO NOT PUBLISH CODE. Disable health-check before publishing code.",
         ),
     ),
     
@@ -136,14 +143,17 @@ $_petra: (
         ),
         
         //  Typography
+        font-scale: (
+            namespace:              'font-size',
+            
+            start:                  1,
+            end:                    10,
+        ),
         font-scale-start:       1,
         font-scale-end:         10,
     ),
     
     single-property-utilities: (
-        //  @TODO: debug how the constructor for this builds out the utilities
-        //  when differences exist between this config and the user-facing one.
-        
         //  Display
         display: (
             namespace:              'display',
@@ -245,7 +255,6 @@ $_petra: (
     ),
     
     features: (
-        //  Debugging
         //  'true' to outline affected elements when a mixin is passed invalid arguments.
         visual-debugging:       true,
 
@@ -255,7 +264,6 @@ $_petra: (
         //  'true' to @debug print a count of namespaced scopes on compile.
         scope-index:            false,
         
-        //  Namespacing
         //  'true' to nest BEM elements to their parent blocks.
         nested-bem:             true,
         
@@ -265,21 +273,18 @@ $_petra: (
         //  'true' to output BEM modifiers as delimiter-prefixed short classes.
         detached-bem-syntax:    false,
         
-        //  Layout
         //  'true' to base project gutter and vertical spacing on line-height.
         type-based-grid:        true,
         
-        //  Generic
         //  'true' to output CSS reset.
         reset-css:              true,
         
-        //  'true' to reset :focus styles. WARNING: if 'true', implement custom styles to ensure accessibility.
+        //  'true' to reset :focus styles. WARNING: if 'true', implement custom styles to preserve accessibility.
         reset-focus:            false,
         
         //   'true' to remove all user agent button styles, rendering them as plain text.
         hard-reset-buttons:     true,
         
-        //  Objects
         //  'true' to output a configurable grid system.
         grid-system:            true,
         
@@ -289,12 +294,18 @@ $_petra: (
         //  'true' to build grid system with media queries as defined in config.
         responsive-grid:        true,
         
-        //  Overrides
+        //  @TODO: change utility feature flag keys to '-util' for brevity
         //  'true' will output utility class values as '!important'.
         important-utilities:    true,
         
+        //  'true' to output visibility-affecting utilities for 'hidden' and 'visible'.
+        visibility-utilities:   true,
+        
         //  'true' to output width-affecting 'span' utilities that correspond with the grid.
         grid-span-utilities:    true,
+        
+        //  'true to output font-resizing utilities as configured.
+        font-scale-utilities:   true,
         
         //  'true' to output a stylesheet for printed media, based on the HTML5 boilerplate.
         print-media:            true,

@@ -1,0 +1,10 @@
+//
+//  Scope, Health Check
+//
+
+@include _prefix(scope, 'health-check') {
+    @include _block {
+        @include health-check;
+    }
+}
+

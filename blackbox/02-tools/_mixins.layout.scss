@@ -11,8 +11,8 @@
         left:               $left;
 }
 
-@mixin position-center($x: true, $y: true) {
-    position:               absolute;
+@mixin position-center($x: true, $y: true, $position: absolute) {
+    position:               $position;
     @if ($x and $y) {
         top:                    50%;
         left:                   50%;
@@ -64,16 +64,14 @@
                 display:                none !important;
             }
         } @else if $var == "visual" {
-            position:				absolute;
-                left:       		-200vw;
+            position:				absolute !important;
             
-            margin:					-1px;
-            overflow:				hidden;
-            padding:				0;
-            width:					1px;
-            height:					1px;
+            overflow:				hidden !important;
+            padding:				0 !important;
+            width:					1px !important;
+            height:					1px !important;
 
-            clip:					rect(0, 0, 0, 0);
+            clip:					rect(1px, 1px, 1px, 1px) !important;
         } @else {
             @include debug(
                 "@include null()",
