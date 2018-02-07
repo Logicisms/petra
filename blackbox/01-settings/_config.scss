@@ -129,13 +129,6 @@ $_petra: (
         ),
     ),
     
-    objects: (
-        list-style-types: (
-            circle, disclosure-closed, disclosure-open, decimal, decimal-leading-zero,
-            disc, lower-alpha, lower-roman, square, upper-alpha, upper-roman,
-        ),
-    ),
-    
     utilities: (
         //  Transform
         rotation-grades: (
@@ -293,6 +286,9 @@ $_petra: (
         
         //  'true' to build grid system with media queries as defined in config.
         responsive-grid:        true,
+        
+        //  'true' to output a set of miscellaneous ascii emotes usable as icons. e.g. ¯\_(ツ)_/¯
+        ascii-emotes:           true,
         
         //  @TODO: change utility feature flag keys to '-util' for brevity
         //  'true' will output utility class values as '!important'.
