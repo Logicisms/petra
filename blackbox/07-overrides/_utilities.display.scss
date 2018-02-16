@@ -12,7 +12,7 @@
 }
 
 //  'visibility'
-@if feature(visibility-utilities) {
+@if feature(visibility-utils) {
     @include _prefix(utility, 'hidden') {
         visibility:             utility-value(hidden);
     }

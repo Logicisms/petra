@@ -98,7 +98,7 @@ $_petra: (
         
         //  determines the value (in ems) by which headings h1-h6 are scaled
         //  relative to font-size.
-        heading-scale-ratio:    0.25em,
+        heading-scale-ratio:    0.32em,
     ),
     
     layout: (
@@ -290,18 +290,26 @@ $_petra: (
         //  'true' to output a set of miscellaneous ascii emotes usable as icons. e.g. ¯\_(ツ)_/¯
         ascii-emotes:           true,
         
-        //  @TODO: change utility feature flag keys to '-util' for brevity
         //  'true' will output utility class values as '!important'.
-        important-utilities:    true,
+        important-utils:        true,
         
         //  'true' to output visibility-affecting utilities for 'hidden' and 'visible'.
-        visibility-utilities:   true,
+        visibility-utils:       true,
+        
+        //  'true' to output a set of flexbox helper utilities.
+        flexbox-utils:          true,
+        
+        //  'true' to output a set of responsive clearfix formatting hack utilities. 
+        clearfix-utils:         true,
         
         //  'true' to output width-affecting 'span' utilities that correspond with the grid.
-        grid-span-utilities:    true,
+        grid-span-utils:        true,
         
         //  'true to output font-resizing utilities as configured.
-        font-scale-utilities:   true,
+        font-scale-utils:       true,
+        
+        //  'true' to output font-resizing utilities corresponding to the h1-6 headings.
+        heading-utils:          true,
         
         //  'true' to output a stylesheet for printed media, based on the HTML5 boilerplate.
         print-media:            true,

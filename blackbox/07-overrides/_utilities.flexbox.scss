@@ -2,30 +2,32 @@
 //  Utilities, Flexbox
 //
 
-@include _prefix(utility, 'flex') {
-    &-grow {
-        flex-grow:              utility-value(1);
-        flex-basis:             utility-value(0%);
-        max-width:              utility-value(100%);
-    }
-    
-    &-center {
-        &-x {
-            margin-right:       utility-value(auto);
-            margin-left:        utility-value(auto);
+@if _feature(flexbox-utils) {
+    @include _prefix(utility, 'flex') {
+        &-grow {
+            flex-grow:              utility-value(1);
+            flex-basis:             utility-value(0%);
+            max-width:              utility-value(100%);
         }
-        
-        &-y {
-            margin-top:         utility-value(auto);
-            margin-bottom:      utility-value(auto);
+
+        &-center {
+            &-x {
+                margin-right:       utility-value(auto);
+                margin-left:        utility-value(auto);
+            }
+
+            &-y {
+                margin-top:         utility-value(auto);
+                margin-bottom:      utility-value(auto);
+            }
         }
-    }
-    
-    &-push {
-        &-top { margin-top: utility-value(auto); }
-        &-right { margin-right: utility-value(auto); }
-        &-bottom { margin-bottom: utility-value(auto); }
-        &-left { margin-left: utility-value(auto); }
+
+        &-push {
+            &-top { margin-top: utility-value(auto); }
+            &-right { margin-right: utility-value(auto); }
+            &-bottom { margin-bottom: utility-value(auto); }
+            &-left { margin-left: utility-value(auto); }
+        }
     }
 }
 

@@ -104,7 +104,7 @@ $_debug-pathfinder: false;
 }
 
 @function utility-value($value) {
-    @if _feature(important-utilities) {
+    @if _feature(important-utils) {
         @return $value !important;
     }
     

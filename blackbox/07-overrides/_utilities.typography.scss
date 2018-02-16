@@ -2,7 +2,7 @@
 //  Utilities, Typography
 //
 
-@if feature(font-scale-utilities) {
+@if _feature(font-scale-utils) {
     @include _prefix( utility, _pathfinder(utilities, font-scale, namespace) ) {
         $start: _pathfinder(utilities, font-scale-start);
         $end: _pathfinder(utilities, font-scale-end);
@@ -16,6 +16,14 @@
 @include _prefix(utility, 'text') {
     &-smaller { font-size: utility-value( _pathfinder(typography, font-sizes, smaller) ); }
     &-larger { font-size: utility-value( _pathfinder(typography, font-sizes, larger) ); }
+}
+
+@if _feature(heading-utils) {
+    @each $heading, $font-size in $_heading-scales {
+        @include _prefix(utility, $heading) {
+            font-size:          $font-size;
+        }
+    }
 }
 
 @include _prefix(utility, 'nowrap') {

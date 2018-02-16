@@ -2,7 +2,7 @@
 //  Utilities, Spans
 //
 
-@if _feature(grid-span-utilities) {
+@if _feature(grid-span-utils) {
     @include _prefix(utility, 'span') {
         @for $i from 1 through $_grid-columns {
             &-#{$i} {

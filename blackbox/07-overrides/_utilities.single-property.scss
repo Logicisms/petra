@@ -2,17 +2,18 @@
 //  Utilities, Single Property Util Constructor
 //
 
+//  @TODO: test the changes to this against differences between the $_petra and $settings configs.
 @each $utility in map-keys( _pathfinder(single-property-utilities) ) {
-    $map: _pathfinder(single-property-utilities, $utility);
+//    $map: _pathfinder(single-property-utilities, $utility);
     
-    @if length($map) > 0 {
-        @include _prefix( utility, map-get($map, namespace) ) {
-            @each $val in map-get($map, values) {
-                &-#{$val} {
-                    #{$utility}: utility-value($val);
-                }
+//    @if length($map) > 0 {
+    @include _prefix( utility, _pathfinder(single-property-utilities, $utility, namespace) ) { //map-get($map, namespace) ) {
+        @each $val in _pathfinder(single-property-utilities, $utility, values) { //map-get($map, values) {
+            &-#{$val} {
+                #{$utility}: utility-value($val);
             }
         }
     }
+//    }
 }
 
