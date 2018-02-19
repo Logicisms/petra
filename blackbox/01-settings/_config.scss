@@ -146,48 +146,7 @@ $_petra: (
         font-scale-end:         10,
     ),
     
-    single-property-utilities: (
-        //  Display
-        display: (
-            namespace:              'display',
-            values: (
-                block, flex, flow, flow-root, grid,
-                inline, inline-block, inline-flex, inline-grid, inline-table,
-                list-item, run-in, subgrid, table,
-            ),
-        ),
-        
-        //  Interaction
-        cursor: (
-            namespace:              'cursor',
-            values: (
-                alias, all-scroll, copy, crosshair, default,
-                grab, grabbing, help, move, not-allowed,
-                none, pointer, progress, text, wait,
-                zoom-in, zoom-out,
-            ),
-        ),
-        pointer-events: (
-            namespace:              'pointer-events',
-            values: (
-                auto, initial, none,
-            ),
-        ),
-        
-        //  Layout
-        position: (
-            namespace:              'position',
-            values: (
-                absolute, fixed, relative, static,
-            ),
-        ),
-        float: (
-            namespace:              'float',
-            values: (
-                left, right, none,
-            ),
-        ),
-        
+    single-property-utils: (
         flex-direction: (
             namespace:              'flex-direction',
             values: (
@@ -210,39 +169,6 @@ $_petra: (
             namespace:              'flex-align-self',
             values: (
                 center, flex-start, flex-end, space-around, space-between, stretch,
-            ),
-        ),
-        
-        //  Typography
-        font-weight: (
-            namespace:              'font-weight',
-            values: (
-                normal, bold, bolder, lighter,
-            ),
-        ),
-        text-align: (
-            namespace:             'text-align',
-            values: (
-                left, right, center, justify,
-            ),
-        ),
-        text-transform: (
-            namespace:              'text-transform',
-            values: (
-                capitalize, lowercase, uppercase,
-            ),
-        ),
-        white-space: (
-            namespace:              'white-space',
-            values: (
-                normal, pre, pre-line, pre-wrap,
-            ),
-        ),
-        vertical-align: (
-            namespace:              'vertical-align',
-            values: (
-                baseline, bottom, middle, sub, super,
-                text-top, text-bottom, top,
             ),
         ),
     ),
