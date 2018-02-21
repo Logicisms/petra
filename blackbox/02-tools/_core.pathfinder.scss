@@ -130,7 +130,6 @@ $_font-family:              _pathfinder(typography, font-family);
  $font-family:              $_font-family !default;
 $_line-height:              _pathfinder(typography, line-height);
  $line-height:              $_line-height !default;
-//  @TODO: this could be more elegant, i think. revisit it later.
 $_hx-i:                     _pathfinder(typography, heading-scale-ratio);
 $_heading-scales: (
     h1:                     1em + ($_hx-i * 5),
