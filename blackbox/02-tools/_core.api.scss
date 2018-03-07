@@ -3,8 +3,19 @@
 //
 
 //  Prefixing
-@mixin _prefix($prefix, $name) {
-    .#{prefix($prefix) + $name} { @content; }
+@mixin _prefix($prefix, $names...) {
+    $length: length($names);
+    $selectors: ();
+    
+    @for $index from 1 through $length {
+        $i: nth($names, $index);
+        
+        $selectors: append($selectors, #{"." + prefix($prefix) + $i}, comma);
+    }
+    
+    #{$selectors} {
+        @content;
+    }
     
     @include _scope-index-counter($prefix, $name);
 }
@@ -84,6 +95,7 @@
 
 
 //  Context simplification
+//  @TODO: move these to lithos, as they're rather arbitrary for the blackbox.
 @mixin qualify($selector) {
     @at-root #{$selector + &} { @content; }
 }

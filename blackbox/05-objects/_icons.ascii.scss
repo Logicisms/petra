@@ -2,7 +2,7 @@
 //  Icons, ASCII Emotes
 //
 @if _feature(ascii-emotes) {
-    [class*='-ascii-'] {
+    [class*="#{prefix(object) + 'ascii-'}"] {
         display:                inline-block;
 
         font: {

@@ -21,7 +21,7 @@
 @if _feature(heading-utils) {
     @each $heading, $font-size in $_heading-scales {
         @include _prefix(utility, $heading) {
-            font-size:          $font-size;
+            font-size:          utility-value($font-size);
         }
     }
 }
