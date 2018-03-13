@@ -11,13 +11,13 @@
         $i: nth($names, $index);
         
         $selectors: append($selectors, #{"." + prefix($prefix) + $i}, comma);
+        
+        @include _scope-index-counter($prefix, $i);
     }
     
     #{$selectors} {
         @content;
     }
-    
-    @include _scope-index-counter($prefix, $name);
 }
 
 
