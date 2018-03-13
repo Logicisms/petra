@@ -80,7 +80,7 @@
     }
 }
 
-@mixin pseudo-element($display: block, $position: absolute, $content: "") {
+@mixin pseudo-element($position: absolute, $display: block, $content: "") {
     position:               $position;
     
     display:                $display;

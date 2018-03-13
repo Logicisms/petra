@@ -23,7 +23,7 @@
         @if _pathfinder(layout, breakpoints, $i) {
             $query: _breakpoint-get-query($i);
 
-            @media #{'only screen ' + _breakpoint-build-query($query)} {
+            @media #{"only screen " + _breakpoint-build-query($query)} {
                 @content;
             }
         } @else {

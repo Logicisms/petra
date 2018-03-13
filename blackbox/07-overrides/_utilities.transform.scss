@@ -6,7 +6,7 @@
 @include _prefix(utility, 'rotate') {
     @each $grade in _pathfinder(utilities, rotation-grades) {
         &-#{$grade} {
-            transform:              utility-value( rotate(#{$grade + 'deg'}) );
+            transform:              utility-value( rotate(#{$grade + "deg"}) );
         }
     }
 }

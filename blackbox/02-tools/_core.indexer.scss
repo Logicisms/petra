@@ -40,7 +40,7 @@ $_scope-index-classes:      ();
         @each $prefix in $prefixes {
             $_count: length( map-get($scopes, $prefix) );
             $count: $count + $_count;
-            $print: if( $_count > 0, map-get($scopes, $prefix), 'null' );
+            $print: if( $_count > 0, map-get($scopes, $prefix), "null" );
             
             @debug "- #{$_count} '#{$prefix}' scopes:  (#{$print}).";
         }
