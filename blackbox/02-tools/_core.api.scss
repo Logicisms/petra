@@ -93,26 +93,3 @@
         @include _responsive-modifier-array($output) { @content; }
     }
 
-
-//  Context simplification
-//  @TODO: move these to lithos, as they're rather arbitrary for the blackbox.
-@mixin qualify($selector) {
-    @at-root #{$selector + &} { @content; }
-}
-
-@mixin descendant-of($selector) {
-    #{$selector} & { @content; }
-}
-
-@mixin child-of($selector) {
-    #{$selector} > & { @content; }
-}
-
-@mixin adjacent-sibling-of($selector) {
-    #{$selector} + & { @content; }
-}
-
-@mixin general-sibling-of($selector) {
-    #{$selector} ~ & { @content; }
-}
-
