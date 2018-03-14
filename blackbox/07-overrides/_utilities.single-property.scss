@@ -6,10 +6,10 @@
     $map: _pathfinder(single-property-utils, $utility);
     
     @if length($map) > 0 {
-        @include _prefix( utility, map-get($map, namespace) ) {
+        @include _prefix(utility, $utility) {
             @each $val in map-get($map, values) {
                 &-#{$val} {
-                    #{$utility}: utility-value($val);
+                    #{map-get($map, property)}: utility-value($val);
                 }
             }
         }

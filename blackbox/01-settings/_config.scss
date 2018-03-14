@@ -148,25 +148,25 @@ $_petra: (
     
     single-property-utils: (
         flex-direction: (
-            namespace:              'flex-direction',
+            property:               'flex-direction',
             values: (
                 column, row,
             ),
         ),
-        align-content: (
-            namespace:              'flex-align',
+        flex-align: (
+            property:               'align-content',
             values: (
                 center, flex-start, flex-end, space-around, space-between, stretch,
             ),
         ),
-        justify-content: (
-            namespace:              'flex-justify',
+        flex-justify: (
+            property:               'justify-content',
             values: (
                 center, flex-start, flex-end, space-around, space-between,
             ),
         ),
-        align-self: (
-            namespace:              'flex-align-self',
+        flex-align-self: (
+            property:               'align-self',
             values: (
                 center, flex-start, flex-end, space-around, space-between, stretch,
             ),
