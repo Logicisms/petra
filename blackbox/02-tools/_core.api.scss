@@ -85,7 +85,7 @@
     }
 
 @mixin _responsive-modifier-array {
-    @include responsive-modifier($_breakpoints...) {
+    @include responsive-modifier($_class-breakpoints...) {
         @content;
     }
 }

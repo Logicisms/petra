@@ -5,8 +5,6 @@
 $_debug-pathfinder: false;
 
 @function _pathfinder($path...) {
-    $fallback: map-deep-get($_petra, $path...);
-    
     @if $_debug-pathfinder {
         @debug "START _pathfinder for $path terminating at '#{nth($path, -1)}'.";
         @debug "- Checking for $settings map..."; }
@@ -41,7 +39,7 @@ $_debug-pathfinder: false;
                         @debug "----- $settings does not have '#{$key}'; falling back.";
                         @debug "END _pathfinder for $path terminating at '#{nth($path, -1)}'."; }
                     
-                    @return map-deep-get($fallback); // write up more @debug process descriptors
+                    @return map-deep-get($_petra, $path...); // write up more @debug process descriptors
                 }
             }
             
@@ -70,7 +68,11 @@ $_debug-pathfinder: false;
         
         @warn map-deep-get($_petra, debugging, messages, project-settings);
     }
-    @return map-deep-get($fallback);
+    @return map-deep-get($_petra, $path...);
+}
+
+@function config($setting...) {
+    @return _pathfinder($setting...);
 }
 
 
