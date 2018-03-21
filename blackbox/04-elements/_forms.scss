@@ -69,8 +69,6 @@ textarea {
 }
 
 input, select, textarea, button {
-    cursor:                 pointer;
-    
     &:disabled {
         cursor:                 not-allowed;
     }
