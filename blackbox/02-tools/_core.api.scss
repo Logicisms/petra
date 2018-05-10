@@ -6,15 +6,15 @@
 @mixin _prefix($prefix, $names...) {
     $length: length($names);
     $selectors: ();
-    
+
     @for $index from 1 through $length {
         $i: nth($names, $index);
-        
+
         $selectors: append($selectors, #{"." + prefix($prefix) + $i}, comma);
-        
+
         @include _scope-index-counter($prefix, $i);
     }
-    
+
     #{$selectors} {
         @content;
     }
@@ -37,13 +37,13 @@
     $length: length($elements);
     $selectors: ();
     $parent: if(_feature(nested-bem), '& &', '&');
-    
+
     @for $index from 1 through $length {
         $i: nth($elements, $index);
-        
+
         $selectors: append($selectors, #{$parent + $_element + $i}, comma);
     }
-    
+
     #{$selectors} {
         @content;
     }
@@ -55,14 +55,14 @@
 @mixin _modifier($modifiers...) {
     $length: length($modifiers);
     $selectors: ();
-    
+
     @for $index from 1 through $length {
         $i: nth($modifiers, $index);
         $modifier: if(_feature(detached-bem-syntax), '&.#{$_modifier + $i}', '&#{$_modifier + $i}');
-        
+
         $selectors: append($selectors, $modifier, comma);
     }
-    
+
     #{$selectors} {
         @content;
     }
@@ -90,6 +90,5 @@
     }
 }
     @mixin responsive-modifier-array {
-        @include _responsive-modifier-array($output) { @content; }
+        @include _responsive-modifier-array { @content; }
     }
-
