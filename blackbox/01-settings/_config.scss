@@ -9,10 +9,10 @@ $_petra: (
             component:              'c-',
             utility:                'u-',
             scope:                  's-',
-            
+
             state:                  'is-',
             state-within:           'has-',
-            
+
             hack:                   '\*\*',
             javascript:             'js-',
         ),
@@ -22,16 +22,16 @@ $_petra: (
             responsive:             \@,
         ),
     ),
-    
+
     debugging: (
         messages: (
             lede:                   ("Invalid argument:", "passed to mixin:"),
             on-warn:                "Follow backtrace or review rendered markup.",
             on-error:               "Correct invalid argument to unblock compiler.",
             valid-arg:              "Valid arguments:",
-            
+
             project-settings:       "No '$settings' map found for this project.",
-            
+
             default:                "mixin (no message defined)",
         ),
         outline: (
@@ -42,43 +42,44 @@ $_petra: (
         flags: (
             //  set to 'true' to warn if no $settings map is declared.
             project-settings:       true,
-            
+
             //  warn/error flags for petra mixins using the debug utility.
             //  set to 'true' to error out of a compile with incorrect syntax.
             respond-to:             false,
             float:                  false,
             null:                   false,
         ),
-        
+
         health-check: (
             colors: (
                 object:             material-color(blue, a400),
                 component:          material-color(purple, a400),
                 scope:              material-color(green, a400),
                 utility:            material-color(yellow, a400),
-                
+
                 state:              material-color(orange, a400),
                 state-within:       material-color(deep-orange, a400),
-                
+
                 hack:               material-color(red, a700),
                 javascript:         material-color(blue-grey, 500),
             ),
             warning:                "Health-check is active, DO NOT PUBLISH CODE. Disable health-check before publishing code.",
         ),
     ),
-    
+
     typography: (
         browser-context:        16px,
-        
+
         font-sizes: (
             //  "static" sizes, should be in 'rem'.
             normal:                 1.6rem,
-            
+
             //  "responsive" sizes, should be in '%' or 'em'.
             smaller:                85%,
             larger:                 115%,
         ),
         font-faces: (
+            //  @TODO: remove or comment out 'open-sans' before release.
             open-sans: (
                 font-family:            "Open Sans",
                 src: (
@@ -92,21 +93,21 @@ $_petra: (
             serif:                  ("Times New Roman", Times, serif),
             monospace:              ("Lucida Console", Monaco, monospace),
         ),
-        
+
         font-family:            sans-serif,
         line-height:            1.75,
-        
+
         //  determines the value (in ems) by which headings h1-h6 are scaled
         //  relative to font-size.
         heading-scale-ratio:    0.32em,
     ),
-    
+
     layout: (
         //  if 'type-based-grid' is true, this gutter will be ignored.
         gutter:                 1.75em,
-        
+
         grid-columns:           12,
-        
+
         breakpoints: (
             small: (
                 max-width:          64rem,
@@ -122,30 +123,32 @@ $_petra: (
                 min-resolution:     192dpi,
             ),
         ),
+        //  @TODO: refactor or remove the funcionality tied to this key/value,
+        //  as the current implementation does not work.
         class-breakpoints:      3,
-        
+
         z-indices: (
             default:                1,
         ),
     ),
-    
+
     utilities: (
         //  Transform
         rotation-grades: (
             45, 90, 180, 270, 360,
         ),
-        
+
         //  Typography
         font-scale: (
             namespace:              'font-size',
-            
+
             start:                  1,
             end:                    10,
         ),
         font-scale-start:       1,
         font-scale-end:         10,
     ),
-    
+
     single-property-utils: (
         flex-direction: (
             property:               'flex-direction',
@@ -172,7 +175,7 @@ $_petra: (
             ),
         ),
     ),
-    
+
     features: (
         //  'true' to outline affected elements when a mixin is passed invalid arguments.
         visual-debugging:       true,
@@ -182,63 +185,62 @@ $_petra: (
 
         //  'true' to @debug print a count of namespaced scopes on compile.
         scope-index:            false,
-        
+
         //  'true' to nest BEM elements to their parent blocks.
         nested-bem:             true,
-        
+
         //  'true' to nest BEM blocks with themselves to ensure consistent specificity.
         strict-nesting:         false,
-        
+
         //  'true' to output BEM modifiers as delimiter-prefixed short classes.
         detached-bem-syntax:    false,
-        
+
         //  'true' to base project gutter and vertical spacing on line-height.
         type-based-grid:        true,
-        
+
         //  'true' to output CSS reset.
         reset-css:              true,
-        
+
         //  'true' to reset :focus styles. WARNING: if 'true', implement custom styles to preserve accessibility.
         reset-focus:            false,
-        
+
         //   'true' to remove all user agent button styles, rendering them as plain text.
         hard-reset-buttons:     true,
-        
+
         //  'true' to output a configurable grid system.
         grid-system:            true,
-        
+
         //  'true' to use flexbox rules instead of floats in grid system.
         flexbox-grid:           true,
-        
+
         //  'true' to build grid system with media queries as defined in config.
         responsive-grid:        true,
-        
+
         //  'true' to output a set of miscellaneous ascii emotes usable as icons. e.g. ¯\_(ツ)_/¯
         ascii-emotes:           true,
-        
+
         //  'true' will output utility class values as '!important'.
         important-utils:        true,
-        
+
         //  'true' to output visibility-affecting utilities for 'hidden' and 'visible'.
         visibility-utils:       true,
-        
+
         //  'true' to output a set of flexbox helper utilities.
         flexbox-utils:          true,
-        
-        //  'true' to output a set of responsive clearfix formatting hack utilities. 
+
+        //  'true' to output a set of responsive clearfix formatting hack utilities.
         clearfix-utils:         true,
-        
+
         //  'true' to output width-affecting 'span' utilities that correspond with the grid.
         grid-span-utils:        true,
-        
+
         //  'true to output font-resizing utilities as configured.
         font-scale-utils:       true,
-        
+
         //  'true' to output font-resizing utilities corresponding to the h1-6 headings.
         heading-utils:          true,
-        
+
         //  'true' to output a stylesheet for printed media, based on the HTML5 boilerplate.
         print-media:            true,
     ),
 );
-
