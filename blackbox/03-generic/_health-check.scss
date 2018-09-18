@@ -1,8 +1,0 @@
-//
-//  Health check
-//
-
-@if _feature(health-check) {
-    @include health-check(true);
-}
-

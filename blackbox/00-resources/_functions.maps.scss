@@ -1,27 +1,44 @@
 //
-//  Tools, Mapping Functions
+//  #RESOURCES, #FUNCTIONS-MAPS
 //
 
-@function map-deep-get($map, $keys...) {
-    //  an extension of the built in 'map-get()' by Hugo Giraudel
-    //  https://css-tricks.com/snippets/sass/deep-getset-maps/
+//  map-deep-get()
+//  ============================================================================
+//  By Hugo Giraudel; an extension of the 'map-get()' function.
+//  https://css-tricks.com/snippets/sass/deep-getset-maps/
+
+@function map-deep-get($map, $keys...) { // [1]
     @each $key in $keys {
         $map: map-get($map, $key);
     }
+
     @return $map;
 }
+
+
+//  map-deep-keys()
+//  ============================================================================
+//  $map (map) - Map.
+//  $keys (arglist) - Key chain.
 
 @function map-deep-keys($map, $keys...) {
     @each $key in $keys {
         $map: map-get($map, $key);
     }
+
     @return map-keys($map);
 }
+
+
+//  deep-inspect()
+//  ============================================================================
+//  $map (map) - Map.
+//  $keys (arglist) - Key chain.
 
 @function deep-inspect($map, $keys...) {
     @each $key in $keys {
         $map: map-get($map, $key);
     }
+
     @return inspect($map);
 }
-

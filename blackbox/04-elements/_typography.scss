@@ -1,33 +1,33 @@
-//
-//  Typography
-//
+/**
+ *  #ELEMENTS, #TYPOGRAPHY
+**/
 
-@each $heading, $font-size in $_heading-scales {
-    #{$heading} {
-        clear:              both;
-        
-        font-size:          $font-size;
+@if _feature(typography,make-headings) and _feature(typography,heading,elements) {
+    /*  Headings
+     *  ============================================================================ */
+
+     @include _make-headings('h');
+}
+
+
+/*  Block-level
+ *  ============================================================================ */
+
+p {
+    @if _feature(layout,vertical-flow) {
+        margin-bottom:          _gutter();
     }
 }
 
-p {
-    margin-bottom:          $_gutter;
-}
 
-blockquote {
-    margin-bottom:          $_gutter;
-    position:               relative;
-}
+/*  Inline
+ *  ============================================================================
+ *  1. Slightly extends the background-color highlight effect without visibly
+ *     extending the element's overall width.
+ */
 
-code, kbd, pre, tt, var {
-    font-family:            font-stack(monospace);
-}
-
-abbr[title] {
-    cursor:                 help;
-}
-
-mark, ins {
+mark,
+ins { /* [1] */
     margin: {
         right:              -0.2ex;
         left:               -0.2ex; }
@@ -35,4 +35,3 @@ mark, ins {
         right:              0.2ex;
         left:               0.2ex; }
 }
-

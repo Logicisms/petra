@@ -1,9 +1,14 @@
+//
+//  #RESOURCES
+//
+
 @import
-    'blackbox/00-resources/functions.color',
     'blackbox/00-resources/functions.lists',
+    'blackbox/00-resources/functions.color',
     'blackbox/00-resources/functions.maps',
     'blackbox/00-resources/functions.numbers',
     'blackbox/00-resources/functions.strings',
-    
-    'blackbox/00-resources/palette.material-design';
 
+    'blackbox/00-resources/resources.config-make',
+    'blackbox/00-resources/resources.material-design',
+    'blackbox/00-resources/resources.pathfinder';

@@ -1,0 +1,27 @@
+//
+//  #SETTINGS, #PETRA-NAMESPACING
+//
+
+$_petra-config-namespacing: (
+    id: 'namespace',
+
+    prefix: (
+        object:                 'o-',
+        icon:                   'i-',
+        component:              'c-',
+        utility:                'u-',
+        scope:                  's-',
+
+        state:                  'is-',
+        state-within:           'has-',
+
+        hack:                   \*\*, // Escaped values cannot be wrapped in quotes, as doing so causes compiler issues.
+        javascript:             'js-',
+    ),
+
+    delimiter: (
+        element:                '__',
+        modifier:               '--',
+        responsive:             \@,
+    ),
+);

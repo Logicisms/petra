@@ -1,13 +1,15 @@
 //
-//  Imports
+//  Root Sandbox Stylesheet
 //
 
 @import
-    "00-resources",
-    "01-settings",
-    "02-tools",
-    "03-generic",
-    "04-elements",
-    "05-objects",
-    "07-overrides";
+    'petra/00-resources',
+    'petra/01-settings',
+    'petra/02-tools',
+    'petra/03-generic',
+    'petra/04-elements',
+    'petra/05-objects',
+    //     06-components
+    'petra/07-overrides';
 
+@include _scope-index;

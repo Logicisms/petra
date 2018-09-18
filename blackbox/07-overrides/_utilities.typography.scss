@@ -1,32 +1,68 @@
-//
-//  Utilities, Typography
-//
+@if _feature(utilities,typography) {
+    /**
+     *  #OVERRIDES, #TYPOGRAPHY
+    **/
 
-@if _feature(font-scale-utils) {
-    @include _prefix( utility, _pathfinder(utilities, font-scale, namespace) ) {
-        $start: _pathfinder(utilities, font-scale-start);
-        $end: _pathfinder(utilities, font-scale-end);
+    $_petra-utility-class-text: _utility-classname('txt', 'text');
 
-        @for $i from $start through $end {
-            &-x#{$i} { font-size: utility-value(1em * $i); }
+    @include _prefix(utility, $_petra-utility-class-text) {
+
+        &-#{_utility-classname('sm', 'smaller')} {
+            @include _make-responsive-utility {
+                font-size:              _petra(typography, font-size, smaller);
+            }
+        }
+
+        &-#{_utility-classname('lg', 'larger')} {
+            @include _make-responsive-utility {
+                font-size:              _petra(typography, font-size, larger);
+            }
+        }
+
+
+        &-#{_utility-classname('trunc', 'truncate')} {
+            @include _make-responsive-utility {
+                overflow:               hidden;
+                text-overflow:          ellipsis;
+                white-space:            nowrap;
+            }
+        }
+
+
+        $type-scale-values: _petra(utility, type-scale-values);
+
+        @if $type-scale-values and ($type-scale-values != 0) {
+            @if length($type-scale-values) == 2 {
+
+                $start: nth($type-scale-values, 1);
+                $end: nth($type-scale-values, 2);
+
+                @for $i from $start through $end {
+                    &-x#{$i} {
+                        @include _make-responsive-utility {
+                            font-size: _utility-value($i + 0em);
+                        }
+                    }
+                }
+
+            } @else {
+
+                @each $value in $type-scale-values {
+                    &-x#{$value} {
+                        @include _make-responsive-utility {
+                            font-size: _utility-value($value + 0em);
+                        }
+                    }
+                }
+
+            }
+        }
+
+    }
+
+    @include _prefix(utility, 'nowrap') {
+        @include _make-responsive-utility {
+            white-space:            _utility-value(nowrap);
         }
     }
 }
-
-@include _prefix(utility, 'text') {
-    &-smaller { font-size: utility-value( _pathfinder(typography, font-sizes, smaller) ); }
-    &-larger { font-size: utility-value( _pathfinder(typography, font-sizes, larger) ); }
-}
-
-@if _feature(heading-utils) {
-    @each $heading, $font-size in $_heading-scales {
-        @include _prefix(utility, $heading) {
-            font-size:          utility-value($font-size);
-        }
-    }
-}
-
-@include _prefix(utility, 'nowrap') {
-    white-space: utility-value(nowrap);
-}
-

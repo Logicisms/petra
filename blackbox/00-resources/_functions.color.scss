@@ -1,6 +1,11 @@
 //
-//  Tools, Color Functions
+//  #RESOURCES, #FUNCTIONS-COLOR
 //
+
+//  blacken()
+//  ============================================================================
+//  $color (color) - The color to be mixed with black.
+//  $amount (number) - The percentage by which to mix the given color.
 
 @function blacken($color, $amount) {
     @return mix(black, $color, $amount);
@@ -9,10 +14,15 @@
         @return blacken($color, $amount);
     }
 
+
+//  whiten()
+//  ============================================================================
+//  $color (color) - The color to be mixed with white.
+//  $amount (number) - The percentage by which to mix the given color.
+
 @function whiten($color, $amount) {
     @return mix(white, $color, $amount);
 }
     @function tint($color, $amount) {
         @return whiten($color, $amount);
     }
-

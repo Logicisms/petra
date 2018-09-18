@@ -1,20 +1,48 @@
 //
-//  Tools, List Functions
+//  #RESOURCES, #FUNCTIONS-LISTS
 //
 
-@function remove($list, $value, $separator: auto, $recursive: false) {
-    //  remove an entry from a list, by Hugo Giraudel, modified
-    //  https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#removing-values-from-list
+//  list-remove()
+//  ============================================================================
+//  By Hugo Giraudel; removes an entry from a list.
+//  https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#removing-values-from-list
+
+@function list-remove($list, $value, $separator: auto, $recursive: false) { // [1]
     $result: ();
 
     @for $i from 1 through length($list) {
+
         @if type-of(nth($list, $i)) == list and $recursive {
             $result: append($result, remove(nth($list, $i), $value, $recursive), $separator);
         }
         @else if nth($list, $i) != $value {
             $result: append($result, nth($list, $i), $separator);
         }
+
     }
+
     @return $result;
 }
 
+
+//  list-reverse()
+//  ============================================================================
+//  By Hugo Giraudel; reverses the order of items in a list.
+//  https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#reverse-a-list
+
+@function list-reverse($list, $recursive: false) { // [2]
+   $result: ();
+
+   @for $i from length($list)*-1 through -1 {
+
+      @if type-of(nth($list, abs($i))) == list and $recursive {
+        $result: append($result, reverse(nth($list, abs($i)), $recursive));
+      }
+      @else {
+        $result: append($result, nth($list, abs($i)));
+      }
+
+   }
+
+   @return $result;
+}

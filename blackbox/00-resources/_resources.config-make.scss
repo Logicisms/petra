@@ -1,0 +1,36 @@
+//
+//  #RESOURCES, #CONFIG-MAKE
+//
+//  Taking a list of map variables as its argument, builds a single nested
+//  config map for easier referencing and more concise helper functions.
+//
+//  To prevent collision, config sub-modules should have a key defining a
+//  submodule ID. The submodule's contents will be nested under this ID in the
+//  output config map.
+//
+//  $key (key) - The name of the key defining the submodule's id string.
+//  $maps (map list) - The maps that will be merged to make the config.
+//
+
+@function config-make($key, $maps...) {
+    $map: ();
+
+    @each $i in $maps {
+        @if map-has-key($i, $key) {
+
+            $id: map-get($i, $key);
+            $module: (
+                #{$id}: map-remove($i, $key)
+            );
+
+            $map: map-merge($map, $module);
+
+        } @else {
+
+            $map: map-merge($map, $i);
+
+        }
+    }
+
+    @return $map;
+}

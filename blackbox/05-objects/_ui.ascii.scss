@@ -1,0 +1,32 @@
+/**
+ *  #OBJECTS, #ASCII-ICONS
+**/
+
+@include _prefix(icon, 'ascii') {
+    $map: map-remove(_petra(ascii), id);
+
+    @each $icon, $content in _petra(ascii) {
+
+        &-#{$icon} {
+            @include _block {
+                display:                inline-block;
+
+                font: {
+                    family:             _font-stack(system), Ubuntu, Helvetica, Arial, sans-serif;
+                    size:               inherit;
+                    style:              inherit; }
+                line-height:            1;
+                text-rendering:         optimizeLegibility;
+                white-space:            pre;
+
+                cursor: default;
+
+
+                &::before {
+                    content:                escape-quote($content);
+                }
+            }
+        }
+
+    }
+}

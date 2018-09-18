@@ -1,33 +1,54 @@
-//
-//  Utilities, Flexbox
-//
+@if _feature(utilities,flexbox) {
+    /**
+     *  #OVERRIDES, #UTILITIES-FLEXBOX
+    **/
 
-@if _feature(flexbox-utils) {
-    @include _prefix(utility, 'flex') {
-        &-grow {
-            flex-grow:              utility-value(1);
-            flex-basis:             utility-value(0%);
-            max-width:              utility-value(100%);
+    /*  Flex container
+     *  ============================================================================ */
+
+    @include _prefix(utility, 'flex-row') {
+        @include _make-responsive-utility {
+            flex: {
+                direction:          _utility-value(row);
+                wrap:               _utility-value(wrap); }
         }
+    }
 
-        &-center {
-            &-x {
-                margin-right:       utility-value(auto);
-                margin-left:        utility-value(auto);
+    $_petra-utility-class-flex-column: _utility-classname('flex-col', 'flex-column');
+
+    @include _prefix(utility, $_petra-utility-class-flex-column) {
+        @include _make-responsive-utility {
+            flex-direction:         _utility-value(column);
+        }
+    }
+
+    @include _prefix(utility, 'flex-wrap') {
+        @include _make-responsive-utility {
+            flex-wrap:              _utility-value(wrap);
+        }
+    }
+
+
+    /*  Flex item
+     *  ============================================================================ */
+
+    @include _prefix(utility, 'flex-grow') {
+        @include _make-responsive-utility {
+            flex: {
+                basis:              _utility-value(0%);
+                grow:               _utility-value(1); }
+        }
+    }
+
+    @include _prefix(utility, 'flex-push') {
+        @each $position in (top, right, bottom, left) {
+
+            &-#{$position} {
+                @include _make-responsive-utility {
+                    margin-#{$position}: _utility-value(auto);
+                }
             }
 
-            &-y {
-                margin-top:         utility-value(auto);
-                margin-bottom:      utility-value(auto);
-            }
-        }
-
-        &-push {
-            &-top { margin-top: utility-value(auto); }
-            &-right { margin-right: utility-value(auto); }
-            &-bottom { margin-bottom: utility-value(auto); }
-            &-left { margin-left: utility-value(auto); }
         }
     }
 }
-

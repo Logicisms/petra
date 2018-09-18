@@ -1,65 +1,37 @@
-//
-//  Layout, Grid
-//
+@if _feature(layout,grid-system) {
+    /**
+     *  #OBJECTS, #GRID
+    **/
 
-@mixin _column($index) {
-    @include block {
-        position:               relative;
-        
-        padding: {
-            right:              ($gutter / 2);
-            left:               ($gutter / 2); }
-
-        @if _feature(flexbox-grid) {
-            flex: {
-                grow:               0;
-                shrink:             0;
-                basis:              column($index); }
-            //  'width' here is a trick pulled from Bootstrap, explained there:
-            //  https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss#L35
-            width:                  100%;
-            max-width:              column($index);
-        } @else {
-            float:                  left;
-            width:                  column($index);
-        }
-    }
-}
-
-@if _feature(grid-system) {
     @include _prefix(object, 'row') {
-        @include block {
-            margin: {
-                right:              ($gutter / -2);
-                left:               ($gutter / -2); }
+        @include _block {
+            position:               relative;
 
-            @if _feature(flexbox-grid) {
+            margin: {
+                right:              (_gutter() / -2);
+                left:               (_gutter() / -2); }
+
+            @if _feature(layout,grid,flexbox) {
+
                 display:                flex;
                 flex-wrap:              wrap;
+
             } @else {
-                @include clearfix;
+
+                display:                block;
+
+                &::after {
+                    clear:                  both;
+                    display:                block;
+
+                    content:                " ";
+                }
+
             }
         }
     }
 
     @include _prefix(object, 'col') {
-        @for $i from 1 through $_grid-columns {
-            &-#{$i} {
-                @include _column($i);
-            }
-        }
-
-        @if _feature(responsive-grid) {
-            @each $breakpoint in $_class-breakpoints {
-                @include respond-to($breakpoint) {
-                    @for $i from 1 through $_grid-columns {
-                        &-#{$i + $_responsive + $breakpoint} {
-                            @include _column($i);
-                        }
-                    }
-                }
-            }
-        }
+        @include _make-columns;
     }
 }
-

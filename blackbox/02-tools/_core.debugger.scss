@@ -1,0 +1,42 @@
+//
+//  #TOOLS, #CORE-DEBUGGER
+//
+
+@function _debug-message($key) {
+    @return _petra(debug, message, $key);
+}
+
+@mixin _debug(
+    $mixin: _debug-message(mixin),
+    $value: "<undefined>",
+    $valid: "<undefined>",
+    $warn: _feature(debug, visual-debug)
+) {
+
+    @if $warn {
+
+        @each $property, $value in _petra(debug, outline) {
+            outline-#{$property}: $value !important;
+        }
+
+        @warn nth(_debug-message(lede), 1)
+              + " '" + $value + "' " +
+              nth(_debug-message(lede), 2)
+              + " '" + $mixin + "'. " +
+              _debug-message(valid-arguments)
+              + ":  " + $valid + ". " +
+              _debug-message(warn);
+
+    } @else {
+
+        @warn nth(_debug-message(lede), 1)
+              + " '" + $value + "' " +
+              nth(_debug-message(lede), 2)
+              + " '" + $mixin + "'. " +
+              _debug-message(valid-arguments)
+              + ":  " + $valid + ".";
+        @error _debug-message(error);
+
+    }
+
+}

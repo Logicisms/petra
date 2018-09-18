@@ -1,226 +1,398 @@
-//
-//  CSS Reset
-//
+/**
+ *  #GENERIC, #RESET
+ *
+ *  This reset is informed by and borrows best practices from:
+ *  -   Eric Meyer's CSS reset
+ *      https://meyerweb.com/eric/tools/css/reset/
+ *  -   Normalize.css
+ *      https://necolas.github.io/normalize.css/
+ *  -   Bootstrap's 'Reboot'
+ *      https://getbootstrap.com/docs/4.0/content/reboot/
+**/
 
-@if _feature(reset-css) {
-    body {
-        min-height:             100vh;
+/*  Document
+ *  ============================================================================
+ *  1. Sets the document's root font-size to (an equivalent of) 10, relative to
+ *     the given browser context.
+ *  2. As this property is still experimental, the prefixed version is used here
+ *     to address text scaling on mobile WebKit browsers.
+ *     https://drafts.csswg.org/css-size-adjust/#adjustment-control
+ *  3. From Reboot, IE10+ may not honor '<meta name="viewport">'.
+ *     https://github.com/twbs/bootstrap/blob/5fed73d4098016c7e19d9664a61d58924f7ef06b/scss/_reboot.scss#L36
+ */
+
+html {
+    $context: strip-unit( _petra(typography, browser-context) );
+
+    box-sizing:             border-box;
+
+    font: {
+        family:             inherit;
+        size:               percentage(10 / $context); /* [1] */
+        style:              inherit;
+        weight:             inherit; }
+    line-height:            _petra(typography, line-height, base);
+    text-decoration:        none;
+    -webkit-text-size-adjust: 100%; /* [2] */
+}
+
+*, *::before, *::after {
+    box-sizing:             inherit;
+}
+
+@at-root {
+    @-ms-viewport { /* [3] */
+        width:                  device-width;
     }
-    
-    html, body, div, span,
-    p, blockquote, pre,
-    abbr, address, cite,
-    code, del, dfn, em,
-    h1, h2, h3, h4, h5, h6,
-    img, ins,
-    kbd, q, s,
-    samp, small, strike,
-    strong, sub, sup,
-    tt, var, b, u, i,
-    dl, dt, dd,
-    ol, ul, li,
-    fieldset, form, label,
-    legend, table, caption,
-    tbody, tfoot, thead,
-    tr, th, td,
-    article, aside, canvas,
-    details, embed,  figure,
-    figcaption, footer, header,
-    hgroup,  menu, nav,
-    output, ruby, section,
-    summary, time, mark,
-    audio, video {
-        margin:                 0;
+}
+
+div, span, p, blockquote, pre, abbr, address, cite, code, del, dfn, em,
+h1, h2, h3, h4, h5, h6, img, ins, kbd, q, s, samp, small, strike, strong,
+sub, sup, tt, var, b, u, i, dl, dt, dd, ol, ul, li, fieldset, form, label,
+legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+details, embed, figure, figcaption, footer, header, hgroup,  menu, nav, output,
+ruby, section, summary, time, mark, audio, video {
+    margin:                 0;
+    padding:                0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu,
+nav, section {
+    display:                block;
+}
+
+
+/*  Body
+ *  ============================================================================ */
+
+body {
+    margin:                 0;
+
+    font: {
+        family:             _font-family(default);
+        size:               _petra(typography, font-size, default); }
+    line-height:            inherit;
+    text-align:             left;
+}
+
+
+/*  Embedded content
+ *  ============================================================================ */
+
+audio, embed, img, iframe, object, video {
+    height:                 auto;
+    max-width:              100%;
+}
+
+audio, canvas, iframe, img, svg, video {
+    vertical-align:         middle;
+}
+
+img {
+    border-style:           none;
+}
+
+svg {
+    overflow:               hidden;
+}
+
+
+/*  Forms
+ *  ============================================================================
+ *  1. From Normalize, corrects the inability to style clickable types in Apple
+ *     browsers.
+ *  2. From Normalize, removes inner focus border and padding in Firefox.
+ *  3. From Normalize, restores removed focus styles in Firefox.
+ *  4. From Normalize, removes the inheritence of text-transform in some
+ *     browsers.
+ *  5. From Reboot, makes fieldsets behave more like standard block elements.
+ *  6. From Normalize, corrects cursor style of increment and decrement buttons
+ *     in Chrome.
+ *  7. From Normalize, corrects appearance in Chrome and Safari.
+ *  8. From Normalize, corrects outline style in Safari.
+ *  9. From Normalize, removes the inner padding in some macOS browsers.
+ *  10. From Normalize, corrects inability to style clickable types in Apple
+ *      browsers.
+ *  11. From Normalize, corrects inheritence in Safari.
+ */
+
+button {
+    border-style:           none;
+
+    @if _feature(reset,buttons) {
+        -webkit-appearance:     none;
+        -moz-appearance:        none;
         padding:                0;
-        
+        height:                 auto;
+
+        background-color:       transparent;
+        border-style:           none;
+        border: {
+            radius:             0;
+            style:              none; }
+
+        text: {
+            align:              inherit;
+            shadow:             none; }
+    }
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    @if not _feature(reset,buttons) {
+        -webkit-appearance:     button; /* [1] */
+    }
+
+    &::-moz-focus-inner { /* [2] */
+        padding:                0;
+
         border-style:           none;
     }
-    
-    article, aside, details,
-    div, figcaption, figure,
-    footer, header, main,
-    menu, nav, section, summary {
-        display:                block;
-    }
 
-    hr {
-        box-sizing:             content-box;
-        height:                 0;
-        overflow:               visible;
+    &:-moz-focusring { /* [3] */
+        outline:                1px dotted ButtonText;
     }
-    
-    ol, ul {
-        list-style:             none;
+}
+
+button, input, optgroup, select, textarea {
+    margin:                 0;
+
+    color:                  inherit;
+    font: {
+        size:               1em;
+        weight:             normal; }
+    line-height:            inherit;
+}
+
+button, input {
+    overflow:               visible;
+}
+
+button, select {
+    text-transform:         none; /* [4] */
+}
+
+fieldset {
+    min-width:              0; /* [5] */
+
+    border-style:           none;
+}
+
+label {
+    display:                inline-block;
+}
+
+legend {
+    display:                block;
+    padding:                0;
+    width:                  100%;
+    max-width:              100%;
+
+    color:                  inherit;
+    line-height:            inherit;
+    white-space:            normal;
+}
+
+progress {
+    vertical-align:         baseline;
+}
+
+textarea {
+    overflow:               auto;
+}
+
+[type="number"] {
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button { /* [6] */
+        height:                 auto;
     }
-    
-    pre, code,
-    kbd, samp {
-        font: {
-            family:             monospace;
-            size:               1em; }
+}
+
+[type="search"] {
+    -webkit-appearance:     textfield; /* [7] */
+
+    outline-offset:         -2px; /* [8] */
+
+    &::-webkit-search-decoration { /* [9] */
+        -webkit-appearance:     none;
     }
-    
-    
-    a {
-        background-color:       transparent;
-        -webkit-text-decoration-skip:objects;
-    }
-    
-    abbr[title] {
-        border-bottom-style:    0;
-        text: {
-            decoration:         underline;
-            decoration:         underline  dotted; }
-    }
-    
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance:     button; /* [10] */
+
+    font:                   inherit; /* [11] */
+}
+
+
+/*  Grouping
+ *  ============================================================================ */
+
+@if _feature(reset,quotes) {
     blockquote, q {
-        quotes:                 none;
-        
-        
-        &::before,
-        &::after {
-            content:                "";
+        &::before, &::after {
+            content:                '';
             content:                none;
         }
     }
-    
+}
+
+blockquote {
+    position:               relative;
+}
+
+hr {
+    box-sizing:             content-box;
+    height:                 0;
+    overflow:               visible;
+}
+
+@if _feature(reset,lists) {
+    ol, ul {
+        list-style:             none;
+    }
+}
+
+
+/*  Interaction
+ *  ============================================================================
+ *  1. Adds the correct display in IE11, Edge and Firefox.
+ *  2. Adds the correct display.
+ */
+
+a, area, button, input, label, select, summary, textarea {
+    touch-action:           manipulation;
+}
+
+details {
+    display:                block; /* [1 ] */
+}
+
+summary {
+    display:                list-item; /* [2] */
+}
+
+@if _feature(reset,focus) {
+    :focus { outline: 0; }
+}
+
+
+/*  Miscellaneous
+ *  ============================================================================
+ *  1. From Normalize, adds correct display in IE11.
+ */
+
+template { /* [1] */
+    display:                none;
+}
+
+
+/*  Typography
+ *  ============================================================================
+ *  1. From Normalize, removes the bottom border on older versions of chrome.
+ *  2. From Normalize, adds the correct text decoration across browsers.
+ */
+
+ a {
+     background-color:       transparent;
+ }
+
+ abbr[title] {
+     border-bottom:          0; /* [1] */
+     text-decoration:        underline; /* [2] */
+     text-decoration:        underline dotted; /* [2] */
+ }
+
+@if _feature(reset,semantic-type) {
+
+    b {
+        font-weight:            bolder;
+    }
+
+    em {
+        font-style:             inherit;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        clear:                  both;
+
+        font: {
+            size:               1em;
+            weight:             normal; }
+        line-height:            _petra(typography, line-height, heading);
+    }
+
+    strong {
+        font-weight:            inherit;
+    }
+
+} @else {
+
     b, strong {
         font-weight:            bolder;
     }
-    
-    dfn, em, i {
-        font-style:             italic;
+
+    h1, h2, h3, h4, h5, h6 {
+        line-height:            _petra(typography, line-height, heading);
     }
 
-    del, s {
-        text-decoration:        line-through;
-    }
-    
-    small {
-        font-size:              _pathfinder(typography, font-sizes, smaller);
-    }
-    
-    sub, sup {
-        position:               relative;
-        
-        height:                 0;
-        
-        font-size:              _pathfinder(typography, font-sizes, smaller);
-        line-height:            0;
-    }
-    sub {
-        vertical-align:         sub;
-    }
-    sup {
-        vertical-align:         super;
-    }
-    
-    
-    audio, canvas, iframe,
-    img, svg, video {
-        vertical-align:         middle;
-    }
-    
-    audio, canvas, video {
-        display:                inline-block;
-    }
-    
-    audio:not([controls]) {
-        display:                none;
-        height:                 0;
-    }
-    
-    img {
-        border-style:           none;
-    }
-    
-    svg:not(:root) {
-        overflow:               hidden;
-    }
-    
-    
+}
+
+small {
+    font-size:              _petra(typography, font-size, smaller);
+}
+
+sub, sup {
+    position:               relative;
+
+    height:                 0;
+
+    font-size:              _petra(typography, font-size, subscript);
+    line-height:            0;
+}
+
+sub {
+    vertical-align:         sub;
+}
+
+sup {
+    vertical-align:         super;
+}
+
+
+/*  Code
+ *  ============================================================================
+ *  1. From Reboot, forces a non-overlapping, non-auto-hiding scrollbar in IE11
+ *     and Edge.
+ */
+
+code, kbd, pre, samp {
+    font: {
+        family:             _font-stack(monospace);
+        size:               1em; }
+}
+
+pre {
+    overflow:               auto;
+    -ms-overflow-style:     scrollbar; /* [1] */
+}
+
+
+@if _feature(reset,tables) {
+    /*  Tables
+     *  ============================================================================ */
+
     table {
         border: {
             collapse:           collapse;
             spacing:            0; }
     }
-    
-    
-    button, input, optgroup,
-    select, textarea {
-        margin:                 0;
-    }
-    
-    button, input, select,
-    textarea {
-        color:                  inherit;
-        font-size:              inherit;
-        line-height:            inherit;
-    }
-    
-    button, input {
-        overflow:               visible;
-    }
-    
-    button, select {
-        text-transform:         none;
-    }
-    
-    textarea {
-        overflow:               auto;
-        resize:                 vertical;
-    }
-    
-    template {
-        display:                none;
-    }
-    
-    
-    a, area, button,
-    input, label, select,
-    summary, textarea, [tabindex] {
-        touch-action:           manipulation;
-    }
-    
-    @if _feature(hard-reset-buttons) {
-        button {
-            appearance:             none;
-            background-color:       transparent;
-            height:                 auto;
-            margin:                 0;
-            padding:                0;
 
-            border-style:           none;
-            
-            font-weight:            normal;
-            text: {
-                align:              inherit;
-                shadow:             none; }
-        }
-    }
-    
-    
-    [hidden] {
-        display:                none;
-    }
-    
-    [aria-busy="true"] {
-        cursor:                 progress;
-    }
-    
-    [aria-controls] {
-        cursor:                 pointer;
-    }
-    
-    [aria-disabled] {
-        cursor:                 default;
-    }
-    
-    
-    @if _feature(reset-focus) {
-        :focus {
-            outline:                0;
-        }
+    td, th {
+        padding:                0;
+
+        text-align:             inherit;
     }
 }
-

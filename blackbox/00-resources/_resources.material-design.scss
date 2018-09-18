@@ -1,6 +1,11 @@
+//
+//  #RESOURCES, #MATERIAL-DESIGN
+//
+//  Material color palettes pulled from Google's Material Design library.
+//  https://material.io/guidelines/style/color.html#color-color-palette
+//
+
 $google-material-colors: (
-    //  material color variables from Google's Material Design library
-    //  https://material.io/guidelines/style/color.html#color-color-palette
     red: (
         50:     #ffebee,
         100:    #ffcdd2,
@@ -314,4 +319,3 @@ $google-material-colors: (
 @function material-color($key, $tone: 500) {
     @return map-deep-get($google-material-colors, $key, $tone);
 }
-

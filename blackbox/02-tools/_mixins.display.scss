@@ -1,0 +1,31 @@
+//
+//  #TOOLS, #MIXINS-DISPLAY
+//
+
+//  visually-hidden()
+//  ============================================================================
+//  $focusable (boolean) - Determines whether to output primary styles, or
+//  focusable overrides; defaults to 'false'.
+
+@mixin visually-hidden($focusable: false) {
+    @if not $focusable {
+
+        position:               absolute !important;
+            top:                auto;
+            left:               -1000rem;
+
+        width:                  1px;
+        height:                 1px;
+        overflow:               hidden;
+
+    } @else {
+
+        position:               static !important;
+            left:               auto;
+
+        width:                  auto;
+        height:                 auto;
+        overflow:               auto;
+
+    }
+}

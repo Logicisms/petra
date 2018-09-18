@@ -1,12 +1,15 @@
-//
-//  Tables
-//
+/**
+ *  #ELEMENTS, #TABLES
+**/
 
 table {
     width:                  100%;
 }
 
-th { vertical-align:        bottom; }
+td {
+    vertical-align:         middle;
+}
 
-td { vertical-align:        middle; }
-
+th {
+    vertical-align:         bottom;
+}

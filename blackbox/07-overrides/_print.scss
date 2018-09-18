@@ -1,72 +1,71 @@
-//
-//  Print styles
-//
-
 @if _feature(print-media) {
+    /**
+     *  #OVERRIDES, #PRINT
+     *
+     *  Print styles are derived from the HTML5 Boilerplate project.
+     *  https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css
+    **/
+
     @media print {
-        *,
-        *:before,
-        *:after {
-            background:             transparent !important;
+        *, *::before, *::after {
+            background-color:       transparent !important;
             box-shadow:             none !important;
 
             color:                  #000 !important;
             text-shadow:            none !important;
         }
-        
+
+        html {
+            background-color:       #fff !important;
+        }
+
         a {
-            &,
-            &:visited {
+            &, &:visited {
                 text-decoration:        underline;
             }
-            
+
             &[href]::after {
-                content:                " (" attr(href) ")";
+                content:                " (" attr(html) ")";
             }
-            
-            &[href^="#"]::after,
-            &[href^="javascript:"]::after {
+
+            &[href="#"]::after,
+            &[href="javascript:"]::after {
                 content:                "";
             }
         }
-        
-        abbr[title]:after {
+
+        abbr[title]::after {
             content:                " (" attr(title) ")";
         }
-        
+
         pre {
-            white-space:            pre-wrap !important;
+            white-space:            pre-line;
         }
-        pre,
-        blockquote {
+
+        pre, blockquote {
             border: {
                 color:              #999;
                 style:              solid;
                 width:              1px; }
-            
+
             page-break-inside:      avoid;
         }
-        
+
         thead {
             display:                table-header-group;
         }
 
-        tr,
-        img {
+        tr, img {
             page-break-inside:      avoid;
         }
 
-        p,
-        h2,
-        h3 {
+        p, h2, h3 {
             orphans:                3;
             widows:                 3;
         }
 
-        h2,
-        h3 {
+        h2, h3 {
             page-break-after:       avoid;
         }
     }
 }
-

@@ -1,0 +1,43 @@
+//
+//  #SETTINGS, #PETRA-LAYOUT
+//
+
+$_petra-config-layout: (
+    id: 'layout',
+
+    breakpoint: (
+        small: (
+            shorthand:              'sm',
+            query: (
+                max-width:          64rem
+            ),
+        ),
+        medium: (
+            shorthand:              'md',
+            query: (
+                min-width:          64.1rem
+            ),
+        ),
+        large: (
+            shorthand:              'lg',
+            query: (
+                min-width:          102.4rem
+            ),
+        ),
+
+        retina: (
+            shorthand:              'rtn',
+            query: (
+                min-device-pixel-ratio: 2,
+                min-resolution:     192dpi
+            ),
+        ),
+    ),
+
+    grid: (
+        columns:                12,
+        gutter:                 1.75em,
+
+        breakpoints:            (small, medium, large), // Breakpoint keywords should correspond to project breakpoints as defined within the layout submodule.
+    ),
+);
