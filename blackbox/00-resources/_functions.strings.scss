@@ -10,19 +10,8 @@
 //  $type (string) - The type of quotation mark to output; defaults to 'double'.
 //  Valid values are 'double' and 'single'.
 
-@function escape-quote($string, $type: 'double') {
-    @if $type == 'double' {
-
-        @return unquote('\"') + $string + unquote('\"');
-
-    } @else if $type == 'single' {
-
-        @return unquote('\'') + $string + unquote('\'');
-
-    }
-
-    @warn "Invalid argument: '#{$type}' passed to escape-quote(). Returning null.";
-    @return null;
+@function unicode($string) {
+    @return unquote('\"') + $string + unquote('\"');
 }
 
 
