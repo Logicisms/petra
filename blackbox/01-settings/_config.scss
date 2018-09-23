@@ -3,7 +3,6 @@
 //
 
 @import
-    'petra.ascii',
     'petra.debugging',
     'petra.features',
     'petra.layout',
@@ -13,7 +12,6 @@
 
 $_petra: config-make(
     'id',
-    $_petra-config-ascii,
     $_petra-config-debugging,
     $_petra-config-features,
     $_petra-config-layout,
