@@ -8,15 +8,15 @@ $_petra-config-typography: (
     browser-context:        16px,
 
     font-face: (
-        open-sans: (
-            font-family:            "Open Sans",
-            font-style:             normal,
-            font-weight:            400,
-            src: (
-                url('/fonts/OpenSans-Regular-webfont.woff2') format('woff2'),
-                url('/fonts/OpenSans-Regular-webfont.woff') format('woff')
-            )
-        ), // open-sans
+        // open-sans: (
+        //     font-family:            "Open Sans",
+        //     font-style:             normal,
+        //     font-weight:            400,
+        //     src: (
+        //         url('/fonts/OpenSans-Regular-webfont.woff2') format('woff2'),
+        //         url('/fonts/OpenSans-Regular-webfont.woff') format('woff')
+        //     )
+        // ), // open-sans
     ),
 
     font-stack: (
