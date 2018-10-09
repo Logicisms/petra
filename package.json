@@ -1,0 +1,11 @@
+{
+  "name": "petra-sass",
+  "version": "2.0.0",
+  "description": "A configurable, responsive, slightly experimental Sass/SCSS framework.",
+  "main": "_petra.scss",
+  "repository": "git@github.com:Logicisms/petra.git",
+  "author": "Logicisms <jeanluc.harbin@gmail.com>",
+  "license": "GNU GPLv3",
+  "keywords": ["Sass", "SCSS", "framework", "CSS reset", "grid", "flexbox", "BEM", "inverted triangle", "ITCSS"],
+  "bugs": "https://github.com/Logicisms/petra/issues"
+}
