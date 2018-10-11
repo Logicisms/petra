@@ -3,12 +3,12 @@
 //
 
 @import
-    'petra.debugging',
-    'petra.features',
-    'petra.layout',
-    'petra.namespacing',
-    'petra.typography',
-    'petra.utilities';
+    'petra/debugging',
+    'petra/features',
+    'petra/layout',
+    'petra/namespacing',
+    'petra/typography',
+    'petra/utilities';
 
 $_petra: config-make(
     'id',
@@ -19,5 +19,3 @@ $_petra: config-make(
     $_petra-config-typography,
     $_petra-config-utilities
 );
-
-$petra: () !default;

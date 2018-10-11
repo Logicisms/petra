@@ -5,7 +5,7 @@
   "main": "_petra.scss",
   "repository": "git@github.com:Logicisms/petra.git",
   "author": "Logicisms <jeanluc.harbin@gmail.com>",
-  "license": "GNU GPLv3",
+  "license": "MIT",
   "keywords": ["Sass", "SCSS", "framework", "CSS reset", "grid", "flexbox", "BEM", "inverted triangle", "ITCSS"],
   "bugs": "https://github.com/Logicisms/petra/issues"
 }
