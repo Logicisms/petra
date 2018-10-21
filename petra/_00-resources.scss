@@ -3,6 +3,9 @@
 //
 
 @import
+    './node_modules/sass-less-material-colors/google-material-colors';
+
+@import
     'blackbox/00-resources/functions.lists',
     'blackbox/00-resources/functions.color',
     'blackbox/00-resources/functions.maps',
@@ -10,5 +13,4 @@
     'blackbox/00-resources/functions.strings',
 
     'blackbox/00-resources/resources.config-make',
-    'blackbox/00-resources/resources.material-design',
     'blackbox/00-resources/resources.pathfinder';

@@ -1,0 +1,9 @@
+{
+    "ids": 2,
+    "important": false,
+    "shorthand": false,
+
+    //  disabling old IE rules
+    "adjoining-classes": false,
+    "bulletproof-font-face": false
+}

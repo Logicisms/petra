@@ -1,11 +1,51 @@
 {
-  "name": "petra-sass",
-  "version": "2.0.0",
-  "description": "A configurable, responsive, slightly experimental Sass/SCSS framework.",
-  "main": "_petra.scss",
-  "repository": "git@github.com:Logicisms/petra.git",
-  "author": "Logicisms <jeanluc.harbin@gmail.com>",
-  "license": "MIT",
-  "keywords": ["Sass", "SCSS", "framework", "CSS reset", "grid", "flexbox", "BEM", "inverted triangle", "ITCSS"],
-  "bugs": "https://github.com/Logicisms/petra/issues"
+    "name": "petra-sass",
+    "description": "A configurable, responsive, slightly experimental Sass/SCSS framework.",
+    "version": "2.0.0",
+    "author": "Logicisms <jeanluc.harbin@gmail.com>",
+    "license": "MIT",
+    "keywords": [
+        "Sass",
+        "SCSS",
+        "CSS reset",
+        "grid",
+        "flexbox",
+        "BEM",
+        "inverted triangle",
+        "ITCSS",
+        "config",
+        "framework"
+    ],
+    "main": "_petra.scss",
+    "repository": "git@github.com:Logicisms/petra.git",
+    "bugs": "https://github.com/Logicisms/petra/issues",
+    "files": [
+        "petra/**/*.scss",
+        "LICENSE",
+        "package.json",
+        "README.md"
+    ],
+    "dependencies": {
+        "sass-less-material-colors": "^1.1.0"
+    },
+    "devDependencies": {
+        "autoprefixer": "^9.1.2",
+        "cssnano": "^4.0.5",
+        "dart-sass": "^1.10.3",
+        "grunt": "^1.0.1",
+        "grunt-concurrent": "^2.3.1",
+        "grunt-contrib-clean": "^1.1.0",
+        "grunt-contrib-connect": "^2.0.0",
+        "grunt-contrib-copy": "^1.0.0",
+        "grunt-contrib-csslint": "^2.0.0",
+        "grunt-contrib-jshint": "^2.0.0",
+        "grunt-contrib-watch": "^1.0.0",
+        "grunt-minify-html": "^3.0.0",
+        "grunt-newer": "^1.3.0",
+        "grunt-postcss": "^0.9.0",
+        "grunt-sass": "^3.0.1",
+        "grunt-sass-lint": "^0.2.4",
+        "load-grunt-tasks": "^3.5.2",
+        "node-sass": "^4.9.4"
+    }
 }
