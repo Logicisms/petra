@@ -16,7 +16,7 @@
         "config",
         "framework"
     ],
-    "main": "_petra.scss",
+    "main": "petra/_petra.scss",
     "repository": "git@github.com:Logicisms/petra.git",
     "bugs": "https://github.com/Logicisms/petra/issues",
     "files": [

@@ -210,6 +210,9 @@ module.exports = function(grunt) {
      *  ===================================================================== */
 
     grunt.registerTask('lint-grunt', ['jshint:grunt']);
-    grunt.registerTask('lint-sass', ['sasslint:src']);
+    // grunt.registerTask('lint-sass', ['sasslint:src']);
+    grunt.registerTask('lint-sass', 'Runs sasslint on the specified target, or on all targets.', function(target){
+        grunt.task.run([target ? 'sasslint:' + target : 'sasslint']);
+    });
     grunt.registerTask('lint-css', ['clean', '_build-styles', 'csslint:dist']);
 };

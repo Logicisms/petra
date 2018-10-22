@@ -8,7 +8,7 @@
         ],
         "declarations-before-nesting": 1,
         "indentation": [
-            0,
+            1,
             {
                 "size": 4
             }
@@ -19,7 +19,8 @@
             "include": true
             }
         ],
-        "no-color-keywords": 1,
+        "no-color-keywords": 0,
+        "no-color-literals": 2,
         "no-css-comments": 0,
         "no-debug": 1,
         "no-duplicate-properties": [
@@ -50,7 +51,7 @@
                 "excluded-identifiers": []
             }
         ],
-        "no-warn": 1,
+        "no-warn": 0,
         "property-sort-order": [
             0,
             {
