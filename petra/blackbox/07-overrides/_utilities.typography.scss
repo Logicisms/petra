@@ -1,4 +1,4 @@
-@if _feature(utilities,typography) {
+@if _feature(utilities, typography) {
     /**
      *  #OVERRIDES, #TYPOGRAPHY
     **/
@@ -32,6 +32,7 @@
         $type-scale-values: _petra(utility, type-scale-values);
 
         @if $type-scale-values and ($type-scale-values != 0) {
+            // sass-lint:disable-block zero-unit
             @if length($type-scale-values) == 2 {
 
                 $start: nth($type-scale-values, 1);

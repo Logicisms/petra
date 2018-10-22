@@ -1,6 +1,11 @@
 //
 //  #ELEMENTS
 //
+//  1. Indentation is disabled here to prevent sass-lint from flagging the
+//     nested @import block;
+//
+//  sass-lint:disable indentation [1]
+//
 
 @import
     'blackbox/04-elements/grouping',

@@ -11,8 +11,8 @@
     @if not $focusable {
 
         position:               absolute !important;
-            top:                auto;
-            left:               -1000rem;
+        top:                    auto;
+        left:                   -1000rem;
 
         width:                  1px;
         height:                 1px;
@@ -21,7 +21,7 @@
     } @else {
 
         position:               static !important;
-            left:               auto;
+        left:                   auto;
 
         width:                  auto;
         height:                 auto;

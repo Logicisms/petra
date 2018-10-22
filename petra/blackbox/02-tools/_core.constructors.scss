@@ -22,8 +22,8 @@
 @mixin _make-col(
     $count,
     $index,
-    $flexbox: _feature(layout,grid,flexbox),
-    $conditional-padding: _feature(layout,grid,conditional-padding)
+    $flexbox: _feature(layout, grid, flexbox),
+    $conditional-padding: _feature(layout, grid, conditional-padding)
 ) {
     @include _block {
         position:               relative;
@@ -47,16 +47,16 @@
 
         @if not $conditional-padding {
             padding: {
-                right:              (_gutter() / 2);
-                left:               (_gutter() / 2); }
+                right:              (_gutter / 2);
+                left:               (_gutter / 2); }
         }
     }
 
     @if $conditional-padding {
         @at-root #{'.' + _prefix(object) + 'row'} > & {
             padding: {
-                right:              (_gutter() / 2);
-                left:               (_gutter() / 2); }
+                right:              (_gutter / 2);
+                left:               (_gutter / 2); }
         }
     }
 }
@@ -74,7 +74,7 @@
 
 @mixin _make-columns(
     $count: _petra(layout, grid, columns),
-    $responsive-modifiers: _feature(layout,grid,responsive),
+    $responsive-modifiers: _feature(layout, grid, responsive),
     $breakpoints: _petra(layout, grid, breakpoints)
 ) {
     @for $i from 1 through $count {
@@ -142,7 +142,7 @@
 
     } @else {
 
-        @warn "Petra:  value for key 'heading-scale-factor' in the typography config must be greater than 0.";
+        @warn 'Petra:  value for key \'heading-scale-factor\' in the typography config must be greater than 0.';
 
     }
 }
@@ -153,8 +153,9 @@
 //  $map (map) - A map containing class prefixes and outline color values.
 
 @mixin _make-health-check( $map: _petra(debug, health-check) ) {
+    // sass-lint:disable no-universal-selectors
     * {
-        outline: _utility-value( 1px solid map-get($map, global) )
+        outline: _utility-value( 1px solid map-get($map, global) );
     }
 
     $map: map-remove($map, global);
@@ -163,7 +164,7 @@
 
         $prefix: _prefix($type);
 
-        [class*="#{$prefix}"] {
+        [class*='#{$prefix}'] {
             outline: _utility-value( 6px solid map-get($map, $type) );
         }
 
@@ -176,7 +177,7 @@
 //  $flag (boolean) - Determines whether or not to generate responsive
 //  modifiers; defaults to _feature(utilities, responsive).
 
-@mixin _make-responsive-utility( $flag: _feature(utilities,responsive) ) {
+@mixin _make-responsive-utility( $flag: _feature(utilities, responsive) ) {
     @content;
 
     @if $flag {

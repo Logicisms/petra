@@ -3,10 +3,10 @@
 //
 
 @function _breakpoint-make-query($arg...) {
-    $query: "only screen";
+    $query: 'only screen';
 
     @each $property, $value in $arg {
-        $query: $query + " and (#{$property}: #{$value})";
+        $query: $query + ' and (#{$property}: #{$value})';
     }
 
     @return $query;
@@ -26,7 +26,7 @@
         } @else {
 
             @include _debug(
-                $mixin: "@include respond-to()",
+                $mixin: '@include respond-to()',
                 $value: $breakpoint,
                 $valid: map-keys( _petra(layout, breakpoint) )
             );

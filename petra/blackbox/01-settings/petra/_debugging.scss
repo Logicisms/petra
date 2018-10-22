@@ -6,12 +6,12 @@ $_petra-config-debugging: (
     id: 'debug',
 
     message: (
-        lede:                   ("Invalid argument:", "passed to mixin"),
-        warn:                   "Follow stack trace or review rendered markup.",
-        error:                  "Correct invalid argument to unblock compiler.",
-        valid-arguments:        "Valid arguments",
+        lede:                   ('Invalid argument:', 'passed to mixin'),
+        warn:                   'Follow stack trace or review rendered markup.',
+        error:                  'Correct invalid argument to unblock compiler.',
+        valid-arguments:        'Valid arguments',
 
-        mixin:                  "mixin (no message defined)",
+        mixin:                  'mixin (no message defined)',
     ),
     outline: (
         color:                  red,

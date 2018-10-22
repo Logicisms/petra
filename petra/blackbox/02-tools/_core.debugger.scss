@@ -1,6 +1,8 @@
 //
 //  #TOOLS, #CORE-DEBUGGER
 //
+//  sass-lint:disable indentation
+//
 
 @function _debug-message($key) {
     @return _petra(debug, message, $key);
@@ -8,8 +10,8 @@
 
 @mixin _debug(
     $mixin: _debug-message(mixin),
-    $value: "<undefined>",
-    $valid: "<undefined>",
+    $value: '<undefined>',
+    $valid: '<undefined>',
     $warn: _feature(debug, visual-debug)
 ) {
 
@@ -20,21 +22,21 @@
         }
 
         @warn nth(_debug-message(lede), 1)
-              + " '" + $value + "' " +
+              + ' \'' + $value + '\' ' +
               nth(_debug-message(lede), 2)
-              + " '" + $mixin + "'. " +
+              + ' \'' + $mixin + '\'. ' +
               _debug-message(valid-arguments)
-              + ":  " + $valid + ". " +
+              + ':  ' + $valid + '. ' +
               _debug-message(warn);
 
     } @else {
 
         @warn nth(_debug-message(lede), 1)
-              + " '" + $value + "' " +
+              + ' \'' + $value + '\' ' +
               nth(_debug-message(lede), 2)
-              + " '" + $mixin + "'. " +
+              + ' \'' + $mixin + '\'. ' +
               _debug-message(valid-arguments)
-              + ":  " + $valid + ".";
+              + ':  ' + $valid + '.';
         @error _debug-message(error);
 
     }

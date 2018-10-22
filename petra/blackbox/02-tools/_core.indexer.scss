@@ -14,6 +14,8 @@
 //  index using the '_scope-index-parser' function and outputs the index to the
 //  compiler.
 //
+//  sass-lint:disable no-debug
+//
 
 $_petra-scope-index-types:    ();
 $_petra-scope-index-scopes:   ();
@@ -50,18 +52,18 @@ $_petra-scope-index-scopes:   ();
         $prefixes: map-keys( _petra(namespace, prefix) );
         $scopes: _scope-index-parser($_petra-scope-index-types, $_petra-scope-index-scopes);
 
-        @debug "START scope indexer.";
+        @debug 'START scope indexer.';
 
         @each $prefix in $prefixes {
             $num: length( map-get($scopes, $prefix) );
             $count: $count + $num;
-            $print: if( $num > 0, map-get($scopes, $prefix), "" );
+            $print: if( $num > 0, map-get($scopes, $prefix), '' );
 
-            @debug "- #{$num} '#{$prefix}' scopes:  (#{$print}).";
+            @debug '- #{$num} \'#{$prefix}\' scopes:  (#{$print}).';
         }
 
-        @debug "- #{$count} unique scopes in total.";
-        @debug "END scope indexer."
+        @debug '- #{$count} unique scopes in total.';
+        @debug 'END scope indexer.';
 
     }
 }

@@ -1,4 +1,4 @@
-@if _feature(layout,grid-system) {
+@if _feature(layout, grid-system) {
     /**
      *  #OBJECTS, #GRID
     **/
@@ -11,7 +11,7 @@
                 right:              (_gutter() / -2);
                 left:               (_gutter() / -2); }
 
-            @if _feature(layout,grid,flexbox) {
+            @if _feature(layout, grid, flexbox) {
 
                 display:                flex;
                 flex-wrap:              wrap;

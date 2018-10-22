@@ -23,7 +23,7 @@
 //  https://css-tricks.com/snippets/sass/strip-unit-function/
 
 @function strip-unit($number) {
-    @if type-of($number) == "number" and not unitless($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
         @return $number / ($number * 0 + 1);
     }
 
@@ -40,7 +40,7 @@
 //  $unit (string) - CSS unit.
 
 @function replace-unit($number, $unit) {
-    @if type-of($number) == "number" and not unitless($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
         @return strip-unit($number) + 0 + $unit;
     }
 
@@ -55,6 +55,7 @@
 //  $pixels (number) - Pixel value.
 
 @function rem($pixels) {
+    // sass-lint:disable zero-unit
     @return (strip-unit($pixels) / 10) + 0rem;
 }
 
@@ -67,6 +68,7 @@
 //  $context (number) - Pixel value; defaults to 16px.
 
 @function em($pixels, $context: 16px) {
+    // sass-lint:disable zero-unit
     @if unitless($pixels) {
         $pixels: $pixels + 0px;
     }

@@ -6,6 +6,7 @@
 **/
 
 @include _prefix(object, 'flex') {
+    // sass-lint:disable-block no-universal-selectors
     @include _block {
         display:                flex;
         flex-wrap:              nowrap;

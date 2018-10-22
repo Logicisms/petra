@@ -10,6 +10,8 @@
  *      https://getbootstrap.com/docs/4.0/content/reboot/
 **/
 
+//  sass-lint:disable no-universal-selectors, no-vendor-prefixes
+
 /*  Document
  *  ============================================================================
  *  1. Sets the document's root font-size to (an equivalent of) 10, relative to
@@ -36,7 +38,9 @@ html {
     -webkit-text-size-adjust: 100%; /* [2] */
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing:             inherit;
 }
 
@@ -46,6 +50,7 @@ html {
     }
 }
 
+// sass-lint:disable single-line-per-selector
 div, span, p, blockquote, pre, abbr, address, cite, code, del, dfn, em,
 h1, h2, h3, h4, h5, h6, img, ins, kbd, q, s, samp, small, strike, strong,
 sub, sup, tt, var, b, u, i, dl, dt, dd, ol, ul, li, fieldset, form, label,
@@ -60,6 +65,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu,
 nav, section {
     display:                block;
 }
+// sass-lint:enable single-line-per-selector
 
 
 /*  Body
@@ -79,12 +85,22 @@ body {
 /*  Embedded content
  *  ============================================================================ */
 
-audio, embed, img, iframe, object, video {
+audio,
+embed,
+img,
+iframe,
+object,
+video {
     height:                 auto;
     max-width:              100%;
 }
 
-audio, canvas, iframe, img, svg, video {
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
     vertical-align:         middle;
 }
 
@@ -119,17 +135,16 @@ svg {
 button {
     border-style:           none;
 
-    @if _feature(reset,buttons) {
+    @if _feature(reset, buttons) {
         -webkit-appearance:     none;
         -moz-appearance:        none;
         padding:                0;
         height:                 auto;
 
         background-color:       transparent;
-        border-style:           none;
         border: {
             radius:             0;
-            style:              none; }
+            width:              0; }
 
         text: {
             align:              inherit;
@@ -138,10 +153,10 @@ button {
 }
 
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-    @if not _feature(reset,buttons) {
+[type='button'],
+[type='reset'],
+[type='submit'] {
+    @if not _feature(reset, buttons) {
         -webkit-appearance:     button; /* [1] */
     }
 
@@ -156,7 +171,11 @@ button,
     }
 }
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
     margin:                 0;
 
     color:                  inherit;
@@ -166,11 +185,13 @@ button, input, optgroup, select, textarea {
     line-height:            inherit;
 }
 
-button, input {
+button,
+input {
     overflow:               visible;
 }
 
-button, select {
+button,
+select {
     text-transform:         none; /* [4] */
 }
 
@@ -203,14 +224,14 @@ textarea {
     overflow:               auto;
 }
 
-[type="number"] {
+[type='number'] {
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button { /* [6] */
         height:                 auto;
     }
 }
 
-[type="search"] {
+[type='search'] {
     -webkit-appearance:     textfield; /* [7] */
 
     outline-offset:         -2px; /* [8] */
@@ -230,9 +251,12 @@ textarea {
 /*  Grouping
  *  ============================================================================ */
 
-@if _feature(reset,quotes) {
-    blockquote, q {
-        &::before, &::after {
+@if _feature(reset, quotes) {
+    blockquote,
+    q {
+        &::before,
+        &::after {
+            // sass-lint:disable-block no-duplicate-properties
             content:                '';
             content:                none;
         }
@@ -249,8 +273,9 @@ hr {
     overflow:               visible;
 }
 
-@if _feature(reset,lists) {
-    ol, ul {
+@if _feature(reset, lists) {
+    ol,
+    ul {
         list-style:             none;
     }
 }
@@ -262,7 +287,14 @@ hr {
  *  2. Adds the correct display.
  */
 
-a, area, button, input, label, select, summary, textarea {
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea {
     touch-action:           manipulation;
 }
 
@@ -274,7 +306,7 @@ summary {
     display:                list-item; /* [2] */
 }
 
-@if _feature(reset,focus) {
+@if _feature(reset, focus) {
     :focus { outline: 0; }
 }
 
@@ -295,17 +327,21 @@ template { /* [1] */
  *  2. From Normalize, adds the correct text decoration across browsers.
  */
 
- a {
-     background-color:       transparent;
- }
+a {
+    background-color:       transparent;
+}
 
- abbr[title] {
-     border-bottom:          0; /* [1] */
-     text-decoration:        underline; /* [2] */
-     text-decoration:        underline dotted; /* [2] */
- }
+// sass-lint:disable force-attribute-nesting
+abbr[title] {
+    // sass-lint:disable-block no-duplicate-properties
+    border-bottom:          0; /* [1] */
+    text-decoration:        underline; /* [2] */
+    text-decoration:        underline dotted; /* [2] */
+}
+// sass-lint:enable force-attribute-nesting
 
-@if _feature(reset,semantic-type) {
+
+@if _feature(reset, semantic-type) {
 
     b {
         font-weight:            bolder;
@@ -315,7 +351,12 @@ template { /* [1] */
         font-style:             inherit;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         clear:                  both;
 
         font: {
@@ -330,11 +371,17 @@ template { /* [1] */
 
 } @else {
 
-    b, strong {
+    b,
+    strong {
         font-weight:            bolder;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         line-height:            _petra(typography, line-height, heading);
     }
 
@@ -344,7 +391,8 @@ small {
     font-size:              _petra(typography, font-size, smaller);
 }
 
-sub, sup {
+sub,
+sup {
     position:               relative;
 
     height:                 0;
@@ -368,7 +416,10 @@ sup {
  *     and Edge.
  */
 
-code, kbd, pre, samp {
+code,
+kbd,
+pre,
+samp {
     font: {
         family:             _font-stack(monospace);
         size:               1em; }
@@ -380,7 +431,7 @@ pre {
 }
 
 
-@if _feature(reset,tables) {
+@if _feature(reset, tables) {
     /*  Tables
      *  ============================================================================ */
 
@@ -390,7 +441,8 @@ pre {
             spacing:            0; }
     }
 
-    td, th {
+    td,
+    th {
         padding:                0;
 
         text-align:             inherit;

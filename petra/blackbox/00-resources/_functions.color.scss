@@ -10,9 +10,11 @@
 @function blacken($color, $amount) {
     @return mix(black, $color, $amount);
 }
+// sass-lint:disable indentation
     @function shade($color, $amount) {
         @return blacken($color, $amount);
     }
+// sass-lint:enable indentation
 
 
 //  whiten()
@@ -23,6 +25,8 @@
 @function whiten($color, $amount) {
     @return mix(white, $color, $amount);
 }
+// sass-lint:disable indentation
     @function tint($color, $amount) {
         @return whiten($color, $amount);
     }
+// sass-lint:enable indentation

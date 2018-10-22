@@ -15,6 +15,7 @@
 
 @mixin _prefix($prefix, $classes...) {
     @if _prefix($prefix) {
+        // sass-lint:disable indentation
 
         $class-type: if(
             ($prefix == state or $prefix == state-within) and &,
@@ -34,7 +35,7 @@
     } @else {
 
         @include _debug(
-            $mixin: "@include _prefix()",
+            $mixin: '@include _prefix()',
             $value: $prefix,
             $valid: map-keys( _petra(namespace, prefix) ),
             $warn: false
@@ -49,7 +50,7 @@
 //  Used to scope content within a block class based on BEM nesting settings.
 
 @mixin _block {
-    @if _feature(namespace,bem-nesting) and _feature(namespace,strict-nesting) {
+    @if _feature(namespace, bem-nesting) and _feature(namespace, strict-nesting) {
 
         &#{&} { @content; }
 
@@ -69,7 +70,7 @@
 //  $classes (arglist) - The classes to be namespaced.
 
 @mixin _element($classes...) {
-    $parent: if(_feature(namespace,bem-nesting), '& &', '&');
+    $parent: if(_feature(namespace, bem-nesting), '& &', '&');
     $selectors: ();
 
     @each $class in $classes {
@@ -91,7 +92,7 @@
 
 @mixin _modifier($classes...) {
     $modifier: if(
-        _feature(namespace,detached-modifiers),
+        _feature(namespace, detached-modifiers),
         '&.#{_delimiter(modifier)}',
         '&#{_delimiter(modifier)}'
     );

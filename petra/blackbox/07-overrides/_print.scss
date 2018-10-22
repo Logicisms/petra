@@ -6,8 +6,12 @@
      *  https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css
     **/
 
+    // sass-lint:disable force-attribute-nesting, force-pseudo-nesting, no-universal-selectors, no-color-literals
+
     @media print {
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             background-color:       transparent !important;
             box-shadow:             none !important;
 
@@ -20,29 +24,31 @@
         }
 
         a {
-            &, &:visited {
+            &,
+            &:visited {
                 text-decoration:        underline;
             }
 
             &[href]::after {
-                content:                " (" attr(html) ")";
+                content:                ' (' attr(html) ')';
             }
 
-            &[href="#"]::after,
-            &[href="javascript:"]::after {
-                content:                "";
+            &[href='#']::after,
+            &[href='javascript:']::after {
+                content:                '';
             }
         }
 
         abbr[title]::after {
-            content:                " (" attr(title) ")";
+            content:                ' (' attr(title) ')';
         }
 
         pre {
             white-space:            pre-line;
         }
 
-        pre, blockquote {
+        pre,
+        blockquote {
             border: {
                 color:              #999;
                 style:              solid;
@@ -55,16 +61,20 @@
             display:                table-header-group;
         }
 
-        tr, img {
+        tr,
+        img {
             page-break-inside:      avoid;
         }
 
-        p, h2, h3 {
+        p,
+        h2,
+        h3 {
             orphans:                3;
             widows:                 3;
         }
 
-        h2, h3 {
+        h2,
+        h3 {
             page-break-after:       avoid;
         }
     }

@@ -2,11 +2,11 @@
  *  #ELEMENTS, #TYPOGRAPHY
 **/
 
-@if _feature(typography,make-headings) and _feature(typography,heading,elements) {
+@if _feature(typography, make-headings) and _feature(typography, heading, elements) {
     /*  Headings
      *  ============================================================================ */
 
-     @include _make-headings('h');
+    @include _make-headings('h');
 }
 
 
@@ -14,7 +14,7 @@
  *  ============================================================================ */
 
 p {
-    @if _feature(layout,vertical-flow) {
+    @if _feature(layout, vertical-flow) {
         margin-bottom:          _gutter();
     }
 }

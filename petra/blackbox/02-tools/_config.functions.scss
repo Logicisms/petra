@@ -16,7 +16,7 @@
     @return pathfinder($petra, $_petra, $path...);
 }
 
-
+// sass-lint:disable indentation
     //  _feature()
     //  ========================================================================
     //  Aliases the _petra function to get keys from the feature config module.
@@ -95,7 +95,7 @@
             @return $list;
         }
 
-        @warn "Petra:  invalid argument: '#{$arg}' passed to _font-family(). Returning null.";
+        @warn 'Petra:  invalid argument: \'#{$arg}\' passed to _font-family(). Returning null.';
         @return null;
     }
 
@@ -109,9 +109,10 @@
     //  or the layout value for the project gutter. Defaults to the the feature
     //  flag.
 
-    @function _gutter( $type-based-grid: _feature(layout,type-based-grid) ) {
+    @function _gutter( $type-based-grid: _feature(layout, type-based-grid) ) {
         @if $type-based-grid {
 
+            // sass-lint:disable zero-unit
             @return _petra(typography, line-height, base) + 0em;
 
         }
@@ -133,7 +134,7 @@
     @function _utility-classname(
         $shorthand,
         $longhand,
-        $use-shorthand: _feature(utilities,shorthand)
+        $use-shorthand: _feature(utilities, shorthand)
     ) {
         @if $use-shorthand {
 
@@ -154,7 +155,7 @@
     //  $important (boolean) - Determines whether to output the value as
     //  !important. Defaults to the feature flag.
 
-    @function _utility-value( $value, $important: _feature(utilities,important) ) {
+    @function _utility-value( $value, $important: _feature(utilities, important) ) {
         @if $important {
 
             @return $value !important;
@@ -163,3 +164,4 @@
 
         @return $value;
     }
+// sass-lint:disable indentation

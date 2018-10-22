@@ -1,6 +1,11 @@
 //
 //  #RESOURCES
 //
+//  1. Indentation is disabled here to prevent sass-lint from flagging the
+//     nested @import block;
+//
+//  sass-lint:disable indentation [1]
+//
 
 @import
     './node_modules/sass-less-material-colors/google-material-colors';
