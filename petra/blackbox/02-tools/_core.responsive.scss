@@ -2,11 +2,15 @@
 //  #TOOLS, #CORE-RESPONSIVE
 //
 
-@function _breakpoint-make-query($arg...) {
+@function _breakpoint-make-query($args...) {
     $query: 'only screen';
 
-    @each $property, $value in $arg {
-        $query: $query + ' and (#{$property}: #{$value})';
+    @each $key-val in $args {
+        @each $property, $value in $key-val {
+
+            $query: $query + ' and (#{$property}: #{$value})';
+
+        }
     }
 
     @return $query;

@@ -47,16 +47,16 @@
 
         @if not $conditional-padding {
             padding: {
-                right:              (_gutter / 2);
-                left:               (_gutter / 2); }
+                right:              (_gutter() / 2);
+                left:               (_gutter() / 2); }
         }
     }
 
     @if $conditional-padding {
         @at-root #{'.' + _prefix(object) + 'row'} > & {
             padding: {
-                right:              (_gutter / 2);
-                left:               (_gutter / 2); }
+                right:              (_gutter() / 2);
+                left:               (_gutter() / 2); }
         }
     }
 }

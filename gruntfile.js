@@ -43,8 +43,7 @@ module.exports = function(grunt) {
                 implementation: require(config.sass.implementation),
                 indentWidth: 4,
                 outputStyle: config.sass.style,
-                precision: config.sass.precision,
-                sourceComments: !config.build.optimize
+                precision: config.sass.precision
             },
             build: {
                 files: (function() { // [3]
@@ -69,8 +68,8 @@ module.exports = function(grunt) {
             options: {
                 map: false,
                 processors: [
-                    require('autoprefixer')(config.postcss.autoprefixer),
-                    require('cssnano')()
+                    require('autoprefixer')(config.postcss.autoprefixer)
+                    // require('cssnano')()
                 ]
             },
             build: { expand: true, cwd: dir.bld + '/css', src: ['**/*.css'], dest: dir.bld + '/css/' }
@@ -190,7 +189,7 @@ module.exports = function(grunt) {
     ]);
     grunt.registerTask('_build-styles', [
         'newer:copy:build-styles',
-        'newer:sass',
+        'sass',
         config.build.optimize ? 'postcss' : 'skipped-task:postcss',
         'newer:copy:dist-styles'
     ]);

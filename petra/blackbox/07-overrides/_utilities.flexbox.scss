@@ -33,11 +33,13 @@
      *  ============================================================================ */
 
     @include _prefix(utility, 'flex-grow') {
+        /* csslint ignore:start */
         @include _make-responsive-utility {
             flex: {
                 basis:              _utility-value(0%);
                 grow:               _utility-value(1); }
         }
+        /* csslint ignore:end */
     }
 
     @include _prefix(utility, 'flex-push') {

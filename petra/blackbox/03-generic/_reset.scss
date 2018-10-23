@@ -10,7 +10,7 @@
  *      https://getbootstrap.com/docs/4.0/content/reboot/
 **/
 
-//  sass-lint:disable no-universal-selectors, no-vendor-prefixes
+// sass-lint:disable no-universal-selectors, no-vendor-prefixes
 
 /*  Document
  *  ============================================================================
@@ -152,6 +152,7 @@ button {
     }
 }
 
+/* csslint ignore:start */
 button,
 [type='button'],
 [type='reset'],
@@ -170,6 +171,7 @@ button,
         outline:                1px dotted ButtonText;
     }
 }
+/* csslint ignore:end */
 
 button,
 input,
@@ -224,6 +226,7 @@ textarea {
     overflow:               auto;
 }
 
+/* csslint ignore:start */
 [type='number'] {
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button { /* [6] */
@@ -246,6 +249,7 @@ textarea {
 
     font:                   inherit; /* [11] */
 }
+/* csslint ignore:end */
 
 
 /*  Grouping
@@ -332,12 +336,14 @@ a {
 }
 
 // sass-lint:disable force-attribute-nesting
+/* csslint ignore:start */
 abbr[title] {
     // sass-lint:disable-block no-duplicate-properties
     border-bottom:          0; /* [1] */
     text-decoration:        underline; /* [2] */
     text-decoration:        underline dotted; /* [2] */
 }
+/* csslint ignore:end */
 // sass-lint:enable force-attribute-nesting
 
 
