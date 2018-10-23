@@ -1,6 +1,6 @@
 module.exports = {
     dir: {
-        src: 'dev',
+        src: 'src',
         bld: 'build',
         out: 'dist'
     },

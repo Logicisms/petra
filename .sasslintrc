@@ -9,7 +9,7 @@
         "declarations-before-nesting": 1,
         "empty-args": 0,
         "indentation": [
-            1,
+            2,
             {
                 "size": 4
             }
