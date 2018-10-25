@@ -7,8 +7,6 @@
  *  2. Automatically loads all grunt tasks listed in package.json.
  *  3. A function is used here to build the files object in accordance with the
  *     'stylesheets' array defined in the config.
- *  4. Targets here are built out dynamically due to the task's atypical file
- *     listing method.
  *
  *  a. This *could* use a function to specifically target files corresponding to
  *     those assigned to 'stylesheets'. As-is, doing so would probably provide
@@ -25,12 +23,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         copy: {
             'build-markup': { expand: true, cwd: dir.src + '/html', src: ['**/*'], dest: dir.bld + '/html/' },
-            'build-styles': {
-                files: [
-                    { expand: true, cwd: dir.src + '/sass', src: ['**/*'], dest: dir.bld + '/sass/' },
-                    { expand: true, cwd: 'petra', src: ['**/*'], dest: dir.bld + '/sass/' }
-                ]
-            },
+            'build-styles': { expand: true, cwd: dir.src + '/sass', src: ['**/*'], dest: dir.bld + '/sass/' },
 
             'dist-markup': { expand: true, cwd: dir.bld + '/html', src: ['**/*.html'], dest: dir.out + '/www/' },
             'dist-styles': { expand: true, cwd: dir.bld + '/css', src: ['**/*.css'], dest: dir.out + '/www/css/' }, // [a]
