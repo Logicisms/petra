@@ -8,6 +8,9 @@
 //
 
 @import
-    'blackbox/01-settings/petra';
-
-$petra: () !default;
+    'blackbox/01-settings/config.debugging',
+    'blackbox/01-settings/config.features',
+    'blackbox/01-settings/config.layout',
+    'blackbox/01-settings/config.namespacing',
+    'blackbox/01-settings/config.typography',
+    'blackbox/01-settings/config.utilities';

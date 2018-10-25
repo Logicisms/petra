@@ -1,0 +1,25 @@
+//
+//  #TOOLS, #CONFIG-CONSTRUCTORS
+//
+//  Builds config maps from settings modules.
+//
+
+$_petra: config-make(
+    'id',
+    $_petra-config-debugging,
+    $_petra-config-features,
+    $_petra-config-layout,
+    $_petra-config-namespacing,
+    $_petra-config-typography,
+    $_petra-config-utilities
+);
+
+$petra: config-make(
+    'id',
+    $petra-config-debugging,
+    $petra-config-features,
+    $petra-config-layout,
+    $petra-config-namespacing,
+    $petra-config-typography,
+    $petra-config-utilities
+) !default;

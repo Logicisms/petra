@@ -9,11 +9,12 @@
 
 @charset 'utf-8';
 
-@import
-    './petra/00-resources',
-    './petra/01-settings',
-    './petra/02-tools',
-    './petra/03-generic',
-    './petra/04-elements',
-    './petra/05-objects',
-    './petra/07-overrides';
+@import './petra/00-resources';
+@import './petra/01-settings';
+@import './petra/02-tools';
+@import './petra/03-generic';
+@import './petra/04-elements';
+@import './petra/05-objects';
+@import './petra/07-overrides';
+
+@include _scope-index;

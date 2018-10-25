@@ -32,3 +32,5 @@ $_petra-config-utilities: (
 
     type-scale-values:      (1, 10), // Accepts a single number or a list. If the list is two-entries long, the entries will be used as the lower and upper limits for the type scaling classes.
 );
+
+$petra-config-utilities: () !default;

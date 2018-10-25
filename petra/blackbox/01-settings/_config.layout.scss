@@ -41,3 +41,5 @@ $_petra-config-layout: (
         breakpoints:            (small, medium, large), // Breakpoint keywords should correspond to project breakpoints as defined within the layout submodule.
     ),
 );
+
+$petra-config-layout: () !default;

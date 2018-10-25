@@ -1,0 +1,122 @@
+//
+//  #SETTINGS, #PETRA-FEATURES
+//
+//  @TODO: this module's annotations can be replaced with a dedicated article
+//  in Petra's documentation.
+//
+//  1. If 'true', Petra will outline all elements in the DOM following the
+//     options defined in the debug config module.
+//  2. If 'true', Petra will print an index of output class scopes to the
+//     compiler.
+//  3. If 'true', mixins using Petra's debugger will render with a red outline
+//     when passed an invalid argument. If 'false' the compiler will error out.
+//  4. https://csswizardry.com/2016/11/nesting-your-bem/
+//  5. https://css-tricks.com/abem-useful-adaptation-bem/#article-header-id-5
+//  6. If 'true', will completely unset user-agent button styles, causing them
+//     to be rendered as plain text.
+//  7. If 'true', will set the global :focus outline to 0.
+//  8. If 'true', will remove the list style type from ordered and unordered
+//     lists.
+//  9. If 'true', will reset the pseudo element content for <blockquote> and
+//     <q> elements.
+//  10. If 'true', will reset styles for headings, and semantic <em> and
+//      <strong> elements, to prevent them for being used to apply non-semantic
+//      styles.
+//  11. If 'true', will output a reset for table styles.
+//  12. If 'true', will output a configurable, Bootstrap-like grid system.
+//  13. If 'true', will only apply padding to columns that are direct children
+//      of 'row' objects.
+//  14. If 'true', will use the flexbox module to format the grid system.
+//      Otherwise, will use a clearfix/float-based grid system.
+//  15. If 'true', project gutter and vertical spacing will be based on the
+//      line-height.
+//  16. If 'true', certain block-level elements will be output with vertical
+//      margins based on the project gutter.
+//  17. If 'true', will generate <h1>-<h6> heading font sizes using the
+//      `heading-scale-factor` value in the typography config module.
+//  18. If 'true' and 'make-headings' is enabled, will output <h1>-<h6> elements
+//      using the generated font-sizes.
+//  19. If 'true' and 'make-headings' is enabled, will output heading object
+//      classes using the generated font-sizes.
+//  20. If 'true', will make all utility class values !important, to ensure
+//      consistency across scopes.
+//  21. If 'true', will output an array of responsive modifiers (corresponding
+//      with grid breakpoints) for enabled utilities. Currently, can lead to
+//      bloated output.
+//  22. If 'true', utility classes will be output using the shorthand versions
+//      of their class names, where applicable.
+//  23. If 'true', will output a small set of display and visibility affecting
+//      utilities.
+//  24. If 'true', outputs a set of flexbox utility classes for use with the
+//      framework's flex object.
+//  25. If 'true', will output a utility class that applies the health-check
+//      outlines to descendant entities in the DOM.
+//  26. If 'true', will use the configured settings to build out single-property
+//      utility classes.
+//  27. If 'true', outputs a set of transform utility classes based on the
+//      transform grades set in the utility config.
+//  28. If 'true', outputs a set of typography-affecting utilities.
+//  29. If 'true', will output a print @media block to reset certain styles for
+//      print.
+//
+
+$_petra-config-features: (
+    id: 'feature',
+
+    debug: (
+        health-check:           false, // [1]
+        index-scopes:           false, // [2]
+        visual-debug:           true, // [3]
+    ),
+
+    namespace: (
+        bem-nesting:            false, // [4]
+        strict-nesting:         false,
+        detached-modifiers:     false, // [5]
+    ),
+
+    reset: (
+        buttons:                true, // [6]
+        focus:                  false, // [7]
+        lists:                  true, // [8]
+        quotes:                 true, // [9]
+        semantic-type:          true, // [10]
+        tables:                 true, // [11]
+    ),
+
+    layout: (
+        grid-system:            true, // [12]
+        grid: (
+            conditional-padding:    true, // [13]
+            flexbox:                true, // [14]
+            responsive:             true,
+        ),
+        type-based-grid:        true, // [15]
+        vertical-flow:          true, // [16]
+    ),
+
+    typography: (
+        make-headings:          true, // [17]
+        heading: (
+            elements:               true, // [18]
+            objects:                false, // [19]
+        ),
+    ),
+
+    utilities: (
+        important:              true, // [20]
+        responsive:             false, // [21]
+        shorthand:              false, // [22]
+
+        display:                true, // [23]
+        flexbox:                true, // [24]
+        health-check:           false, // [25]
+        single-responsibility:  true, // [26]
+        transform:              true, // [27]
+        typography:             true, // [28]
+    ),
+
+    print-media:            true, // [29]
+);
+
+$petra-config-features: () !default;
