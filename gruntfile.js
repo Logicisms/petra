@@ -134,13 +134,6 @@ module.exports = function(grunt) {
             newer: ['node_modules/grunt-newer/.cache']
         },
 
-        jshint: {
-            options: {
-                jshintrc: true
-            },
-            grunt: ['gruntfile.js', './config/*.js']
-        },
-
         sasslint: {
             options: {
                 configFile: './.sasslintrc'
@@ -201,7 +194,6 @@ module.exports = function(grunt) {
     /*  Debug tasks
      *  ===================================================================== */
 
-    grunt.registerTask('lint-grunt', ['jshint:grunt']);
     grunt.registerTask('lint-sass', 'Runs sasslint on the specified target, or on all targets.', function(target){
         grunt.task.run([target ? 'sasslint:' + target : 'sasslint']);
     });
