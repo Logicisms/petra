@@ -33,7 +33,7 @@ Once the package has been installed, import Petra's styles into your project:
 
 ```scss
 // single import method, for simple integration.
-@import './node_modules/petra-sass/petra/petra';
+@import './node_modules/petra-sass/petra';
 ```
 
 
