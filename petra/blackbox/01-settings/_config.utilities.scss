@@ -1,6 +1,10 @@
 //
 //  #SETTINGS, #PETRA-UTILITIES
 //
+//  1. Accepts a single number or a list. If the list is two-entries long, the
+//     entries will be used as the lower and upper limits for the type scaling
+//     classes.
+//
 
 $_petra-config-utilities: (
     id: 'utility',
@@ -30,7 +34,7 @@ $_petra-config-utilities: (
         ),
     ),
 
-    type-scale-values:      (1, 10), // Accepts a single number or a list. If the list is two-entries long, the entries will be used as the lower and upper limits for the type scaling classes.
+    type-scale-values:      (1, 10), // [1]
 );
 
 $petra-config-utilities: () !default;

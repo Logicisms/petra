@@ -1,6 +1,8 @@
 //
 //  #SETTINGS, #PETRA-NAMESPACING
 //
+//  1. Escaped values cannot be wrapped in quotes.
+//
 
 $_petra-config-namespacing: (
     id: 'namespace',
@@ -15,14 +17,14 @@ $_petra-config-namespacing: (
         state:                  'is-',
         state-within:           'has-',
 
-        hack:                   \*\*, // Escaped values cannot be wrapped in quotes, as doing so causes compiler issues.
+        hack:                   \*\*, // [1]
         javascript:             'js-',
     ),
 
     delimiter: (
         element:                '__',
         modifier:               '--',
-        responsive:             \@,
+        responsive:             \@, // [1]
     ),
 );
 

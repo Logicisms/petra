@@ -38,3 +38,5 @@ Once the package has been installed, import Petra's styles into your project:
 
 
 ## Configuring Petra
+
+See documentation for [Configuring Petra](https://github.com/Logicisms/petra/wiki/Configuring-Petra).

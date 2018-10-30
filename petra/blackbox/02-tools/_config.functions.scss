@@ -74,16 +74,14 @@
     //  defining a list of valid font stacks.
 
     @function _font-family($arg) {
-        $arglist: _petra(typography, font-family, $arg);
-        $list: ();
-
         @if map-has-key(_petra(typography, font-family), $arg) {
+            $arglist: _petra(typography, font-family, $arg);
+            $list: ();
+
             @each $key in $arglist {
                 @if map-has-key(_petra(typography, font-stack), $key) {
 
-                    $stack: _font-stack($key);
-
-                    $list: join($list, $stack, comma, false);
+                    $list: join($list, _font-stack($key), comma, false);
 
                 } @else {
 

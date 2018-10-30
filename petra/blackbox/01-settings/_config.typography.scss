@@ -1,6 +1,13 @@
 //
 //  #SETTINGS, #PETRA-TYPOGRAPHY
 //
+//  1. System fonts, to leverage the native typefaces of user devices.
+//  2. System fonts for emoji support.
+//  3. The font-family config references the font stacks defined in the
+//     font-stack config.
+//  4. The font-size applied to both subscript and superscript elements.
+//  5. The line-height applied specifically to headings h1-h6.
+//
 
 $_petra-config-typography: (
     id: 'typography',
@@ -24,21 +31,21 @@ $_petra-config-typography: (
         serif:                  ('Times New Roman', Times, serif),
         monospace:              ('Lucida Console', Monaco, monospace),
 
-        system: ( // System fonts, to leverage the native typefaces of user devices.
+        system: ( // [1]
             -apple-system,
             BlinkMacSystemFont,
             'Ubuntu',
             'Segoe UI',
             'Roboto'
         ),
-        emoji: ( // System fonts for emoji support.
+        emoji: ( // [2]
             'Apple Color Emoji',
             'EmojiOne',
             'Segoe UI Emoji',
             'Segoe UI Symbol'
         ),
     ),
-    font-family: ( // The font-family config references the font stacks defined in the font-stack config.
+    font-family: ( // [3]
         default:                (system, sans-serif, emoji),
     ),
 
@@ -47,12 +54,12 @@ $_petra-config-typography: (
 
         smaller:                85%,
         larger:                 115%,
-        subscript:              75%, // The font-size applied to both subscript and superscript elements.
+        subscript:              75%, // [4]
     ),
 
     line-height: (
         base:                   1.75,
-        heading:                1.15, // The line-height applied specifically to headings h1-h6.
+        heading:                1.15, // [5]
     ),
 
     heading-scale-factor:   1.25,

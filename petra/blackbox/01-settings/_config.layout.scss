@@ -1,6 +1,9 @@
 //
 //  #SETTINGS, #PETRA-LAYOUT
 //
+//  1. Breakpoint keywords should correspond to project breakpoints as defined
+//     within the layout, breakpoint submodule.
+//
 
 $_petra-config-layout: (
     id: 'layout',
@@ -38,7 +41,7 @@ $_petra-config-layout: (
         columns:                12,
         gutter:                 1.75em,
 
-        breakpoints:            (small, medium, large), // Breakpoint keywords should correspond to project breakpoints as defined within the layout submodule.
+        breakpoints:            (small, medium, large), // [1]
     ),
 );
 
