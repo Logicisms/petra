@@ -62,7 +62,6 @@ module.exports = function(grunt) {
                 map: false,
                 processors: [
                     require('autoprefixer')(config.postcss.autoprefixer)
-                    // require('cssnano')()
                 ]
             },
             build: { expand: true, cwd: dir.bld + '/css', src: ['**/*.css'], dest: dir.bld + '/css/' }
