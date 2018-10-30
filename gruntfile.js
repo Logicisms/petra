@@ -182,9 +182,7 @@ module.exports = function(grunt) {
         config.build.lint ? 'sasslint:src' : 'skipped-task:sasslint',
         'concurrent:build',
         config.build.clean ? 'clean:build' : 'skipped-task:clean:build',
-        config.build.lint ? 'csslint:dist' : 'skipped-task:csslint',
-        'connect',
-        'watch'
+        config.build.lint ? 'csslint:dist' : 'skipped-task:csslint'
     ]);
 
     grunt.registerTask('default', config.build.default);

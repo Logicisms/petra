@@ -22,7 +22,7 @@ module.exports = {
         livereload: 35729
     },
     build: {
-        default: ['clean', 'build'],
+        default: ['clean', 'build', 'connect', 'watch'],
         clean: false,
         lint: true,
         optimize: true
