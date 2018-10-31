@@ -5,23 +5,23 @@
     "author": "Logicisms <jeanluc.harbin@gmail.com>",
     "license": "MIT",
     "keywords": [
-        "Sass",
-        "SCSS",
-        "CSS reset",
-        "grid",
-        "flexbox",
         "BEM",
+        "config",
+        "CSS reset",
+        "flexbox",
+        "framework",
+        "grid",
         "inverted triangle",
         "ITCSS",
-        "config",
-        "framework"
+        "Sass",
+        "SCSS"
     ],
     "main": "_petra.scss",
     "repository": "git@github.com:Logicisms/petra.git",
     "bugs": "https://github.com/Logicisms/petra/issues",
     "files": [
-        "_petra.scss",
         "petra/**/*.scss",
+        "_petra.scss",
         "LICENSE",
         "package.json",
         "README.md"
