@@ -4,6 +4,8 @@
 //  Config introspection functions. All internal functions are prefixed with an
 //  underscore to prevent collisions with non-framework functions.
 //
+//  sass-lint:disable indentation
+//
 
 //  _petra()
 //  ============================================================================
@@ -16,7 +18,6 @@
     @return pathfinder($petra, $_petra, $path...);
 }
 
-// sass-lint:disable indentation
     //  _feature()
     //  ========================================================================
     //  Aliases the _petra function to get keys from the feature config module.
@@ -162,4 +163,3 @@
 
         @return $value;
     }
-// sass-lint:disable indentation
