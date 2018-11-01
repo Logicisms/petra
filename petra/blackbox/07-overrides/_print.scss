@@ -1,0 +1,81 @@
+@if _feature(print-media) {
+    /**
+     *  #OVERRIDES, #PRINT
+     *
+     *  Print styles are derived from the HTML5 Boilerplate project.
+     *  https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css
+    **/
+
+    // sass-lint:disable force-attribute-nesting, force-pseudo-nesting, no-universal-selectors, no-color-literals
+
+    @media print {
+        *,
+        *::before,
+        *::after {
+            background-color:       transparent !important;
+            box-shadow:             none !important;
+
+            color:                  #000 !important;
+            text-shadow:            none !important;
+        }
+
+        html {
+            background-color:       #fff !important;
+        }
+
+        a {
+            &,
+            &:visited {
+                text-decoration:        underline;
+            }
+
+            &[href]::after {
+                content:                ' (' attr(html) ')';
+            }
+
+            &[href='#']::after,
+            &[href='javascript:']::after {
+                content:                '';
+            }
+        }
+
+        abbr[title]::after {
+            content:                ' (' attr(title) ')';
+        }
+
+        pre {
+            white-space:            pre-line;
+        }
+
+        pre,
+        blockquote {
+            border: {
+                color:              #999;
+                style:              solid;
+                width:              1px; }
+
+            page-break-inside:      avoid;
+        }
+
+        thead {
+            display:                table-header-group;
+        }
+
+        tr,
+        img {
+            page-break-inside:      avoid;
+        }
+
+        p,
+        h2,
+        h3 {
+            orphans:                3;
+            widows:                 3;
+        }
+
+        h2,
+        h3 {
+            page-break-after:       avoid;
+        }
+    }
+}

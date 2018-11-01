@@ -1,0 +1,16 @@
+//
+//  #SETTINGS
+//
+//  1. Indentation is disabled here to prevent sass-lint from flagging the
+//     nested @import block;
+//
+//  sass-lint:disable indentation [1]
+//
+
+@import
+    'blackbox/01-settings/config.debugging',
+    'blackbox/01-settings/config.features',
+    'blackbox/01-settings/config.layout',
+    'blackbox/01-settings/config.namespacing',
+    'blackbox/01-settings/config.typography',
+    'blackbox/01-settings/config.utilities';

@@ -1,0 +1,19 @@
+//
+//  Petra
+//
+//  1. Indentation is disabled here to prevent sass-lint from flagging the
+//     nested @import block;
+//
+//  sass-lint:disable indentation [1]
+//
+
+@import
+    'petra/00-resources',
+    'petra/01-settings',
+    'petra/02-tools',
+    'petra/03-generic',
+    'petra/04-elements',
+    'petra/05-objects',
+    'petra/07-overrides';
+
+@include _scope-index;

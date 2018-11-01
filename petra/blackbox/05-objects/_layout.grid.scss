@@ -1,0 +1,37 @@
+@if _feature(layout, grid-system) {
+    /**
+     *  #OBJECTS, #GRID
+    **/
+
+    @include _prefix(object, 'row') {
+        @include _block {
+            position:               relative;
+
+            margin: {
+                right:              (_gutter() / -2);
+                left:               (_gutter() / -2); }
+
+            @if _feature(layout, grid, flexbox) {
+
+                display:                flex;
+                flex-wrap:              wrap;
+
+            } @else {
+
+                display:                block;
+
+                &::after {
+                    clear:                  both;
+                    display:                block;
+
+                    content:                ' ';
+                }
+
+            }
+        }
+    }
+
+    @include _prefix(object, 'col') {
+        @include _make-columns;
+    }
+}

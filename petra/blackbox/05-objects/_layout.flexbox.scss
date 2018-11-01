@@ -1,0 +1,23 @@
+/**
+ *  #OBJECTS, #FLEXBOX
+ *
+ *  1. Present to address cross-browser text truncation issue.
+ *     https://css-tricks.com/flexbox-truncated-text/
+**/
+
+@include _prefix(object, 'flex') {
+    // sass-lint:disable-block no-universal-selectors
+    @include _block {
+        display:                flex;
+        flex-wrap:              nowrap;
+    }
+
+
+    > * {
+        flex: {
+            basis:              auto;
+            grow:               0;
+            shrink:             1; }
+        min-width:              0; /* [1] */
+    }
+}

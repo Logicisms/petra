@@ -1,0 +1,68 @@
+//
+//  #SETTINGS, #PETRA-TYPOGRAPHY
+//
+//  1. System fonts, to leverage the native typefaces of user devices.
+//  2. System fonts for emoji support.
+//  3. The font-family config references the font stacks defined in the
+//     font-stack config.
+//  4. The font-size applied to both subscript and superscript elements.
+//  5. The line-height applied specifically to headings h1-h6.
+//
+
+$_petra-config-typography: (
+    id: 'typography',
+
+    browser-context:        16px,
+
+    font-face: (
+        // open-sans: (
+        //     font-family:            "Open Sans",
+        //     font-style:             normal,
+        //     font-weight:            400,
+        //     src: (
+        //         url('/fonts/OpenSans-Regular-webfont.woff2') format('woff2'),
+        //         url('/fonts/OpenSans-Regular-webfont.woff') format('woff')
+        //     )
+        // ), // open-sans
+    ),
+
+    font-stack: (
+        sans-serif:             ('Helvetica Neue', Helvetica, sans-serif),
+        serif:                  ('Times New Roman', Times, serif),
+        monospace:              ('Lucida Console', Monaco, monospace),
+
+        system: ( // [1]
+            -apple-system,
+            BlinkMacSystemFont,
+            'Ubuntu',
+            'Segoe UI',
+            'Roboto'
+        ),
+        emoji: ( // [2]
+            'Apple Color Emoji',
+            'EmojiOne',
+            'Segoe UI Emoji',
+            'Segoe UI Symbol'
+        ),
+    ),
+    font-family: ( // [3]
+        default:                (system, sans-serif, emoji),
+    ),
+
+    font-size: (
+        default:                1.8rem,
+
+        smaller:                85%,
+        larger:                 115%,
+        subscript:              75%, // [4]
+    ),
+
+    line-height: (
+        base:                   1.75,
+        heading:                1.15, // [5]
+    ),
+
+    heading-scale-factor:   1.25,
+);
+
+$petra-config-typography: () !default;

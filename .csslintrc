@@ -1,0 +1,16 @@
+{
+    "compatible-vendor-prefixes": false,
+    "font-sizes": false,
+    "ids": 2,
+    "important": false,
+    "known-properties": false,
+    "order-alphabetical": false,
+    "shorthand": false,
+    "unique-headings": false,
+    "universal-selector": false,
+
+    //  disabling old IE rules
+    "adjoining-classes": false,
+    "box-sizing": false,
+    "bulletproof-font-face": false
+}

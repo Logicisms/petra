@@ -1,0 +1,137 @@
+//
+//  #TOOLS, #CORE-NAMESPACING
+//
+//  1. 'respond-to()' is defined in '_core.responsive.scss'.
+//
+
+//  _prefix()
+//  ============================================================================
+//  Prepends a prefix from the config to the given class name. Will
+//  automatically join stateful prefixes to their parent classes when nested.
+//
+//  $prefix (key) - The prefix to pull from the config. Key must exist in the
+//  config.
+//  $classes (arglist) - Class names to be prefixed.
+
+@mixin _prefix($prefix, $classes...) {
+    @if _prefix($prefix) {
+        // sass-lint:disable indentation
+
+        $class-type: if(
+            ($prefix == state or $prefix == state-within) and &,
+            '&.#{ _prefix($prefix) }',
+            '.#{_prefix($prefix)}'
+        );
+        $selectors: ();
+
+        @each $class in $classes {
+            $selectors: append($selectors, ($class-type + $class), comma);
+
+            @include _scope-index-counter($prefix, $class);
+        }
+
+        #{$selectors} { @content; }
+
+    } @else {
+
+        @include _debug(
+            $mixin: '@include _prefix()',
+            $value: $prefix,
+            $valid: map-keys( _petra(namespace, prefix) ),
+            $warn: false
+        );
+
+    }
+}
+
+
+//  _block
+//  ============================================================================
+//  Used to scope content within a block class based on BEM nesting settings.
+
+@mixin _block {
+    @if _feature(namespace, bem-nesting) and _feature(namespace, strict-nesting) {
+
+        &#{&} { @content; }
+
+    } @else {
+
+        & { @content; }
+
+    }
+}
+
+
+//  _element()
+//  ============================================================================
+//  Prepends the configured element delimiter and parent block's class name to
+//  the given element class.
+//
+//  $classes (arglist) - The classes to be namespaced.
+
+@mixin _element($classes...) {
+    $parent: if(_feature(namespace, bem-nesting), '& &', '&');
+    $selectors: ();
+
+    @each $class in $classes {
+
+        $selectors: append($selectors, ($parent + _delimiter(element) + $class), comma);
+
+    }
+
+    #{$selectors} { @content; }
+}
+
+
+//  _modifier()
+//  ============================================================================
+//  Prepends the configured modifier delimiter and parent block or element's
+//  class name to the given modifier class.
+//
+//  $classes (arglist) - The classes to be namespaced.
+
+@mixin _modifier($classes...) {
+    $modifier: if(
+        _feature(namespace, detached-modifiers),
+        '&.#{_delimiter(modifier)}',
+        '&#{_delimiter(modifier)}'
+    );
+    $selectors: ();
+
+    @each $class in $classes {
+
+        $selectors: append($selectors, ($modifier + $class), comma);
+
+    }
+
+    #{$selectors} { @content; }
+}
+
+
+//  _responsive-modifier()
+//  ============================================================================
+//  Appends the given breakpoint's shorthand to the parent class, and nests the
+//  new class and content block in a media query matching the given breakpoint.
+//
+//  $breakpoints (arglist) - The breakpoints for which responsive modifiers will
+//  be generated.
+
+@mixin _responsive-modifier($breakpoints...) {
+    @if length($breakpoints) == 0 {
+        $breakpoints: _petra(layout, grid, breakpoints);
+    }
+
+    $map: _petra(layout, breakpoint);
+
+    @each $breakpoint in $breakpoints {
+        @if map-has-key($map, $breakpoint) {
+            $shorthand: map-deep-get($map, $breakpoint, shorthand);
+
+            @include respond-to($breakpoint) { // [1]
+                &#{_delimiter(responsive) + $shorthand} {
+                    @content;
+                }
+            }
+        }
+    }
+}

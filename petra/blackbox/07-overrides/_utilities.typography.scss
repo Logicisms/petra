@@ -1,0 +1,69 @@
+@if _feature(utilities, typography) {
+    /**
+     *  #OVERRIDES, #TYPOGRAPHY
+    **/
+
+    $_petra-utility-class-text: _utility-classname('txt', 'text');
+
+    @include _prefix(utility, $_petra-utility-class-text) {
+
+        &-#{_utility-classname('sm', 'smaller')} {
+            @include _make-responsive-utility {
+                font-size:              _petra(typography, font-size, smaller);
+            }
+        }
+
+        &-#{_utility-classname('lg', 'larger')} {
+            @include _make-responsive-utility {
+                font-size:              _petra(typography, font-size, larger);
+            }
+        }
+
+
+        &-#{_utility-classname('trunc', 'truncate')} {
+            @include _make-responsive-utility {
+                overflow:               hidden;
+                text-overflow:          ellipsis;
+                white-space:            nowrap;
+            }
+        }
+
+
+        $type-scale-values: _petra(utility, type-scale-values);
+
+        @if $type-scale-values and ($type-scale-values != 0) {
+            // sass-lint:disable-block zero-unit
+            @if length($type-scale-values) == 2 {
+
+                $start: nth($type-scale-values, 1);
+                $end: nth($type-scale-values, 2);
+
+                @for $i from $start through $end {
+                    &-x#{$i} {
+                        @include _make-responsive-utility {
+                            font-size: _utility-value($i + 0em);
+                        }
+                    }
+                }
+
+            } @else {
+
+                @each $value in $type-scale-values {
+                    &-x#{$value} {
+                        @include _make-responsive-utility {
+                            font-size: _utility-value($value + 0em);
+                        }
+                    }
+                }
+
+            }
+        }
+
+    }
+
+    @include _prefix(utility, 'nowrap') {
+        @include _make-responsive-utility {
+            white-space:            _utility-value(nowrap);
+        }
+    }
+}
