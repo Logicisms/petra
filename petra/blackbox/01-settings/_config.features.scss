@@ -1,0 +1,64 @@
+//
+//  #SETTINGS, #PETRA-FEATURES
+//
+
+$_petra-config-features: (
+    id: 'feature',
+
+    debug: (
+        health-check:           false,
+        index-scopes:           false,
+        visual-debug:           true,
+    ),
+
+    namespace: (
+        bem-nesting:            false,
+        strict-nesting:         false,
+        detached-modifiers:     false,
+    ),
+
+    reset: (
+        buttons:                true,
+        focus:                  false,
+        lists:                  true,
+        quotes:                 true,
+        semantic-type:          true,
+        tables:                 true,
+    ),
+
+    layout: (
+        grid-system:            true,
+        grid: (
+            conditional-padding:    true,
+            flexbox:                true,
+            responsive:             true,
+        ),
+        type-based-grid:        true,
+        vertical-flow:          true,
+    ),
+
+    typography: (
+        make-headings:          true,
+        heading: (
+            elements:               true,
+            objects:                false,
+        ),
+    ),
+
+    utilities: (
+        important:              true,
+        responsive:             false,
+        shorthand:              false,
+
+        display:                true,
+        flexbox:                true,
+        health-check:           false,
+        single-responsibility:  true,
+        transform:              true,
+        typography:             true,
+    ),
+
+    print-media:            true,
+);
+
+$petra-config-features: () !default;

@@ -1,0 +1,22 @@
+/**
+ *  #ELEMENTS, #GROUPING
+**/
+
+blockquote {
+    @if _feature(layout, vertical-flow) {
+        margin-bottom:          _gutter();
+    }
+}
+
+hr {
+    @if _feature(layout, vertical-flow) {
+        margin: {
+            top:                (_gutter() / 2);
+            bottom:             (_gutter() / 2); }
+    }
+
+    border: {
+        top:                0;
+        right:              0;
+        left:               0; }
+}

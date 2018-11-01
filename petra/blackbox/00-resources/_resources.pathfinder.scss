@@ -1,0 +1,30 @@
+//
+//  #RESOURCES, #PATHFINDER
+//
+//  The Pathfinder serves as an enhanced 'map-get()' function for large
+//  projects, allowing for the use of two configuration maps; one serving as a
+//  front-facing settings map, the other serving as a fallback and source of
+//  truth.
+//
+//  $config (map) - The editable, front-facing settings map.
+//  $source (map) - The readonly source config map.
+//  $path (list) - A chain of keys to get from the config.
+//
+
+@function pathfinder($config, $source, $path...) {
+    $map: $config;
+
+    @each $key in $path {
+        @if map-has-key($map, $key) {
+
+            $map: map-get($map, $key);
+
+        } @else {
+
+            @return map-deep-get($source, $path...);
+
+        }
+    }
+
+    @return $map;
+}

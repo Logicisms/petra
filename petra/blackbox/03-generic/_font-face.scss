@@ -1,0 +1,17 @@
+/**
+ *  #GENERIC, #FONT-FACE
+**/
+
+@if length( _petra(typography, font-face) ) > 0 {
+    $font-faces: _petra(typography, font-face);
+
+    @each $font-face in map-keys($font-faces) {
+
+        @font-face {
+            @each $property, $value in map-get($font-faces, $font-face) {
+                #{$property}: $value;
+            }
+        }
+
+    }
+}

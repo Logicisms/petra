@@ -1,0 +1,33 @@
+@if _feature(utilities, single-responsibility) {
+    /**
+     *  #OVERRIDES, #SINGLE-RESPONSIBILITY
+    **/
+
+    //
+    //  Constructs single-responsibility utility classes as defined in the
+    //  config.
+    //
+    //  a. Setting the pathfinder's results to this variable prevents it from
+    //     checking against both configs at a deeper level, allowing developers
+    //     to "zero out" the default options.
+    //  b. Prevents the constructor from creating a class for empty maps.
+    //
+
+    @each $utility in map-keys( _petra(utility, single-responsibility) ) {
+        $map: _petra(utility, single-responsibility, $utility); // [a]
+
+        @if length($map) > 0 { // [b]
+            @include _prefix(utility, $utility) {
+                @each $value in map-get($map, values) {
+
+                    &-#{$value} {
+                        @include _make-responsive-utility {
+                            #{ map-get($map, property) }: _utility-value($value);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}

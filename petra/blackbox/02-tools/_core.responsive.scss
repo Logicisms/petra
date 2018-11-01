@@ -1,0 +1,40 @@
+//
+//  #TOOLS, #CORE-RESPONSIVE
+//
+
+@function _breakpoint-make-query($args...) {
+    $query: 'only screen';
+
+    @each $key-val in $args {
+        @each $property, $value in $key-val {
+
+            $query: $query + ' and (#{$property}: #{$value})';
+
+        }
+    }
+
+    @return $query;
+}
+
+@mixin respond-to($breakpoints...) {
+    @each $breakpoint in $breakpoints {
+
+        @if _petra(layout, breakpoint, $breakpoint) {
+
+            $query: _petra(layout, breakpoint, $breakpoint, query);
+
+            @media #{_breakpoint-make-query($query)} {
+                @content;
+            }
+
+        } @else {
+
+            @include _debug(
+                $mixin: '@include respond-to()',
+                $value: $breakpoint,
+                $valid: map-keys( _petra(layout, breakpoint) )
+            );
+        }
+
+    }
+}

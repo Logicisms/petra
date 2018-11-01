@@ -1,0 +1,79 @@
+//
+//  #RESOURCES, #FUNCTIONS-NUMBERS
+//
+
+//  random-range()
+//  ============================================================================
+//  Returns a random number within a range.
+//
+//  $min (number) - Minimum number.
+//  $max (number) - Maximum number.
+
+@function random-range($min, $max) {
+    $random: random();
+    $number: $min + floor($random * (($max - $min) + 1));
+
+    @return $number;
+}
+
+
+//  strip-unit()
+//  ============================================================================
+//  By Hugo Giraudel; strips CSS unit from any numerical value.
+//  https://css-tricks.com/snippets/sass/strip-unit-function/
+
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+
+//  replace-unit()
+//  ============================================================================
+//  Uses the 'strip-unit()' function to strip and replace the CSS unit from any
+//  numerical value.
+//
+//  $number (number) - Number.
+//  $unit (string) - CSS unit.
+
+@function replace-unit($number, $unit) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return strip-unit($number) + 0 + $unit;
+    }
+
+    @return $number;
+}
+
+
+//  rem()
+//  ============================================================================
+//  Converts a pixel value to rem.
+//
+//  $pixels (number) - Pixel value.
+
+@function rem($pixels) {
+    // sass-lint:disable zero-unit
+    @return (strip-unit($pixels) / 10) + 0rem;
+}
+
+
+//  em()
+//  ============================================================================
+//  Converts a pixel value to em based on browser context.
+//
+//  $pixels (number) - Pixel value.
+//  $context (number) - Pixel value; defaults to 16px.
+
+@function em($pixels, $context: 16px) {
+    // sass-lint:disable zero-unit
+    @if unitless($pixels) {
+        $pixels: $pixels + 0px;
+    }
+    @if unitless($context) {
+        $context: $context + 0px;
+    }
+    @return ($pixels / $context) + 0em;
+}

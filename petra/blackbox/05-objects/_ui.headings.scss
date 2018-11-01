@@ -1,0 +1,9 @@
+@if _feature(typography, make-headings) and _feature(typography, heading, objects) {
+    /**
+     *  #OBJECTS, #HEADINGS
+    **/
+
+    @include _prefix(object, 'h') {
+        @at-root { @include _make-headings(&); }
+    }
+}

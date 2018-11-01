@@ -1,0 +1,56 @@
+@if _feature(utilities, flexbox) {
+    /**
+     *  #OVERRIDES, #UTILITIES-FLEXBOX
+    **/
+
+    /*  Flex container
+     *  ============================================================================ */
+
+    @include _prefix(utility, 'flex-row') {
+        @include _make-responsive-utility {
+            flex: {
+                direction:          _utility-value(row);
+                wrap:               _utility-value(wrap); }
+        }
+    }
+
+    $_petra-utility-class-flex-column: _utility-classname('flex-col', 'flex-column');
+
+    @include _prefix(utility, $_petra-utility-class-flex-column) {
+        @include _make-responsive-utility {
+            flex-direction:         _utility-value(column);
+        }
+    }
+
+    @include _prefix(utility, 'flex-wrap') {
+        @include _make-responsive-utility {
+            flex-wrap:              _utility-value(wrap);
+        }
+    }
+
+
+    /*  Flex item
+     *  ============================================================================ */
+
+    @include _prefix(utility, 'flex-grow') {
+        /* csslint ignore:start */
+        @include _make-responsive-utility {
+            flex: {
+                basis:              _utility-value(0%);
+                grow:               _utility-value(1); }
+        }
+        /* csslint ignore:end */
+    }
+
+    @include _prefix(utility, 'flex-push') {
+        @each $position in (top, right, bottom, left) {
+
+            &-#{$position} {
+                @include _make-responsive-utility {
+                    margin-#{$position}: _utility-value(auto);
+                }
+            }
+
+        }
+    }
+}

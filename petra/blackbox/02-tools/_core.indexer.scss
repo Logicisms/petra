@@ -1,0 +1,69 @@
+//
+//  #TOOLS, #CORE-INDEXER
+//
+//  A utility that tallies an index of class scopes output by Petra. Does not
+//  provide an exact count of classes, but provides a useful abstract for
+//  tracking framework overhead.
+//
+//  The '_scope-index-counter' is included in Petra's prefixing mixin, and
+//  appends each prefixed scope's class type and name to a pair of global
+//  tracking variables.
+//
+//  The '_scope-index' mixin verifies that the feature is enabled from the
+//  config and that any scopes have been indexed, then iterates through the
+//  index using the '_scope-index-parser' function and outputs the index to the
+//  compiler.
+//
+//  sass-lint:disable no-debug
+//
+
+$_petra-scope-index-types:    ();
+$_petra-scope-index-scopes:   ();
+
+@mixin _scope-index-counter($type, $class) {
+    $_petra-scope-index-types:  append($_petra-scope-index-types, $type, comma) !global;
+    $_petra-scope-index-scopes: append($_petra-scope-index-scopes, $class, comma) !global;
+}
+
+@function _scope-index-parser($index, $classes) {
+    $prefixes: map-keys( _petra(namespace, prefix) );
+    $map: ();
+
+    @each $prefix in $prefixes {
+        $list: ();
+
+        @for $i from 1 through length($index) {
+            @if nth($index, $i) == $prefix {
+                $list: append($list, nth($classes, $i), comma);
+            }
+        }
+
+        $map: map-merge($map, ($prefix: $list) );
+    }
+
+    @return $map;
+}
+
+
+@mixin _scope-index( $true: _feature(debug, index-scopes) ) {
+    @if $true and length($_petra-scope-index-types) > 0 {
+
+        $count: 0;
+        $prefixes: map-keys( _petra(namespace, prefix) );
+        $scopes: _scope-index-parser($_petra-scope-index-types, $_petra-scope-index-scopes);
+
+        @debug 'START scope indexer.';
+
+        @each $prefix in $prefixes {
+            $num: length( map-get($scopes, $prefix) );
+            $count: $count + $num;
+            $print: if( $num > 0, map-get($scopes, $prefix), '' );
+
+            @debug '- #{$num} \'#{$prefix}\' scopes:  (#{$print}).';
+        }
+
+        @debug '- #{$count} unique scopes in total.';
+        @debug 'END scope indexer.';
+
+    }
+}

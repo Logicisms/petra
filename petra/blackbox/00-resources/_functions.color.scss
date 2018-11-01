@@ -1,0 +1,32 @@
+//
+//  #RESOURCES, #FUNCTIONS-COLOR
+//
+
+//  blacken()
+//  ============================================================================
+//  $color (color) - The color to be mixed with black.
+//  $amount (number) - The percentage by which to mix the given color.
+
+@function blacken($color, $amount) {
+    @return mix(black, $color, $amount);
+}
+// sass-lint:disable indentation
+    @function shade($color, $amount) {
+        @return blacken($color, $amount);
+    }
+// sass-lint:enable indentation
+
+
+//  whiten()
+//  ============================================================================
+//  $color (color) - The color to be mixed with white.
+//  $amount (number) - The percentage by which to mix the given color.
+
+@function whiten($color, $amount) {
+    @return mix(white, $color, $amount);
+}
+// sass-lint:disable indentation
+    @function tint($color, $amount) {
+        @return whiten($color, $amount);
+    }
+// sass-lint:enable indentation

@@ -1,0 +1,38 @@
+//
+//  #SETTINGS, #PETRA-DEBUGGING
+//
+
+$_petra-config-debugging: (
+    id: 'debug',
+
+    message: (
+        lede:                   ('Invalid argument:', 'passed to mixin'),
+        warn:                   'Follow stack trace or review rendered markup.',
+        error:                  'Correct invalid argument to unblock compiler.',
+        valid-arguments:        'Valid arguments',
+
+        mixin:                  'mixin (no message defined)',
+    ),
+    outline: (
+        color:                  red,
+        style:                  solid,
+        width:                  0.5em,
+    ),
+
+    health-check: (
+        global:                 material-color(red, a700),
+
+        object:                 material-color(purple),
+        component:              material-color(deep-purple, a400),
+        scope:                  material-color(blue, a400),
+        utility:                material-color(teal, a400),
+
+        state:                  material-color(green, a400),
+        state-within:           material-color(lime, a700),
+
+        hack:                   material-color(deep-orange, a400),
+        javascript:             material-color(blue-grey, 500),
+    ),
+);
+
+$petra-config-debugging: () !default;

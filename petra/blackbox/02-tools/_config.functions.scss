@@ -1,0 +1,165 @@
+//
+//  #TOOLS, #CORE-CONFIG
+//
+//  Config introspection functions. All internal functions are prefixed with an
+//  underscore to prevent collisions with non-framework functions.
+//
+//  sass-lint:disable indentation
+//
+
+//  _petra()
+//  ============================================================================
+//  The primary config-getting function. Uses the Pathfinder function to check
+//  the front-facing $petra config and fall back to the blackbox $_petra config.
+//
+//  $path (arglist) - A list of keys to get from the config.
+
+@function _petra($path...) {
+    @return pathfinder($petra, $_petra, $path...);
+}
+
+    //  _feature()
+    //  ========================================================================
+    //  Aliases the _petra function to get keys from the feature config module.
+    //
+    //  $path (arglist) - A list of keys to get from the config.
+
+    @function _feature($path...) {
+        @return _petra(feature, $path...);
+    }
+
+
+    //  _prefix()
+    //  ========================================================================
+    //  Aliases the _petra function to get class prefixes from the namespace
+    //  config module.
+    //
+    //  $key (key) - A key to get from the config.
+
+    @function _prefix($key) {
+        @return _petra(namespace, prefix, $key);
+    }
+
+
+    //  _delimiter()
+    //  ========================================================================
+    //  Aliases the _petra function to get class delimiters from the namespace
+    //  config module.
+    //
+    //  $key (key) - A key to get from the config.
+
+    @function _delimiter($key) {
+        @return _petra(namespace, delimiter, $key);
+    }
+
+
+    //  _font-stack()
+    //  ========================================================================
+    //  Aliases the _petra function to get font-stack lists from the typography
+    //  config module.
+    //
+    //  $key (key) - A key to get from the config.
+
+    @function _font-stack($key) {
+        @return _petra(typography, font-stack, $key);
+    }
+
+
+    //  _font-family()
+    //  ========================================================================
+    //  Using the _petra function, takes a keyword argument referencing the
+    //  keys set in the typography module's 'font-family' map and builds a
+    //  font-stack list.
+    //
+    //  $arg (key) - A keyword defined in the typography config module,
+    //  defining a list of valid font stacks.
+
+    @function _font-family($arg) {
+        @if map-has-key(_petra(typography, font-family), $arg) {
+            $arglist: _petra(typography, font-family, $arg);
+            $list: ();
+
+            @each $key in $arglist {
+                @if map-has-key(_petra(typography, font-stack), $key) {
+
+                    $list: join($list, _font-stack($key), comma, false);
+
+                } @else {
+
+                    $list: append($list, $key, comma);
+
+                }
+            }
+
+            @return $list;
+        }
+
+        @warn 'Petra:  invalid argument: \'#{$arg}\' passed to _font-family(). Returning null.';
+        @return null;
+    }
+
+
+    //  _gutter()
+    //  ========================================================================
+    //  Returns a gutter value based on the feature flag for
+    //  'layout, type-based-grid'.
+    //
+    //  $type-based-grid (boolean) - Determines whether to use the line-height
+    //  or the layout value for the project gutter. Defaults to the the feature
+    //  flag.
+
+    @function _gutter( $type-based-grid: _feature(layout, type-based-grid) ) {
+        @if $type-based-grid {
+
+            // sass-lint:disable zero-unit
+            @return _petra(typography, line-height, base) + 0em;
+
+        }
+
+        @return _petra(layout, grid, gutter);
+    }
+
+
+    //  _utility-classname()
+    //  ========================================================================
+    //  Controls whether utility classnames use shorthand or longhand syntax,
+    //  based on the feature flag for 'utilities, shorthand'.
+    //
+    //  $shorthand (string) - The abbreviated form of the class name.
+    //  $longhand (string) - The full class name.
+    //  $use-shorthand (boolean) - Determines whether the shorthand is used over
+    //  the longhand. Defaults to the feature flag.
+
+    @function _utility-classname(
+        $shorthand,
+        $longhand,
+        $use-shorthand: _feature(utilities, shorthand)
+    ) {
+        @if $use-shorthand {
+
+            @return $shorthand;
+
+        }
+
+        @return $longhand;
+    }
+
+
+    //  _utility-value()
+    //  ========================================================================
+    //  Controls whether utility class values are !important, based on the
+    //  feature flag for 'utilities, important'.
+    //
+    //  $value (any) - A CSS property value.
+    //  $important (boolean) - Determines whether to output the value as
+    //  !important. Defaults to the feature flag.
+
+    @function _utility-value( $value, $important: _feature(utilities, important) ) {
+        @if $important {
+
+            @return $value !important;
+
+        }
+
+        @return $value;
+    }

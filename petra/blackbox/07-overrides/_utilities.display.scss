@@ -1,0 +1,38 @@
+@if _feature(utilities, display) {
+    /**
+     *  #OVERRIDES, #UTILITIES-DISPLAY
+    **/
+
+    @include _prefix(utility, 'null') {
+        @include _make-responsive-utility {
+            display:                _utility-value(none);
+        }
+    }
+
+    $_petra-utility-class-hidden: _utility-classname('hid', 'hidden');
+
+    @include _prefix(utility, $_petra-utility-class-hidden) {
+        @include _make-responsive-utility {
+            visibility:             _utility-value(hidden);
+        }
+    }
+
+    $_petra-utility-class-visible: _utility-classname('vis', 'visible');
+
+    @include _prefix(utility, $_petra-utility-class-visible) {
+        @include _make-responsive-utility {
+            visibility:             _utility-value(visible);
+        }
+    }
+
+    @include _prefix(utility, 'visually-hidden') {
+        @include _make-responsive-utility {
+            @include visually-hidden;
+
+
+            @include _prefix(state, 'focusable') {
+                @include visually-hidden($focusable: true);
+            }
+        }
+    }
+}

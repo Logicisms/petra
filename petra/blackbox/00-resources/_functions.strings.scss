@@ -1,0 +1,35 @@
+//
+//  #RESOURCES, #FUNCTIONS-STRINGS
+//
+
+//  escape-quote()
+//  ============================================================================
+//  Wraps a string in escaped quotes, useful for dealing with escaped values.
+//
+//  $string (string) - Initial string.
+//  $type (string) - The type of quotation mark to output; defaults to 'double'.
+//  Valid values are 'double' and 'single'.
+
+@function unicode($string) {
+    @return unquote('\"') + $string + unquote('\"');
+}
+
+
+//  str-replace()
+//  ============================================================================
+//  By Hugo Giraudel, replaces an existing value in a string.
+//  https://css-tricks.com/snippets/sass/str-replace-function/
+//
+//  $string (string) - Initial string.
+//  $search (string) - Substring to replace.
+//  $replace (string) - New value.
+
+@function str-replace($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}

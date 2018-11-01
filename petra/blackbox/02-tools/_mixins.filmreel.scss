@@ -1,0 +1,52 @@
+//
+//  #TOOLS, #MIXINS-FILMREEL
+//
+//  The filmreel mixin is designed to streamline* the process of animating
+//  sprite sheets in CSS. To use, @include the mixin in a class with the sprite
+//  sheet as its background-image. The class must also have a set width and
+//  height, or a set aspect-ratio.
+//
+//  * With the condition that sprite sheets must be arranged vertically.
+//
+//  $frames (number) - The number of frames in the image.
+//  $duration (number) - The duration, in seconds, of the resulting animation.
+//  $name (string) - Optional; a unique identifier for the animation.
+//
+//  .example {
+//      display: block;
+//      width: 640px;
+//      height: 200px;
+//
+//      background-image: url('path/to/image.jpg');
+//      @include filmreel(30, 1.5s);
+//  }
+//
+
+@mixin filmreel($frames, $duration, $name: 'reel-#{unique-id()}') {
+    background: {
+        position:           center;
+        repeat:             no-repeat;
+        size:               100% auto; }
+
+    animation: {
+        name:               unquote($name);
+        duration:           $duration;
+        iteration-count:    infinite;
+        timing-function:    step-end; }
+
+    @at-root {
+        @keyframes #{$name} {
+
+            $var: ($frames - 1);
+
+            @for $i from 0 through $var {
+                #{100% / $var + $i} {
+
+                    background-position: 0% ( (100% / $var) * $i );
+
+                }
+            }
+
+        }
+    }
+}
