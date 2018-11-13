@@ -1,0 +1,17 @@
+@if _feature(typography, make-headings) {
+    @if _feature(typography, heading, objects) or _feature(typography, heading, classes) {
+    /**
+     *  #OVERRIDES, #HEADINGS
+    **/
+
+    @if _feature(typography, heading, objects) {
+        @warn "The \'typography, heading, objects\' flag has been marked for deprecation. Please replace it with \'typography, heading, classes\' to maintain commpatibility with future versions.";
+    }
+
+    $_petra-utility-class-text: _utility-classname('h', 'heading-');
+
+    @include _prefix(utility, 'h') {
+        @at-root { @include _make-headings(&, $utility: true); }
+    }
+}
+}

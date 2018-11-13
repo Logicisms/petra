@@ -120,7 +120,8 @@
     $selector,
     $base: 1em,
     $factor: _petra(typography, heading-scale-factor),
-    $h6: true
+    $h6: true,
+    $utility: false
 ) {
     @if $factor > 0 {
 
@@ -133,10 +134,19 @@
         }
 
         @for $i from 1 through ( if($h6, 6, 5) ) {
-            #{$selector + $i} {
-                clear: both;
+            $font-size: nth( list-reverse($list), $i );
 
-                font-size: nth( list-reverse($list), $i );
+            #{$selector + $i} {
+
+                @if $utility {
+                    clear: _utility-value(both);
+
+                    font-size: _utility-value($font-size);
+                } @else {
+                    clear: both;
+
+                    font-size: $font-size;
+                }
             }
         }
 
