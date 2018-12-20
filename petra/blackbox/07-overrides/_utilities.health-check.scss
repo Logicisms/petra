@@ -1,10 +1,14 @@
 @if _feature(debug, health-check) or _feature(utilities, health-check) {
     /**
+     *  ============================================================================
+     *
      *  #OVERRIDES, #UTILITIES-HEALTH-CHECK
      *
      *  Applies a colored outline to prefixed elements, with colors corresponding to
      *  prefixes as set in the project config. Useful for visually estimating the
      *  scope of a document's styles.
+     *
+     *  ============================================================================
     **/
 
     @if _feature(debug, health-check) {

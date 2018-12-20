@@ -1,8 +1,12 @@
 /**
+ *  ============================================================================
+ *
  *  #OBJECTS, #FLEXBOX
  *
  *  1. Present to address cross-browser text truncation issue.
  *     https://css-tricks.com/flexbox-truncated-text/
+ *
+ *  ============================================================================
 **/
 
 @include _prefix(object, 'flex') {

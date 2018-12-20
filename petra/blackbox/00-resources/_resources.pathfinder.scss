@@ -1,3 +1,4 @@
+//  ============================================================================
 //
 //  #RESOURCES, #PATHFINDER
 //
@@ -10,6 +11,7 @@
 //  $source (map) - The readonly source config map.
 //  $path (list) - A chain of keys to get from the config.
 //
+//  ============================================================================
 
 @function pathfinder($config, $source, $path...) {
     $map: $config;

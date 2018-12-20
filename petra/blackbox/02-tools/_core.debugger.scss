@@ -1,8 +1,10 @@
+//  ============================================================================
 //
 //  #TOOLS, #CORE-DEBUGGER
 //
 //  sass-lint:disable indentation
 //
+//  ============================================================================
 
 @function _debug-message($key) {
     @return _petra(debug, message, $key);

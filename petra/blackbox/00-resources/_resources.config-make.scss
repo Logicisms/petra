@@ -1,3 +1,4 @@
+//  ============================================================================
 //
 //  #RESOURCES, #CONFIG-MAKE
 //
@@ -11,6 +12,7 @@
 //  $key (key) - The name of the key defining the submodule's id string.
 //  $maps (map list) - The maps that will be merged to make the config.
 //
+//  ============================================================================
 
 @function config-make($key, $maps...) {
     $map: ();
