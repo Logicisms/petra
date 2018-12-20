@@ -1,6 +1,10 @@
 @if _feature(utilities, typography) {
     /**
+     *  ============================================================================
+     *
      *  #OVERRIDES, #TYPOGRAPHY
+     *
+     *  ============================================================================
     **/
 
     $_petra-utility-class-text: _utility-classname('txt', 'text');
