@@ -10,14 +10,18 @@
 //  ============================================================================
 
 @import
-    'blackbox/02-tools/config.constructors',
-    'blackbox/02-tools/config.functions',
+    'blackbox/02-tools/config.init',
+    'blackbox/02-tools/config.functions.features',
+    'blackbox/02-tools/config.functions.layout',
+    'blackbox/02-tools/config.functions.namespacing',
+    'blackbox/02-tools/config.functions.typography',
+    'blackbox/02-tools/config.functions.utilities',
 
     'blackbox/02-tools/core.constructors',
     'blackbox/02-tools/core.debugger',
     'blackbox/02-tools/core.indexer',
     'blackbox/02-tools/core.namespacing',
-    'blackbox/02-tools/core.responsive',
+    'blackbox/02-tools/core.respond-to',
 
     'blackbox/02-tools/mixins.display',
     'blackbox/02-tools/mixins.filmreel';
