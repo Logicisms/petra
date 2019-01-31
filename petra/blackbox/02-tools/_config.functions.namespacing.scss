@@ -1,0 +1,28 @@
+//  ============================================================================
+//
+//  #TOOLS, #CONFIG-FUNCTIONS-NAMESPACING
+//
+//  ============================================================================
+
+//  _prefix()
+//  ========================================================================
+//  Aliases the _petra function to get class prefixes from the namespace
+//  config module.
+//
+//  $key (key) - A key to get from the config.
+
+@function _prefix($key) {
+    @return _petra(namespace, prefix, $key);
+}
+
+
+//  _delimiter()
+//  ========================================================================
+//  Aliases the _petra function to get class delimiters from the namespace
+//  config module.
+//
+//  $key (key) - A key to get from the config.
+
+@function _delimiter($key) {
+    @return _petra(namespace, delimiter, $key);
+}

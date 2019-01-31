@@ -1,0 +1,50 @@
+//  ============================================================================
+//
+//  #TOOLS, #CONFIG-CONSTRUCTORS
+//
+//  Builds config maps from settings modules.
+//
+//  ============================================================================
+
+//  $petra
+//  ============================================================================
+//  Uses the 'config-make()' function to build the config modules into a single
+//  map for both the blackbox and the front-facing configs.
+
+$_petra: config-make(
+    'id',
+    $_petra-config-debugging,
+    $_petra-config-features,
+    $_petra-config-layout,
+    $_petra-config-namespacing,
+    $_petra-config-typography,
+    $_petra-config-utilities
+);
+
+$petra: config-make(
+    'id',
+    $petra-config-debugging,
+    $petra-config-features,
+    $petra-config-layout,
+    $petra-config-namespacing,
+    $petra-config-typography,
+    $petra-config-utilities
+) !default;
+
+
+//  petra()
+//  ============================================================================
+//  The primary config-getting function. Uses the Pathfinder function to check
+//  the front-facing $petra config and fall back to the blackbox $_petra config.
+//
+//  $path (arglist) - A list of keys to get from the config.
+//
+//  sass-lint:disable indentation
+
+@function _petra($path...) {
+    @return pathfinder($petra, $_petra, $path...);
+}
+
+    @function petra($path...) {
+        @return _petra($path...);
+    }
