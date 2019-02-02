@@ -2,109 +2,11 @@
 //
 //  #TOOLS, #CORE-CONSTRUCTORS
 //
-//  1. 'respond-to()' is defined in '_core.responsive.scss'.
-//  2. '_responsive-modifier()' is defined in '_core.namespacing.scss'.
+//  Rule-constructing mixins for functionality included in multiple modules.
+//
+//  1. '_responsive-modifier()' is defined in '_core.namespacing.scss'.
 //
 //  ============================================================================
-
-//  _make-col()
-//  ============================================================================
-//  $count (number) - The number of columns. Defaults to value set in the config
-//  layout submodule.
-//  $index (number) - The current index of the _make-columns() constructor's
-//  @for loop.
-//  $flexbox (boolean) - Determines weather or not to use flexbox module
-//  properties. Defaults to _feature(layout,grid,use-flexbox).
-//  $conditional-padding (boolean) - Determines how padding is applied to column
-//  objects. Defaults to _feature(layout,grid,conditional-padding).
-//
-//  a. Present to address cross-browser text truncation issue.
-//     https://css-tricks.com/flexbox-truncated-text/
-
-@mixin _make-col(
-    $count,
-    $index,
-    $flexbox: _feature(layout, grid, flexbox),
-    $conditional-padding: _feature(layout, grid, conditional-padding)
-) {
-    @include _block {
-        position:               relative;
-
-        @if $flexbox {
-
-            flex: {
-                grow:               0;
-                shrink:             0;
-                basis:              percentage( $index / $count ); }
-            width:                  100%;
-            min-width:              0; // [a]
-            max-width:              percentage( $index / $count );
-
-        } @else {
-
-            float:                  left;
-            width:                  percentage( $index / $count );
-
-        }
-
-        @if not $conditional-padding {
-            padding: {
-                right:              (_gutter() / 2);
-                left:               (_gutter() / 2); }
-        }
-    }
-
-    @if $conditional-padding {
-        @at-root #{'.' + _prefix(object) + 'row'} > & {
-            padding: {
-                right:              (_gutter() / 2);
-                left:               (_gutter() / 2); }
-        }
-    }
-}
-
-
-//  _make-columns()
-//  ============================================================================
-//  $count (number) - The number of columns. Defaults to value set in the config
-//  layout submodule.
-//  $responsive-modifiers (boolean) - Determines whether or not to output
-//  responsive modiiers for each column, corresponding to defined project
-//  breakpoints. Defaults to _feature(layout,grid,responsive).
-//  $breakpoints (list) - Defines which project breakpoints to use for the
-//  responsive modifiers.
-
-@mixin _make-columns(
-    $count: _petra(layout, grid, columns),
-    $responsive-modifiers: _feature(layout, grid, responsive),
-    $breakpoints: _petra(layout, grid, breakpoints)
-) {
-    @for $i from 1 through $count {
-
-        &-#{$i} {
-            @include _make-col($count, $i);
-        }
-
-    }
-
-    @if $responsive-modifiers {
-        @each $breakpoint in $breakpoints {
-            $shorthand: _petra(layout, breakpoint, $breakpoint, shorthand);
-
-            @include respond-to($breakpoint) { // [1]
-                @for $i from 1 through $count {
-
-                    &-#{$i + _delimiter(responsive) + $shorthand} {
-                        @include _make-col($count, $i);
-                    }
-
-                }
-            }
-
-        }
-    }
-}
-
 
 //  _make-headings()
 //  ============================================================================
@@ -160,30 +62,6 @@
 }
 
 
-//  _make-health-check()
-//  ============================================================================
-//  $map (map) - A map containing class prefixes and outline color values.
-
-@mixin _make-health-check( $map: _petra(debug, health-check) ) {
-    // sass-lint:disable no-universal-selectors
-    * {
-        outline: _utility-value( 1px solid map-get($map, global) );
-    }
-
-    $map: map-remove($map, global);
-
-    @each $type in map-keys($map) {
-
-        $prefix: _prefix($type);
-
-        [class*='#{$prefix}'] {
-            outline: _utility-value( 6px solid map-get($map, $type) );
-        }
-
-    }
-}
-
-
 //  _make-responsive-utility()
 //  ============================================================================
 //  $flag (boolean) - Determines whether or not to generate responsive
@@ -193,6 +71,6 @@
     @content;
 
     @if $flag {
-        @include _responsive-modifier { @content; } // [2]
+        @include _responsive-modifier { @content; } // [1]
     }
 }
