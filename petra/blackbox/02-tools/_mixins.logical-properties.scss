@@ -1,0 +1,72 @@
+//  ============================================================================
+//
+//  #TOOLS, #MIXINS-LOGICAL-PROPERTIES
+//
+//  ============================================================================
+
+//  _logical-property()
+//  ============================================================================
+//  An internal mixin that outputs a single logical property with a @supports
+//  rule defining a fallback.
+
+@mixin _logical-property($property, $fallback, $value) {
+    #{$property}: $value;
+
+    @supports not ($property: 0) {
+        #{$fallback}: $value;
+    }
+}
+
+
+//  inset API
+//  ============================================================================
+
+@mixin inset-block-start($size) {
+    @include _logical-property(inset-block-start, top, $size);
+}
+@mixin inset-block-end($size) {
+    @include _logical-property(inset-block-end, bottom, $size);
+}
+
+@mixin inset-inline-start($size) {
+    @include _logical-property(inset-inline-start, left, $size);
+}
+@mixin inset-inline-end($size) {
+    @include _logical-property(inset-inline-end, right, $size);
+}
+
+
+//  margin API
+//  ============================================================================
+
+@mixin margin-block-start($size) {
+    @include _logical-property(margin-block-start, margin-top, $size);
+}
+@mixin margin-block-end($size) {
+    @include _logical-property(margin-block-end, margin-bottom, $size);
+}
+
+@mixin margin-inline-start($size) {
+    @include _logical-property(margin-inline-start, margin-left, $size);
+}
+@mixin margin-inline-end($size) {
+    @include _logical-property(margin-inline-end, margin-right, $size);
+}
+
+
+//  padding API
+//  ============================================================================
+
+@mixin padding-block-start($size) {
+    @include _logical-property(padding-block-start, padding-top, $size);
+}
+@mixin padding-block-end($size) {
+    @include _logical-property(padding-block-end, padding-bottom, $size);
+}
+
+@mixin padding-inline-start($size) {
+    @include _logical-property(padding-inline-start, padding-left, $size);
+}
+@mixin padding-inline-end($size) {
+    @include _logical-property(padding-inline-end, padding-right, $size);
+}
