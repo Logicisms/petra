@@ -4,7 +4,12 @@
 //
 //  ============================================================================
 
-@function _breakpoint-make-query($args...) {
+//  _respond-to-query()
+//  ============================================================================
+//  Parses the arguments passed into the 'respond-to()' mixin and formats the
+//  results as a query string.
+
+@function _respond-to-query($args...) {
     $query: 'only screen';
 
     @each $key-val in $args {
@@ -18,14 +23,18 @@
     @return $query;
 }
 
-@mixin respond-to($breakpoints...) {
+//  respond-to()
+//  ============================================================================
+//  sass-lint:disable indentation
+
+@mixin _respond-to($breakpoints...) {
     @each $breakpoint in $breakpoints {
 
         @if _petra(layout, breakpoint, $breakpoint) {
 
             $query: _petra(layout, breakpoint, $breakpoint, query);
 
-            @media #{_breakpoint-make-query($query)} {
+            @media #{_respond-to-query($query)} {
                 @content;
             }
 
@@ -40,3 +49,7 @@
 
     }
 }
+
+    @mixin respond-to($breakpoints...) {
+        @include _respond-to($breakpoints...) { @content; }
+    }

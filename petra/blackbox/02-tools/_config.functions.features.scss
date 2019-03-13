@@ -1,0 +1,15 @@
+//  ============================================================================
+//
+//  #TOOLS, #CONFIG-FUNCTIONS-FEATURES
+//
+//  ============================================================================
+
+//  _feature()
+//  ========================================================================
+//  Aliases the _petra function to get keys from the feature config module.
+//
+//  $path (arglist) - A list of keys to get from the config.
+
+@function _feature($path...) {
+    @return _petra(feature, $path...);
+}

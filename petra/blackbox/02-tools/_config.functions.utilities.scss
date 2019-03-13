@@ -1,0 +1,55 @@
+//  ============================================================================
+//
+//  #TOOLS, #CONFIG-FUNCTIONS-UTILITIES
+//
+//  ============================================================================
+
+//  _feature()
+//  ========================================================================
+//  Aliases the _petra function to get keys from the feature config module.
+//
+//  $path (arglist) - A list of keys to get from the config.
+
+//  _utility-classname()
+//  ========================================================================
+//  Controls whether utility classnames use shorthand or longhand syntax,
+//  based on the feature flag for 'utilities, shorthand'.
+//
+//  $shorthand (string) - The abbreviated form of the class name.
+//  $longhand (string) - The full class name.
+//  $use-shorthand (boolean) - Determines whether the shorthand is used over
+//  the longhand. Defaults to the feature flag.
+
+@function _utility-classname(
+    $shorthand,
+    $longhand,
+    $use-shorthand: _feature(utilities, shorthand)
+) {
+    @if $use-shorthand {
+
+        @return $shorthand;
+
+    }
+
+    @return $longhand;
+}
+
+
+//  _utility-value()
+//  ========================================================================
+//  Controls whether utility class values are !important, based on the
+//  feature flag for 'utilities, important'.
+//
+//  $value (any) - A CSS property value.
+//  $important (boolean) - Determines whether to output the value as
+//  !important. Defaults to the feature flag.
+
+@function _utility-value( $value, $important: _feature(utilities, important) ) {
+    @if $important {
+
+        @return $value !important;
+
+    }
+
+    @return $value;
+}

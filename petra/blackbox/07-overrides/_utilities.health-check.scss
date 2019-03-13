@@ -1,3 +1,36 @@
+//  ============================================================================
+//
+//  #OVERRIDES, #UTILITIES-HEALTH-CHECK
+//
+//  ============================================================================
+
+//  _health-check()
+//  ============================================================================
+//  $map (map) - A map containing class prefixes and outline color values.
+
+@mixin _health-check( $map: _petra(debug, health-check) ) {
+    // sass-lint:disable no-universal-selectors
+    * {
+        outline: _utility-value( 1px solid map-get($map, global) );
+    }
+
+    $map: map-remove($map, global);
+
+    @each $type in map-keys($map) {
+
+        $prefix: _prefix($type);
+
+        [class*='#{$prefix}'] {
+            outline: _utility-value( 6px solid map-get($map, $type) );
+        }
+
+    }
+}
+
+
+//  Health-check utilities
+//  ============================================================================
+
 @if _feature(debug, health-check) or _feature(utilities, health-check) {
     /**
      *  ============================================================================
@@ -12,13 +45,13 @@
     **/
 
     @if _feature(debug, health-check) {
-        @include _make-health-check;
+        @include _health-check;
     }
 
     @if _feature(utilities, health-check) {
         @include _prefix(utility, 'health-check') {
             @include _make-responsive-utility {
-                @include _make-health-check;
+                @include _health-check;
             }
         }
     }

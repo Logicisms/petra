@@ -1,0 +1,50 @@
+//  ============================================================================
+//
+//  #TOOLS, #CONFIG-FUNCTIONS-TYPOGRAPHY
+//
+//  ============================================================================
+
+//  _font-stack()
+//  ========================================================================
+//  Aliases the _petra function to get font-stack lists from the typography
+//  config module.
+//
+//  $key (key) - A key to get from the config.
+
+@function _font-stack($key) {
+    @return _petra(typography, font-stack, $key);
+}
+
+
+//  _font-family()
+//  ========================================================================
+//  Using the _petra function, takes a keyword argument referencing the
+//  keys set in the typography module's 'font-family' map and builds a
+//  font-stack list.
+//
+//  $arg (key) - A keyword defined in the typography config module,
+//  defining a list of valid font stacks.
+
+@function _font-family($arg) {
+    @if map-has-key(_petra(typography, font-family), $arg) {
+        $arglist: _petra(typography, font-family, $arg);
+        $list: ();
+
+        @each $key in $arglist {
+            @if map-has-key(_petra(typography, font-stack), $key) {
+
+                $list: join($list, _font-stack($key), comma, false);
+
+            } @else {
+
+                $list: append($list, $key, comma);
+
+            }
+        }
+
+        @return $list;
+    }
+
+    @warn 'Petra:  invalid argument: \'#{$arg}\' passed to _font-family(). Returning null.';
+    @return null;
+}

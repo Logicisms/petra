@@ -1,3 +1,60 @@
+//  ============================================================================
+//
+//  #OBJECTS, #GRID
+//
+//  ============================================================================
+
+//  _column-rules()
+//  ============================================================================
+//  $count (number) - The number of columns. Defaults to value set in the config
+//  layout submodule.
+//  $index (number) - The current index of the _make-columns() constructor's
+//  @for loop.
+//
+//  a. Present to address cross-browser text truncation issue.
+//     https://css-tricks.com/flexbox-truncated-text/
+
+@mixin _column-rules($count, $index) {
+    @include _block {
+        position:               relative;
+
+        @if _feature(layout, grid, flexbox) {
+
+            flex: {
+                grow:               0;
+                shrink:             0;
+                basis:              percentage( $index / $count ); }
+            width:                  100%;
+            min-width:              0; // [a]
+            max-width:              percentage( $index / $count );
+
+        } @else {
+
+            float:                  left;
+            width:                  percentage( $index / $count );
+
+        }
+
+        @if not _feature(layout, grid, conditional-padding) {
+            padding: {
+                right:              (_gutter() / 2);
+                left:               (_gutter() / 2); }
+        }
+    }
+
+    @if _feature(layout, grid, conditional-padding) {
+        @at-root #{'.' + _prefix(object) + 'row'} > & {
+            padding: {
+                right:              (_gutter() / 2);
+                left:               (_gutter() / 2); }
+        }
+    }
+}
+
+
+//  Grid objects
+//  ============================================================================
+
 @if _feature(layout, grid-system) {
     /**
      *  ============================================================================
@@ -36,6 +93,32 @@
     }
 
     @include _prefix(object, 'col') {
-        @include _make-columns;
+        $count: _petra(layout, grid, columns);
+
+        @for $i from 1 through $count {
+
+            &-#{$i} {
+                @include _column-rules($count, $i);
+            }
+
+        }
+
+        @if _feature(layout, grid, responsive) {
+
+            @each $breakpoint in _petra(layout, grid, breakpoints) {
+                $shorthand: _petra(layout, breakpoint, $breakpoint, shorthand);
+
+                @include respond-to($breakpoint) {
+                    @for $i from 1 through $count {
+
+                        &-#{$i + _delimiter(responsive) + $shorthand} {
+                            @include _column-rules($count, $i)
+                        }
+
+                    }
+                }
+            }
+
+        }
     }
 }

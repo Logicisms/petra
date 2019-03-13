@@ -1,0 +1,25 @@
+//  ============================================================================
+//
+//  #TOOLS, #CONFIG-FUNCTIONS-LAYOUT
+//
+//  ============================================================================
+
+//  _gutter()
+//  ========================================================================
+//  Returns a gutter value based on the feature flag for
+//  'layout, type-based-grid'.
+//
+//  $type-based-grid (boolean) - Determines whether to use the line-height
+//  or the layout value for the project gutter. Defaults to the the feature
+//  flag.
+
+@function _gutter( $type-based-grid: _feature(layout, type-based-grid) ) {
+    @if $type-based-grid {
+
+        // sass-lint:disable zero-unit
+        @return _petra(typography, line-height, base) + 0em;
+
+    }
+
+    @return _petra(layout, grid, gutter);
+}
