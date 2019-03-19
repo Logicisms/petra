@@ -1,0 +1,235 @@
+//  ============================================================================
+//
+//  #TOOLS, #MIXINS-LOGICAL-PROPERTIES
+//
+//  ============================================================================
+
+//  _logical-layout-property-shorthand()
+//  ============================================================================
+//  An internal mixin replicates the shorthand syntax of the margin and padding
+//  properties.
+//
+//  https://developer.mozilla.org/en-US/docs/Web/CSS/margin#Syntax
+//
+//  $property (string) - CSS property name.
+//  $sizes (list) - A list of numbers of valid keywords.
+
+@mixin _logical-layout-property-shorthand($property, $sizes...) {
+    $fallback: if(
+        $condition: $property == 'inset',
+        $if-true:   '',
+        $if-false:  $property + '-'
+    );
+    $length: length($sizes);
+    $query: 'not (#{$property}-block-start: 0)';
+
+    @if $length < 2 {
+
+        #{$property}: {
+            block-start: nth($sizes, 1);
+            block-end: nth($sizes, 1);
+            inline-start: nth($sizes, 1);
+            inline-end: nth($sizes, 1);
+        }
+
+        @supports #{$query} {
+            #{$fallback}top: nth($sizes, 1);
+            #{$fallback}bottom: nth($sizes, 1);
+            #{$fallback}left: nth($sizes, 1);
+            #{$fallback}right: nth($sizes, 1);
+        }
+
+    } @else if $length < 3 {
+
+        #{$property}: {
+            block-start: nth($sizes, 1);
+            block-end: nth($sizes, 1);
+            inline-start: nth($sizes, 2);
+            inline-end: nth($sizes, 2);
+        }
+
+        @supports #{$query} {
+            #{$fallback}top: nth($sizes, 1);
+            #{$fallback}bottom: nth($sizes, 1);
+            #{$fallback}left: nth($sizes, 2);
+            #{$fallback}right: nth($sizes, 2);
+        }
+
+    } @else if $length < 4 {
+
+        #{$property}: {
+            block-start: nth($sizes, 1);
+            inline-start: nth($sizes, 2);
+            inline-end: nth($sizes, 2);
+            block-end: nth($sizes, 3);
+        }
+
+        @supports #{$query} {
+            #{$fallback}top: nth($sizes, 1);
+            #{$fallback}left: nth($sizes, 2);
+            #{$fallback}right: nth($sizes, 2);
+            #{$fallback}bottom: nth($sizes, 3);
+        }
+
+    } @else {
+
+        #{$property}: {
+            block-start: nth($sizes, 1);
+            inline-end: nth($sizes, 2);
+            block-end: nth($sizes, 3);
+            inline-start: nth($sizes, 4);
+        }
+
+        @supports #{$query} {
+            #{$fallback}top: nth($sizes, 1);
+            #{$fallback}right: nth($sizes, 2);
+            #{$fallback}bottom: nth($sizes, 3);
+            #{$fallback}left: nth($sizes, 4);
+        }
+
+    }
+}
+
+
+//  _logical-layout-property-single()
+//  ============================================================================
+//  An internal mixin that outputs a single logical property with a @supports
+//  rule defining a fallback.
+//
+//  $property (string) - Full CSS logical property name.
+//  $fallback (string) - Full CSS property name; equivalent to $property.
+//  $value (number or valid keyword) - Value to be applied.
+
+@mixin _logical-layout-property-single($property, $fallback, $value) {
+    #{$property}: $value;
+
+    @supports not ($property: 0) {
+        #{$fallback}: $value;
+    }
+}
+
+
+//  _logical-layout-property-span()
+//  ============================================================================
+//  An internal mixin that sets values for the start and end of either the block
+//  or inline dimension of an element.
+//
+//  $property (string) - CSS property name.
+//  $block-dimension (boolean) - If set to true, values will be set to the block
+//  dimension. Otherwise, values will be set to the inline dimension.
+//  $size (number or valid keyword) - Value to be applied.
+
+@mixin _logical-layout-property-span($property, $block-dimension, $size) {
+    $dimension: if(
+        $condition: $block-dimension,
+        $if-true:   'block',
+        $if-false:  'inline'
+    );
+    $fallback: if(
+        $condition: $property == 'inset',
+        $if-true:   '',
+        $if-false:  $property + '-'
+    );
+    $query: #{$property}-#{$dimension}-start;
+
+    #{$property}-#{$dimension}-start: $size;
+    #{$property}-#{$dimension}-end: $size;
+
+    @supports not ($query: 0) {
+        @if $block-dimension {
+
+            #{$fallback}top: $size;
+            #{$fallback}bottom: $size;
+
+        } @else {
+
+            #{$fallback}left: $size;
+            #{$fallback}right: $size;
+
+        }
+    }
+}
+
+
+//  inset API
+//  ============================================================================
+
+@mixin inset($sizes...) {
+    @include _logical-layout-property-shorthand(inset, $sizes...);
+}
+
+@mixin inset-block($size) {
+    @include _logical-layout-property-span(inset, true, $size);
+}
+@mixin inset-block-start($size) {
+    @include _logical-layout-property-single(inset-block-start, top, $size);
+}
+@mixin inset-block-end($size) {
+    @include _logical-layout-property-single(inset-block-end, bottom, $size);
+}
+
+@mixin inset-inline($size) {
+    @include _logical-layout-property-span(inset, false, $size);
+}
+@mixin inset-inline-start($size) {
+    @include _logical-layout-property-single(inset-inline-start, left, $size);
+}
+@mixin inset-inline-end($size) {
+    @include _logical-layout-property-single(inset-inline-end, right, $size);
+}
+
+
+//  margin API
+//  ============================================================================
+
+@mixin margin($sizes...) {
+    @include _logical-layout-property-shorthand(margin, $sizes...);
+}
+
+@mixin margin-block($size) {
+    @include _logical-layout-property-span(margin, true, $size);
+}
+@mixin margin-block-start($size) {
+    @include _logical-layout-property-single(margin-block-start, margin-top, $size);
+}
+@mixin margin-block-end($size) {
+    @include _logical-layout-property-single(margin-block-end, margin-bottom, $size);
+}
+
+@mixin margin-inline($size) {
+    @include _logical-layout-property-span(margin, false, $size);
+}
+@mixin margin-inline-start($size) {
+    @include _logical-layout-property-single(margin-inline-start, margin-left, $size);
+}
+@mixin margin-inline-end($size) {
+    @include _logical-layout-property-single(margin-inline-end, margin-right, $size);
+}
+
+
+//  padding API
+//  ============================================================================
+
+@mixin padding($sizes...) {
+    @include _logical-layout-property-shorthand(padding, $sizes...);
+}
+
+@mixin padding-block($size) {
+    @include _logical-layout-property-span(padding, true, $size);
+}
+@mixin padding-block-start($size) {
+    @include _logical-layout-property-single(padding-block-start, padding-top, $size);
+}
+@mixin padding-block-end($size) {
+    @include _logical-layout-property-single(padding-block-end, padding-bottom, $size);
+}
+
+@mixin padding-inline($size) {
+    @include _logical-layout-property-span(padding, false, $size);
+}
+@mixin padding-inline-start($size) {
+    @include _logical-layout-property-single(padding-inline-start, padding-left, $size);
+}
+@mixin padding-inline-end($size) {
+    @include _logical-layout-property-single(padding-inline-end, padding-right, $size);
+}
