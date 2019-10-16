@@ -1,0 +1,5 @@
+$_module: '01-settings';
+
+.forward__#{$_module} {
+    content: $_module;
+}

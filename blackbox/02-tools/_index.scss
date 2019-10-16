@@ -1,0 +1,5 @@
+$_module: '02-tools';
+
+.forward__#{$_module} {
+    content: $_module;
+}

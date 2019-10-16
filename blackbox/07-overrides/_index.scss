@@ -1,0 +1,5 @@
+$_module: '07-overrides';
+
+.forward__#{$_module} {
+    content: $_module;
+}

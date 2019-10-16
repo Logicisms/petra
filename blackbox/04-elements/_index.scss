@@ -1,0 +1,5 @@
+$_module: '04-elements';
+
+.forward__#{$_module} {
+    content: $_module;
+}

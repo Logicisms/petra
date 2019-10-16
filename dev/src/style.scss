@@ -1,0 +1,16 @@
+//
+//  Module @imports
+//
+
+@charset 'utf-8';
+
+// @use 'index';
+
+@use 'blackbox/01-settings' as *;
+@use 'blackbox/02-tools' as *;
+@use 'blackbox/03-generic' as *;
+@use 'blackbox/04-elements' as *;
+@use 'blackbox/05-objects' as *;
+@use 'blackbox/07-overrides' as *;
+
+// @include _scope-index;

@@ -1,18 +1,18 @@
-# Generated directories
-build/
-dist/
-
-# Local configurations
-config/*-local.js
-
-# Dependency directories
+# Dependencies
 node_modules/
 
-# Generated files
-.DS_Store
-.env
-.sass-cache
-.yarn-integrity
 
-# Logs
-.log
+# Build-generated directories
+dev/build/
+dev/dist/css/
+
+
+# Sass things
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
+
+# Miscellaneous
+.DS_Store

@@ -1,0 +1,5 @@
+$_module: '03-generic';
+
+.forward__#{$_module} {
+    content: $_module;
+}
