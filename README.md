@@ -20,11 +20,11 @@ $ yarn add petra-sass
 
 ## Getting started
 
-If you haven't already, start by adding `node_modules` to your Sass [load paths](https://sass-lang.com/documentation/at-rules/use#load-paths).
+To begin, add `node_modules/petra-sass` to your Sass [load paths](https://sass-lang.com/documentation/at-rules/use#load-paths).
 
 Command line example:
 ```bash
-$ sass --load-path=node_modules source.scss output.css
+$ sass --load-path=node_modules style.scss style.css
 ```
 
 

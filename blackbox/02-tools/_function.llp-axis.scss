@@ -1,0 +1,39 @@
+@use 'function.map-layout-shorthands' as *;
+
+//  mixin llp-axis()
+//  ============================================================================
+//  @TODO: fill in the description and meta info for this mixin.
+
+@mixin llp-axis($property, $axis, $value, $important: false) {
+    $axis-start: if(
+        $axis == 'block',
+        'top',
+        'left'
+    );
+    $axis-end: if(
+        $axis == 'block',
+        'bottom',
+        'right'
+    );
+    $fallback: if(
+        $property == 'inset',
+        '',
+        $property + '-'
+    );
+    $query: '(#{$property}-#{$axis}: 0)';
+    $value: if(
+        $important,
+        #{$value + ' !important'},
+        $value
+    );
+
+    #{$fallback + $axis-start}: $value;
+    #{$fallback + $axis-end}: $value;
+
+    @supports #{$query} {
+        #{$fallback + $axis-start}: unset;
+        #{$fallback + $axis-end}: unset;
+
+        #{$property + '-' + $axis}: $value;
+    }
+}

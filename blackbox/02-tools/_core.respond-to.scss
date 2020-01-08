@@ -1,0 +1,54 @@
+@use 'sass:map';
+
+@use 'config' as *;
+
+@use 'core.debugger' as *;
+
+//  ============================================================================
+//
+//  #TOOLS, #CORE-RESPOND-TO
+//
+//  ============================================================================
+
+//  function _query()
+//  ============================================================================
+//
+
+@function _query($args...) {
+    $query: 'only screen';
+
+    @each $arg in $args {
+        @each $property, $value in $arg {
+            $query: $query + ' and (#{$property}: #{$value})';
+        }
+    }
+
+    @return $query;
+}
+
+
+//  mixin respond-to()
+//  ============================================================================
+//
+
+@mixin respond-to($breakpoints...) {
+    @each $breakpoint in $breakpoints {
+        @if config(layout, breakpoint, $breakpoint) {
+
+            $query: config(layout, breakpoint, $breakpoint, query);
+
+            @media #{ _query($query) } {
+                @content;
+            }
+
+        } @else {
+
+            @include debugger(
+                'respond-to()',
+                $breakpoint,
+                map.keys( config(layout, breakpoint) )
+            );
+
+        }
+    }
+}

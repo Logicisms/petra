@@ -1,5 +1,28 @@
-$_module: '02-tools';
+//  ============================================================================
+//
+//  #TOOLS
+//
+//  @TODO: review and, if need be, revise function descriptions and annotations.
+//
+//  ============================================================================
 
-.forward__#{$_module} {
-    content: $_module;
-}
+@forward 'sass-extensions/map-compile';
+@forward 'sass-extensions/map-deep-get';
+@forward 'sass-extensions/map-deep-keys';
+@forward 'sass-extensions/string-concat';
+@forward 'sass-extensions/strip-unit';
+
+@forward 'config';
+@forward 'config.helpers';
+
+@forward 'core.bem';
+@forward 'core.debugger';
+@forward 'core.logical-layout-properties';
+@forward 'core.prefix';
+@forward 'core.respond-to';
+@forward 'core.responsive-modifier';
+
+@forward 'function.map-layout-shorthands';
+@forward 'function.pathfinder';
+
+@forward 'variables';

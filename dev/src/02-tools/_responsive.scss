@@ -1,0 +1,11 @@
+@use '../dependencies/petra';
+
+//  ============================================================================
+//
+//  #TOOLS, #RESPONSIVE
+//
+//  ============================================================================
+
+@mixin respond-to($breakpoints...) {
+    @include petra.respond-to($breakpoints...) { @content; }
+}

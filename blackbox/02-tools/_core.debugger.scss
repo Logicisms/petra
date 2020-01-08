@@ -1,0 +1,47 @@
+@use 'sass:list';
+
+@use 'sass-extensions/string-concat' as *;
+
+@use 'config' as *;
+@use 'config.helpers' as *;
+
+//  ============================================================================
+//
+//  #TOOLS, #CORE-DEBUGGER
+//
+//  ============================================================================
+
+@function _msg($key) {
+    @return config(debug, message, $key);
+}
+
+@mixin debugger(
+    $mixin-name: '<undefined>',
+    $invalid-value: '<undefined>',
+    $valid-value: '<undefined>',
+    $warn: feature(debug, visual-debug)
+) {
+    $warning-message: string-concat(
+        nth(_msg(lede), 1),
+        ' \'', $invalid-value, '\' ',
+        nth(_msg(lede), 2),
+        ' \'', $mixin-name, '\'. ',
+        _msg(valid-arguments),
+        ':  ', $valid-value, '.'
+    );
+
+    @if $warn {
+
+        @each $property, $value in config(debug, outline) {
+            outline-#{$property}: $value !important;
+        }
+
+        @warn $warning-message + ' ' + _msg(warn);
+
+    } @else {
+
+        @warn $warning-message;
+        @error _msg(error);
+
+    }
+}

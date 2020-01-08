@@ -1,0 +1,11 @@
+@use '../dependencies/petra';
+
+//  ============================================================================
+//
+//  #TOOLS, #NAMESPACING-PREFIXES
+//
+//  ============================================================================
+
+@mixin object($classes...) {
+    @include petra.prefix(object, $classes...) { @content; }
+}

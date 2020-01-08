@@ -1,0 +1,33 @@
+@use 'sass:map';
+
+@use 'sass-extensions/map-deep-get' as *;
+
+//  function pathfinder()
+//  ============================================================================
+//  The Pathfinder serves as an enhanced 'map-get()' function for large
+//  projects, allowing for the use of two configuration maps; one serving as a
+//  front-facing settings map, the other serving as a fallback and source of
+//  truth.
+//
+//  $public-config (map) - A public, configurable config map.
+//  $private-config (map) - A private, readonly config map.
+//  $path (arglist) - A list of keys to find in $public-config or fall back to
+//  in $private-config.
+
+@function pathfinder($public-config, $private-config, $path...) {
+    $map: $public-config;
+
+    @each $key in $path {
+        @if map.has-key($map, $key) {
+
+            $map: map.get($map, $key);
+
+        } @else {
+
+            @return map-deep-get($private-config, $path...);
+
+        }
+    }
+
+    @return $map;
+}

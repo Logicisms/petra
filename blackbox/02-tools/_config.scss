@@ -1,0 +1,50 @@
+@use '../01-settings/debug';
+@use '../01-settings/feature';
+@use '../01-settings/layout';
+@use '../01-settings/namespace';
+@use '../01-settings/typography';
+@use '../01-settings/utility';
+
+@use 'sass-extensions/map-compile' as *;
+
+@use 'function.pathfinder' as *;
+
+//  ============================================================================
+//
+//  #TOOLS, #CONFIG
+//
+//  Builds Petra's settings into a single map each for the private and public
+//  configs with config-make(), and defines a function for accessing them with
+//  pathfinder().
+//
+//  ============================================================================
+
+$_config: map-compile(
+    (debug: debug.$config-private),
+    (feature: feature.$config-private),
+    (layout: layout.$config-private),
+    (namespace: namespace.$config-private),
+    (typography: typography.$config-private),
+    (utility: utility.$config-private)
+);
+
+$config: map-compile(
+    (debug: debug.$config),
+    (feature: feature.$config),
+    (layout: layout.$config),
+    (namespace: namespace.$config),
+    (typography: typography.$config),
+    (utility: utility.$config)
+) !default;
+
+
+//  function config()
+//  ============================================================================
+//  Petra's primary config-getting function. Uses the Pathfinder to check the
+//  public config and fall back to the private config for missing values.
+//
+//  $path (arglist) - A list of keys nested within the config map.
+
+@function config($path...) {
+    @return pathfinder($config, $_config, $path...);
+}

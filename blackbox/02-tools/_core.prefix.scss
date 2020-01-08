@@ -1,0 +1,46 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+
+@use 'config' as *;
+@use 'config.helpers' as *;
+
+@use 'core.debugger' as *;
+
+//  mixin prefix()
+//  ============================================================================
+//  Prepends a prefix defined in the namespacing config to the given class or
+//  classes. Stateful prefixes are automatically joined to their parent classes
+//  when nested.
+//
+//  $prefix (key) - A prefix to pull from the config. This key must correspond
+//  to one defined in the config.
+//  $classes (arglist) - One or more classnames to prefix.
+
+@mixin prefix($prefix, $classes...) {
+    @if prefix($prefix) {
+
+        $class-prefix: if(
+            string.index($prefix, 'state-') and &,
+            '&.#{ prefix($prefix) }',
+            '.#{ prefix($prefix) }'
+        );
+        $selectors: ();
+
+        @each $class in $classes {
+            $selectors: list.append($selectors, ($class-prefix + $class), comma);
+        }
+
+        #{$selectors} { @content; }
+
+    } @else {
+
+        @include debugger(
+            'prefix()',
+            $prefix,
+            map.keys( config(namespace, prefix) ),
+            false
+        );
+
+    }
+}

@@ -1,0 +1,30 @@
+//  ============================================================================
+//
+//  #SETTINGS, #CONFIG-NAMESPACING
+//
+//  1. Escaped values cannot be wrapped in quotes.
+//
+//  ============================================================================
+
+$config-private: (
+    prefix: (
+        object:                 'o-',
+        component:              'c-',
+        utility:                'u-',
+        scope:                  's-',
+
+        state-is:               'is-',
+        state-has:              'has-',
+
+        hack:                   \*\*, // [1]
+        javascript:             'js-',
+    ),
+
+    delimiter: (
+        element:                '__',
+        modifier:               '--',
+        responsive:             \@, // [1]
+    ),
+);
+
+$config: $config-private !default;

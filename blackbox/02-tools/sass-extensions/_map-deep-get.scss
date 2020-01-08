@@ -1,0 +1,20 @@
+@use 'sass:map';
+
+//  map-deep-get()
+//  ============================================================================
+//  By Hugo Giraudel.
+//  https://css-tricks.com/snippets/sass/deep-getset-maps/
+//
+//  An extension of the built-in 'map.get()' function. Returns a value from a
+//  nested map.
+//
+//  $map (map) - A target map.
+//  $keys (arglist) - A list of keys nested within the target map.
+
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map.get($map, $key);
+    }
+
+    @return $map;
+}

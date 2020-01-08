@@ -1,0 +1,17 @@
+@use 'sass:map';
+
+//  map-compile()
+//  ============================================================================
+//  An extension of the built-in 'map.merge()' function. Takes a list of maps
+//  and returns a new map with the compiled values.
+//
+//  $map1 (map)
+//  $maps (arglist) - A list of maps.
+
+@function map-compile($map1, $maps...) {
+    @each $map in $maps {
+        $map1: map.merge($map1, $map);
+    }
+
+    @return $map1;
+}

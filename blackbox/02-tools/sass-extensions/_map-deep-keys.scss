@@ -1,0 +1,17 @@
+@use 'sass:map';
+
+//  map-deep-keys()
+//  ============================================================================
+//  An extension of the internal 'map.keys()' function. Returns a list of keys
+//  from a nested map.
+//
+//  $map (map) - A target map.
+//  $keys (arglist) - A list of keys nested within the target map.
+
+@function map-deep-keys($map, $keys...) {
+    @each $key in $keys {
+        $map: map.get($map, $key);
+    }
+
+    @return map.keys($map);
+}

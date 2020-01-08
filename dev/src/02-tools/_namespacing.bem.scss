@@ -1,0 +1,19 @@
+@use '../dependencies/petra';
+
+//  ============================================================================
+//
+//  #TOOLS, #NAMESPACING-BEM
+//
+//  ============================================================================
+
+@mixin block {
+    @include petra.block { @content; }
+}
+
+@mixin element($classes...) {
+    @include petra.element($classes...) { @content; }
+}
+
+@mixin modifier($classes...) {
+    @include petra.modifier($classes...) { @content; }
+}

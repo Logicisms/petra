@@ -1,5 +1,12 @@
-$_module: '01-settings';
+//  ============================================================================
+//
+//  #SETTINGS
+//
+//  ============================================================================
 
-.forward__#{$_module} {
-    content: $_module;
-}
+@forward 'debug' as debug-*;
+@forward 'feature' as feature-*;
+@forward 'layout' as layout-*;
+@forward 'namespace' as namespace-*;
+@forward 'typography' as typography-*;
+@forward 'utility' as utility-*;

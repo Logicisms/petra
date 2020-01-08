@@ -1,0 +1,54 @@
+@use 'sass:list';
+@use 'sass:map';
+
+//  function map-layout-shorthands()
+//  ============================================================================
+//  Takes a list of values in layout shorthand order (top right bottom left) and
+//  returns a map with those values assigned to their equivalent logical
+//  properties. Any values after the fourth will be ignored.
+//
+//  $values (arglist) - A non-comma-separated list of spacing values.
+
+@function map-layout-shorthands($values) {
+    $map: ();
+
+    @if list.length($values) == 1 {
+
+        $map: (
+            block-start:    list.nth($values, 1),
+            block-end:      list.nth($values, 1),
+            inline-start:   list.nth($values, 1),
+            inline-end:     list.nth($values, 1)
+        );
+
+    } @else if list.length($values) == 2 {
+
+        $map: (
+            block-start:    list.nth($values, 1),
+            block-end:      list.nth($values, 1),
+            inline-start:   list.nth($values, 2),
+            inline-end:     list.nth($values, 2)
+        );
+
+    } @else if list.length($values) == 3 {
+
+        $map: (
+            block-start:    list.nth($values, 1),
+            block-end:      list.nth($values, 3),
+            inline-start:   list.nth($values, 2),
+            inline-end:     list.nth($values, 2)
+        );
+
+    } @else {
+
+        $map: (
+            block-start:    list.nth($values, 1),
+            block-end:      list.nth($values, 3),
+            inline-start:   list.nth($values, 4),
+            inline-end:     list.nth($values, 2)
+        );
+
+    }
+
+    @return $map;
+}

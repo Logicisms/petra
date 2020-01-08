@@ -1,0 +1,16 @@
+//  string-concat()
+//  ============================================================================
+//  Concatenates strings passed as arguments. Offers a prettier method for
+//  string concatenation than '"string" + "string"', for variable assignment.
+//
+//  $strings (arglist) - A list of values to concatenate into a single string.
+
+@function string-concat($strings...) {
+    $output: "";
+
+    @each $string in $strings {
+        $output: $output + $string;
+    }
+
+    @return $output;
+}

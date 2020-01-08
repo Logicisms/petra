@@ -1,0 +1,18 @@
+@use 'config' as *;
+@use 'config.helpers' as *;
+
+//  ============================================================================
+//
+//  #TOOLS, #VARIABLES
+//
+//  @TODO: add a description, sections, and annotations here.
+//
+//  ============================================================================
+
+$browser-context: config(typography, browser-context);
+
+$gutter: if(
+    feature(layout, type-based-grid),
+    config(typography, line-height, base) + 0em,
+    config(layout, grid, gutter)
+);

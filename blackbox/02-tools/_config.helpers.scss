@@ -1,0 +1,146 @@
+@use 'sass:list';
+@use 'sass:map';
+
+@use 'config' as *;
+
+//  ============================================================================
+//
+//  #TOOLS, #CONFIG-HELPERS
+//
+//  ============================================================================
+
+//  delimiter()
+//  ============================================================================
+//  Gets class delimiters from the namespacing config.
+//
+//  $key (key) - A key to get from the config's 'namespace, delimiter' map.
+
+@function delimiter($key) {
+    @return config(namespace, delimiter, $key);
+}
+
+
+//  feature()
+//  ============================================================================
+//  Gets feature flag values.
+//
+//  $path (arglist) - A list of keys nested within the config's 'feature' map.
+
+@function feature($path...) {
+    @return config(feature, $path...);
+}
+
+
+//  font-family()
+//  ============================================================================
+//  Gets font-family values from the typography config.
+//
+//  $key (key) - A key to get from the config's 'typography, font-family' map.
+
+@function font-family($key) {
+    @return config(typography, font-family, $key);
+}
+
+
+//  font-family-stack()
+//  ============================================================================
+//  Gets a list defined in the font-family-stack map in the typography config
+//  and builds a font stack using the keys defined in that list. List entries
+//  that do not correspond to font-family keys are added to the output as-is.
+//
+//  $key (key) - A key to get from the config's 'typograhy, font-family-stack'
+//  map.
+
+@function font-family-stack($key) {
+    @if map.has-key(config(typography, font-family-stack), $key) {
+
+        $font-stack: config(typography, font-family-stack, $key);
+        $list: ();
+
+        @each $font-family in $font-stack {
+            @if map.has-key(config(typography, font-family), $font-family) {
+
+                $list: list.join($list, font-family($font-family), comma, false);
+
+            } @else {
+
+                $list: list.append($list, $font-family, comma);
+
+            }
+        }
+
+        @return $list;
+
+    }
+
+    @warn 'Petra:  invalid argument \'#{$key}\' passed to font-family-stack().';
+    @return null;
+}
+
+
+//  font-size()
+//  ============================================================================
+//  Get font-size values from the typography config.
+//
+//  $key (key) - A key to get from the config's 'typography, font-size' map.
+
+@function font-size($key) {
+    @return config(typography, font-size, $key);
+}
+
+
+//  line-height()
+//  ============================================================================
+//  Gets line-height values from the typography config.
+
+@function line-height($key) {
+    @return config(typography, line-height, $key);
+}
+
+
+//  prefix()
+//  ============================================================================
+//  Gets class prefixes from the namespacing config.
+//
+//  $key (key) - A key to get from the config's 'namespace, prefix' map.
+
+@function prefix($key) {
+    @return config(namespace, prefix, $key);
+}
+
+
+//  utility-class-name()
+//  ============================================================================
+//  Takes the longhand and shorthand forms of a utility class name and
+//  determines what to return based on the 'utilities, shorthand' feature flag.
+//
+//  $name (string) - The full class name.
+//  $name-shorthand (string) - The abbreviated class name.
+
+@function utility-class-name($name, $name-shorthand) {
+    @if config(feature, utilities, shorthand) {
+
+        @return $name-shorthand;
+
+    }
+
+    @return $name;
+}
+
+
+//  utility-value()
+//  ============================================================================
+//  Takes a CSS property value and determines whether to return it as !important
+//  based on the 'utilities, important' feature flag.
+//
+//  $value (any) - A CSS property value.
+
+@function utility-value($value) {
+    @if config(feature, utilities, important) {
+
+        @return $value !important;
+
+    }
+
+    @return $value;
+}

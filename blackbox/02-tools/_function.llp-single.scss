@@ -1,0 +1,22 @@
+@use 'function.map-layout-shorthands' as *;
+
+//  mixin llp-single()
+//  ============================================================================
+//  @TODO: fill in the description and meta info for this mixin.
+
+@mixin llp-single($property, $fallback, $value, $important: false) {
+    $query: '(#{$property}: 0)';
+    $value: if(
+        $important,
+        #{$value + ' !important'},
+        $value
+    );
+
+    #{$fallback}: $value;
+
+    @supports #{$query} {
+        #{$fallback}: unset;
+
+        #{$property}: $value;
+    }
+}

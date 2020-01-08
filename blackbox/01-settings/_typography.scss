@@ -1,0 +1,69 @@
+//  ============================================================================
+//
+//  #SETTINGS, #CONFIG-TYPOGRAPHY
+//
+//  1. System fonts, to leverage the native typefaces of user devices.
+//  2. System fonts for emoji support.
+//  3. The font-family-stack config references the values defined in the
+//     font-family config.
+//  4. The font-size applied to both subscript and superscript elements.
+//  5. The line-height applied specifically to headings h1-h6.
+//
+//  ============================================================================
+
+$config-private: (
+    browser-context:        16px,
+
+    font-face: (
+        // open-sans: (
+        //     font-family:            "Open Sans",
+        //     font-style:             normal,
+        //     font-weight:            400,
+        //     src: (
+        //         url('/fonts/OpenSans-Regular-webfont.woff2') format('woff2'),
+        //         url('/fonts/OpenSans-Regular-webfont.woff') format('woff')
+        //     )
+        // ), // open-sans
+    ),
+
+    font-family: (
+        sans-serif:             ('Helvetica Neue', Helvetica, sans-serif),
+        serif:                  ('Times New Roman', Times, serif),
+        monospace:              ('Lucida Console', Monaco, monospace),
+
+        system: ( // [1]
+            -apple-system,
+            BlinkMacSystemFont,
+            'Ubuntu',
+            'Segoe UI',
+            'Roboto'
+        ),
+        emoji: ( // [2]
+            'Apple Color Emoji',
+            'EmojiOne',
+            'Segoe UI Emoji',
+            'Segoe UI Symbol'
+        ),
+    ),
+    font-family-stack: ( // [3]
+        default:                (sans-serif, system, emoji),
+    ),
+
+    font-size: (
+        default:                1.8rem,
+
+        smaller:                85%,
+        larger:                 115%,
+        subscript:              75%, // [4]
+    ),
+
+    line-height: (
+        default:                1.75,
+
+        heading:                1.15, // [5]
+    ),
+
+    heading-scale-factor:   1.25,
+);
+
+$config: $config-private !default;

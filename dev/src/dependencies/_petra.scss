@@ -1,0 +1,28 @@
+//  ============================================================================
+//
+//  #PETRA
+//
+//  Dependency configuration for 'petra-sass'.
+//
+//  @TODO: document this method of implementing petra, noting that it requires
+//  sass version 1.24 at least.
+//
+//  ============================================================================
+
+@forward 'index' with (
+    $feature-config: (
+        namespace: (
+            bem-nesting: true,
+            strict-nesting: true,
+            // detached-modifiers: true
+        )
+    ),
+    $typography-config: (
+        browser-context: 18px
+    ),
+    $namespace-config: (
+        prefix: (
+            // icon: 'i-'
+        )
+    )
+);

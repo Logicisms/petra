@@ -1,0 +1,68 @@
+@use 'sass:map';
+
+@use 'function.map-layout-shorthands' as *;
+
+//  mixin llp-shorthand()
+//  ============================================================================
+//  Replicates the shorthand syntax of the directional margin and padding
+//  properties (e.g. top right bottom left), and assigns the given values to
+//  their equivalent logical spacing properties. Also functions as a shorthand
+//  for 'inset'.
+//
+//  Outputs the directional properties, and the logical properties nested in a
+//  @supports block.
+//
+//  $property (string) - A logical spacing property (inset, margin, padding).
+//  $values (arglist) - A non-comma-separated list of spacing values in
+//  shorthand order (e.g. top right bottom left).
+//  $important (boolean) - If true, values will be returned !important. False by
+//  default.
+//
+//  1. Defines the fallback as an empty string if the given property is 'inset'.
+//  2. The map-layout-shorthands functin (_function.map-layout-shorthands.scss)
+//     is used to map the given values to their logical properties.
+
+@mixin llp-shorthand($property, $values, $important: false) {
+    $fallback: if(
+        $property == 'inset',
+        '',
+        $property + '-'
+    ); // [1]
+    $fallback-legend: (
+        block-start:    'top',
+        block-end:      'bottom',
+        inline-start:   'left',
+        inline-end:     'right'
+    );
+    $query: '(#{$property}-block-start: 0)';
+    $map: map-layout-shorthands($values); // [2]
+
+    @each $key, $val in $map {
+        $key: map.get($fallback-legend, $key);
+        $val: if(
+            $important,
+            #{$val + ' !important'},
+            $val
+        );
+
+        #{$fallback + $key}: $val;
+    }
+
+    @supports #{$query} {
+        @each $key, $val in $map {
+            $key: map.get($fallback-legend, $key);
+
+            #{$fallback + $key}: unset;
+        }
+
+        @each $key, $val in $map {
+            $val: if(
+                $important,
+                #{$val + ' !important'},
+                $val
+            );
+
+            #{$property + '-' + $key}: $val;
+        }
+    }
+}

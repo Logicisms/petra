@@ -1,0 +1,36 @@
+//  ============================================================================
+//
+//  #SETTINGS, #CONFIG-DEBUGGING
+//
+//  ============================================================================
+
+$config-private: (
+    message: (
+        lede:                   ('Invalid argument:', 'passed to mixin'),
+        warn:                   'Follow stack trace or review rendered markup.',
+        error:                  'Correct invalid argument to unblock compiler.',
+        valid-arguments:        'Valid arguments',
+    ),
+    outline: (
+        color:                  red,
+        style:                  solid,
+        width:                  0.5em,
+    ),
+
+    health-check: (
+        global:                 #d50000, //material-color(red, a700),
+
+        object:                 #9c27b0, //material-color(purple),
+        component:              #651fff, //material-color(deep-purple, a400),
+        scope:                  #2979ff, //material-color(blue, a400),
+        utility:                #1de9b6, //material-color(teal, a400),
+
+        state:                  #00e676, //material-color(green, a400),
+        state-within:           #aeea00, //material-color(lime, a700),
+
+        hack:                   #ff3d00, //material-color(deep-orange, a400),
+        javascript:             #607d8b, //material-color(blue-grey, 500),
+    ),
+);
+
+$config: $config-private !default;

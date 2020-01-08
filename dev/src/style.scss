@@ -2,15 +2,31 @@
 //  Module @imports
 //
 
-@charset 'utf-8';
+@use 'dependencies/petra';
 
-// @use 'index';
+@use '02-tools/namespacing.bem' as *;
+@use '02-tools/namespacing.prefixes' as *;
+@use '02-tools/responsive' as *;
 
-@use 'blackbox/01-settings' as *;
-@use 'blackbox/02-tools' as *;
-@use 'blackbox/03-generic' as *;
-@use 'blackbox/04-elements' as *;
-@use 'blackbox/05-objects' as *;
-@use 'blackbox/07-overrides' as *;
 
-// @include _scope-index;
+@include object('block') {
+    @include block {
+        color: red;
+        font-size: petra.$browser-context;
+
+
+        @include respond-to('large') {
+            font-size: (petra.$browser-context * 2);
+        }
+    }
+
+
+    @include modifier('modifier') {
+        color: black;
+    }
+
+
+    @include element('element') {
+        color: green;
+    }
+}

@@ -31,32 +31,29 @@
     ],
     "devDependencies": {
         "autoprefixer": "^9.6.4",
-        "cssnano": "^4.1.10",
         "http-server": "^0.11.1",
-        "node-sass": "^4.12.0",
         "npm-run-all": "^4.1.5",
         "onchange": "^6.1.0",
         "postcss-cli": "^6.1.3",
         "rimraf": "^3.0.0",
-        "sass": "^1.23.0",
+        "sass": "^1.24.2",
         "stylelint": "^11.0.0"
     },
     "scripts": {
         "test": "run-s clean:build stylelint sass",
         "start": "npm-run-all build --parallel watch:* server",
+        "start:serverless": "run-s build watch",
         "build": "run-s clean sass postcss",
         "clean": "run-s clean:*",
         "clean:build": "rimraf dev/build",
         "clean:dist": "rimraf dev/dist/css",
         "postcss": "postcss dev/build/*.css --dir dev/dist/css",
-        "sass": "npm run sass:dart",
-        "sass:dart": "sass --load-path=./ --load-path=node_modules dev/src:dev/build",
-        "sass:node": "node-sass --include-path=./ --include-path=node_modules dev/src/style.scss dev/build/style.css",
-        "server": "http-server dev/dist",
-        "server:silent": "npm run server -- -s",
+        "sass": "sass --load-path=./ dev/src:dev/build",
+        "server": "http-server dev/dist -p ${PORT:-8000} -s",
         "stylelint": "stylelint 'blackbox/**/*.scss'",
         "watch": "run-p watch:*",
-        "watch:sass": "onchange 'blackbox/**/*.scss' 'dev/src/**/*.scss' -- npm run sass",
+        "watch:sass": "onchange 'blackbox/**/*.scss' 'dev/src/**/*.scss' -- run-s watch:sass:echo sass",
+        "watch:sass:echo": "echo \"> \\033[1;32mWATCH:SASS -- $(date +%Y-%m-%d@%I:%M:%S.%N)\\033[0m\"",
         "watch:css": "onchange 'dev/build/*.css' -- npm run postcss"
     }
 }

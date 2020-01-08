@@ -1,0 +1,92 @@
+@use 'function.llp-axis' as *;
+@use 'function.llp-shorthand' as *;
+@use 'function.llp-single' as *;
+
+//  ============================================================================
+//
+//  #TOOLS, #CORE-LOGICAL-LAYOUT-PROPERTIES
+//
+//  ============================================================================
+
+//  inset API
+//  ============================================================================
+
+@mixin inset($values, $important: false) {
+    @include llp-shorthand('inset', $values, $important);
+}
+
+@mixin inset-block($value, $important: false) {
+    @include llp-axis('inset', 'block', $value, $important);
+}
+@mixin inset-block-start($value, $important: false) {
+    @include llp-single('inset-block-start', 'top', $value, $important);
+}
+@mixin inset-block-end($value, $important: false) {
+    @include llp-single('inset-block-end', 'bottom', $value, $important);
+}
+
+@mixin inset-inline($value, $important: false) {
+    @include llp-axis('inset', 'inline', $value, $important);
+}
+@mixin inset-inline-start($value, $important: false) {
+    @include llp-single('inset-inline-start', 'left', $value, $important);
+}
+@mixin inset-inline-end($value, $important: false) {
+    @include llp-single('inset-inline-end', 'right', $value, $important);
+}
+
+
+//  margin API
+//  ============================================================================
+
+@mixin margin($values, $important: false) {
+    @include llp-shorthand('margin', $values, $important);
+}
+
+@mixin margin-block($value, $important: false) {
+    @include llp-axis('margin', 'block', $value, $important);
+}
+@mixin margin-block-start($value, $important: false) {
+    @include llp-single('margin-block-start', 'margin-top', $value, $important);
+}
+@mixin margin-block-end($value, $important: false) {
+    @include llp-single('margin-block-end', 'margin-bottom', $value, $important);
+}
+
+@mixin margin-inline($value, $important: false) {
+    @include llp-axis('margin', 'inline', $value, $important);
+}
+@mixin margin-inline-start($value, $important: false) {
+    @include llp-single('margin-inline-start', 'margin-left', $value, $important);
+}
+@mixin margin-inline-end($value, $important: false) {
+    @include llp-single('margin-inline-end', 'margin-right', $value, $important);
+}
+
+
+//  padding API
+//  ============================================================================
+
+@mixin padding($values, $important: false) {
+    @include llp-shorthand('padding', $values, $important);
+}
+
+@mixin padding-block($value, $important: false) {
+    @include llp-axis('padding', 'block', $value, $important);
+}
+@mixin padding-block-start($value, $important: false) {
+    @include llp-single('padding-block-start', 'padding-top', $value, $important);
+}
+@mixin padding-block-end($value, $important: false) {
+    @include llp-single('padding-block-end', 'padding-bottom', $value, $important);
+}
+
+@mixin padding-inline($value, $important: false) {
+    @include llp-axis('padding', 'inline', $value, $important);
+}
+@mixin padding-inline-start($value, $important: false) {
+    @include llp-single('padding-inline-start', 'padding-left', $value, $important);
+}
+@mixin padding-inline-end($value, $important: false) {
+    @include llp-single('padding-inline-end', 'padding-right', $value, $important);
+}

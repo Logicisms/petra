@@ -1,0 +1,54 @@
+@use 'sass:map';
+
+@use 'config' as *;
+@use 'config.helpers' as *;
+
+@use 'core.bem' as *;
+@use 'core.debugger' as *;
+@use 'core.respond-to' as *;
+
+//  mixin responsive-modifier()
+//  ============================================================================
+//  Appends the shorthand of the given breakpoint to the parent class and nests
+//  the result and the given @content in a media query corresponding to the
+//  breakpoint. Accepts multiple arguments, which will output multiple
+//  responsive modifiers.
+//
+//  $breakpoints (arglist)
+//
+//  1. If no breakpoints are passed, the list defined in the grid config will be
+//  used instead. (@TODO: consider passing that list in with a variable instead)
+//  2. The 'block()' mixin is used to maintain a consistent specificity level.
+
+@mixin responsive-modifier($breakpoints...) {
+    $breakpoints: if(
+        length($breakpoints) == 0,
+        config(layout, grid, breakpoints),
+        $breakpoints
+    ); // [1]
+    $map: config(layout, breakpoint);
+
+    @each $breakpoint in $breakpoints {
+        @if map.has-key($map, $breakpoint) {
+
+            $shorthand: config(layout, breakpoint, $breakpoint, shorthand);
+
+            @include respond-to($breakpoint) {
+                &#{delimiter(responsive) + $shorthand} {
+                    @include block { // [2]
+                        @content;
+                    }
+                }
+            }
+
+        } @else {
+
+            @include debugger(
+                'responsive-modifier()',
+                $breakpoint,
+                map.keys( config(layout, breakpoint) ),
+            );
+
+        }
+    }
+}

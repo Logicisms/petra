@@ -1,0 +1,82 @@
+@use 'sass:list';
+
+@use 'config' as *;
+@use 'config.helpers' as *;
+
+//  ============================================================================
+//
+//  #TOOLS, #CORE-BEM
+//
+//  @TODO: add description here.
+//
+//  ============================================================================
+
+//  mixin block()
+//  ============================================================================
+//  Scopes the properties of a block based on BEM nesting feature flags.
+//
+//  1. If bem-nesting and strict-nesting are set to true, blocks will be chained
+//  together to match the specificity level of nested elements.
+
+@mixin block() {
+    @if feature(namespace, bem-nesting) and feature(namespace, strict-nesting) { // [1]
+
+        &#{&} { @content; }
+
+    } @else {
+
+        & { @content; }
+
+    }
+}
+
+
+//  mixin element()
+//  ============================================================================
+//  Prepends the configured BEM element delimiter and the parent block's class
+//  name to the given element class or classes.
+//
+//  $classes (arglist) - The class or classes to be namespaced.
+
+@mixin element($classes...) {
+    $parent: if(
+        feature(namespace, bem-nesting),
+        '& &',
+        '&'
+    );
+    $selectors: ();
+
+    @each $class in $classes {
+        $selectors: list.append($selectors, ($parent + delimiter(element) + $class), comma);
+    }
+
+    #{$selectors} { @content; }
+}
+
+
+//  mixin modifier()
+//  ============================================================================
+//  Prepends the configured BEM modifier delimiter and the parent block or
+//  element's class name to the given modifier class or classes.
+//
+//  $classes (arglist) - The class or classes to be namespaced.
+
+@mixin modifier($classes...) {
+    $parent: if(
+        feature(namespace, bem-nesting) and feature(namespace, strict-nesting),
+        '&#{&}',
+        '&'
+    );
+    $delimiter: if(
+        feature(namespace, detached-modifiers),
+        $parent + '.' + delimiter(modifier),
+        $parent + delimiter(modifier)
+    );
+    $selectors: ();
+
+    @each $class in $classes {
+        $selectors: list.append($selectors, ($delimiter + $class), comma);
+    }
+
+    #{$selectors} { @content; }
+}
