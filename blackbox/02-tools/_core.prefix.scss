@@ -18,20 +18,34 @@
 //  $classes (arglist) - One or more classnames to prefix.
 
 @mixin prefix($prefix, $classes...) {
-    @if prefix($prefix) {
+    @if prefix($prefix) { //  @NOTE: checks if the given prefix is valid.
 
         $class-prefix: if(
-            string.index($prefix, 'state-') and &,
-            '&.#{ prefix($prefix) }',
-            '.#{ prefix($prefix) }'
+            string.index($prefix, 'state-') and &, //  @NOTE: checks if the prefix is stateful, and if there's a parent selector.
+            '&.#{ prefix($prefix) }', //  @NOTE: if true, joins the output to the parent selector as a stateful modifier.
+            '.#{ prefix($prefix) }' //  @NOTE: if false, outputs a standalone class.
         );
-        $selectors: ();
 
-        @each $class in $classes {
-            $selectors: list.append($selectors, ($class-prefix + $class), comma);
+        @if feature(namespace, bem-nesting) {
+            //  @NOTE: checks if bem-nesting is enabled, and outputs a separate block for each given class if so.
+            //  if this isn't done, the combination of multiple classes and parent operators results in jumbled output.
+            //  @TODO: include this in Petra documentation, as a caveat to enabling bem-nesting.
+
+            @each $class in $classes {
+                #{$class-prefix + $class} { @content; }
+            }
+
+        } @else {
+
+            $selectors: ();
+
+            @each $class in $classes {
+                $selectors: list.append($selectors, ($class-prefix + $class), comma);
+            }
+
+            #{$selectors} { @content; }
+
         }
-
-        #{$selectors} { @content; }
 
     } @else {
 
