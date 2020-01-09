@@ -46,19 +46,23 @@ $config-private: (
         ),
     ),
     font-family-stack: ( // [3]
-        default:                (sans-serif, system, emoji),
+        body:                   (sans-serif, system, emoji),
     ),
 
     font-size: (
-        default:                1.8rem,
+        body:                   1.8rem,
 
         smaller:                85%,
         larger:                 115%,
         subscript:              75%, // [4]
     ),
 
+    font-weight: (
+        body:                   normal,
+    ),
+
     line-height: (
-        default:                1.75,
+        body:                   1.75,
 
         heading:                1.15, // [5]
     ),

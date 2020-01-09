@@ -1,0 +1,26 @@
+@use 'sass:map';
+
+@use '../02-tools/config' as *;
+@use '../02-tools/config.helpers' as *;
+
+@if length( config(typography, font-face) ) > 0 {
+    /**
+     *  ============================================================================
+     *
+     *  #GENERIC, #FONT-FACE
+     *
+     *  ============================================================================
+    **/
+
+    $_font-faces: config(typography, font-face);
+
+    @each $font-face in map.keys($_font-faces) {
+
+        @font-face {
+            @each $property, $value in map.get($_font-faces, $font-face) {
+                #{$property}: $value;
+            }
+        }
+
+    }
+}

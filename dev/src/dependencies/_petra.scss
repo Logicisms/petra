@@ -10,19 +10,32 @@
 //  ============================================================================
 
 @forward 'index' with (
-    $feature-config: (
+    $config: (
+        feature: (
+            namespace: (
+                // bem-nesting:            true,
+                // strict-nesting:         true
+            )
+        ),
         namespace: (
-            bem-nesting: true,
-            strict-nesting: true,
-            // detached-modifiers: true
-        )
-    ),
-    $typography-config: (
-        browser-context: 18px
-    ),
-    $namespace-config: (
-        prefix: (
-            // icon: 'i-'
+            prefix: (
+                // icon:                   'i-'
+            )
+        ),
+        typography: (
+            // browser-context:        18px,
+
+            // font-face: (
+            //     open-sans: (
+            //         font-family:            "Open Sans",
+            //         font-style:             normal,
+            //         font-weight:            400,
+            //         src: (
+            //             url('/fonts/OpenSans-Regular-webfont.woff2') format('woff2'),
+            //             url('/fonts/OpenSans-Regular-webfont.woff') format('woff')
+            //         )
+            //     ),
+            // ),
         )
     )
 );

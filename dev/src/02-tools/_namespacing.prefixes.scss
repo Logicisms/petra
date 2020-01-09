@@ -9,3 +9,7 @@
 @mixin object($classes...) {
     @include petra.prefix(object, $classes...) { @content; }
 }
+
+// @mixin icon($classes...) {
+//     @include petra.prefix(icon, $classes...) { @content; }
+// }
